@@ -25,6 +25,18 @@ export const marketModels = [
     source: 'https://onchainbureau.com/rwa#token-design',
   },
   {
+    id: 'stock', label: 'Tokenized stock', object: 'A share certificate, reinterpreted onchain',
+    title: 'A stock reference. A defined set of rights.',
+    intro: 'A token can represent an issuer’s share or a separate claim linked to it. The structure determines what the holder owns and how the token connects to the underlying market.',
+    reference: 'The underlying share’s market price',
+    liquidity: 'Trading hours, venue access and available inventory',
+    redemption: 'Transfer or exit terms defined by the structure',
+    question: 'What happens to dividends, votes and stock splits?',
+    answer: 'Those rights and events need explicit treatment in the token’s terms. A matching price does not by itself establish identical shareholder rights.',
+    route: ['Share reference', 'Token market', 'Defined holder rights'],
+    source: 'https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities',
+  },
+  {
     id: 'unique', label: 'Unique asset', object: 'An asset with its own characteristics',
     title: 'Two assets. Not necessarily one price.',
     intro: 'An emerald, a building or a single lot may differ from every other unit. The first question is what can reasonably trade together.',

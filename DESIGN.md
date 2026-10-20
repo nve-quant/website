@@ -53,7 +53,7 @@ Next: owner review of the developed homepage, then build service/research pages 
 
 
 ## Interactive asset explorer
-The owner requested more dynamic and 3D treatment after reviewing the static homepage. Replace its static diagram with three selectable illustrative asset studies: gold ingots, portfolio-share layers and a faceted unique asset. The selected study changes reference-price, liquidity and redemption explanations together. This gives the motion a business-specific purpose.
+The owner requested more dynamic and 3D treatment after reviewing the static homepage. Replace its static diagram with four selectable illustrative asset studies: gold ingots, portfolio-share layers, a physical stock certificate and a faceted unique asset. The selected study changes reference-price, liquidity and redemption explanations together. This gives the motion a business-specific purpose.
 
 Use original procedural Three.js geometry with a pale green surface (#e6ebd9), physical lighting and restrained model transitions. The selected asset rotates automatically. Drag the object directly to turn and tilt it; click the object or press Space/Enter while the scene has focus to pause or resume. Arrow keys turn or tilt the object and pause automatic rotation. Keep the scene focusable with visible focus and interaction instructions. Preserve the visitor's pause choice when switching assets or returning to the scene.
 
@@ -70,3 +70,11 @@ The owner rejected the incremental detail pass as still too basic. Rebuilt the a
 Bullion silhouette/reference context: [Argor-Heraeus cast bar catalogue](https://www.argor-heraeus.com/en/products-and-services/products/cast-and-minted-bars/1000g-au-cast-classic-999.9/). No manufacturer logos, images or model files are reused.
 
 Performance: one visible asset group, original procedural geometry and generated maps, no external asset fetches. Reflection environment is generated once. Retain DPR cap 1.75 and one 1024² shadow map; the gemstone uses one half-resolution transmission pass. Automatic rotation uses a 30fps cap. Rendering stops once paused movement settles, outside the model's viewport observation area or while the document is hidden. Initialization waits for a visible document and model area. Dispose shared maps once on teardown.
+
+
+### Readable bullion stamps and tokenized stock
+The owner found the initial engraving adjustment too faint and rejected Onchain Bureau branding on bullion. Replaced it with larger generic Au, FINE GOLD, 999.9 and 1000 g stamps, a stronger recessed height map and darker groove interiors. Keep the original bar geometry, material finish, lighting and motion. The small specimen marking distinguishes the study from an actual certified refinery product. Mobile gold also includes purity and weight markings.
+
+Added a tokenized-stock scenario with an original curved paper certificate: ivory rag-paper texture, navy security-print borders, architectural vignette, registration fields and a raised foil specimen seal. The certificate is illustrative and does not name a real issuer or establish shareholder rights. The stock explanation links to SEC staff's tokenized-securities statement and distinguishes underlying share prices from the rights conferred by a token structure.
+
+The paper geometry and generated textures are created on first stock selection; no remote model, image, font or extra dependency is fetched. The existing capped rotation and drag interaction are shared. Mobile selectors use two columns for four readable choices; stock has an original SVG fallback.

@@ -84,3 +84,10 @@ All three refined models visually reviewed in Chrome; captures are refined-gold.
 
 ### Subtle gold engraving adjustment
 Changed only the engraving height-map shade (#656565 → #595959) and engraving colour (#bb8d3b → #b78a39), giving the recessed marks slightly more depth and contrast. Geometry, gold surface, lighting and interactions are unchanged. Reviewed the gold model in Safari; capture: gold-engraving-subtle.png. Type/content checks and build passed. No layout changes or new responsive checks in this pass.
+
+### Unbranded bullion stamps and stock certificate
+- The prior engraving adjustment was still too faint for the owner. Enlarged the fineness/weight lettering, strengthened recess contrast and removed OB/Onchain Bureau markings. Reviewed the resulting gold in Safari and the stamped mobile fallback in Chrome. Bar geometry and shared lighting remain unchanged.
+- Added the tokenized-stock selector, scenario explanation, original 3D paper certificate and SVG fallback. Reviewed the certificate in Safari and Chrome; increased border stroke weights after the first render looked too faint. Chrome click-to-pause and dragging exercised on the new certificate.
+- Chrome responsive harness measured 375, 768 and 1440px both before and after selecting stock: no horizontal overflow, zero broken section anchors and fonts loaded. Visually checked the two-column mobile selector, mobile certificate/gold, and complete tablet certificate framing.
+- Captures: gold-unbranded-stamps.png, stock-certificate-desktop.png, stock-mobile-375.png and stock-tablet-768.png.
+- Type/content checks, static build and production-isolation checks pass. The existing lazy-chunk size advisory remains. Scene code is 148,927 gzip bytes in this build; certificate textures are generated only on first stock selection, with no external asset fetches or new dependencies. No new GPU timing, screen-reader or clean-console audit is claimed.

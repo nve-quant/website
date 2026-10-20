@@ -56,3 +56,9 @@ Service copy and engagement steps in src/data/home.ts are editorial drafts adapt
 
 ## Interactive asset scenarios
 `src/data/market-model.ts` contains editorial drafts for tokenized gold, yield-bearing funds and unique assets. Each retains its existing-site research source. Explanations are illustrative design questions, not verified capabilities, investment advice, live market conditions or performance evidence. Owner review remains required before publication.
+
+
+## Tokenized-stock scenario
+New editorial draft in `src/data/market-model.ts`, informed by the [SEC staff Statement on Tokenized Securities, 28 January 2026](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities). This external source supports the distinction between issuer-sponsored tokenized shares and third-party structures; it does not verify Onchain Bureau capabilities. Rights, corporate actions and exit terms remain structure-specific design questions. The physical certificate is original specimen artwork, not an actual issued security. Business copy still requires owner approval.
+
+Gold model marks now use generic metal, fineness and weight labels instead of OB/Onchain Bureau. No refinery logo or certification claim is depicted. The existing [Argor-Heraeus cast-bar reference](https://www.argor-heraeus.com/en/products-and-services/products/cast-and-minted-bars/1000g-au-cast-classic-999.9/) remains visual context only; no imagery is reused.

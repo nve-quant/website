@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {createGold} from './models/gold';
 import {createFund} from './models/fund';
+import {createStock} from './models/stock';
 import {createEmerald} from './models/emerald';
 import type {MarketModelId} from '../data/market-model';
 
@@ -47,16 +48,18 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   key.shadow.normalBias=.018;key.shadow.bias=-.00015;
   scene.add(key);
   const rig=new THREE.Group();scene.add(rig);
-  const models:Record<MarketModelId,THREE.Group>={gold:createGold(),fund:createFund(),unique:createEmerald()};
+  const models:Record<MarketModelId,THREE.Group>={gold:createGold(),fund:createFund(),stock:new THREE.Group(),unique:createEmerald()};
+  let stockReady=false;
   Object.values(models).forEach(model=>{rig.add(model);model.visible=false;});
   // Clamp texture sampling once, including shared maps created by the model builders.
-  scene.traverse(object=>{
+  const configureTextures=(root:THREE.Object3D)=>root.traverse(object=>{
     if(!(object instanceof THREE.Mesh))return;
     const materials=Array.isArray(object.material)?object.material:[object.material];
     materials.forEach(material=>Object.values(material).forEach(value=>{
       if(value instanceof THREE.Texture)value.anisotropy=Math.min(value.anisotropy,renderer.capabilities.getMaxAnisotropy());
     }));
   });
+  configureTextures(scene);
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.MeshBasicMaterial({color:0xe6ebd9,toneMapped:false}));
   floor.rotation.x=-Math.PI/2;floor.position.y=-.045;scene.add(floor);
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.ShadowMaterial({opacity:.12}));
@@ -196,7 +199,13 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   canvas.addEventListener('webglcontextlost',lost);
   resize();
   return {
-    select(id:MarketModelId){endDrag();active=id;Object.entries(models).forEach(([key,model])=>{model.visible=key===id;model.scale.setScalar(1);});scale=.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();},
+    select(id:MarketModelId){
+      endDrag();
+      // Generate the certificate's paper and engraving maps only when requested.
+      if(id==='stock'&&!stockReady){models.stock.add(createStock());configureTextures(models.stock);stockReady=true;}
+      active=id;Object.entries(models).forEach(([key,model])=>{model.visible=key===id;model.scale.setScalar(1);});
+      scale=.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();
+    },
     visible(value:boolean){visible=value;if(!value){endDrag();leave();if(frame!==undefined){cancelAnimationFrame(frame);frame=undefined;}}if(value){lastTime=performance.now();schedule();}},
     dispose(){
       disposed=true;endDrag();if(frame!==undefined)cancelAnimationFrame(frame);resizeObserver.disconnect();

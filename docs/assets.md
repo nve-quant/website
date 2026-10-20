@@ -11,3 +11,7 @@
 
 - Product-study model modules in src/scripts/models: original gold geometry/maps, fund certificate geometry/guilloché maps and emerald-cut geometry. Generated canvas maps are created locally at runtime, with no asset downloads. Gold stamps use original Onchain Bureau specimen artwork; no third-party hallmark is reproduced.
 - Studio lighting is now an original procedural softbox environment, replacing RoomEnvironment.
+
+
+### Stock certificate
+`src/scripts/models/stock.ts` and the stock SVG in `AssetMarket.astro` contain original procedural artwork: engraved borders, rosettes, architectural vignette, paper fibres, curved sheet geometry and specimen foil seal. Canvas lettering uses system Georgia/sans-serif; no font or artwork is downloaded. The paper is an illustrative design study without an issuer identity, completed signature or certification claim.

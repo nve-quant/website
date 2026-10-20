@@ -20,19 +20,18 @@ export function createGold(): THREE.Group {
   // The same engraved artwork changes colour, surface height and roughness.
   const mark=(ctx:CanvasRenderingContext2D,fill:string)=>{
     ctx.save();ctx.fillStyle=fill;ctx.strokeStyle=fill;ctx.textAlign='center';
-    ctx.lineWidth=4;ctx.beginPath();ctx.arc(256,202,77,0,Math.PI*2);ctx.stroke();
-    ctx.font='500 69px Georgia,serif';ctx.fillText('OB',256,224);
-    ctx.font='26px sans-serif';ctx.fillText('ONCHAIN BUREAU',256,340);
-    ctx.font='500 44px sans-serif';ctx.fillText('FINE GOLD',256,468);
-    ctx.font='54px Georgia,serif';ctx.fillText('999.9',256,551);
-    ctx.font='34px sans-serif';ctx.fillText('1000 g',256,645);
-    ctx.font='19px monospace';ctx.fillText('ILLUSTRATIVE SPECIMEN',256,793);
-    ctx.font='23px monospace';ctx.fillText('OB 000001',256,842);
+    ctx.lineWidth=4;ctx.strokeRect(184,112,144,142);
+    ctx.font='74px Georgia,serif';ctx.fillText('Au',256,213);
+    ctx.font='600 59px sans-serif';ctx.fillText('FINE GOLD',256,389);
+    ctx.font='96px sans-serif';ctx.fillText('999.9',256,522);
+    ctx.font='500 52px sans-serif';ctx.fillText('1000 g',256,632);
+    ctx.font='21px monospace';ctx.fillText('SPECIMEN',256,790);
+    ctx.font='28px monospace';ctx.fillText('000001',256,842);
     ctx.restore();
   };
-  mark(heightCtx,'#595959');mark(roughCtx,'#acacac');
+  mark(heightCtx,'#222222');mark(roughCtx,'#acacac');
   // Small offset highlights mimic the lip of a struck mark, rather than printed black text.
-  colorCtx.save();colorCtx.translate(0,-1.2);mark(colorCtx,'#ffe4a0');colorCtx.restore();mark(colorCtx,'#b78a39');
+  colorCtx.save();colorCtx.translate(0,-2);mark(colorCtx,'#ffe4a0');colorCtx.restore();mark(colorCtx,'#80551d');
   for(let i=0;i<150;i++){
     const x=random()*512,y=random()*1024,length=8+random()*65;
     heightCtx.strokeStyle=`rgba(70,70,70,${.035+random()*.07})`;heightCtx.lineWidth=.5+random();
