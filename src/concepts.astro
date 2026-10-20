@@ -1,0 +1,28 @@
+---
+import Base from './layouts/Base.astro';
+import MarketDiagram from './components/MarketDiagram.astro';
+import {getCollection} from 'astro:content';
+import {site,directions} from './data/site';
+import '@fontsource/public-sans/400.css';
+import '@fontsource/public-sans/500.css';
+import '@fontsource/newsreader/400.css';
+import './styles/concepts.css';
+export function getStaticPaths(){return directions.map(d=>({params:{direction:d.id}}));}
+const direction=directions.find(d=>d.id===Astro.params.direction)!;
+const service=(await getCollection('services'))[0].data;
+const research=(await getCollection('research'))[0].data;
+const isResearch=direction.id==='research';
+---
+<Base title={direction.name} description={site.description} theme={direction.id}>
+ <div class="study-bar"><a href="/">All concepts</a><span>{direction.name} · Draft study</span></div>
+ <div class="site-wrap">
+ <header class="site-header"><a href="#main" class="wordmark" aria-label="Onchain Bureau home">Onchain<br/>Bureau<span class="brand-mark" aria-hidden="true"></span></a><nav aria-label="Main navigation"><a href="#approach">Approach</a><a href="#research">Research</a><a href="#contact">Contact</a></nav></header>
+ <main id="main">
+ {isResearch ? <section id="research" class="research-opening" aria-labelledby="hero-heading"><div class="research-context"><p>From our research</p><p>Asset structure<br/>14 October 2026</p></div><div><h1 id="hero-heading">{research.title}</h1><p class="lead">{research.summary}</p><a class="text-link" href={research.source}>Read the research note</a></div><div class="stone-study" aria-hidden="true"><svg viewBox="0 0 300 320"><path d="M50 110 100 35 207 55 265 135 220 265 88 280 30 190Z"/><path d="m50 110 82 20 37-65 38-10M132 130l76 25 57-20M208 155l12 110M132 130 88 280M30 190l102-60M169 65l39 90M88 280l120-125"/><path d="M100 35 132 130 50 110M208 155l-39-90"/></svg><span>Form varies.<br/>Value follows.</span></div></section> : <section class="hero" aria-labelledby="hero-heading"><div class="hero-title"><p class="audience">{site.audience}</p><h1 id="hero-heading">Real assets.<br/><span>Working markets.</span></h1></div><div class="hero-copy"><p class="lead">{site.intro}</p><a class="cta" href={`mailto:${site.email}`}>{site.contact}</a></div></section>}
+ {direction.id==='mechanics' && <section class="mechanics-diagram" aria-label="How the market connects"><div class="diagram-heading"><h2>The asset sets<br/>the terms.</h2><p>A market connects them.</p></div><MarketDiagram/></section>}
+ <section id="approach" class="approach"><div class="section-label"><p>Market design</p>{isResearch && <p class="research-business">{site.description}</p>}</div><div class="approach-copy"><h2>{service.title}</h2><p class="lead">{service.summary}</p>{isResearch && <p>{site.intro}</p>}<a class="text-link" href={`mailto:${site.email}`}>{site.contact}</a></div>{direction.id!=='mechanics' && <div class="approach-diagram"><MarketDiagram/></div>}</section>
+ {!isResearch && <section id="research" class="research-section"><div><p>{isResearch?'The question behind the work':'Research'}</p><p class="date">14 October 2026</p></div><div><h2>{research.title}</h2><p>{research.summary}</p><a class="text-link" href={research.source}>Read the research note</a></div></section>}
+ <section id="contact" class="contact-section"><h2>What does your<br/>market need?</h2><div><p>{site.audience}</p><a href={`mailto:${site.email}`}>{site.email}</a></div></section>
+ </main><footer class="site-footer"><span>Onchain Bureau</span><p>Platform in development.</p><a href="/">Back to concepts</a></footer>
+ </div>
+</Base>

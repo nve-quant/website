@@ -1,0 +1,21 @@
+---
+import Base from './layouts/Base.astro';
+import {directions} from './data/site';
+---
+<Base title="Responsive review"><main id="main"><a href="/">All concepts</a><h1>Responsive review</h1><p>Local review tool. Each preview uses the exact viewport width shown.</p><nav aria-label="Select preview">{directions.map(d=><div><strong>{d.name}</strong>{[375,768,1440].map(w=><button data-concept={d.id} data-width={w}>{d.name} {w}px</button>)}</div>)}</nav><p id="result" aria-live="polite">Choose a preview.</p><div class="stage"><iframe title="Concept preview" width="375" height="2000"></iframe></div></main></Base>
+<script>
+const frame=document.querySelector('iframe')!;
+const result=document.querySelector('#result')!;
+document.querySelectorAll<HTMLButtonElement>('button[data-concept]').forEach(button=>button.addEventListener('click',()=>{
+ frame.width=button.dataset.width!;frame.src=`/concepts/${button.dataset.concept}`;result.textContent='Loading preview…';
+}));
+frame.addEventListener('load',async()=>{
+ const doc=frame.contentDocument;if(!doc||!frame.getAttribute('src'))return;
+ await doc.fonts.ready;
+ frame.height=String(doc.documentElement.scrollHeight);
+ const overflow=doc.documentElement.scrollWidth>Number(frame.width);
+ const invalidAnchors=Array.from(doc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')).filter(a=>!doc.querySelector(a.getAttribute('href')!));
+ result.textContent=`${frame.width}px: ${overflow?'FAIL: horizontal overflow':'PASS: no horizontal overflow'}; ${invalidAnchors.length} broken section links; fonts ${doc.fonts.status}.`;
+});
+</script>
+<style>main{padding:24px}h1{font-size:2rem;margin:24px 0 12px}nav{display:flex;flex-wrap:wrap;gap:24px}nav div{display:flex;flex-wrap:wrap;gap:8px;align-items:center}button{padding:8px;border:1px solid #80929c;background:white;color:#182b39;cursor:pointer}.stage{overflow:auto;background:#e7ebee;padding:16px}iframe{display:block;background:white;border:0;max-width:none}#result{font-weight:bold;max-width:none}</style>

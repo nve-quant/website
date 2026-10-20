@@ -1,0 +1,8 @@
+# Assets and licensing
+
+- Public Sans: self-hosted from @fontsource/public-sans, weights 400/500. SIL Open Font License 1.1; licence copy is docs/licenses/public-sans.txt.
+- Newsreader: self-hosted from @fontsource/newsreader, weight 400. SIL Open Font License 1.1; licence copy is docs/licenses/newsreader.txt.
+- Geometric emerald study: original inline SVG created for this project; illustrative, not a photograph or appraisal of a real asset.
+- Operating diagram and wordmark treatment: original HTML/CSS studies. Wordmark is provisional, not a final logo.
+- Existing site's favicon and IBM Plex Sans URLs are inventoried but not reused. Confirm licensing/source files if subsequently retained.
+- No external font requests, stock imagery, customer logos or third-party icon library.

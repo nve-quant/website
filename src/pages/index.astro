@@ -1,0 +1,6 @@
+---
+import Base from '../layouts/Base.astro';
+import {directions} from '../data/site';
+---
+<Base title="Design studies"><main id="main" class="review"><p>Onchain Bureau / Design development</p><h1>One business.<br/>Three ways to tell its story.</h1><p>Compare the same content through three distinct compositions. These are local studies, not the finished website.</p>{import.meta.env.DEV ? <nav aria-label="Design concepts">{directions.map(d=><a href={`/concepts/${d.id}`}><h2>{d.name}</h2><p>{d.description}</p><span>Explore concept</span></a>)}</nav> : <p>The design studies are available through the local development server only.</p>}<footer>Review the hierarchy, clarity and character of each direction before choosing a design system.</footer></main></Base>
+<style>.review{max-width:1050px;margin:auto;padding:64px 32px}h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;line-height:1.05;margin:50px 0 24px}nav{margin:60px 0}nav a{display:grid;grid-template-columns:1fr 1.3fr auto;gap:24px;align-items:baseline;padding:30px 0;border-top:1px solid #b6c4cb;text-decoration:none}nav a:hover h2{text-decoration:underline}h2{font-size:1.4rem;margin:0}nav p{margin:0}nav span,footer{font-size:.85rem}footer{padding-top:20px}@media(max-width:700px){.review{padding:36px 24px}nav a{grid-template-columns:1fr;gap:12px}}</style>
