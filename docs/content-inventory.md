@@ -102,3 +102,6 @@ Evidence still required: named biographies and firm history; permitted case stud
 
 ## DEX illustration clarification, 20 October 2026
 The owner requested faster range tracking and questioned the centre-heavy distribution. The revised graphic represents liquidity L available at each price, rather than cumulative market depth or token value. A single managed range is flat within its bounds; the pool total combines its contribution with other illustrative overlapping ranges. Source for the range-based model: [Uniswap concentrated liquidity](https://developers.uniswap.org/docs/get-started/concepts/liquidity-providers/concentrated-liquidity). The chosen range widths, profile and shortened response delay remain illustrative, not actual positions, a universal pool shape, a trading strategy or evidence of execution speed.
+
+### DEX profile clarification follow-up
+The owner clarified the requested profile as a central valley with fuller shoulders, rather than a flat band. The illustration now aggregates multiple managed ranges. Its accessible description supersedes the prior single-position explanation; it explicitly avoids presenting the shape as a universal profile or actual strategy. The animation pace and all values remain illustrative.

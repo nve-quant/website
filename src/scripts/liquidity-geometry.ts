@@ -51,7 +51,10 @@ export function rangeGeometry(seconds: number) {
   // Same path with a short illustrative lag (~188ms), not an execution-speed claim.
   const priceAt=(time:number)=>270+58*ease((time-2)/3)-104*ease((time-8)/3)+46*ease((time-13)/2);
   const price=priceAt(t),center=priceAt(t-.6);
-  const left=center-88,width=176,managedHeight=110;
+  const left=center-88,width=176;
+  // Aggregate multiple ranges: a central valley, fuller shoulders, tapered edges.
+  const shoulderHeights=[22,26,34,50,76,100,116,116,100,72,46];
+  const managedAt=(x:number)=>Math.abs(x-center)>=88?0:shoulderHeights[Math.floor(Math.abs(x-center)/8)];
   const poolLevels=[];
   let bars='', background='';
   for(let i=0;i<48;i++){
@@ -59,18 +62,23 @@ export function rangeGeometry(seconds: number) {
     // Liquidity L per price interval, not cumulative depth or token value.
     // Other LP ranges form a stepped profile; pool totals include our range.
     const sample=x+3.5;
-    const other=15+(sample>=86&&sample<176?18:0)+(sample>=156&&sample<356?25:0)+(sample>=296&&sample<456?14:0);
-    const managed=sample>=left&&sample<left+width?managedHeight:0,total=other+managed;
+    const distance=Math.abs(sample-270);
+    const other=18+(distance>=40&&distance<170?12:0)+(distance>=70&&distance<150?16:0)+(distance>=90&&distance<130?12:0);
+    const managed=managedAt(sample),total=other+managed;
     poolLevels.push({x,other,managed,total});
     background+=`M${x} 236v-${total}h7v${total}Z`;
   }
+  let outline=`M${fixed(left)} 236`;
+  const managedLevels=[];
   for(let i=0;i<22;i++){
-    const x=center-86+i*8;
-    const h=managedHeight;
+    const start=left+i*8,x=start+1.25;
+    const h=managedAt(start+4);
+    managedLevels.push({x:start+4,height:h});
     bars+=`M${fixed(x)} 236v-${h}h5.5v${h}Z`;
+    outline+=`V${236-h}H${fixed(start+8)}`;
   }
-  const outline=`M${fixed(left)} 236V${236-managedHeight}h${width}V236`;
+  outline+='V236';
   const moving=[[2,5],[8,11],[13,15]];
   const phase=moving.some(([start])=>t>=start&&t<start+.6)?'Price moves':moving.some(([start,end])=>t>=start+.6&&t<end+.6)?'Range rebalances':'Positioned around price';
-  return {price,center,left,width,bars,background,outline,phase,managedHeight,poolLevels};
+  return {price,center,left,width,bars,background,outline,phase,managedLevels,poolLevels};
 }

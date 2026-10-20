@@ -30,7 +30,7 @@ for(let t=0;t<64;t+=.05){
   assert(Math.abs(r.price-r.center)<32,'Managed range follows price without the previous long lag');
   for(const level of r.poolLevels){
     assert.equal(level.total,level.other+level.managed,'Pool liquidity includes the managed position');
-    assert(level.managed===0||level.managed===r.managedHeight,'One range has constant liquidity L');
+    assert(level.managed>=0&&level.managed<=116,'Managed allocation stays within its height bounds');
     assert(level.total>0&&level.total<=181,'Pool bars remain inside the plot');
   }
   assert(!/NaN|Infinity/.test(r.bars+b.fill+b.line+b.volume));
@@ -57,7 +57,12 @@ assert(rangeGeometry(.9).center>270,'Repositioning starts soon after price movem
 for(const t of [.9,1.3,2.8,3.3,4.5]){
   assert(Math.abs(rangeGeometry(t).center-rangeGeometry(t-.1875).price)<1e-8,'Range tracks the delayed price path');
 }
-assert.equal(new Set([...rangeGeometry(1).bars.matchAll(/v-(\d+)/g)].map(match=>match[1])).size,1,'Managed bars are flat within the selected range');
+const profile=rangeGeometry(0);
+assert(profile.managedLevels[10].height<profile.managedLevels[4].height,'Managed centre is thinner than its shoulders');
+assert(profile.managedLevels[0].height<profile.managedLevels[4].height,'Outer edges taper beyond the shoulders');
+assert.deepEqual(profile.managedLevels.map(l=>l.height),profile.managedLevels.map(l=>l.height).reverse(),'Managed profile is balanced around its centre');
+const nearestPool=x=>profile.poolLevels.reduce((a,b)=>Math.abs(b.x+3.5-x)<Math.abs(a.x+3.5-x)?b:a);
+assert(nearestPool(270).total<nearestPool(214).total&&nearestPool(270).total<nearestPool(326).total,'Pool has less liquidity in the centre than at both shoulders');
 
 // Exercise lifecycle without a browser: offscreen, hidden, pause, motion preference and teardown.
 const pending=new Map();let next=0,observe;

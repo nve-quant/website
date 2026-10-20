@@ -68,7 +68,7 @@ const name = kind === 'cex' ? 'order book' : 'liquidity range';
     </g>
   </svg> : <svg class="market-chart" viewBox="0 0 540 292" role="img" aria-labelledby="dex-chart-title dex-chart-description">
     <title id="dex-chart-title">Illustrative liquidity range rebalancing</title>
-    <desc id="dex-chart-description">Liquidity L available at each price, not cumulative depth. The managed position contributes constant liquidity within its selected range. Total pool liquidity includes that position and other overlapping LP ranges. The selected range follows the price with a short illustrative delay. This accelerated sequence is not a trading strategy, execution-speed claim or live data.</desc>
+    <desc id="dex-chart-description">Liquidity L available at each price. The illustrative managed allocation combines multiple ranges, with less liquidity near its centre and fuller shoulders on either side. Total pool liquidity includes that allocation and other LP ranges. The managed allocation follows the price with a short illustrative delay. This example does not represent a universal liquidity profile, actual strategy, execution speed or live data.</desc>
     <g class="chart-grid">{[76,120,164,208].map(y=><path d={`M32 ${y}H508`}/>)}{[32,111,191,270,349,429,508].map(x=><path d={`M${x} 54V236`}/>)}</g>
     <text class="chart-axis-label" x="32" y="34">Liquidity (L)</text>
     <path class="pool-bars" data-pool-bars d={range.background}/>
