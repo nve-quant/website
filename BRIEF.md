@@ -47,3 +47,6 @@ Owner requested selectable specimens within asset groups: four gemstones, four p
 
 ### Expanded asset studies — 20 October 2026
 Owner requested distinct Metals, Grains (wheat, corn and soy) and Real estate categories. Metals now includes the original gold, silver, palladium and platinum plus copper and aluminium. Real estate uses original residential, office and industrial architectural miniatures. Oil remains under Commodities. These are illustrative market-design studies, not a portfolio, available products, certified holdings or evidence of existing client mandates. New grain/property copy is a draft for owner review.
+
+### Asset taxonomy and detail pass — 21 October 2026
+Owner approved eight groups: Precious metals; Industrial metals; Energy; Agriculture; Gemstones & collectibles; Real estate; Equities; Fixed income & funds. Add nickel, natural gas, coffee, cotton, Treasury bill and corporate bond specimens. Watches/art remain future possibilities, not additions in this milestone. Fund shares, direct bills and corporate debt must be distinguished in the explanation. These remain illustrative market studies, not a product catalogue or claimed holdings. Owner also requested more detailed grains, buildings and barrel, with the existing performance-conscious rendering approach retained.

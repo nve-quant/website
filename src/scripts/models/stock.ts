@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 /** Original specimen artwork on a gently curled paper sheet, not an issued security. */
-export function createStock(): THREE.Group {
+export function createStock(kind:'stock'|'treasury'|'bond'='stock'): THREE.Group {
   const group = new THREE.Group();
   const width = 2.75, depth = 1.84;
   const face = document.createElement('canvas');
@@ -20,7 +20,7 @@ export function createStock(): THREE.Group {
     ink.beginPath(); ink.moveTo(x, y);
     ink.lineTo(x + 1 + random() * 7, y + random() * 2); ink.stroke();
   }
-  const blue = '#153444', lightBlue = '#46616a';
+  const blue = kind==='treasury'?'#365347':kind==='bond'?'#674734':'#153444', lightBlue = kind==='stock'?'#46616a':'#6c7966';
   const line = (x1:number, y1:number, x2:number, y2:number, weight=1) => {
     ink.lineWidth = weight; ink.beginPath(); ink.moveTo(x1, y1); ink.lineTo(x2, y2); ink.stroke();
   };
@@ -84,11 +84,11 @@ export function createStock(): THREE.Group {
   ink.textAlign = 'left'; ink.font = '23px Georgia,serif'; ink.fillText('No. 000001',228,148);
   ink.textAlign = 'right'; ink.font = '22px sans-serif'; ink.fillText('SPECIMEN',1308,148);
   ink.textAlign = 'center';
-  ink.font = '32px Georgia,serif'; ink.fillText('S H A R E   C E R T I F I C A T E',768,338);
-  ink.font = '106px Georgia,serif'; ink.fillText('Common stock',768,448);
+  ink.font = '32px Georgia,serif'; ink.fillText(kind==='stock'?'S H A R E   C E R T I F I C A T E':'D E B T   I N S T R U M E N T',768,338);
+  ink.font = '106px Georgia,serif'; ink.fillText(kind==='treasury'?'Treasury bill':kind==='bond'?'Corporate bond':'Common stock',768,448);
   ink.strokeStyle = lightBlue; line(414,521,1122,521);
-  ink.font = '23px Georgia,serif'; ink.fillText('Registered ownership',768,562);
-  ink.font = '22px Georgia,serif'; ink.fillText('This specimen illustrates a physical share certificate.',768,613);
+  ink.font = '23px Georgia,serif'; ink.fillText(kind==='treasury'?'Defined maturity':kind==='bond'?'Issuer credit · Coupon terms · Maturity':'Registered ownership',768,562);
+  ink.font = '22px Georgia,serif'; ink.fillText(kind==='stock'?'This specimen illustrates a physical share certificate.':'Illustrative document. Not an issued or redeemable security.',768,613);
   ink.font = '20px Georgia,serif'; ink.fillText('Rights and transfer terms depend on the issuing structure.',768,650);
 
   // A faint central watermark and unfilled registration/signature fields.

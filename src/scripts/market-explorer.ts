@@ -1,4 +1,4 @@
-import {assetVariants,type MarketModelId} from '../data/market-model';
+import {assetVariants,assetNotes,type MarketModelId} from '../data/market-model';
 import type {createMarketScene} from './market-scene';
 
 export function initMarketExplorer(root: HTMLElement) {
@@ -13,7 +13,7 @@ export function initMarketExplorer(root: HTMLElement) {
   let intersecting = false;
   let destroyed = false;
   let selection: MarketModelId = 'gold';
-  const positions:Record<MarketModelId,number>={gold:0,fund:0,stock:0,unique:0,grains:0,realestate:0,commodities:0};
+  const positions:Record<MarketModelId,number>={industrial:0,gold:0,fund:0,stock:0,unique:0,grains:0,realestate:0,commodities:0};
   const controls=root.querySelector<HTMLElement>('[data-specimen-controls]')!;
   const variant=()=>assetVariants[selection][positions[selection]]!;
   function selectSpecimen(announce=false){
@@ -28,7 +28,9 @@ export function initMarketExplorer(root: HTMLElement) {
       const step=Number(button.dataset.specimenStep),next=list[(positions[selection]+step+list.length)%list.length]!;
       button.setAttribute('aria-label',`${step<0?'Previous':'Next'} specimen: ${next.label}`);
     });
-    if(selection==='gold'){
+    const note=root.querySelector<HTMLElement>(`[data-specimen-note="${selection}"]`)!;
+    note.textContent=assetNotes[current.id]??'';note.hidden=!note.textContent;
+    if(selection==='gold'||selection==='industrial'){
       root.querySelector('[data-bullion-stamp]')!.textContent=(['gold','silver'].includes(current.id)?'FINE ':'')+current.label.toUpperCase();
       root.querySelector('[data-bullion-purity]')!.textContent=current.id==='aluminium'?'PRIMARY':['gold','silver'].includes(current.id)?'999.9':'999.5';
       root.querySelector('[data-bullion-weight]')!.textContent=current.id==='aluminium'?'METAL':'1000 g';

@@ -35,7 +35,7 @@ Market mechanics is selected. Read BRIEF.md and DESIGN.md, then review the compl
 The development-only `/review` route offers exact 375/768/1440px embedded previews and reports overflow, missing section targets and font readiness. It is excluded from production alongside the concepts. Screenshot evidence is in `docs/screenshots/`.
 
 ## Interactive market study
-`src/data/market-model.ts` holds seven illustrative categories and nineteen specimens. `AssetMarket.astro` renders their accessible selector, explanations and SVG fallbacks. `src/scripts/market-explorer.ts` loads the Three.js scene only near the viewport in a visible document, on screens wider than 700px without reduced motion.
+`src/data/market-model.ts` holds eight illustrative categories and twenty-five specimens. `AssetMarket.astro` renders their accessible selector, explanations and SVG fallbacks. `src/scripts/market-explorer.ts` loads the Three.js scene only near the viewport in a visible document, on screens wider than 700px without reduced motion.
 
 The selected asset rotates automatically. Drag the object directly to rotate it; click to pause or resume. With the scene focused, Space/Enter toggles pause and the arrow keys rotate or tilt the object manually, pausing automatic rotation. Pause remains selected when changing assets or returning to the scene.
 
@@ -56,3 +56,5 @@ Service navigation interaction checks: `node scripts/check-service-navigation.mj
 Client-need animation checks: `node scripts/check-need-illustrations.mjs` (pause, visibility, reduced motion and page lifecycle).
 
 Asset studies: `/asset-review` is a development-only material inspection page for explicit still renders of each procedural specimen. `/review` covers the actual section at responsive widths. Run `node scripts/check-asset-explorer.mjs` to check variant cycling, remembered selections, lazy initialization, accessible naming, fallback modes and lifecycle handling.
+
+Geometry/resource checks: `node scripts/check-asset-models.mjs`. This runs every real factory with a stubbed canvas to check finite geometry, floor/framing envelopes and resource budgets. It is not a visual or FPS test. Desktop rendering uses a maximum 2× device pixel ratio and a 2.4-megapixel canvas cap; automatic rotation remains capped at 30 fps.

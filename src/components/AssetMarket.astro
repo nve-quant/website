@@ -1,7 +1,14 @@
 ---
-import {marketModels,assetVariants} from '../data/market-model';
+import {marketModels,assetVariants,assetNotes} from '../data/market-model';
 import '../styles/market-model.css';
 import AdditionalAssetFallbacks from './AdditionalAssetFallbacks.astro';
+import NewAssetFallbacks from './NewAssetFallbacks.astro';
+const fallback=(id:string)=>({gold:'gold',silver:'gold',platinum:'gold',palladium:'gold',aluminium:'gold',emerald:'unique',oil:'commodities'}[id]??id);
+const selectorStyles=marketModels.map(model=>{
+ const prefix=`.market-explorer:has(input[value="${model.id}"]:checked)`;
+ const variants=assetVariants[model.id],first=fallback(variants[0].id);
+ return `${prefix} [data-panel="${model.id}"],${prefix} .fallback-${first}{display:block}${prefix} [data-caption="${model.id}"],${prefix} [data-route="${model.id}"]{display:flex}`+variants.map(variant=>`${prefix}[data-specimen="${variant.id}"] .model-fallback svg{display:none}${prefix}[data-specimen="${variant.id}"] .model-fallback .fallback-${fallback(variant.id)}{display:block}`).join('');
+}).join('');
 ---
 <section id="asset-studies" class="market-explorer" aria-labelledby="explorer-title" data-market-explorer>
   <div class="explorer-heading"><div><p>Tokenized asset studies</p><h2 id="explorer-title">The asset shapes<br/>the market.</h2></div><p>Explore how reference prices, liquidity and redemption vary by asset.</p></div>
@@ -39,7 +46,7 @@ import AdditionalAssetFallbacks from './AdditionalAssetFallbacks.astro';
             {Array.from({length:11},(_,i)=>{const x=158+i*18,y=92+Math.abs(i-5)*10;return <g transform={`rotate(${(i-5)*3} ${x} ${y})`}><path d={`M250 329Q${x} 245 ${x} ${y}`} fill="none" stroke="#9a7e43" stroke-width="2"/>{Array.from({length:6},(_,j)=><g><ellipse cx={x-6} cy={y+j*10} rx="5" ry="10" transform={`rotate(-35 ${x-6} ${y+j*10})`} fill="#d7b475" stroke="#9a7e43"/><ellipse cx={x+6} cy={y+j*10} rx="5" ry="10" transform={`rotate(35 ${x+6} ${y+j*10})`} fill="#c6a25c" stroke="#9a7e43"/><path d={`M${x-10} ${y+j*10}l-8-25M${x+10} ${y+j*10}l8-25`} stroke="#b69550" stroke-width="1"/></g>)}</g>;})}
             <path d="M230 270l39 2m-38 4 37 2m-36 4 35 2" stroke="#806840" stroke-width="4"/>
           </g></svg>
-        <AdditionalAssetFallbacks/>
+        <AdditionalAssetFallbacks/><NewAssetFallbacks/>
       </div>
       <div class="specimen-controls" data-specimen-controls hidden role="group" aria-label="Choose an asset specimen">
         <button type="button" class="specimen-arrow specimen-previous" data-specimen-step="-1" aria-label="Previous specimen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h12"/></svg></button>
@@ -49,13 +56,14 @@ import AdditionalAssetFallbacks from './AdditionalAssetFallbacks.astro';
       <p id="model-interaction-help" hidden>Drag the object to rotate it. Click or press Space or Enter to pause or resume automatic rotation. Use the arrow keys to turn the object.</p>
     </div>
     <div class="model-explanation">
-      {marketModels.map(model=><article id={`model-${model.id}`} class="model-panel" data-panel={model.id} aria-labelledby={`title-${model.id}`}><h3 id={`title-${model.id}`}>{model.title}</h3><p class="model-intro">{model.intro}</p><dl><div><dt>Reference price</dt><dd>{model.reference}</dd></div><div><dt>Liquidity</dt><dd>{model.liquidity}</dd></div><div><dt>Redemption</dt><dd>{model.redemption}</dd></div></dl><details class="model-question"><summary>{model.question}<span aria-hidden="true">+</span></summary><p>{model.answer}</p>{model.source && <a href={model.source}>Read more about this structure</a>}</details></article>)}
+      {marketModels.map(model=><article id={`model-${model.id}`} class="model-panel" data-panel={model.id} aria-labelledby={`title-${model.id}`}><h3 id={`title-${model.id}`}>{model.title}</h3><p class="model-intro">{model.intro}</p><p class="specimen-note" data-specimen-note={model.id} hidden={!assetNotes[assetVariants[model.id][0].id]}>{assetNotes[assetVariants[model.id][0].id]}</p><dl><div><dt>Reference price</dt><dd>{model.reference}</dd></div><div><dt>Liquidity</dt><dd>{model.liquidity}</dd></div><div><dt>Redemption</dt><dd>{model.redemption}</dd></div></dl><details class="model-question"><summary>{model.question}<span aria-hidden="true">+</span></summary><p>{model.answer}</p>{model.source && <a href={model.source}>Read more about this structure</a>}</details></article>)}
     </div>
   </div>
   <div class="model-routes" aria-label="Illustrative market relationships">{marketModels.map(model=><ol data-route={model.id}>{model.route.map(item=><li>{item}</li>)}</ol>)}</div>
   <p class="model-disclaimer">Illustrative structures, not live markets. Terms vary by asset and issuer.</p>
   <p class="visually-hidden" aria-live="polite" data-model-status></p>
 </section>
+<style is:inline set:html={selectorStyles}/>
 <script>
   import {initMarketExplorer} from '../scripts/market-explorer';
   document.querySelectorAll<HTMLElement>('[data-market-explorer]').forEach(initMarketExplorer);

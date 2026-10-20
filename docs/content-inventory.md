@@ -124,3 +124,11 @@ The former Tokenized gold tab becomes Precious metals, with generalized draft re
 - Original assets: copper strip coil, aluminium cast ingots, corn, dry soybean pods, residential building, office tower and logistics warehouse. Generated as local Three.js geometry with authored SVG companions; no third-party asset licence required.
 - Draft copy: grain specification, storage/delivery questions and property ownership/valuation/exit questions in `src/data/market-model.ts`. Review before publication; these describe illustrative design considerations, not instrument-specific advice or confirmed services/holdings. No invented source links or property values.
 - Existing commodity copy rewritten for oil after moving wheat. Unique-asset copy now focuses on gems/lots; property has its own explanation. Existing source URLs retained.
+
+### Taxonomy and six specimens — 21 October 2026
+Owner supplied/approved the eight-category grouping and new nickel, gas, coffee, cotton, Treasury-bill and corporate-bond studies. Replaced the broad Metals/Commodities and Unique asset labels; relabelled stock as Equities and fund group as Fixed income & funds, with Fund shares as its specimen label. No claim that a token automatically gives direct asset ownership.
+
+Bill and corporate-debt explanatory facts checked against primary sources:
+- TreasuryDirect, https://www.treasurydirect.gov/marketable-securities/treasury-bills/ — bills sold at discount or face value, defined maturity.
+- Investor.gov, https://www.investor.gov/introduction-investing/investing-basics/investment-products/bonds-or-fixed-income-products — corporate debt, interest/principal and issuer payment risk.
+The fund-versus-direct-instrument distinction was explicitly requested by the owner. The 3D paper studies are marked illustrative, not issued securities. Commodity form/grade/location and property copy remain draft market-design questions, without specific commercial commitments. All model/fallback artwork is locally authored; no external assets or new licences.

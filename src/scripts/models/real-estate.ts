@@ -1,16 +1,19 @@
 import * as THREE from 'three';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+import {brickSurface,surfaceRelief} from './surfaces';
 
 type PropertyKind='residential'|'office'|'warehouse';
 /** Original architectural miniatures; no named development or implied portfolio. */
 export function createRealEstate(kind:PropertyKind):THREE.Group {
   const group=new THREE.Group();
+  const stoneRelief=surfaceRelief('stone');stoneRelief.repeat.set(4,4);
   const materials={
-    stone:new THREE.MeshStandardMaterial({color:0xd7d2c2,roughness:.83}),
-    concrete:new THREE.MeshStandardMaterial({color:0x9fa49b,roughness:.9}),
+    stone:new THREE.MeshStandardMaterial({color:0xd7d2c2,roughness:.83,bumpMap:stoneRelief,bumpScale:.002}),
+    concrete:new THREE.MeshStandardMaterial({color:0x9fa49b,roughness:.9,bumpMap:stoneRelief,bumpScale:.004}),
     dark:new THREE.MeshStandardMaterial({color:0x35423f,roughness:.55,metalness:.2}),
-    glass:new THREE.MeshStandardMaterial({color:0x719095,roughness:.17,metalness:.48}),
+    glass:new THREE.MeshPhysicalMaterial({color:0x526f76,roughness:.13,metalness:.62,clearcoat:1,clearcoatRoughness:.12}),
     frame:new THREE.MeshStandardMaterial({color:0xc4c9c3,roughness:.35,metalness:.65}),
-    brick:new THREE.MeshStandardMaterial({color:0x9e7863,roughness:.92}),
+    brick:new THREE.MeshStandardMaterial({color:0xffffff,roughness:.88,...(kind==='residential'?brickSurface():{})}),
     warm:new THREE.MeshStandardMaterial({color:0xb2aa86,roughness:.36,metalness:.15}),
   };
   type Finish=keyof typeof materials;
@@ -52,14 +55,33 @@ export function createRealEstate(kind:PropertyKind):THREE.Group {
     box('dark',.22,.26,.035,0,.20,.52);box('glass',.17,.22,.04,0,.20,.54);
     box('stone',.42,.028,.28,0,.36,.61);
     box('stone',.46,.025,.26,0,.04,.65);
+    // Balcony returns, recessed sills, rainwater pipes and roof coping.
+    for(let floor=1;floor<5;floor++)for(const x of [-.40,0,.40]){
+      const y=.18+floor*.27;
+      for(const side of [-1,1]){
+        box('dark',.01,.012,.21,x+side*.166,y+.055,.60);
+        box('dark',.008,.12,.008,x+side*.166,y-.005,.51);
+      }
+      box('stone',.29,.018,.045,x,y-.052,.51);
+    }
+    for(const x of [-.59,.59])box('frame',.016,1.37,.016,x,.75,-.507);
+    for(const x of [-.66,.66])box('stone',.065,.014,1.10,x,1.59,0);
+    for(const z of [-.51,.51])box('stone',1.38,.014,.065,0,1.59,z);
+    for(const x of [-.72,.72]){
+      box('concrete',.20,.16,.36,x,.10,.46);box('dark',.17,.012,.33,x,.187,.46);
+      for(let i=0;i<5;i++)box('warm',.028,.045,.23,x-.06+i*.03,.21,.46);
+    }
+    for(let step=0;step<3;step++)box('stone',.43,.012,.07,0,.012+step*.011,.86-step*.055);
   }else if(kind==='office'){
     box('concrete',1.75,.055,1.55,0,0,0);
     box('dark',1.02,1.71,.92,0,.88,0);
     for(let floor=0;floor<10;floor++){
       const y=.15+floor*.16;
       for(const side of [-1,1]){
-        box('glass',1.025,.132,.018,0,y,side*.47);
-        box('glass',.018,.132,.925,side*.52,y,0);
+        for(let pane=0;pane<6;pane++){
+          box('glass',.148,.132,.018,-.40+pane*.16,y,side*.47);
+          box('glass',.018,.132,.132,side*.52,y,-.357+pane*.143);
+        }
         box('frame',1.06,.014,.025,0,y+.073,side*.48);
         box('frame',.025,.014,.96,side*.53,y+.073,0);
       }
@@ -76,6 +98,14 @@ export function createRealEstate(kind:PropertyKind):THREE.Group {
     }
     box('dark',.38,.25,.10,0,.16,.51);box('glass',.32,.21,.02,0,.16,.57);
     box('frame',.55,.025,.34,0,.32,.63);
+    for(const side of [-1,1]){
+      box('frame',.015,.21,.016,side*.08,.16,.587);
+      box('frame',.008,.065,.02,side*.025,.16,.60);
+      box('stone',.52,.05,.22,side*.55,.05,.59);
+    }
+    for(let floor=0;floor<10;floor++)for(const side of [-1,1])box('dark',1.03,.025,.02,0,.15+floor*.16-.06,side*.481);
+    for(const x of [-.50,.50])box('frame',.025,.07,.94,x,1.81,0);
+    for(const z of [-.44,.44])box('frame',1.02,.07,.025,0,1.81,z);
   }else{
     box('concrete',2.75,.055,2.12,0,0,.12);
     box('stone',2.05,.58,1.32,0,.33,-.12);
@@ -98,12 +128,26 @@ export function createRealEstate(kind:PropertyKind):THREE.Group {
     // Roof lights follow each pitch, without transparency render passes.
     for(const x of [-.52,.52])for(const z of [-.50,.05])box('glass',.37,.012,.27,x,.707,z,x<0?.181:-.181);
     box('dark',.02,.25,.16,1.04,.18,-.51);box('glass',.022,.16,.12,1.055,.21,-.51);
+    // Standing seams, gutters, dock rails and door hardware.
+    for(let i=0;i<20;i++){
+      const x=-1.04+i*.109,y=.79-Math.abs(x)*.1835;
+      box('frame',.008,.01,1.42,x,y+.007,-.12);
+    }
+    for(const x of [-1.08,1.08]){
+      box('frame',.027,.025,1.46,x,.588,-.12);
+      for(const z of [-.77,.52])box('frame',.019,.53,.019,x,.30,z);
+    }
+    for(const x of [-.67,0,.67]){
+      box('frame',.065,.013,.012,x,.19,.616);
+      for(const dx of [-.26,.26])box('warm',.025,.15,.025,x+dx,.105,.83);
+      box('dark',.38,.009,.035,x,.083,.74);
+    }
   }
   // Repeated façade details share a single geometry and one draw per material.
-  const cube=new THREE.BoxGeometry(1,1,1);
+  const cube=new RoundedBoxGeometry(1,1,1,1,.012);
   batches.forEach((matrices,finish)=>{
     const mesh=new THREE.InstancedMesh(cube,materials[finish],matrices.length);
-    matrices.forEach((matrix,i)=>mesh.setMatrixAt(i,matrix));mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);
+    matrices.forEach((matrix,i)=>{mesh.setMatrixAt(i,matrix);if(finish==='glass')mesh.setColorAt(i,new THREE.Color().setScalar(.78+(i*7%13)/60));});mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);
   });
   // Discard unused materials; the scene owns all materials referenced by meshes.
   Object.entries(materials).forEach(([name,material])=>{if(!batches.has(name as Finish)&&!(kind==='warehouse'&&name==='dark'))material.dispose();});
