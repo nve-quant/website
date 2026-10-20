@@ -38,3 +38,6 @@ This milestone adds CEX Market Making (`/market-making`), DEX Liquidity Manageme
 Owner requested implementing the conversion audit locally before deciding what to retain. Added problem-to-objective explanations, service-fit guidance, proposed KPI frameworks, commercial/access questions, an enquiry template and a local Company page. The homepage mandate document is replaced by client needs and measurement; detailed mandate content remains on the service pages.
 
 This request does not confirm new facts about people, results, venue support, fees or controls. Development-only editorial notes identify the missing evidence in context and are excluded from static output. See docs/commercial-evidence.md for exact inputs. Company currently describes only the confirmed operating model; biographies and substantiated track record remain pending.
+
+## Owner-confirmed additional services, 20 October 2026
+The owner confirmed OTC deals and systematic strategies as a service, including plug-and-play trading strategy terminals and managed vaults. Include these in navigation and the homepage service overview. Exact strategy catalogue, execution/counterparty model, custody and vault configuration, supported deployments, commercial terms and results are not confirmed by this statement. Do not extend CEX/DEX-specific access claims to every strategy product.

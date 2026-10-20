@@ -105,3 +105,8 @@ The owner requested faster range tracking and questioned the centre-heavy distri
 
 ### DEX profile clarification follow-up
 The owner clarified the requested profile as a central valley with fuller shoulders, rather than a flat band. The illustration now aggregates multiple managed ranges. Its accessible description supersedes the prior single-position explanation; it explicitly avoids presenting the shape as a universal profile or actual strategy. The animation pace and all values remain illustrative.
+
+## Service navigation and new owner confirmations, 20 October 2026
+Owner confirmed OTC deals and systematic strategies as a service, including plug-and-play trading strategy terminals and managed vaults. Added draft descriptions in src/data/home.ts and homepage anchors /#otc-deals and /#systematic-strategies. These are owner-confirmed service categories, not independently verified product evidence. Exact strategies, deployment support, custody, counterparties, settlement process, terms and results remain unspecified. No returns, screenshots, automation guarantee or principal-versus-agency model was invented.
+
+The Services dropdown reuses core and supplementary service data, with detail links to /market-making and /dex-liquidity-management and deep links to the homepage explanations. Additional stable anchors: /#market-design, /#pool-design, /#treasury-execution and /#distribution. Existing source URLs and migration decisions remain unchanged.
