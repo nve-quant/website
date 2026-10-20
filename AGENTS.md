@@ -2,7 +2,8 @@
 
 Read BRIEF.md, DESIGN.md and docs/content-inventory.md before changing content or UI. Apply the frontend-design skill for visual work. Keep changes focused and explain observed problems rather than making arbitrary styling passes.
 
-- This milestone is local-only. Do not publish, change DNS or alter the live site.
+- The owner authorized GitHub synchronization and a separate Vercel preview on 20 October 2026. Do not change DNS, attach the live domain or alter the existing live site. Preserve noindex until a launch is explicitly approved.
+- For cloud work, read docs/CLOUD_HANDOFF.md. Use the frontend-design skill when available; otherwise follow the checked-in DESIGN.md and existing components without blocking routine edits on a machine-specific skill path.
 - Market mechanics is selected. Develop the homepage at / using its scoped design system. Preserve the original concepts at /studies as development-only references.
 - Keep shared content in src/data and typed content collections. Concept-specific styles must be scoped to their body class; shared mechanics may be reused.
 - Never invent proof. Preserve source URLs, draft status and illustrative labels. New business claims need explicit sourcing and owner review.

@@ -1,0 +1,6 @@
+docs/
+.git/
+.github/
+node_modules/
+dist/
+.astro/

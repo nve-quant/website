@@ -1,6 +1,6 @@
 # Onchain Bureau design foundation
 
-Local Astro/TypeScript marketing-site exploration. No deployment or live-site changes.
+Astro/TypeScript marketing website. GitHub and a separate Vercel preview support remote development; the existing live site and domain remain unchanged. See [cloud handoff](docs/CLOUD_HANDOFF.md).
 
 ## Run
 Use Node **24.11.0** (`nvm use`) and npm. From this directory:
@@ -35,7 +35,7 @@ Market mechanics is selected. Read BRIEF.md and DESIGN.md, then review the compl
 The development-only `/review` route offers exact 375/768/1440px embedded previews and reports overflow, missing section targets and font readiness. It is excluded from production alongside the concepts. Screenshot evidence is in `docs/screenshots/`.
 
 ## Interactive market study
-`src/data/market-model.ts` holds four illustrative scenarios. `AssetMarket.astro` renders their accessible selector, explanations and SVG fallbacks. `src/scripts/market-explorer.ts` loads the Three.js scene only near the viewport in a visible document, on screens wider than 700px without reduced motion.
+`src/data/market-model.ts` holds seven illustrative categories and nineteen specimens. `AssetMarket.astro` renders their accessible selector, explanations and SVG fallbacks. `src/scripts/market-explorer.ts` loads the Three.js scene only near the viewport in a visible document, on screens wider than 700px without reduced motion.
 
 The selected asset rotates automatically. Drag the object directly to rotate it; click to pause or resume. With the scene focused, Space/Enter toggles pause and the arrow keys rotate or tilt the object manually, pausing automatic rotation. Pause remains selected when changing assets or returning to the scene.
 
