@@ -13,10 +13,13 @@ export function bookGeometry(seconds: number) {
   for(let i=0;i<96;i++){
     const sample=tick-95+i, x=20+(i-fraction)*step;
     line+=`${i?'L':'M'}${fixed(x)} ${fixed(y(indexPrice(sample)))}`;
-    if(i%3===0){
-      const h=5+noise(sample)*18;
-      volume+=`M${fixed(x)} 252v-${fixed(h)}h${fixed(step*2)}v${fixed(h)}Z`;
-    }
+  }
+  // Anchor bars to absolute sample IDs, never the moving window's array indices.
+  // Include partially clipped bars at the left edge so they scroll out intact.
+  for(let sample=tick-98;sample<=tick;sample++){
+    if(sample%3!==0)continue;
+    const x=20+(sample-(tick-95)-fraction)*step,h=5+noise(sample)*18;
+    volume+=`M${fixed(x)} 252v-${fixed(h)}h${fixed(step*2)}v${fixed(h)}Z`;
   }
   line+=`L304 ${fixed(y(price))}`;
   const levels=(side: -1|1)=>Array.from({length:5},(_,row)=>{
@@ -29,7 +32,18 @@ export function bookGeometry(seconds: number) {
   const asks=levels(1),bids=levels(-1);
   // Illustrative participation: mark the seven largest levels, leaving smaller orders unmarked.
   [...asks,...bids].sort((a,b)=>Number(b.size)-Number(a.size)).slice(0,7).forEach(row=>{row.ours=true;});
-  return {tick,price:price.toFixed(2),priceY:y(price),line,fill:`${line}V214H20Z`,volume,asks,bids,spread:'.04'};
+  const depthSide=(rows:typeof bids,side:-1|1)=>{
+    let cumulative=0,path=`M${437+side*10} 252`;
+    const points=rows.map((row,i)=>{
+      cumulative+=Number(row.size);
+      const x=437+side*(10+i*19),y=252-cumulative/50*174;
+      path+=`${i?'H'+x:''}V${fixed(y)}`;
+      return {price:Number(row.price),size:cumulative,x,y};
+    });
+    return {line:path,fill:`${path}V252Z`,points};
+  };
+  const depth={bids:depthSide(bids,-1),asks:depthSide([...asks].reverse(),1)};
+  return {tick,price:price.toFixed(2),priceY:y(price),line,fill:`${line}V214H20Z`,volume,asks,bids,depth,spread:'.04'};
 }
 
 export function rangeGeometry(seconds: number) {

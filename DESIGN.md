@@ -2,6 +2,9 @@
 
 Status: Market mechanics selected by the owner. The developed homepage is at /. Original studies remain at /studies in development.
 
+### CEX order book / depth switch
+The shared CEX illustration now offers Order book and Depth tabs in the existing Public Sans, forest-green and muted-brown system. The left price history remains in place. The right depth view accumulates the same five levels per side shown in the book, on one fixed size scale; it is not a separate invented feed. Native tab buttons support arrow keys, Home/End and visible focus, without restarting motion or overriding pause. The order-participation legend appears only in the book view. Historical volume is anchored to absolute sample IDs so completed bars retain their heights while scrolling. No new dependency or network request.
+
 ## Common principles
 Lead with the business or an asset-specific question. Keep readable measures, familiar navigation and a real contact action. Structural rules communicate grouping. One distinctive idea per concept; motion must support orientation or interaction. All concepts share service and research content and an explicitly illustrative operating diagram.
 

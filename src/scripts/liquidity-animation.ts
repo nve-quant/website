@@ -7,7 +7,7 @@ export function initLiquidityAnimation(root: HTMLElement) {
   const phase=root.querySelector<HTMLElement>('[data-phase]')!;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const nodes=new Map<string,SVGElement>();
-  root.querySelectorAll<SVGElement>('svg [data-trade-fill],svg [data-trade-line],svg [data-trade-volume],svg [data-trade-dot],svg [data-last-price],svg [data-last-price-rule],svg [data-range-window],svg [data-position-bars],svg [data-position-outline],svg [data-range-bracket],svg [data-price-marker]').forEach(node=>{
+  root.querySelectorAll<SVGElement>('svg [data-trade-fill],svg [data-trade-line],svg [data-trade-volume],svg [data-trade-dot],svg [data-last-price],svg [data-last-price-rule],svg [data-range-window],svg [data-position-bars],svg [data-position-outline],svg [data-range-bracket],svg [data-price-marker],svg [data-depth-bid-fill],svg [data-depth-ask-fill],svg [data-depth-bid-line],svg [data-depth-ask-line]').forEach(node=>{
     for(const key of Object.keys(node.dataset)) nodes.set(key,node);
   });
   const bookRows = (side: string) => Array.from(root.querySelectorAll<SVGGElement>(`[data-book-${side}]`)).map(row=>({
@@ -22,6 +22,39 @@ export function initLiquidityAnimation(root: HTMLElement) {
   let visible=false, paused=false, frame=0, previous=0, elapsed=0, destroyed=false;
   const controller=new AbortController();
   const {signal}=controller;
+  if(kind==='cex'){
+    const tabs=Array.from(root.querySelectorAll<HTMLButtonElement>('[data-market-view]'));
+    const panel=root.querySelector<HTMLElement>('[data-market-panel]')!;
+    const bookView=root.querySelector<SVGGElement>('[data-book-view]')!;
+    const depthView=root.querySelector<SVGGElement>('[data-depth-view]')!;
+    const title=root.querySelector<SVGTitleElement>('[data-chart-title]')!;
+    const description=root.querySelector<SVGDescElement>('#cex-chart-description')!;
+    const bookDescription=description.textContent;
+    const ownLegend=root.querySelector<HTMLElement>('.legend-own')?.parentElement;
+    panel.setAttribute('role','tabpanel');panel.tabIndex=0;
+    panel.setAttribute('aria-labelledby',tabs[0].id);
+    root.querySelector<HTMLElement>('[data-view-tabs]')!.hidden=false;
+    function selectTab(tab:HTMLButtonElement){
+      const depth=tab.dataset.marketView==='depth';
+      tabs.forEach(item=>{item.setAttribute('aria-selected',String(item===tab));item.tabIndex=item===tab?0:-1;});
+      panel.setAttribute('aria-labelledby',tab.id);
+      bookView.setAttribute('display',depth?'none':'inline');
+      bookView.setAttribute('aria-hidden',String(depth));
+      depthView.setAttribute('display',depth?'inline':'none');
+      depthView.setAttribute('aria-hidden',String(!depth));
+      if(ownLegend)ownLegend.hidden=depth;
+      title.textContent=`Simulated price chart and ${depth?'cumulative depth':'order book'}`;
+      description.textContent=depth?'A scrolling indexed price chart and cumulative bid and ask sizes from the same five levels on each side of the simulated order book. Depth increases away from the spread; both sides use the same fixed size scale. All values are synthetic, not live market data.':bookDescription;
+    }
+    tabs.forEach((tab,index)=>{
+      tab.addEventListener('click',()=>selectTab(tab),{signal});
+      tab.addEventListener('keydown',event=>{
+        const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:event.key==='ArrowRight'?(index+1)%tabs.length:event.key==='ArrowLeft'?(index+tabs.length-1)%tabs.length:-1;
+        if(next<0)return;
+        event.preventDefault();selectTab(tabs[next]);tabs[next].focus();
+      },{signal});
+    });
+  }
 
   function draw() {
     if(kind==='cex'){
@@ -31,6 +64,8 @@ export function initLiquidityAnimation(root: HTMLElement) {
       attr('lastPriceRule','d',`M20 ${g.priceY}H304`);
       if(g.tick!==lastQuote){
         lastQuote=g.tick;
+        attr('depthBidFill','d',g.depth.bids.fill);attr('depthAskFill','d',g.depth.asks.fill);
+        attr('depthBidLine','d',g.depth.bids.line);attr('depthAskLine','d',g.depth.asks.line);
         const current=nodes.get('lastPrice'); if(current)current.textContent=g.price;
         for(const [rows,values] of [[asks,g.asks],[bids,g.bids]] as const){
           rows.forEach((row,i)=>{

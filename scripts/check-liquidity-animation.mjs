@@ -16,12 +16,34 @@ for(let t=0;t<64;t+=.05){
     });
   }
   assert(Math.abs(Number(b.asks[4].price)-Number(b.bids[0].price)-.04)<1e-8);
+  for(const [depth,rows] of [[b.depth.bids,b.bids],[b.depth.asks,[...b.asks].reverse()]]){
+    let cumulative=0;
+    depth.points.forEach((point,i)=>{
+      cumulative+=Number(rows[i].size);
+      assert.equal(point.price,Number(rows[i].price));
+      assert.equal(point.size,cumulative,'Depth must use the displayed book sizes');
+      assert(point.x>=350&&point.x<=524&&point.y>=78&&point.y<=252);
+      if(i)assert(point.y<depth.points[i-1].y,'Depth grows away from the spread');
+    });
+  }
   assert(r.left>=32&&r.left+r.width<=508);assert(r.price>=32&&r.price<=508);assert.equal(r.width,176);
   assert(!/NaN|Infinity/.test(r.bars+b.fill+b.line+b.volume));
 }
 const quotes=Array.from({length:9},(_,i)=>bookGeometry(i*.12));
 assert(new Set(quotes.map(q=>q.price)).size>=5,'Multiple price updates per second');
 assert.deepEqual(bookGeometry(.121).bids,bookGeometry(.239).bids,'Quotes stable between ticks');
+// Old bars translate left by elapsed time; they must never change height.
+const volumeBars=time=>[...bookGeometry(time).volume.matchAll(/M(-?[\d.]+) 252v-([\d.]+)/g)].map(([,x,h])=>({x:Number(x),h:Number(h)}));
+for(const time of [0,.11,.25,1.34,8.51]){
+  for(const delta of [.04,.13,.39]){
+    const after=volumeBars(time+delta),shift=delta/.12*(284/95);
+    for(const bar of volumeBars(time).filter(bar=>bar.x-shift>=20)){
+      const moved=after.find(next=>Math.abs(next.x-(bar.x-shift))<.02);
+      assert(moved,'Historical volume bar stays attached to its time sample');
+      assert.equal(moved.h,bar.h,'Historical volume must not be rewritten');
+    }
+  }
+}
 assert(Math.abs(rangeGeometry(0).center-rangeGeometry(5-1e-5).center)<.001);
 assert(Math.abs(rangeGeometry(0).price-rangeGeometry(5-1e-5).price)<.001);
 
@@ -55,4 +77,24 @@ window.dispatchEvent(Object.assign(new Event('pagehide'),{persisted:true}));asse
 window.dispatchEvent(new Event('pageshow'));assert.equal(pending.size,1);
 window.dispatchEvent(Object.assign(new Event('pagehide'),{persisted:false}));assert.equal(pending.size,0);
 window.dispatchEvent(new Event('pageshow'));assert.equal(pending.size,0);
-console.log('Liquidity checks passed: price/book consistency, quote cadence, range bounds, loop continuity, pause, visibility, reduced motion and teardown.');
+
+// Tabs change only the presentation, including while animation is paused.
+const element=extra=>Object.assign(new EventTarget(),{attrs:new Map(),setAttribute(k,v){this.attrs.set(k,v);},focus(){this.focused=true;}},extra);
+const tabs=['book','depth'].map(view=>element({id:`cex-${view}-tab`,dataset:{marketView:view}}));
+const panel=element(),bookView=element(),depthView=element(),title=element(),description=element({textContent:'Original order book description'}),tablist=element({hidden:true}),legend={hidden:false};
+const cexButton=element({hidden:true}),cexLabel={textContent:''};
+const elements={'[data-motion-toggle]':cexButton,'[data-motion-label]':cexLabel,'[data-phase]':phase,'[data-market-panel]':panel,'[data-book-view]':bookView,'[data-depth-view]':depthView,'[data-chart-title]':title,'#cex-chart-description':description,'[data-view-tabs]':tablist,'.legend-own':{parentElement:legend}};
+const cexRoot={dataset:{liquidityAnimation:'cex'},querySelector:s=>elements[s],querySelectorAll:s=>s==='[data-market-view]'?tabs:[]};
+initLiquidityAnimation(cexRoot);
+observe([{isIntersecting:true}]);cexButton.dispatchEvent(new Event('click'));assert.equal(pending.size,0);
+tabs[1].dispatchEvent(new Event('click'));
+assert.equal(depthView.attrs.get('display'),'inline');assert.equal(bookView.attrs.get('display'),'none');
+assert.equal(tabs[1].attrs.get('aria-selected'),'true');assert.equal(panel.attrs.get('aria-labelledby'),tabs[1].id);assert(legend.hidden);
+assert.equal(pending.size,0,'Changing view must preserve pause');
+tabs[1].dispatchEvent(Object.assign(new Event('keydown',{cancelable:true}),{key:'ArrowLeft'}));
+assert.equal(tabs[0].attrs.get('aria-selected'),'true');assert(tabs[0].focused);assert.equal(tabs[1].tabIndex,-1);
+assert.equal(description.textContent,'Original order book description');assert(!legend.hidden);
+reduced.matches=true;reduced.dispatchEvent(new Event('change'));
+tabs[1].dispatchEvent(new Event('click'));assert.equal(depthView.attrs.get('display'),'inline');assert.equal(pending.size,0,'Tabs work with reduced motion');
+window.dispatchEvent(Object.assign(new Event('pagehide'),{persisted:false}));
+console.log('Liquidity checks passed: stable historical volume, book/depth consistency, tabs, quote cadence, range bounds, loop continuity, pause, visibility, reduced motion and teardown.');
