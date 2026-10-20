@@ -26,3 +26,10 @@ Avoid default purple gradients, glass cards, emoji, interchangeable three-card s
 
 ## Completion and next decision
 Foundation includes a working local comparison, documented evidence gaps and validation. The owner has selected Market mechanics. The next review covers the developed homepage and its draft business copy. Success means visitors can explain the business and find contact details, with distinctive but usable presentation.
+
+## Owner-confirmed operating model and reporting, 20 October 2026
+The service is fully non-custodial: API-key access for client CEX accounts, and analogous roles/permissions through Safe or Squads vaults for DEX work, adaptable to client requirements. A service mandate uses client-funded liquidity for a fee; exact commercial terms and technical permissions are engagement-specific.
+
+An existing live client dashboard provides aggregate and exchange-specific candlestick charts, order books, active and filled orders, accounting, filled-order CSV downloads, and liquidity/microstructure metrics for comparison with agreed SLAs. These capabilities are owner-confirmed; screenshots and implementation details have not been independently reviewed. Do not call this dashboard “in development.” Remove the ambiguous future-platform homepage promotion while preserving its source material for clarification.
+
+This milestone adds CEX Market Making (`/market-making`), DEX Liquidity Management (`/dex-liquidity-management`) and How We Work (`/work`) alongside the expanded homepage. Company biographies, real dashboard screenshots, a dedicated tokenized-assets page, research migration and a standalone contact page follow later. Remain local-only.

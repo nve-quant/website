@@ -1,0 +1,7 @@
+---
+import {getEntry} from 'astro:content';
+import Service from '../layouts/Service.astro';
+const service=await getEntry('services','dex-liquidity-management');
+if(!service)throw new Error('Missing service content: dex-liquidity-management');
+---
+<Service service={service}/>

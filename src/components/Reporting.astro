@@ -1,0 +1,4 @@
+---
+import {reporting} from '../data/engagement';
+---
+<section id="reporting" class="reporting-section" aria-labelledby="reporting-title"><div class="reporting-heading"><p class="section-kicker">The client dashboard</p><h2 id="reporting-title">See how your<br/>markets are operating.</h2><p>Follow activity across markets, inspect individual orders and review liquidity against the agreed service levels.</p></div><dl class="reporting-list">{reporting.map(item=><div><dt>{item.title}</dt><dd>{item.text}</dd></div>)}</dl><a href="/work#review">How reporting fits your mandate</a></section>

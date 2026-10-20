@@ -1,0 +1,12 @@
+---
+import Base from './Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '@fontsource/public-sans/400.css';
+import '@fontsource/public-sans/500.css';
+import '../styles/home.css';
+import '../styles/services.css';
+interface Props {title:string;description:string;}
+const {title,description}=Astro.props;
+---
+<Base title={title} description={description} theme="home"><div class="home-shell"><SiteHeader/><main id="main"><slot/></main><SiteFooter/></div></Base>

@@ -78,3 +78,17 @@ Owner requested faster motion and a chart with an order book. The new CEX visual
 
 ### Illustrative order participation — 20 October 2026
 Owner-requested “Our orders” markers identify seven larger simulated CEX price levels. This is explanatory animation content, not verified market share, customer evidence or real order ownership. The dot denotes participation at a price level; the displayed aggregate size is not a claim about Onchain Bureau's order size. Retain the simulated-market label when reusing this graphic.
+
+## Service pages and client transparency, 20 October 2026
+Primary new source: the owner's direct confirmations in this conversation. Fully non-custodial operation; CEX API-key access; DEX Safe/Squads vault roles and permissions adaptable to client needs. Existing live dashboard: aggregate and separate exchange candlestick charts, order books, active/filled orders, accounting, CSV downloads of filled orders, and liquidity/microstructure metrics against agreed SLAs. These are owner-confirmed business capabilities, not independently verified product behavior or measured performance.
+
+The approved service-mandate model uses client capital and agreed fees. Exact permissions, vault configurations, SLA values, metrics methodology, venue coverage, onboarding time, fees and review frequency remain unspecified. No unsupported quantitative promise or integration list is added. New service collection entries retain draft editorial status for final copy review; their source URLs preserve migration context, while this entry records the newer owner evidence.
+
+| Destination | Current local treatment |
+| --- | --- |
+| `/market-making` | Retain original URL for the CEX service detail page. |
+| `/dex-liquidity-management` | New dedicated DEX management route. `/pools` remains inventoried for future pool-design content; no redirect decision is made here. |
+| `/work` | Retain original URL for the expanded engagement process and responsibilities. |
+| `/platform` | Preserve original source. Remove the ambiguous homepage “in development” promotion pending clarification of its relationship to the live client dashboard. |
+
+Copy boundaries: service scope, FAQs, responsibility allocations and operating considerations are editorial explanations based on the approved plan; client-specific mechanics are agreed during scoping. No fabricated dashboard imagery or login URL. Actual dashboard visuals, Company biographies, new research articles and further migration mapping are later work.

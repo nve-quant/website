@@ -1,6 +1,5 @@
 ---
 import {coreServices} from '../data/home';
-import {site} from '../data/site';
 import LiquidityDiagram from './LiquidityDiagram.astro';
 ---
 <section id="services" class="liquidity-services" aria-labelledby="liquidity-title">
@@ -16,7 +15,7 @@ import LiquidityDiagram from './LiquidityDiagram.astro';
       <p class="liquidity-intro">{service.intro}</p>
       <p class="liquidity-detail">{service.detail}</p>
       <ul class="liquidity-scope">{service.scope.map(item => <li>{item}</li>)}</ul>
-      <a class="liquidity-contact" href={`mailto:${site.email}?subject=${encodeURIComponent(service.contact)}`}>{service.contact}</a>
+      <a class="liquidity-contact" href={service.id==='cex'?'/market-making':'/dex-liquidity-management'}>Explore {service.title}</a>
     </article>)}
   </div>
 </section>

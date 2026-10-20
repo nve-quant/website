@@ -42,3 +42,9 @@ The selected asset rotates automatically. Drag the object directly to rotate it;
 Automatic rotation is capped at 30 rendered frames per second; dragging can use the display rate while movement settles. Rendering stops outside the model's viewport observation area, when the document is hidden, or when a paused scene has settled. Mobile, reduced-motion and WebGL-unavailable views retain selectable SVG illustrations. Geometry, textures and lighting are local; no model CDN or live data is used. The separately loaded Three.js chunk triggers Vite’s size advisory; measure real-device loading before launch.
 
 For changes to the animated CEX/DEX diagrams, also run `node scripts/check-liquidity-animation.mjs`. This checks geometry invariants and animation lifecycle behavior with mocked browser events; use `/review` for the visual browser pass.
+
+## Service and engagement pages
+Local routes: `/`, `/market-making`, `/dex-liquidity-management`, `/work`.
+The shared marketing layout contains navigation and footer. Service detail copy is in the typed `services` collection; mandate, reporting and process content is in `src/data/engagement.ts`. The homepage retains the original model explorer. `/review` offers each page at 375, 768 and 1440px, with section jump controls and overflow/anchor/image checks. Review tooling and archived concepts remain excluded from builds.
+
+`npm run build` also validates the static navigation graph, local asset references, section anchors, one h1 per page, and local noindex metadata. Run `node scripts/check-liquidity-animation.mjs` for geometry and controller regression checks. No additional dependencies were introduced for the service pages.

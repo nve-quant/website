@@ -6,12 +6,6 @@ export const services = [
  {name:'Treasury execution',for:'For token treasuries',summary:'Turn a treasury decision into an execution plan.',detail:'Plan spot buying, selling and rebalancing around the assets, amounts, venues and schedule. Review execution against the agreed plan.',source:'https://onchainbureau.com/treasury'},
  {name:'Distribution',for:'For assets seeking counterparties',summary:'Find the right venues and counterparties.',detail:'Identify relevant exchanges, lending markets and prospective holders, and prepare the material for their review. Listing and allocation decisions remain with the counterparty.',source:'https://onchainbureau.com/algorithmic-marketing'},
 ];
-export const steps = [
- {title:'Review your markets',text:'Start with your token, trading pairs, existing venues and liquidity needs.'},
- {title:'Agree the mandate',text:'Define the venues, access, capital, operating limits and reporting requirements.'},
- {title:'Operate and review',text:'Review execution, liquidity and exceptions against the agreed scope.'},
-];
-
 // Owner clarification, 2026-10-20. No measured latency or performance guarantees.
 export const homepage = {
  title: 'Market making on CEX and DEX',

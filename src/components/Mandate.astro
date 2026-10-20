@@ -1,0 +1,4 @@
+---
+import {mandate} from '../data/engagement';
+---
+<section class="mandate-section editorial-section" aria-labelledby="mandate-title"><div class="editorial-intro"><h2 id="mandate-title">What your<br/>mandate covers.</h2><p>Start with the market you need to support. Agree the capital, objectives and limits around it.</p><p>A service mandate uses your allocated liquidity capital, with fees and terms agreed for the engagement.</p></div><div class="mandate-document"><div class="document-heading"><span>Engagement scope</span><span>Defined together</span></div><dl>{mandate.map(item=><div><dt>{item.title}</dt><dd>{item.text}</dd></div>)}</dl><p class="document-note">Each mandate is specific to the client and market.</p></div></section>

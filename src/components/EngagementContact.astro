@@ -1,0 +1,6 @@
+---
+import {site} from '../data/site';
+interface Props {subject?:string;}
+const {subject='Market making enquiry'}=Astro.props;
+---
+<section id="contact" class="home-contact" aria-labelledby="contact-title"><div><p>Let’s talk liquidity.</p><h2 id="contact-title">What does your<br/>market need?</h2></div><div class="contact-copy"><p>Tell us about your token, the exchanges or pools you use, and what you want to improve.</p><a class="contact-email" href={`mailto:${site.email}?subject=${encodeURIComponent(subject)}`}>{site.email}</a><p class="contact-audience">For token issuers, crypto teams<br/>and tokenization platforms.</p></div></section>

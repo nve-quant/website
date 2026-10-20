@@ -1,0 +1,24 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import {render} from 'astro:content';
+import Marketing from './Marketing.astro';
+import LiquidityDiagram from '../components/LiquidityDiagram.astro';
+import Mandate from '../components/Mandate.astro';
+import EngagementContact from '../components/EngagementContact.astro';
+interface Props {service:CollectionEntry<'services'>;}
+const {service}=Astro.props;
+const {title,summary,kind,headline,audience,operations,access,considerations,faqs}=service.data;
+if(!kind||!headline||!audience||!operations||!access||!considerations||!faqs)throw new Error(`Incomplete service page: ${service.id}`);
+const {Content}=await render(service);
+---
+<Marketing title={title} description={summary}>
+ <section class="service-hero"><a class="back-link" href="/#services">Services</a><p class="section-kicker">{title}</p><h1>{headline}</h1><div class="service-lead"><p>{summary}</p><a class="home-button" href="#contact">Discuss {kind==='cex'?'CEX market making':'DEX liquidity'}</a></div></section>
+ <section class="service-operation editorial-section" aria-labelledby="operation-title"><div class="editorial-intro"><p class="section-kicker">{audience}</p><h2 id="operation-title">{kind==='cex'?'A market that needs ongoing attention.':'An allocation that moves with the market.'}</h2><Content/></div><LiquidityDiagram kind={kind}/></section>
+ <section class="operation-details" aria-label="Service scope">{operations.map(item=><article><h3>{item.title}</h3><p>{item.text}</p></article>)}</section>
+ <section id="access" class="service-access editorial-section" aria-labelledby="service-access-title"><div><p class="section-kicker">Non-custodial operation</p><h2 id="service-access-title">{kind==='cex'?'Your accounts. Agreed API access.':'Your vaults. Agreed permissions.'}</h2></div><div><p>{access}</p><a href="/work#responsibilities">Who is responsible for what</a></div></section>
+ <Mandate/>
+ <section class="service-review editorial-section" aria-labelledby="service-review-title"><div><h2 id="service-review-title">{kind==='cex'?'From market view to individual order.':'Review the position in context.'}</h2></div><div>{kind==='cex'?<p>The live client dashboard brings together aggregate and exchange-specific candlestick charts, order books, active and filled orders, and accounting. Export filled orders as CSV, inspect liquidity and microstructure metrics, and compare them with your agreed SLA.</p>:<p>Define the measures and review arrangements around the pools and positions in scope. Review allocation, price movement and the cost of repositioning against the mandate. Reporting coverage and the relevant service levels are agreed for the engagement.</p>}<a href="/work#review">Operation and reporting</a><p class="operating-note">{considerations}</p></div></section>
+ <section class="service-faq editorial-section" aria-labelledby="faq-title"><div><h2 id="faq-title">Before we start.</h2><p>Questions about the engagement.</p></div><div>{faqs.map(item=><details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div></section>
+ <div class="related-service"><span>Explore the other market structure</span><a href={kind==='cex'?'/dex-liquidity-management':'/market-making'}>{kind==='cex'?'DEX liquidity management':'CEX market making'}</a></div>
+ <EngagementContact subject={`${title} enquiry`}/>
+</Marketing>

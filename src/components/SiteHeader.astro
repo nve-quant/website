@@ -1,0 +1,5 @@
+---
+const home=Astro.url.pathname==='/';
+const section=(id:string)=>home?`#${id}`:`/#${id}`;
+---
+<header class="home-header"><a class="home-wordmark" href="/" aria-label="Onchain Bureau home">Onchain<br/>Bureau<span aria-hidden="true"></span></a><nav aria-label="Main navigation"><a href={section('services')}>Services</a><a href="/work" aria-current={Astro.url.pathname.replace(/\/$/,'')==='/work'?'page':undefined}>How we work</a><a href={section('asset-studies')}>Asset studies</a><a href={section('research')}>Research</a><a href={section('contact')} class="nav-contact">Talk to us</a></nav></header>
