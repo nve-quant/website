@@ -1,0 +1,40 @@
+// Illustrative design questions, not claims about a specific instrument or live market.
+export const marketModels = [
+  {
+    id: 'gold', label: 'Tokenized gold', object: 'A claim on physical gold',
+    title: 'A familiar asset. A different market.',
+    intro: 'The reference may come from a global gold market. The token still has its own trading venues, access rules and redemption terms.',
+    reference: 'An external gold reference',
+    liquidity: 'Inventory across pools and order books',
+    redemption: 'Defined by the issuer and custodian',
+    question: 'What happens when the reference market closes?',
+    answer: 'The design needs rules for reference age, trading hours and the next price update. A token can trade around the clock while its reference does not.',
+    route: ['Gold reference', 'Token market', 'Issuer redemption'],
+    source: 'https://onchainbureau.com/research/tokenized-gold-thin-markets',
+  },
+  {
+    id: 'fund', label: 'Yield-bearing fund', object: 'A share in an underlying portfolio',
+    title: 'The value changes. The market must follow.',
+    intro: 'A fund share links trading to a portfolio valuation. How yield accrues and when that valuation updates both matter to the market design.',
+    reference: 'A published net asset value (NAV)',
+    liquidity: 'Positions aligned with valuation updates',
+    redemption: 'The fund’s dealing and settlement windows',
+    question: 'Who keeps the yield when a share changes hands?',
+    answer: 'An accruing share and a distributing share behave differently. The token’s structure needs to make the holder’s entitlement clear before liquidity is designed.',
+    route: ['Portfolio NAV', 'Share market', 'Fund redemption'],
+    source: 'https://onchainbureau.com/rwa#token-design',
+  },
+  {
+    id: 'unique', label: 'Unique asset', object: 'An asset with its own characteristics',
+    title: 'Two assets. Not necessarily one price.',
+    intro: 'An emerald, a building or a single lot may differ from every other unit. The first question is what can reasonably trade together.',
+    reference: 'An appraisal or asset-specific valuation',
+    liquidity: 'A lot, a grade or a pooled structure',
+    redemption: 'Specific to the asset and its legal structure',
+    question: 'Can these assets share the same pool?',
+    answer: 'A shared category is not enough. Consider the differences between individual units before choosing a pool, a graded structure or an auction.',
+    route: ['Asset valuation', 'Market structure', 'Asset-specific exit'],
+    source: 'https://onchainbureau.com/research/assets-that-differ-unit-by-unit',
+  },
+] as const;
+export type MarketModelId = typeof marketModels[number]['id'];

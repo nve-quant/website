@@ -21,7 +21,7 @@ See docs/content-inventory.md for source URLs and treatment. The existing websit
 ## Constraints
 Local-only. Full visual rethink. Market mechanics is selected for the developed homepage; three original concepts remain as development-only references. No CMS, backend, authentication, analytics, trading integrations or domain changes. Do not install additional design plugins just to accumulate rules. Use frontend-design guidance and document decisions.
 
-Avoid default purple gradients, glass cards, emoji, interchangeable three-card sections, decorative terminal UIs, automatic animation, fake dashboard numbers and default icon libraries. Typography must serve the content; a different font alone is not an identity. A justified exception is recorded in DESIGN.md.
+Avoid default purple gradients, glass cards, emoji, interchangeable three-card sections, decorative terminal UIs, uncontrolled perpetual animation, fake dashboard numbers and default icon libraries. Typography must serve the content; a different font alone is not an identity. A justified exception is recorded in DESIGN.md.
 
 ## Completion and next decision
 Foundation includes a working local comparison, documented evidence gaps and validation. The owner has selected Market mechanics. The next review covers the developed homepage and its draft business copy. Success means visitors can explain the business and find contact details, with distinctive but usable presentation.

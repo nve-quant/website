@@ -55,3 +55,13 @@ Select a direction. Confirm copy claims and research date, then develop final to
 - Desktop diagram and mobile heading/navigation inspected; screenshots named home-*.png capture the review.
 - No homepage application JavaScript was added. Animation remains absent; shared visible focus and reduced-motion rules are retained.
 - Business copy remains draft. Company/Legal/research links intentionally open existing public pages; their contents have not been migrated.
+
+
+## Interactive 3D explorer — 2026-10-20
+- Clean `npm ci --offline` succeeded (346 packages audited, zero reported vulnerabilities). `npm run check`: zero errors, warnings or hints. Static build and production-isolation assertion passed. Vite reports the separately loaded Three.js chunk exceeds 500kB; real-device loading/performance remains a pre-launch check.
+- Chrome native browser review: original gold and portfolio geometry rendered; selecting unique asset updated the explanation and model state. Start/pause toggled accessible pressed state; arrow-key selection switched fund to unique asset; directional rotation and an expanded research question were exercised.
+- `/review` measured 375, 768 and 1440px: no horizontal overflow, zero broken section links, fonts loaded. Rechecked selected fund at 375/768 and unique at 1440. The harness now remeasures after selection/disclosure changes.
+- Fixed mobile helper words running together after hiding a line break. Fixed cropped tablet scene framing by adapting camera field of view to narrow aspect ratios. Reviewed the corrected tablet rendering.
+- Mobile displays the original SVG fallback and retains scenario selection without 3D controls. Reduced-motion and WebGL-loss fallbacks were inspected in source but not exercised with OS preference changes or forced context loss. Full screen-reader, cross-browser console and real-device performance testing remain outstanding. Chrome's installed extensions generate console noise; no clean-console claim is made.
+- Screenshots: explorer-gold-desktop.png, explorer-unique-desktop.png, explorer-desktop-1440.png, explorer-tablet-768.png and explorer-mobile-375.png. These are native browser captures including browser chrome.
+- Motion is confined to brief transitions, pointer tilt and user-controlled rotation. No live numbers, external model downloads or invented proof were introduced. Business text remains draft.

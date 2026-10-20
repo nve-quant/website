@@ -6,3 +6,5 @@
 - Operating diagram and wordmark treatment: original HTML/CSS studies. Wordmark is provisional, not a final logo.
 - Existing site's favicon and IBM Plex Sans URLs are inventoried but not reused. Confirm licensing/source files if subsequently retained.
 - No external font requests, stock imagery, customer logos or third-party icon library.
+
+- Three.js 0.186.1: MIT-licensed rendering library; licence in docs/licenses/three.txt. All three scene geometries and fallback SVGs are original procedural illustrations, not product screenshots or representations of specific investments. RoomEnvironment provides procedural lighting without a downloaded image.

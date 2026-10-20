@@ -33,3 +33,6 @@ Edit shared copy once to update all concepts. Check source claims before approvi
 Market mechanics is selected. Read BRIEF.md and DESIGN.md, then review the complete homepage on desktop and mobile. Confirm draft business copy before publication. See docs/QA.md for observed verification and remaining checks. Hosting, SEO migration and production launch are separate milestones.
 
 The development-only `/review` route offers exact 375/768/1440px embedded previews and reports overflow, missing section targets and font readiness. It is excluded from production alongside the concepts. Screenshot evidence is in `docs/screenshots/`.
+
+## Interactive market study
+`src/data/market-model.ts` holds three illustrative scenarios. `AssetMarket.astro` renders their accessible selector, explanations and SVG fallbacks. `src/scripts/market-explorer.ts` loads the Three.js scene only near the viewport on screens wider than 700px without reduced motion. Rotation is user-controlled. Geometry and lighting are local; no model CDN or live data is used. The separately loaded Three.js chunk triggers Vite’s size advisory; measure real-device loading before launch.
