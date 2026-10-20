@@ -43,7 +43,7 @@ export function createWheat():THREE.Group {
     const x=Math.cos(angle)*spread,z=Math.sin(angle)*spread;
     const top=1.63+(stalk%5)*.11;
     const curve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(x*.30,.04,z*.30),new THREE.Vector3(x*.18,.9,z*.18),new THREE.Vector3(x,top,z));
-    const stem=new THREE.Mesh(new THREE.TubeGeometry(curve,8,.012,5,false),straw);group.add(stem);
+    const stem=new THREE.Mesh(new THREE.TubeGeometry(curve,8,.012,5,false),straw);stem.castShadow=true;group.add(stem);
     const tilt=new THREE.Vector3(x*.28,1,z*.28).normalize();
     const head=new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),tilt);
     for(let tier=0;tier<9;tier++)for(let side=0;side<2;side++){
@@ -63,7 +63,8 @@ export function createWheat():THREE.Group {
   group.add(new THREE.LineSegments(awnGeometry,new THREE.LineBasicMaterial({color:0xb69550,transparent:true,opacity:.75})));
   const twine=new THREE.MeshStandardMaterial({color:0x806840,roughness:.95});
   for(let i=0;i<4;i++){
-    const tie=new THREE.Mesh(new THREE.TorusGeometry(.19,.012,6,40),twine);tie.rotation.x=Math.PI/2;tie.position.y=.62+i*.025;group.add(tie);
+    const tie=new THREE.Mesh(new THREE.TorusGeometry(.19,.012,6,40),twine);tie.rotation.x=Math.PI/2;tie.position.y=.62+i*.025;tie.castShadow=true;group.add(tie);
   }
-  group.scale.setScalar(.62);return new THREE.Group().add(group);
+  // Set the cut stalk ends just above the receiving floor, rather than floating.
+  group.scale.setScalar(.62);group.position.y=-.06;return new THREE.Group().add(group);
 }

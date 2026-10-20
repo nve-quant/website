@@ -217,7 +217,10 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
       // Three recently viewed specimens at most: no upfront generation or unbounded GPU cache.
       models.delete(id);models.set(id,model);
       if(models.size>3){const oldest=models.keys().next().value!;const evicted=models.get(oldest)!;rig.remove(evicted);disposeTree(evicted);models.delete(oldest);}
-      contact.scale.setScalar(id==='wheat'?.35:id==='oil'?.6:1);
+      contact.scale.setScalar(id==='wheat'?.18:id==='oil'?.6:1);
+      contact.material.opacity=id==='wheat'?.65:1;
+      // Thin stalks need a smaller shadow bias than the broad bullion surfaces.
+      key.shadow.normalBias=id==='wheat'?.003:.018;
       active=id;models.forEach((entry,key)=>{entry.visible=key===id;entry.scale.setScalar(1);});
       scale=.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();
     },

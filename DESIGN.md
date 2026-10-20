@@ -140,3 +140,6 @@ Owner requested gemstone and bullion variants plus commodities, selected with si
 Two quiet circular side buttons cycle within a category; captions name the specimen and show its position. They wrap in both directions and remember the last specimen per category. The buttons disappear for fund and stock. Drag/click rotation remains attached to the object. Remove the explanation-panel entrance animation so text remains visible when browser animation scheduling is suspended.
 
 Build only selected specimens; retain at most three in a least-recently-used cache and dispose evicted geometry, materials, maps and instance buffers. Keep the existing 30fps rotation cap, DPR limit, half-resolution transmission, offscreen/hidden suspension and mobile/reduced-motion SVG fallback. Wheat kernels use one instanced mesh. Local /asset-review provides explicit still renders with production geometry/materials and resource counts, without relying on browser animation scheduling; it never enters the static output.
+
+### Wheat shadow grounding
+Include stalks and twine in the wheat's directional shadow, align the cut ends with the receiving floor, and use a tighter, lighter contact shadow. Apply a smaller normal bias only for wheat so its thin stems remain connected in projection. Preserve the material colour and all other asset lighting settings.
