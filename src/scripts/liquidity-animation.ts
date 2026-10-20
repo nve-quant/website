@@ -14,6 +14,7 @@ export function initLiquidityAnimation(root: HTMLElement) {
     depth:row.querySelector<SVGRectElement>('[data-row-depth]')!,
     price:row.querySelector<SVGTextElement>('[data-row-price]')!,
     size:row.querySelector<SVGTextElement>('[data-row-size]')!,
+    own:row.querySelector<SVGCircleElement>('[data-row-own]')!,
   }));
   const asks=bookRows('ask'), bids=bookRows('bid');
   let lastQuote=-1;
@@ -38,6 +39,7 @@ export function initLiquidityAnimation(root: HTMLElement) {
             row.depth.setAttribute('x',String(524-value.width));
             if(row.price.textContent!==value.price)row.price.textContent=value.price;
             if(row.size.textContent!==value.size)row.size.textContent=value.size;
+            row.own.setAttribute('visibility',value.ours?'visible':'hidden');
           });
         }
       }

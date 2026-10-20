@@ -13,11 +13,11 @@ const name = kind === 'cex' ? 'order book' : 'liquidity range';
     <span class="diagram-phase" data-phase>{kind === 'cex' ? 'Simulated quotes' : 'Positioned around price'}</span>
   </div>
   <div class="diagram-legend" aria-hidden="true">
-    {kind === 'cex' ? <><span><i class="legend-bid"></i>Bids</span><span><i class="legend-ask"></i>Asks</span></> : <><span><i class="legend-base"></i>Pool liquidity</span><span><i class="legend-bid"></i>Managed position</span></>}
+    {kind === 'cex' ? <><span><i class="legend-bid"></i>Bids</span><span><i class="legend-ask"></i>Asks</span><span><i class="legend-own"></i>Our orders</span></> : <><span><i class="legend-base"></i>Pool liquidity</span><span><i class="legend-bid"></i>Managed position</span></>}
   </div>
   {kind === 'cex' ? <svg class="market-chart cex-chart" viewBox="0 0 540 292" role="img" aria-labelledby="cex-chart-title cex-chart-description">
     <title id="cex-chart-title">Simulated price chart and order book</title>
-    <desc id="cex-chart-description">A scrolling indexed price chart with changing bid and ask prices and order sizes. All prices and sizes are synthetic demonstration values, not a live market, client result or latency measurement.</desc>
+    <desc id="cex-chart-description">A scrolling indexed price chart with changing bid and ask prices and order sizes. Yellow dots mark levels containing our illustrative orders; smaller levels are left unmarked. All prices and sizes are synthetic demonstration values, not a live market, client result or latency measurement.</desc>
     <defs><clipPath id="quote-chart-clip"><rect x="20" y="68" width="286" height="186"/></clipPath></defs>
     <text class="chart-axis-label" x="20" y="24">Indexed price</text>
     <text class="quote-current" data-last-price x="20" y="54">{book.price}</text>
@@ -36,7 +36,7 @@ const name = kind === 'cex' ? 'order book' : 'liquidity range';
     <text class="ladder-label" x="524" y="24" text-anchor="end">Size</text>
     {book.asks.map((row,i)=><g class="ladder-row ladder-ask" data-book-ask={i}>
       <rect data-row-depth x={524-row.width} y={48+i*20} width={row.width} height="18"/>
-      <text data-row-price x="350" y={62+i*20}>{row.price}</text>
+      <circle class="own-order-dot" data-row-own cx="341" cy={56+i*20} r="3" visibility={row.ours ? 'visible' : 'hidden'}/><text data-row-price x="350" y={62+i*20}>{row.price}</text>
       <text data-row-size x="524" y={62+i*20} text-anchor="end">{row.size}</text>
     </g>)}
     <path class="orderbook-divider" d="M350 153H524M350 179H524"/>
@@ -44,7 +44,7 @@ const name = kind === 'cex' ? 'order book' : 'liquidity range';
     <text class="ladder-label" x="524" y="170" text-anchor="end">{book.spread}</text>
     {book.bids.map((row,i)=><g class="ladder-row ladder-bid" data-book-bid={i}>
       <rect data-row-depth x={524-row.width} y={182+i*20} width={row.width} height="18"/>
-      <text data-row-price x="350" y={196+i*20}>{row.price}</text>
+      <circle class="own-order-dot" data-row-own cx="341" cy={190+i*20} r="3" visibility={row.ours ? 'visible' : 'hidden'}/><text data-row-price x="350" y={196+i*20}>{row.price}</text>
       <text data-row-size x="524" y={196+i*20} text-anchor="end">{row.size}</text>
     </g>)}
   </svg> : <svg class="market-chart" viewBox="0 0 540 292" role="img" aria-labelledby="dex-chart-title dex-chart-description">

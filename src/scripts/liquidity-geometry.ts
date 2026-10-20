@@ -24,9 +24,12 @@ export function bookGeometry(seconds: number) {
     // Stagger size updates by row so the entire book does not blink together.
     const sizeTick=Math.floor((tick+row*2)/(2+row%3));
     const size=1.2+noise(sizeTick*11+level*37+side*19)*7.8;
-    return {price:(price+side*(.02+(level-1)*.01)).toFixed(2),size:size.toFixed(2),width:24+size/9*146};
+    return {price:(price+side*(.02+(level-1)*.01)).toFixed(2),size:size.toFixed(2),width:24+size/9*146,ours:false};
   });
-  return {tick,price:price.toFixed(2),priceY:y(price),line,fill:`${line}V214H20Z`,volume,asks:levels(1),bids:levels(-1),spread:'.04'};
+  const asks=levels(1),bids=levels(-1);
+  // Illustrative participation: mark the seven largest levels, leaving smaller orders unmarked.
+  [...asks,...bids].sort((a,b)=>Number(b.size)-Number(a.size)).slice(0,7).forEach(row=>{row.ours=true;});
+  return {tick,price:price.toFixed(2),priceY:y(price),line,fill:`${line}V214H20Z`,volume,asks,bids,spread:'.04'};
 }
 
 export function rangeGeometry(seconds: number) {

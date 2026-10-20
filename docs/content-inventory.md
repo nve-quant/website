@@ -75,3 +75,6 @@ The CEX depth and DEX range graphics use deterministic generated coordinates in 
 
 ### CEX chart and quote ladder revision
 Owner requested faster motion and a chart with an order book. The new CEX visual includes generated index prices around 100 and generated order sizes, with an explicit simulated-data label. These are illustrative values, not source material, quoted market prices, customer evidence or company performance. Quote update timing is animation pacing, not a latency claim. This supersedes the earlier statement that the service diagrams contain no numbers. DEX pacing is accelerated for explanation, not an execution or rebalance commitment.
+
+### Illustrative order participation — 20 October 2026
+Owner-requested “Our orders” markers identify seven larger simulated CEX price levels. This is explanatory animation content, not verified market share, customer evidence or real order ownership. The dot denotes participation at a price level; the displayed aggregate size is not a claim about Onchain Bureau's order size. Retain the simulated-market label when reusing this graphic.

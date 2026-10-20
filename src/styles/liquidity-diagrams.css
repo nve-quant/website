@@ -42,3 +42,6 @@
 .ladder-ask text{fill:#805b3e}.ladder-bid text{fill:#315c49}
 .ladder-ask rect{fill:#8a6648;fill-opacity:.1}.ladder-bid rect{fill:#315c49;fill-opacity:.1}
 @media(max-width:1000px){.ladder-row text{font-size:20px}.ladder-label{font-size:19px}.quote-current{font-size:30px}.cex-chart .chart-axis-label{font-size:19px}}
+
+.own-order-dot{fill:#e0b72f;stroke:#866819;stroke-width:.75}
+.diagram-legend .legend-own{width:6px;height:6px;border-radius:50%;background:#e0b72f;border:1px solid #866819}
