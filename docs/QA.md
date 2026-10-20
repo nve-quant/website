@@ -81,3 +81,6 @@ All three refined models visually reviewed in Chrome; captures are refined-gold.
 - Responsive review passed 375/768/1440px: no horizontal overflow, zero broken section targets and fonts loaded. The 375px SVG fallback has no inactive model control or drag hint. Captures: rotation-gold-desktop.png, rotation-tablet-768.png and rotation-mobile-375.png.
 - Type/content checks and static build pass; production isolation passes. No dependencies or downloaded assets added. Existing Three.js lazy-chunk size advisory remains.
 - Source review verified the 30fps automatic-render cap, stopping rendering during a stationary held drag, pointer-capture cleanup, offscreen/background cancellation and reduced-motion fallback. Real touch hardware, forced WebGL loss, OS reduced-motion switching and GPU frame timings were not exercised in this pass.
+
+### Subtle gold engraving adjustment
+Changed only the engraving height-map shade (#656565 → #595959) and engraving colour (#bb8d3b → #b78a39), giving the recessed marks slightly more depth and contrast. Geometry, gold surface, lighting and interactions are unchanged. Reviewed the gold model in Safari; capture: gold-engraving-subtle.png. Type/content checks and build passed. No layout changes or new responsive checks in this pass.

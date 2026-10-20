@@ -30,9 +30,9 @@ export function createGold(): THREE.Group {
     ctx.font='23px monospace';ctx.fillText('OB 000001',256,842);
     ctx.restore();
   };
-  mark(heightCtx,'#656565');mark(roughCtx,'#acacac');
+  mark(heightCtx,'#595959');mark(roughCtx,'#acacac');
   // Small offset highlights mimic the lip of a struck mark, rather than printed black text.
-  colorCtx.save();colorCtx.translate(0,-1.2);mark(colorCtx,'#ffe4a0');colorCtx.restore();mark(colorCtx,'#bb8d3b');
+  colorCtx.save();colorCtx.translate(0,-1.2);mark(colorCtx,'#ffe4a0');colorCtx.restore();mark(colorCtx,'#b78a39');
   for(let i=0;i<150;i++){
     const x=random()*512,y=random()*1024,length=8+random()*65;
     heightCtx.strokeStyle=`rgba(70,70,70,${.035+random()*.07})`;heightCtx.lineWidth=.5+random();
