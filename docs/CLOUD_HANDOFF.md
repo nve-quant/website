@@ -2,6 +2,10 @@
 
 Repository: https://github.com/nve-quant/website
 
+Vercel preview: https://onchain-bureau-website.vercel.app
+
+Vercel project: `onchain-bureau-website` under `nicholas-van-eerdes-projects`. GitHub integration is connected. Deployment protection is enabled; sign in to the authorized Vercel account from your phone. The first deployment is the production target of this separate preview project, not the live business domain.
+
 ## Start here
 
 Read AGENTS.md, BRIEF.md, DESIGN.md and docs/content-inventory.md. The selected design is Market mechanics. Preserve the established typography, palette, service positioning, animated market diagrams and procedural asset models. This repository contains the implementation and decisions; a new cloud task does not need the original local conversation to understand them.
