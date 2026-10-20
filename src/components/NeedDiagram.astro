@@ -1,0 +1,87 @@
+---
+interface Props {kind:'book'|'venues'|'range'|'report'}
+const {kind}=Astro.props;
+const labels={
+ book:'Illustration: uneven bid and ask sizes adjust around a spread.',
+ venues:'Illustration: inventory allocations change across three venues.',
+ range:'Illustration: a selected liquidity allocation follows a moving market price.',
+ report:'Illustration: market activity is collected into a report for review.',
+};
+---
+<svg class={`need-diagram need-${kind}`} data-need-diagram viewBox="0 0 160 100" role="img" aria-label={labels[kind]}>
+ {kind==='book'&&<>
+  <path class="guide" d="M12 26H148M12 44H148M12 62H148M12 80H148"/>
+  <path class="rule" stroke-dasharray="2 4" d="M80 16V88"/>
+  {[0,1,2,3].map(i=><g>
+   <rect class={`ink motion book-bid level-${i}`} x={22-i*3} y={22+i*18} width={48+i*3} height="8"/>
+   <rect class={`sage motion book-ask level-${i}`} x="90" y={22+i*18} width={38+i*6} height="8"/>
+  </g>)}
+ </>}
+ {kind==='venues'&&<>
+  <path class="rule" d="M80 18V30M29 42V30H131V42M80 30V42"/>
+  <circle class="ink" cx="80" cy="15" r="5"/>
+  {[29,80,131].map((x,i)=><g>
+   <rect class="outline" x={x-17} y="42" width="34" height="46"/>
+   <rect class={`ink motion venue-${i}`} x={x-11} y="48" width="22" height="34"/>
+   <path class="guide" d={`M${x-8} 95h16`}/>
+  </g>)}
+ </>}
+ {kind==='range'&&<>
+  <path class="guide" d="M12 36H148M12 58H148M12 80H148"/>
+  <path class="sage" d="M16 80V66h16V54h16V62h16V70h16V66h16V46h16V54h16V64h16V80Z"/>
+  <g class="motion range-allocation">
+   <rect class="range-fill" x="54" y="23" width="52" height="57"/>
+   <path class="ink" d="M58 80V49h8v12h8v10h12V61h8V49h8v31Z"/>
+   <path class="rule" d="M54 18V86M106 18V86"/>
+  </g>
+  <g class="motion range-price"><path class="price-line" d="M80 15V86"/><circle class="price-dot" cx="80" cy="27" r="4"/></g>
+ </>}
+ {kind==='report'&&<>
+  <path class="guide" d="M12 26H54L72 40M12 50H72M12 74H54L72 60"/>
+  <circle class="ink motion report-input input-one" cx="12" cy="26" r="3"/>
+  <circle class="ink motion report-input input-two" cx="12" cy="50" r="3"/>
+  <circle class="ink motion report-input input-three" cx="12" cy="74" r="3"/>
+  <path class="outline" d="M72 14h62l12 12v62H72ZM134 14v12h12"/>
+  <path class="rule" d="M83 35h26M83 72h50"/>
+  <path class="report-trace motion" d="m84 62 10-10 10 4 12-14 16 5"/>
+  <path class="report-check motion" d="m119 32 4 4 9-9"/>
+ </>}
+</svg>
+
+<style>
+ .need-diagram{width:128px;height:80px;overflow:visible;color:var(--ink)}
+ .guide{fill:none;stroke:#cbd3c3;stroke-width:1}
+ .rule{fill:none;stroke:#72866e;stroke-width:1.2}
+ .ink{fill:#315c49}.sage{fill:#b3c1a5;stroke:#72866e;stroke-width:1}
+ .outline{fill:var(--ground);stroke:#72866e;stroke-width:1.2}
+ .range-fill{fill:#dce9a9;fill-opacity:.55}
+ .price-line{stroke:var(--ink);stroke-width:1.6}
+ .price-dot{fill:var(--ink);stroke:var(--ground);stroke-width:2}
+ .motion{animation-duration:3.6s;animation-iteration-count:infinite;animation-timing-function:ease-in-out;animation-play-state:paused}
+ .need-diagram[data-running] .motion{animation-play-state:running}
+ .book-bid,.book-ask{transform-box:fill-box}
+ .book-bid{transform-origin:right;animation-name:bid-size}
+ .book-ask{transform-origin:left;animation-name:ask-size}
+ .level-0{animation-delay:-.6s}.level-1{animation-delay:-1.2s}.level-2{animation-delay:-2.1s}.level-3{animation-delay:-2.8s}
+ .venue-0,.venue-1,.venue-2{transform-box:fill-box;transform-origin:bottom}
+ .venue-0{animation-name:venue-first}.venue-1{animation-name:venue-second}.venue-2{animation-name:venue-third}
+ .range-allocation{animation-name:range-follow;animation-delay:.18s}
+ .range-price{animation-name:price-travel}
+ .report-input{animation-name:collect}
+ .input-two{animation-delay:-1.2s}.input-three{animation-delay:-2.4s}
+ .report-trace,.report-check{fill:none;stroke:#315c49;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+ .report-trace{stroke-dasharray:66;animation-name:trace}
+ .report-check{stroke-dasharray:20;animation-name:check}
+ @keyframes bid-size{0%,100%{transform:scaleX(.48)}25%,45%{transform:scaleX(.9)}65%,80%{transform:scaleX(.7)}}
+ @keyframes ask-size{0%,100%{transform:scaleX(.85)}25%,45%{transform:scaleX(.5)}65%,80%{transform:scaleX(1)}}
+ @keyframes venue-first{0%,100%{transform:scaleY(1)}40%,65%{transform:scaleY(.65)}}
+ @keyframes venue-second{0%,100%{transform:scaleY(.35)}40%,65%{transform:scaleY(.85)}}
+ @keyframes venue-third{0%,100%{transform:scaleY(.75)}40%,65%{transform:scaleY(.6)}}
+ @keyframes range-follow{0%,100%{transform:translateX(-12px)}40%,55%{transform:translateX(20px)}}
+ @keyframes price-travel{0%,100%{transform:translateX(-12px)}40%,55%{transform:translateX(20px)}}
+ @keyframes collect{0%,15%{transform:translateX(0);opacity:0}25%{opacity:1}65%{transform:translateX(43px);opacity:1}75%,100%{transform:translateX(43px);opacity:0}}
+ @keyframes trace{0%,15%{stroke-dashoffset:66}65%,100%{stroke-dashoffset:0}}
+ @keyframes check{0%,65%{stroke-dashoffset:20}80%,100%{stroke-dashoffset:0}}
+ @media(max-width:1000px){.need-diagram{width:92px;height:64px}}
+ @media(prefers-reduced-motion:reduce){.motion{animation:none!important}}
+</style>

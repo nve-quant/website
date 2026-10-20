@@ -1,9 +1,9 @@
 // Editorial proposals for owner review, not measured outcomes or contractual commitments.
 export const clientNeeds = [
- {problem:'A thin or uneven order book',objective:'Define the size buyers and sellers should be able to trade, then set quoting and depth objectives around the available capital.',link:'/market-making',label:'CEX market making'},
- {problem:'Liquidity spread across venues',objective:'Review each market separately and agree where to allocate inventory, so an aggregate view does not hide a weak individual book.',link:'/market-making#measurement',label:'Measuring market quality'},
- {problem:'A DEX position that needs attention',objective:'Review where liquidity is placed as prices move, weighing usable liquidity against changing asset exposure and repositioning costs.',link:'/dex-liquidity-management',label:'DEX liquidity management'},
- {problem:'Too little visibility into the operation',objective:'Inspect orders, accounting and market activity in the client dashboard, then review the work against the agreed service levels.',link:'/work#review',label:'Reporting and review'},
+ {diagram:'book' as const,problem:'A thin or uneven order book',objective:'Define the size buyers and sellers should be able to trade, then set quoting and depth objectives around the available capital.',link:'/market-making',label:'CEX market making'},
+ {diagram:'venues' as const,problem:'Liquidity spread across venues',objective:'Review each market separately and agree where to allocate inventory, so an aggregate view does not hide a weak individual book.',link:'/market-making#measurement',label:'Measuring market quality'},
+ {diagram:'range' as const,problem:'A DEX position that needs attention',objective:'Review where liquidity is placed as prices move, weighing usable liquidity against changing asset exposure and repositioning costs.',link:'/dex-liquidity-management',label:'DEX liquidity management'},
+ {diagram:'report' as const,problem:'Too little visibility into the operation',objective:'Inspect orders, accounting and market activity in the client dashboard, then review the work against the agreed service levels.',link:'/work#review',label:'Reporting and review'},
 ];
 export const commercialQuestions = [
  {title:'Capital & allocation',text:'Define the token and quote assets required, their distribution across venues or pools, and how funding or withdrawals change the scope.'},

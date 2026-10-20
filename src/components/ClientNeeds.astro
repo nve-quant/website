@@ -1,4 +1,14 @@
 ---
 import {clientNeeds} from '../data/commercial';
+import NeedDiagram from './NeedDiagram.astro';
 ---
-<section class="client-needs" aria-labelledby="needs-title"><div class="section-intro"><h2 id="needs-title">Start with what your<br/>market needs to do.</h2><p>Turn a liquidity problem into an operating objective.</p></div><div class="need-rows">{clientNeeds.map(item=><article><h3>{item.problem}</h3><p>{item.objective}</p><a href={item.link}>{item.label}</a></article>)}</div><p class="section-footnote">Objectives depend on the market, available capital and agreed limits. They are not promises of price appreciation or trading volume.</p></section>
+<section class="client-needs" aria-labelledby="needs-title" data-need-illustrations>
+ <div class="section-intro"><h2 id="needs-title">Start with what your<br/>market needs to do.</h2><p>Turn a liquidity problem into an operating objective.</p></div>
+ <div class="need-rows">{clientNeeds.map(item=><article><NeedDiagram kind={item.diagram}/><h3>{item.problem}</h3><p>{item.objective}</p><a href={item.link}>{item.label}</a></article>)}</div>
+ <div class="need-illustration-controls"><span>Illustrative sequences. Not live market data.</span><button type="button" data-need-toggle hidden aria-pressed="false">Pause illustrations</button></div>
+ <p class="section-footnote">Objectives depend on the market, available capital and agreed limits. They are not promises of price appreciation or trading volume.</p>
+</section>
+<script>
+ import {initNeedIllustrations} from '../scripts/need-illustrations';
+ document.querySelectorAll<HTMLElement>('[data-need-illustrations]').forEach(initNeedIllustrations);
+</script>

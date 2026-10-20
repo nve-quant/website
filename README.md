@@ -52,3 +52,5 @@ The shared marketing layout contains navigation and footer. Service detail copy 
 The local `/company` page and conversion sections are editorial drafts. Expand the “Editorial review” disclosures in development to see the evidence each placement needs; these notes are excluded from `npm run build`. See `docs/commercial-evidence.md` for the consolidated checklist. Service fit, benefits and proposed metric definitions live in the typed service collections. Shared email links include a short enquiry template; no form backend was added.
 
 Service navigation interaction checks: `node scripts/check-service-navigation.mjs` (hover, dismissal, keyboard focus and touch fallback).
+
+Client-need animation checks: `node scripts/check-need-illustrations.mjs` (pause, visibility, reduced motion and page lifecycle).

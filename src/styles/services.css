@@ -85,7 +85,7 @@
 
 /* Commercial clarity: problem-led rows and definition registers, not result counters. */
 .client-needs,.measurement-section{padding:var(--section) 0;border-top:1px solid var(--line)}
-.need-rows article{display:grid;grid-template-columns:1fr 1.4fr .7fr;gap:32px;align-items:start;border-top:1px solid var(--line);padding:28px 0}
+.need-rows article{display:grid;grid-template-columns:128px 1fr 1.4fr .7fr;gap:24px;align-items:start;border-top:1px solid var(--line);padding:28px 0}
 .need-rows h3,.metric-register h3,.outcome-list h3{font-size:1.35rem;line-height:1.25;letter-spacing:-.03em;margin:0}
 .need-rows p{font-size:.9rem;margin:0}
 .need-rows a{font-size:.8rem;justify-self:start}
@@ -114,5 +114,8 @@
 .editorial-review p,.editorial-review li{font-size:.75rem;line-height:1.6;max-width:90ch}
 .editorial-review ul{padding-left:20px}
 .editorial-review li+li{margin-top:8px}
-@media(max-width:1000px){.need-rows article{grid-template-columns:1fr 1.4fr;gap:18px 28px}.need-rows a{grid-column:2}.metric-register article{gap:24px}}
-@media(max-width:600px){.need-rows article,.metric-register article{grid-template-columns:1fr;gap:16px}.need-rows a{grid-column:1}.metric-register article>p{border-left:2px solid #879e78;padding-left:16px}.need-rows h3,.metric-register h3,.outcome-list h3{font-size:1.3rem}.editorial-review{padding:14px}.inline-links{flex-direction:column;align-items:start}}
+@media(max-width:1000px){.need-rows article{grid-template-columns:92px 1fr 1.4fr;gap:16px 24px}.need-rows a{grid-column:3}.metric-register article{gap:24px}}
+@media(max-width:600px){.need-rows article{grid-template-columns:92px 1fr;gap:16px;align-items:center}.metric-register article{grid-template-columns:1fr;gap:16px}.need-rows p,.need-rows a{grid-column:1/-1}.metric-register article>p{border-left:2px solid #879e78;padding-left:16px}.need-rows h3,.metric-register h3,.outcome-list h3{font-size:1.3rem}.editorial-review{padding:14px}.inline-links{flex-direction:column;align-items:start}}
+
+.need-illustration-controls{display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:.7rem;color:var(--muted);padding:16px 0;border-top:1px solid var(--line)}
+.need-illustration-controls button{font:inherit;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--ink);padding:8px 0;cursor:pointer;flex:none}
