@@ -10,10 +10,7 @@
 .chart-grid{fill:none;stroke:#d6dece;stroke-width:.7}
 .chart-grid path:nth-child(n+5){stroke-dasharray:2 5}
 .chart-axis-label{font-family:inherit;fill:#526457;font-size:14px}
-.book-bid-fill{fill:#315c49;fill-opacity:.12}.book-ask-fill{fill:#8a6648;fill-opacity:.1}
-.book-line{fill:none;stroke-width:1.8;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.book-bid-line{stroke:#315c49}.book-ask-line{stroke:#8a6648}
-.chart-reference{stroke:#7a8c75;stroke-width:1;stroke-dasharray:3 5}
+.book-bid-fill{fill:#315c49;fill-opacity:.07}
 .spread-bracket{stroke:#778b6f;stroke-width:1;fill:none}
 .chart-tag{fill:#edf0e7;stroke:#bcc9b2;stroke-width:1}
 .chart-tag-text{font-size:14px;fill:#243f35;font-family:inherit}
@@ -32,3 +29,16 @@
 .diagram-motion[aria-pressed="true"] [data-motion-icon]{border:0;border-left:7px solid;border-top:5px solid transparent;border-bottom:5px solid transparent;width:0}
 @media(max-width:1000px){.market-diagram{padding:16px 12px 10px}.diagram-topline{display:block}.diagram-phase{display:block;text-align:left;margin-top:3px}.chart-axis-label,.chart-tag-text{font-size:19px}.diagram-footer{align-items:center}.diagram-footer>span{max-width:23ch}.diagram-legend{gap:14px}}
 @media(max-width:600px){.market-diagram{margin:24px 0}.diagram-topline{display:flex}.diagram-phase{margin:0;text-align:right;max-width:18ch}.diagram-legend{margin-top:16px}.diagram-motion{min-height:36px}.diagram-footer{font-size:.6rem}}
+
+/* Price and book share one quote snapshot; no full-panel flashing or status lights. */
+.quote-current{fill:#243f35;font:500 27px 'Public Sans',Arial,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+.trade-line{fill:none;stroke:#315c49;stroke-width:1.5;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.trade-volume{fill:#a9b99b;fill-opacity:.55}
+.trade-dot{fill:#315c49;stroke:#edf0e7;stroke-width:2}
+.last-price-rule{stroke:#6f8663;stroke-width:.8;stroke-dasharray:3 4;opacity:.65;fill:none}
+.orderbook-divider{stroke:#c8d3be;stroke-width:1;fill:none}
+.ladder-label{font-family:inherit;font-size:14px;fill:#526457}
+.ladder-row text{font-family:inherit;font-size:17px;font-variant-numeric:tabular-nums;letter-spacing:-.025em}
+.ladder-ask text{fill:#805b3e}.ladder-bid text{fill:#315c49}
+.ladder-ask rect{fill:#8a6648;fill-opacity:.1}.ladder-bid rect{fill:#315c49;fill-opacity:.1}
+@media(max-width:1000px){.ladder-row text{font-size:20px}.ladder-label{font-size:19px}.quote-current{font-size:30px}.cex-chart .chart-axis-label{font-size:19px}}

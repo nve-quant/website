@@ -1,29 +1,36 @@
 // Deterministic schematic coordinates, never financial or streamed market data.
 const fixed = (n: number) => n.toFixed(2);
 const ease = (n: number) => { const x=Math.max(0,Math.min(1,n)); return x*x*(3-2*x); };
+// Indexed prices and sizes are generated solely for the labelled visual demonstration.
+const quoteInterval = .12;
+const noise = (n: number) => { const v=Math.sin(n*127.1+311.7)*43758.5453; return v-Math.floor(v); };
+const indexPrice = (tick: number) => Math.round(10000+29*Math.sin(tick*.081)+17*Math.sin(tick*.193)+8*Math.sin(tick*.61)+(noise(tick)-.5)*12)/100;
 export function bookGeometry(seconds: number) {
-  const mid = 270 + 9 * Math.sin(seconds * .34);
-  const gap = 12 + 2 * Math.sin(seconds * .53);
-  function side(direction: -1 | 1) {
-    const start=mid+direction*gap;
-    const edge=direction<0?32:508;
-    let y=228;
-    let line=`M${fixed(start)} ${y}`;
-    for(let i=1;i<=24;i++){
-      // Positive increments preserve cumulative depth as price moves away from the spread.
-      y-=2.4+i*.12+(1+Math.sin(i*.31+seconds*1.05+direction))*1.5
-        +(i===7||i===17?8+5*Math.sin(seconds*.74+i+direction):0);
-      const x=start+(edge-start)*i/24;
-      line+=`H${fixed(x)}V${fixed(y)}`;
+  const clock=seconds/quoteInterval, tick=Math.floor(clock), fraction=clock-tick;
+  const price=indexPrice(tick), y=(value: number)=>148-(value-100)*115;
+  const step=284/95;
+  let line='',volume='';
+  for(let i=0;i<96;i++){
+    const sample=tick-95+i, x=20+(i-fraction)*step;
+    line+=`${i?'L':'M'}${fixed(x)} ${fixed(y(indexPrice(sample)))}`;
+    if(i%3===0){
+      const h=5+noise(sample)*18;
+      volume+=`M${fixed(x)} 252v-${fixed(h)}h${fixed(step*2)}v${fixed(h)}Z`;
     }
-    return {line,fill:`${line}V236H${fixed(start)}Z`};
   }
-  const bid=side(-1), ask=side(1);
-  return {mid,bidLine:bid.line,bidFill:bid.fill,askLine:ask.line,askFill:ask.fill};
+  line+=`L304 ${fixed(y(price))}`;
+  const levels=(side: -1|1)=>Array.from({length:5},(_,row)=>{
+    const level=side===1?5-row:row+1;
+    // Stagger size updates by row so the entire book does not blink together.
+    const sizeTick=Math.floor((tick+row*2)/(2+row%3));
+    const size=1.2+noise(sizeTick*11+level*37+side*19)*7.8;
+    return {price:(price+side*(.02+(level-1)*.01)).toFixed(2),size:size.toFixed(2),width:24+size/9*146};
+  });
+  return {tick,price:price.toFixed(2),priceY:y(price),line,fill:`${line}V214H20Z`,volume,asks:levels(1),bids:levels(-1),spread:'.04'};
 }
 
 export function rangeGeometry(seconds: number) {
-  const t=seconds%16;
+  const t=(seconds*3.2)%16;
   // Price moves first; allocation follows after a deliberate observation period.
   const price=270+58*ease((t-2)/3)-104*ease((t-8)/3)+46*ease((t-13)/2);
   const center=270+58*ease((t-5)/2)-104*ease((t-11)/2)+46*ease((t-15));

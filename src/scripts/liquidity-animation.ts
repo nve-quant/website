@@ -7,9 +7,16 @@ export function initLiquidityAnimation(root: HTMLElement) {
   const phase=root.querySelector<HTMLElement>('[data-phase]')!;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const nodes=new Map<string,SVGElement>();
-  root.querySelectorAll<SVGElement>('svg [data-bid-fill],svg [data-ask-fill],svg [data-bid-line],svg [data-ask-line],svg [data-book-mid],svg [data-range-window],svg [data-position-bars],svg [data-position-outline],svg [data-range-bracket],svg [data-price-marker]').forEach(node=>{
+  root.querySelectorAll<SVGElement>('svg [data-trade-fill],svg [data-trade-line],svg [data-trade-volume],svg [data-trade-dot],svg [data-last-price],svg [data-last-price-rule],svg [data-range-window],svg [data-position-bars],svg [data-position-outline],svg [data-range-bracket],svg [data-price-marker]').forEach(node=>{
     for(const key of Object.keys(node.dataset)) nodes.set(key,node);
   });
+  const bookRows = (side: string) => Array.from(root.querySelectorAll<SVGGElement>(`[data-book-${side}]`)).map(row=>({
+    depth:row.querySelector<SVGRectElement>('[data-row-depth]')!,
+    price:row.querySelector<SVGTextElement>('[data-row-price]')!,
+    size:row.querySelector<SVGTextElement>('[data-row-size]')!,
+  }));
+  const asks=bookRows('ask'), bids=bookRows('bid');
+  let lastQuote=-1;
   const attr=(key:string,name:string,value:string|number)=>nodes.get(key)?.setAttribute(name,String(value));
   let visible=false, paused=false, frame=0, previous=0, elapsed=0, destroyed=false;
   const controller=new AbortController();
@@ -18,9 +25,22 @@ export function initLiquidityAnimation(root: HTMLElement) {
   function draw() {
     if(kind==='cex'){
       const g=bookGeometry(elapsed);
-      attr('bidFill','d',g.bidFill); attr('askFill','d',g.askFill);
-      attr('bidLine','d',g.bidLine); attr('askLine','d',g.askLine);
-      attr('bookMid','transform',`translate(${g.mid} 0)`);
+      attr('tradeFill','d',g.fill); attr('tradeLine','d',g.line);
+      attr('tradeVolume','d',g.volume); attr('tradeDot','cy',g.priceY);
+      attr('lastPriceRule','d',`M20 ${g.priceY}H304`);
+      if(g.tick!==lastQuote){
+        lastQuote=g.tick;
+        const current=nodes.get('lastPrice'); if(current)current.textContent=g.price;
+        for(const [rows,values] of [[asks,g.asks],[bids,g.bids]] as const){
+          rows.forEach((row,i)=>{
+            const value=values[i];
+            row.depth.setAttribute('width',String(value.width));
+            row.depth.setAttribute('x',String(524-value.width));
+            if(row.price.textContent!==value.price)row.price.textContent=value.price;
+            if(row.size.textContent!==value.size)row.size.textContent=value.size;
+          });
+        }
+      }
     }else{
       const g=rangeGeometry(elapsed);
       attr('positionBars','d',g.bars); attr('positionOutline','d',g.outline);
@@ -53,7 +73,7 @@ export function initLiquidityAnimation(root: HTMLElement) {
     update();
   },{signal});
   reduced.addEventListener('change',()=>{
-    if(reduced.matches){elapsed=0;draw();}
+    if(reduced.matches){elapsed=0;lastQuote=-1;draw();}
     update();
   },{signal});
   document.addEventListener('visibilitychange',update,{signal});

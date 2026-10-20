@@ -5,15 +5,25 @@ import {bookGeometry,rangeGeometry} from '../src/scripts/liquidity-geometry.ts';
 
 for(let t=0;t<64;t+=.05){
   const b=bookGeometry(t),r=rangeGeometry(t);
-  for(const [line,side] of [[b.bidLine,-1],[b.askLine,1]]){
-    const levels=[...line.matchAll(/H([\d.]+)V([\d.]+)/g)].map(m=>[+m[1],+m[2]]);
-    assert.equal(levels.length,24);
-    levels.forEach(([x,y],i)=>{assert(side<0?x<b.mid:x>b.mid);assert(y>=54&&y<236);if(i)assert(y<levels[i-1][1]);});
+  const price=Number(b.price);
+  assert(price>99&&price<101); assert(b.priceY>=68&&b.priceY<=214);
+  assert.equal(b.bids.length,5);assert.equal(b.asks.length,5);
+  for(const [rows,side] of [[b.bids,-1],[b.asks,1]]){
+    rows.forEach((row,i)=>{
+      assert(side<0?Number(row.price)<price:Number(row.price)>price);
+      if(i)assert(Number(row.price)<Number(rows[i-1].price),'Ladder sorted from high to low');
+      assert(Number(row.size)>0&&row.width<=174&&row.width>0);
+    });
   }
+  assert(Math.abs(Number(b.asks[4].price)-Number(b.bids[0].price)-.04)<1e-8);
   assert(r.left>=32&&r.left+r.width<=508);assert(r.price>=32&&r.price<=508);assert.equal(r.width,176);
-  assert(!/NaN|Infinity/.test(r.bars+b.bidFill+b.askFill));
+  assert(!/NaN|Infinity/.test(r.bars+b.fill+b.line+b.volume));
 }
-assert(Math.abs(rangeGeometry(0).center-rangeGeometry(16-1e-5).center)<.001);
+const quotes=Array.from({length:9},(_,i)=>bookGeometry(i*.12));
+assert(new Set(quotes.map(q=>q.price)).size>=5,'Multiple price updates per second');
+assert.deepEqual(bookGeometry(.121).bids,bookGeometry(.239).bids,'Quotes stable between ticks');
+assert(Math.abs(rangeGeometry(0).center-rangeGeometry(5-1e-5).center)<.001);
+assert(Math.abs(rangeGeometry(0).price-rangeGeometry(5-1e-5).price)<.001);
 
 // Exercise lifecycle without a browser: offscreen, hidden, pause, motion preference and teardown.
 const pending=new Map();let next=0,observe;
@@ -45,4 +55,4 @@ window.dispatchEvent(Object.assign(new Event('pagehide'),{persisted:true}));asse
 window.dispatchEvent(new Event('pageshow'));assert.equal(pending.size,1);
 window.dispatchEvent(Object.assign(new Event('pagehide'),{persisted:false}));assert.equal(pending.size,0);
 window.dispatchEvent(new Event('pageshow'));assert.equal(pending.size,0);
-console.log('Liquidity checks passed: depth geometry, range bounds, loop continuity, pause, visibility, reduced motion and teardown.');
+console.log('Liquidity checks passed: price/book consistency, quote cadence, range bounds, loop continuity, pause, visibility, reduced motion and teardown.');

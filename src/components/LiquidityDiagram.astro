@@ -9,50 +9,69 @@ const name = kind === 'cex' ? 'order book' : 'liquidity range';
 ---
 <figure class="market-diagram" data-liquidity-animation={kind}>
   <div class="diagram-topline">
-    <span>{kind === 'cex' ? 'Order-book depth' : 'Concentrated liquidity'}</span>
-    <span class="diagram-phase" data-phase>{kind === 'cex' ? 'Two-sided quoting' : 'Positioned around price'}</span>
+    <span>{kind === 'cex' ? 'Price & order book' : 'Concentrated liquidity'}</span>
+    <span class="diagram-phase" data-phase>{kind === 'cex' ? 'Simulated quotes' : 'Positioned around price'}</span>
   </div>
   <div class="diagram-legend" aria-hidden="true">
     {kind === 'cex' ? <><span><i class="legend-bid"></i>Bids</span><span><i class="legend-ask"></i>Asks</span></> : <><span><i class="legend-base"></i>Pool liquidity</span><span><i class="legend-bid"></i>Managed position</span></>}
   </div>
-  <svg class="market-chart" viewBox="0 0 540 292" role="img" aria-labelledby={`${kind}-chart-title ${kind}-chart-description`}>
-    <title id={`${kind}-chart-title`}>{kind === 'cex' ? 'Illustrative cumulative order-book depth' : 'Illustrative liquidity range rebalancing'}</title>
-    <desc id={`${kind}-chart-description`}>{kind === 'cex' ? 'Cumulative bid and ask depth changes around a central spread. The horizontal axis represents price; the vertical axis represents cumulative size. This is a generated illustration, not market data.' : 'A price marker moves across liquidity allocated to price ranges. After the price moves, a managed position is rebalanced around it. This sequence is illustrative, not a trading strategy or live data.'}</desc>
+  {kind === 'cex' ? <svg class="market-chart cex-chart" viewBox="0 0 540 292" role="img" aria-labelledby="cex-chart-title cex-chart-description">
+    <title id="cex-chart-title">Simulated price chart and order book</title>
+    <desc id="cex-chart-description">A scrolling indexed price chart with changing bid and ask prices and order sizes. All prices and sizes are synthetic demonstration values, not a live market, client result or latency measurement.</desc>
+    <defs><clipPath id="quote-chart-clip"><rect x="20" y="68" width="286" height="186"/></clipPath></defs>
+    <text class="chart-axis-label" x="20" y="24">Indexed price</text>
+    <text class="quote-current" data-last-price x="20" y="54">{book.price}</text>
+    <g class="chart-grid">{[86,132,178,214,252].map(y=><path d={`M20 ${y}H304`}/>)}{[20,91,162,233,304].map(x=><path d={`M${x} 68V254`}/>)}</g>
+    <g clip-path="url(#quote-chart-clip)">
+      <path class="trade-volume" data-trade-volume d={book.volume}/>
+      <path class="book-fill book-bid-fill" data-trade-fill d={book.fill}/>
+      <path class="trade-line" data-trade-line d={book.line}/>
+      <path class="last-price-rule" data-last-price-rule d={`M20 ${book.priceY}H304`}/>
+    </g>
+    <circle class="trade-dot" data-trade-dot cx="304" cy={book.priceY} r="3.5"/>
+    <text class="chart-axis-label" x="20" y="278">Recent trades</text>
+    <text class="chart-axis-label" x="304" y="278" text-anchor="end">Now</text>
+    <path class="orderbook-divider" d="M332 16V284"/>
+    <text class="ladder-label" x="350" y="24">Price</text>
+    <text class="ladder-label" x="524" y="24" text-anchor="end">Size</text>
+    {book.asks.map((row,i)=><g class="ladder-row ladder-ask" data-book-ask={i}>
+      <rect data-row-depth x={524-row.width} y={48+i*20} width={row.width} height="18"/>
+      <text data-row-price x="350" y={62+i*20}>{row.price}</text>
+      <text data-row-size x="524" y={62+i*20} text-anchor="end">{row.size}</text>
+    </g>)}
+    <path class="orderbook-divider" d="M350 153H524M350 179H524"/>
+    <text class="ladder-label" x="350" y="170">Spread</text>
+    <text class="ladder-label" x="524" y="170" text-anchor="end">{book.spread}</text>
+    {book.bids.map((row,i)=><g class="ladder-row ladder-bid" data-book-bid={i}>
+      <rect data-row-depth x={524-row.width} y={182+i*20} width={row.width} height="18"/>
+      <text data-row-price x="350" y={196+i*20}>{row.price}</text>
+      <text data-row-size x="524" y={196+i*20} text-anchor="end">{row.size}</text>
+    </g>)}
+  </svg> : <svg class="market-chart" viewBox="0 0 540 292" role="img" aria-labelledby="dex-chart-title dex-chart-description">
+    <title id="dex-chart-title">Illustrative liquidity range rebalancing</title>
+    <desc id="dex-chart-description">A price marker moves across liquidity allocated to price ranges. After the price moves, a managed position is rebalanced around it. This accelerated sequence is illustrative, not a trading strategy or live data.</desc>
     <g class="chart-grid">{[76,120,164,208].map(y=><path d={`M32 ${y}H508`}/>)}{[32,111,191,270,349,429,508].map(x=><path d={`M${x} 54V236`}/>)}</g>
-    <text class="chart-axis-label" x="32" y="34">{kind === 'cex' ? 'Cumulative size' : 'Liquidity'}</text>
-    {kind === 'cex' ? <>
-      <path class="book-fill book-bid-fill" data-bid-fill d={book.bidFill}/>
-      <path class="book-fill book-ask-fill" data-ask-fill d={book.askFill}/>
-      <path class="book-line book-bid-line" data-bid-line d={book.bidLine}/>
-      <path class="book-line book-ask-line" data-ask-line d={book.askLine}/>
-      <g data-book-mid transform={`translate(${book.mid} 0)`}>
-        <path class="chart-reference" d="M0 52V237"/>
-        <path class="spread-bracket" d="M-12 244V251H12V244"/>
-        <rect class="chart-tag" x="-35" y="20" width="70" height="26" rx="3"/>
-        <text class="chart-tag-text" y="38" text-anchor="middle">Spread</text>
-      </g>
-    </> : <>
-      <path class="pool-bars" d={range.background}/>
-      <rect class="position-window" data-range-window x={range.left} y="55" width={range.width} height="181"/>
-      <path class="position-bars" data-position-bars d={range.bars}/>
-      <path class="position-outline" data-position-outline d={range.outline}/>
-      <g data-range-bracket transform={`translate(${range.center} 0)`}>
-        <path class="spread-bracket" d="M-86 244V251H86V244"/>
-      </g>
-      <g data-price-marker transform={`translate(${range.price} 0)`}>
-        <path class="market-price-line" d="M0 48V236"/>
-        <circle class="market-price-dot" cy="72" r="4"/>
-        <rect class="chart-tag" x="-31" y="20" width="62" height="26" rx="3"/>
-        <text class="chart-tag-text" y="38" text-anchor="middle">Price</text>
-      </g>
-    </>}
+    <text class="chart-axis-label" x="32" y="34">Liquidity</text>
+    <path class="pool-bars" d={range.background}/>
+    <rect class="position-window" data-range-window x={range.left} y="55" width={range.width} height="181"/>
+    <path class="position-bars" data-position-bars d={range.bars}/>
+    <path class="position-outline" data-position-outline d={range.outline}/>
+    <g data-range-bracket transform={`translate(${range.center} 0)`}>
+      <path class="spread-bracket" d="M-86 244V251H86V244"/>
+    </g>
+    <g data-price-marker transform={`translate(${range.price} 0)`}>
+      <path class="market-price-line" d="M0 48V236"/>
+      <circle class="market-price-dot" cy="72" r="4"/>
+      <rect class="chart-tag" x="-31" y="20" width="62" height="26" rx="3"/>
+      <text class="chart-tag-text" y="38" text-anchor="middle">Price</text>
+    </g>
     <path class="chart-baseline" d="M32 236H508"/>
     <g class="chart-ticks">{[32,111,191,270,349,429,508].map(x=><path d={`M${x} 236V241`}/>)}</g>
     <text class="chart-axis-label" x="32" y="278">Lower price</text>
     <text class="chart-axis-label" x="508" y="278" text-anchor="end">Higher price</text>
-  </svg>
+  </svg>}
   <figcaption class="diagram-footer">
-    <span>Illustrative market. Not live data.</span>
+    <span>{kind === 'cex' ? 'Simulated market. Not live data.' : 'Illustrative market. Not live data.'}</span>
     <button class="diagram-motion" type="button" data-motion-toggle hidden aria-label={`Pause ${name} animation`} aria-pressed="false"><span data-motion-icon aria-hidden="true"></span><span data-motion-label>Pause</span></button>
   </figcaption>
 </figure>

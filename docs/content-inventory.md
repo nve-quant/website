@@ -72,3 +72,6 @@ Reviewed https://arrakis.finance/ as the owner's service-category reference. It 
 
 ## Animated service illustrations
 The CEX depth and DEX range graphics use deterministic generated coordinates in `src/scripts/liquidity-geometry.ts`. They are original explanatory visuals, explicitly labelled “Illustrative market. Not live data.” Neither shape nor timing represents actual exchange data, client inventory, liquidity results or an operating guarantee. CEX uses cumulative depth with a gap between bids and asks; DEX separates a schematic price move from a subsequent range adjustment. There are no quoted prices or measured quantities.
+
+### CEX chart and quote ladder revision
+Owner requested faster motion and a chart with an order book. The new CEX visual includes generated index prices around 100 and generated order sizes, with an explicit simulated-data label. These are illustrative values, not source material, quoted market prices, customer evidence or company performance. Quote update timing is animation pacing, not a latency claim. This supersedes the earlier statement that the service diagrams contain no numbers. DEX pacing is accelerated for explanation, not an execution or rebalance commitment.
