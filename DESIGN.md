@@ -78,3 +78,12 @@ The owner found the initial engraving adjustment too faint and rejected Onchain 
 Added a tokenized-stock scenario with an original curved paper certificate: ivory rag-paper texture, navy security-print borders, architectural vignette, registration fields and a raised foil specimen seal. The certificate is illustrative and does not name a real issuer or establish shareholder rights. The stock explanation links to SEC staff's tokenized-securities statement and distinguishes underlying share prices from the rights conferred by a token structure.
 
 The paper geometry and generated textures are created on first stock selection; no remote model, image, font or extra dependency is fetched. The existing capped rotation and drag interaction are shared. Mobile selectors use two columns for four readable choices; stock has an original SVG fallback.
+
+### Service-first homepage hierarchy
+Owner clarification, 20 October 2026: market making is the main business; tokenized assets are a specialist application. The developed homepage now leads with “Market making. On CEX and DEX.” and an explicit service description. Preserve Public Sans, the selected green palette and the existing asset models.
+
+Composition: hero → CEX/DEX operating explanations → supporting services → engagement process → dedicated tokenized-asset explorer → research → platform status → contact. The header links directly to the asset studies for returning visitors.
+
+The two primary services share a comparison surface, divided by a single rule. Original inline SVGs show the subject of each operation: two-sided orders around a spread, and allocated liquidity ranges around a price. These are labelled schematic illustrations without numbers, live-data styling or exchange endorsements. No new animation or JavaScript is required. The more elaborate 3D studies remain below the engagement section, with existing lazy loading and interaction intact.
+
+Arrakis (https://arrakis.finance/) was reviewed as service-positioning context, not copied for visuals, performance claims, client evidence or product architecture. Proposed operational details remain subject to owner review. The approved business category does not establish custody arrangements, exact integrations or measured latency.

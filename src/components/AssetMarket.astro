@@ -2,8 +2,8 @@
 import {marketModels} from '../data/market-model';
 import '../styles/market-model.css';
 ---
-<section class="market-explorer" aria-labelledby="explorer-title" data-market-explorer>
-  <div class="explorer-heading"><div><p>Explore the market design</p><h2 id="explorer-title">Different assets.<br/>Different mechanics.</h2></div><p>Choose an asset to see <br/>what changes around it.</p></div>
+<section id="asset-studies" class="market-explorer" aria-labelledby="explorer-title" data-market-explorer>
+  <div class="explorer-heading"><div><p>Tokenized asset studies</p><h2 id="explorer-title">The asset shapes<br/>the market.</h2></div><p>Explore how reference prices, liquidity and redemption vary by asset.</p></div>
   <fieldset class="asset-selector"><legend class="visually-hidden">Choose an illustrative asset type</legend>{marketModels.map((model,index)=><label><input type="radio" name="market-asset" value={model.id} checked={index===0} aria-controls={`model-${model.id}`}/><span>{model.label}</span></label>)}</fieldset>
   <div class="explorer-body">
     <div class="model-stage">

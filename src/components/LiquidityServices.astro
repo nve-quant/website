@@ -1,0 +1,42 @@
+---
+import {coreServices} from '../data/home';
+import {site} from '../data/site';
+---
+<section id="services" class="liquidity-services" aria-labelledby="liquidity-title">
+  <div class="liquidity-heading">
+    <h2 id="liquidity-title">Two market structures.<br/>Active management in both.</h2>
+    <p>Order books and liquidity pools work differently. The operation should reflect that.</p>
+  </div>
+  <div class="liquidity-pair">
+    {coreServices.map(service => <article class={`liquidity-service liquidity-${service.id}`}>
+      <p class="venue-label">{service.label}</p>
+      <h3>{service.title}</h3>
+      <figure class="liquidity-diagram">
+        {service.id === 'cex' ? <svg viewBox="0 0 540 230" role="img" aria-labelledby="book-title book-desc">
+          <title id="book-title">Two-sided order book</title>
+          <desc id="book-desc">Bid and ask orders sit on either side of a spread. This is an illustrative structure with no live prices or quantities.</desc>
+          <g class="diagram-grid"><path d="M30 65H510M30 105H510M30 145H510M30 185H510"/></g>
+          <g class="bid-orders"><rect x="162" y="58" width="84" height="18"/><rect x="126" y="98" width="120" height="18"/><rect x="68" y="138" width="178" height="18"/><rect x="30" y="178" width="216" height="18"/></g>
+          <g class="ask-orders"><rect x="294" y="58" width="66" height="18"/><rect x="294" y="98" width="108" height="18"/><rect x="294" y="138" width="162" height="18"/><rect x="294" y="178" width="216" height="18"/></g>
+          <path class="diagram-dash" d="M270 45V202"/>
+          <g class="diagram-label"><text x="30" y="28">Bid orders</text><text x="510" y="28" text-anchor="end">Ask orders</text><text x="270" y="224" text-anchor="middle">Spread</text></g>
+        </svg> : <svg viewBox="0 0 540 230" role="img" aria-labelledby="range-title range-desc">
+          <title id="range-title">Concentrated liquidity ranges</title>
+          <desc id="range-desc">Overlapping price ranges concentrate liquidity around a market price. Range selection and allocation are managed as market conditions change. Illustrative, not live data.</desc>
+          <g class="diagram-grid"><path d="M30 65H510M30 105H510M30 145H510M30 185H510"/></g>
+          <path class="range-outer" d="M54 185V151H115V112H180V77H340V112H408V151H486V185Z"/>
+          <path class="range-inner" d="M145 185V143H212V96H307V143H375V185Z"/>
+          <path class="price-line" d="M270 48V194"/><circle class="price-dot" cx="270" cy="77" r="5"/>
+          <path class="range-bracket" d="M145 202V209H375V202"/>
+          <g class="diagram-label"><text x="30" y="28">Liquidity allocation</text><text x="510" y="28" text-anchor="end">Market price</text><text x="260" y="228" text-anchor="middle">Managed ranges</text></g>
+          <path class="diagram-dash" d="M436 34V43H270"/>
+        </svg>}
+        <figcaption>Illustrative structure. No live market data.</figcaption>
+      </figure>
+      <p class="liquidity-intro">{service.intro}</p>
+      <p class="liquidity-detail">{service.detail}</p>
+      <ul class="liquidity-scope">{service.scope.map(item => <li>{item}</li>)}</ul>
+      <a class="liquidity-contact" href={`mailto:${site.email}?subject=${encodeURIComponent(service.contact)}`}>{service.contact}</a>
+    </article>)}
+  </div>
+</section>
