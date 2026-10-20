@@ -2,12 +2,12 @@
 import Base from './layouts/Base.astro';
 import {directions} from './data/site';
 ---
-<Base title="Responsive review"><main id="main"><a href="/">All concepts</a><h1>Responsive review</h1><p>Local review tool. Each preview uses the exact viewport width shown.</p><nav aria-label="Select preview">{directions.map(d=><div><strong>{d.name}</strong>{[375,768,1440].map(w=><button data-concept={d.id} data-width={w}>{d.name} {w}px</button>)}</div>)}</nav><p id="result" aria-live="polite">Choose a preview.</p><div class="stage"><iframe title="Concept preview" width="375" height="2000"></iframe></div></main></Base>
+<Base title="Responsive review"><main id="main"><a href="/studies">All concepts</a><h1>Responsive review</h1><p>Local review tool. Each preview uses the exact viewport width shown.</p><nav aria-label="Select preview">{[{id:'home',name:'Homepage'},...directions].map(d=><div><strong>{d.name}</strong>{[375,768,1440].map(w=><button data-concept={d.id} data-width={w}>{d.name} {w}px</button>)}</div>)}</nav><p id="result" aria-live="polite">Choose a preview.</p><div class="stage"><iframe title="Concept preview" width="375" height="2000"></iframe></div></main></Base>
 <script>
 const frame=document.querySelector('iframe')!;
 const result=document.querySelector('#result')!;
 document.querySelectorAll<HTMLButtonElement>('button[data-concept]').forEach(button=>button.addEventListener('click',()=>{
- frame.width=button.dataset.width!;frame.src=`/concepts/${button.dataset.concept}`;result.textContent='Loading preview…';
+ frame.width=button.dataset.width!;frame.src=button.dataset.concept === 'home' ? '/' : `/concepts/${button.dataset.concept}`;result.textContent='Loading preview…';
 }));
 frame.addEventListener('load',async()=>{
  const doc=frame.contentDocument;if(!doc||!frame.getAttribute('src'))return;

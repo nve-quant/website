@@ -1,6 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
-import {directions} from '../data/site';
+import AssetMarket from '../components/AssetMarket.astro';
+import {site} from '../data/site';
+import {services,steps} from '../data/home';
+import {getCollection} from 'astro:content';
+import '@fontsource/public-sans/400.css';
+import '@fontsource/public-sans/500.css';
+import '../styles/home.css';
+const research=(await getCollection('research'))[0].data;
 ---
-<Base title="Design studies"><main id="main" class="review"><p>Onchain Bureau / Design development</p><h1>One business.<br/>Three ways to tell its story.</h1><p>Compare the same content through three distinct compositions. These are local studies, not the finished website.</p>{import.meta.env.DEV ? <nav aria-label="Design concepts">{directions.map(d=><a href={`/concepts/${d.id}`}><h2>{d.name}</h2><p>{d.description}</p><span>Explore concept</span></a>)}</nav> : <p>The design studies are available through the local development server only.</p>}<footer>Review the hierarchy, clarity and character of each direction before choosing a design system.</footer></main></Base>
-<style>.review{max-width:1050px;margin:auto;padding:64px 32px}h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;line-height:1.05;margin:50px 0 24px}nav{margin:60px 0}nav a{display:grid;grid-template-columns:1fr 1.3fr auto;gap:24px;align-items:baseline;padding:30px 0;border-top:1px solid #b6c4cb;text-decoration:none}nav a:hover h2{text-decoration:underline}h2{font-size:1.4rem;margin:0}nav p{margin:0}nav span,footer{font-size:.85rem}footer{padding-top:20px}@media(max-width:700px){.review{padding:36px 24px}nav a{grid-template-columns:1fr;gap:12px}}</style>
+<Base title="Market infrastructure for tokenized assets" description={site.description} theme="home">
+ <div class="home-shell">
+ <header class="home-header"><a class="home-wordmark" href="/" aria-label="Onchain Bureau home">Onchain<br/>Bureau<span aria-hidden="true"></span></a><nav aria-label="Main navigation"><a href="#services">Services</a><a href="#approach">How we work</a><a href="#research">Research</a><a href="#contact" class="nav-contact">Talk to us</a></nav></header>
+ <main id="main">
+ <section class="home-hero" aria-labelledby="home-title"><div><p class="hero-audience">Market infrastructure for tokenized assets</p><h1 id="home-title">Real assets.<br/>Working markets.</h1></div><div class="hero-intro"><p>{site.intro}</p><a class="home-button" href={`mailto:${site.email}`}>{site.contact}</a></div></section>
+ <AssetMarket/>
+ <section class="asset-context" aria-labelledby="context-title"><h2 id="context-title">A token is the beginning.<br/>A market needs more.</h2><div><p>A tokenized asset brings its own conditions: what it represents, how it is valued and who can redeem it. Those conditions need to carry through to the market.</p><p>We connect the design of that market with the work of operating it, from liquidity and execution to distribution.</p></div></section>
+ <section id="services" class="home-services" aria-labelledby="services-title"><div class="section-intro"><h2 id="services-title">The work we do.</h2><p>Start with the part your market needs.<br/>Each service has its own scope.</p></div><div class="service-list">{services.map((service)=><details class="service-row"><summary><span class="service-name">{service.name}</span><span class="service-summary">{service.summary}</span><span class="disclosure" aria-hidden="true"></span></summary><div class="service-expanded"><p class="service-for">{service.for}</p><div><p>{service.detail}</p><a href={`mailto:${site.email}?subject=${encodeURIComponent(service.name+' enquiry')}`}>Discuss {service.name.toLowerCase()}</a></div></div></details>)}</div></section>
+ <section id="approach" class="home-approach" aria-labelledby="approach-title"><div class="approach-intro"><p>How we work</p><h2 id="approach-title">An agreed scope.<br/>A clear way to operate.</h2><p>The engagement starts with the asset and the outcome you need. The mandate defines the work, its limits and how it will be reviewed.</p></div><ol>{steps.map(step=><li><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol></section>
+ <section id="research" class="home-research" aria-labelledby="research-title"><div class="research-intro"><h2 id="research-title">Questions from<br/>the market.</h2><p>Research on the details that shape how tokenized assets trade.</p></div><article><p class="research-topic">Asset structure</p><h3><a href={research.source}>{research.title}</a></h3><p>{research.summary}</p><a class="research-link" href={research.source}>Read the research note</a></article></section>
+ <aside class="platform-note" aria-label="Platform development"><span>In development</span><p>We’re developing an asset-level view of markets, reference prices and liquidity.</p><a href={`mailto:${site.email}?subject=Platform%20enquiry`}>Ask about the platform</a></aside>
+ <section id="contact" class="home-contact" aria-labelledby="contact-title"><div><p>Let’s start with your asset.</p><h2 id="contact-title">What does your<br/>market need?</h2></div><div class="contact-copy"><p>Tell us what the asset represents, where it trades and what you want to improve.</p><a class="contact-email" href={`mailto:${site.email}`}>{site.email}</a><p class="contact-audience">For asset issuers, tokenization platforms<br/>and crypto teams.</p></div></section>
+ </main>
+ <footer class="home-footer"><a class="footer-name" href="#main">Onchain Bureau</a><nav aria-label="Footer navigation"><a href="https://onchainbureau.com/company">Company</a><a href="https://onchainbureau.com/legal">Legal</a><a href="https://t.me/onchainbureau">Telegram</a><a href={`mailto:${site.email}`}>Email</a></nav><p>Market design. Liquidity. Distribution.</p></footer>
+ </div>
+</Base>

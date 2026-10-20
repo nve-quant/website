@@ -19,9 +19,9 @@ Home; Solutions overview; service detail pages for real-world assets, pools and 
 See docs/content-inventory.md for source URLs and treatment. The existing website is first-party source material, not independent verification. Draft copy lives in src/data/site.ts and typed Markdown collections. No invented results, logos, clients, testimonials, screenshots or audit claims. Illustrative diagrams must say so. Dates and statements sourced from the old site must be confirmed before publication.
 
 ## Constraints
-Local-only. Full visual rethink. Three concepts use shared substantive content. No CMS, backend, authentication, analytics, trading integrations or domain changes. Do not install additional design plugins just to accumulate rules. Use frontend-design guidance and document decisions.
+Local-only. Full visual rethink. Market mechanics is selected for the developed homepage; three original concepts remain as development-only references. No CMS, backend, authentication, analytics, trading integrations or domain changes. Do not install additional design plugins just to accumulate rules. Use frontend-design guidance and document decisions.
 
 Avoid default purple gradients, glass cards, emoji, interchangeable three-card sections, decorative terminal UIs, automatic animation, fake dashboard numbers and default icon libraries. Typography must serve the content; a different font alone is not an identity. A justified exception is recorded in DESIGN.md.
 
 ## Completion and next decision
-Foundation includes a working local comparison, documented evidence gaps and validation. The owner selects a concept before final brand tokens and the complete homepage are developed. Success means visitors can explain the business and find contact details, with distinctive but usable presentation.
+Foundation includes a working local comparison, documented evidence gaps and validation. The owner has selected Market mechanics. The next review covers the developed homepage and its draft business copy. Success means visitors can explain the business and find contact details, with distinctive but usable presentation.

@@ -3,7 +3,7 @@
 Read BRIEF.md, DESIGN.md and docs/content-inventory.md before changing content or UI. Apply the frontend-design skill for visual work. Keep changes focused and explain observed problems rather than making arbitrary styling passes.
 
 - This milestone is local-only. Do not publish, change DNS or alter the live site.
-- Preserve all three concepts until the owner chooses a direction. Do not silently turn a favourite into the final site.
+- Market mechanics is selected. Develop the homepage at / using its scoped design system. Preserve the original concepts at /studies as development-only references.
 - Keep shared content in src/data and typed content collections. Concept-specific styles must be scoped to their body class; shared mechanics may be reused.
 - Never invent proof. Preserve source URLs, draft status and illustrative labels. New business claims need explicit sourcing and owner review.
 - Maintain semantic HTML, visible keyboard focus, readable contrast, reduced motion and mobile layouts.

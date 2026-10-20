@@ -49,3 +49,7 @@ Captured from public homepage https://onchainbureau.com/ on 2026-10-20. Link inv
 | https://onchainbureau.com/ | Reference only; does not independently establish company capabilities. |
 | https://t.me/onchainbureau | Retain contact destination; owner to confirm before launch. |
 | mailto:info@onchainbureau.com | Retain contact destination; owner to confirm before launch. |
+
+
+## Developed Market mechanics homepage
+Service copy and engagement steps in src/data/home.ts are editorial drafts adapted from the service descriptions already inventoried. Each service retains its source URL. Business capability claims and the platform development statement require owner confirmation before publication. No quantitative results, audit guarantees or performance claims were added. The emerald research preview retains its existing source, with its unconfirmed date omitted from the developed homepage. Company and Legal links point to the current public pages while local replacements remain outside this milestone.

@@ -5,3 +5,4 @@ assert(!readFileSync('dist/index.html', 'utf8').includes('href="/concepts/'), 'P
 console.log('Production isolation checks passed.');
 
 assert(!existsSync('dist/review'), 'Review tooling must not be built');
+assert(!existsSync('dist/studies'), 'Study index must not be built');

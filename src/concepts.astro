@@ -14,7 +14,7 @@ const research=(await getCollection('research'))[0].data;
 const isResearch=direction.id==='research';
 ---
 <Base title={direction.name} description={site.description} theme={direction.id}>
- <div class="study-bar"><a href="/">All concepts</a><span>{direction.name} · Draft study</span></div>
+ <div class="study-bar"><a href="/studies">All concepts</a><span>{direction.name} · Draft study</span></div>
  <div class="site-wrap">
  <header class="site-header"><a href="#main" class="wordmark" aria-label="Onchain Bureau home">Onchain<br/>Bureau<span class="brand-mark" aria-hidden="true"></span></a><nav aria-label="Main navigation"><a href="#approach">Approach</a><a href="#research">Research</a><a href="#contact">Contact</a></nav></header>
  <main id="main">
@@ -23,6 +23,6 @@ const isResearch=direction.id==='research';
  <section id="approach" class="approach"><div class="section-label"><p>Market design</p>{isResearch && <p class="research-business">{site.description}</p>}</div><div class="approach-copy"><h2>{service.title}</h2><p class="lead">{service.summary}</p>{isResearch && <p>{site.intro}</p>}<a class="text-link" href={`mailto:${site.email}`}>{site.contact}</a></div>{direction.id!=='mechanics' && <div class="approach-diagram"><MarketDiagram/></div>}</section>
  {!isResearch && <section id="research" class="research-section"><div><p>{isResearch?'The question behind the work':'Research'}</p><p class="date">14 October 2026</p></div><div><h2>{research.title}</h2><p>{research.summary}</p><a class="text-link" href={research.source}>Read the research note</a></div></section>}
  <section id="contact" class="contact-section"><h2>What does your<br/>market need?</h2><div><p>{site.audience}</p><a href={`mailto:${site.email}`}>{site.email}</a></div></section>
- </main><footer class="site-footer"><span>Onchain Bureau</span><p>Platform in development.</p><a href="/">Back to concepts</a></footer>
+ </main><footer class="site-footer"><span>Onchain Bureau</span><p>Platform in development.</p><a href="/studies">Back to concepts</a></footer>
  </div>
 </Base>

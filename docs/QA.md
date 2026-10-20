@@ -45,3 +45,13 @@ These text pairs exceed WCAG AA's 4.5:1 normal-text threshold. This is not a cla
 
 ## Next review
 Select a direction. Confirm copy claims and research date, then develop final tokens and the complete homepage. Before production, complete keyboard/screen-reader checks, full browser/network coverage, real-content review, URL redirect mapping and hosting decisions.
+
+
+## Developed homepage — Market mechanics selected
+- Homepage replaces the root comparison index; studies move to development-only /studies. The original concepts remain intact except their return links.
+- Type/content checks and static build pass. Production contains only the homepage, not the review routes.
+- Safari /review measured homepage widths 375, 768 and 1440px: all passed no horizontal overflow, zero broken section targets and loaded fonts.
+- Service disclosure opened by click and closed using Space; accessibility tree reported the expanded and collapsed states. Contextual email subjects were inspected, with no mail sent.
+- Desktop diagram and mobile heading/navigation inspected; screenshots named home-*.png capture the review.
+- No homepage application JavaScript was added. Animation remains absent; shared visible focus and reduced-motion rules are retained.
+- Business copy remains draft. Company/Legal/research links intentionally open existing public pages; their contents have not been migrated.

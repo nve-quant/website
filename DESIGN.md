@@ -1,6 +1,6 @@
 # Design exploration
 
-Status: three local concepts; no final visual identity selected.
+Status: Market mechanics selected by the owner. The developed homepage is at /. Original studies remain at /studies in development.
 
 ## Common principles
 Lead with the business or an asset-specific question. Keep readable measures, familiar navigation and a real contact action. Structural rules communicate grouping. One distinctive idea per concept; no decorative animation. All concepts share service and research content and an explicitly illustrative operating diagram.
@@ -25,3 +25,28 @@ Evaluate clarity of offer, business specificity, evidence credibility, mobile re
 
 ## Next implementation milestone
 After selection, consolidate the chosen styles into semantic CSS variables, resolve draft claims with the owner, develop a complete homepage, then extract only the components required by service and research pages. Review mobile before expanding to the remaining sitemap.
+
+
+## Selected system: Market mechanics
+The owner selected Market mechanics for the homepage on 2026-10-20. The selected palette and Public Sans family are implemented in src/styles/home.css as scoped CSS custom properties:
+- Ink #243f35; ground #f6f7f2; diagram accent #dce9a9; secondary text #526457; divider #b4bfb1; paper #ffffff.
+- Public Sans 400/500, self-hosted. Headings use negative tracking and fluid sizes; body copy stays within readable measures.
+- Outer spacing: clamp(24px, 5vw, 80px). Section spacing: clamp(64px, 8vw, 112px). Responsive changes at 600px and 1000px.
+- Diagram is the principal coloured surface. It connects asset terms/reference prices, market operations and holders. No decorative chart series, inferred performance or live-data claims.
+- Service rows use native details/summary controls. Open states reveal draft descriptions and contextual email links; no JavaScript is needed on the homepage.
+
+Composition reviewed against the brief before implementation:
+```
+Brand                         Services / How we work / Research / Contact
+Specific proposition          Business explanation + email CTA
+Asset terms → market operations → holders (illustrative)
+Why the asset matters          Operational explanation
+Service name                  Summary + expandable detail
+Engagement explanation        Three sequential steps
+Research introduction         Asset-specific note
+Platform status               Enquiry link
+Contact invitation            Email + what to include
+```
+The old three-node diagram was too abstract to explain the work. It has been replaced with concrete reference-price, venue, liquidity and operating-rule labels. Final homepage copy is still subject to business review; selecting the visual direction does not verify capabilities.
+
+Next: owner review of the developed homepage, then build service/research pages from the chosen system. Company and Legal currently link to the existing public site.
