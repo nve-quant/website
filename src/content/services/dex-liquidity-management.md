@@ -6,6 +6,33 @@ source: https://onchainbureau.com/pools
 status: draft
 kind: dex
 audience: For token issuers and crypto teams managing liquidity in decentralized markets.
+fit:
+  - Placing concentrated liquidity for an existing or proposed pool.
+  - Reviewing a position as the market moves away from its selected range.
+  - Allocating treasury-owned liquidity across positions or pools.
+outcomes:
+  - title: Relate the allocation to trading needs
+    text: Discuss how much liquidity the market needs around relevant prices, then weigh range width against the assets and capital available.
+  - title: Make repositioning a considered decision
+    text: Assess price movement, exposure and transaction costs together. A move back into range is not automatically a better economic outcome.
+  - title: Review the full position
+    text: Consider fee income alongside inventory value and operating costs. Choose a comparison benchmark when defining how the engagement will be assessed.
+metrics:
+  - name: Active range & allocation
+    benefit: See where liquidity is positioned relative to the market.
+    definition: Range boundaries, current price, capital allocation and time in range. Treat range status as operational context, not proof of profitability.
+  - name: Trading impact
+    benefit: Assess the liquidity available for trade sizes relevant to your pool.
+    definition: Buy/sell size, pool state, fees and quote methodology. Distinguish a pool-level estimate from routed or realised execution.
+  - name: Inventory composition
+    benefit: Understand how asset exposure changes as the market trades through a position.
+    definition: Token quantities, valuation reference, cash flows and agreed exposure boundaries. Separate price effects from deposits and withdrawals.
+  - name: Fees & repositioning costs
+    benefit: Evaluate income alongside the costs of maintaining positions.
+    definition: Accrued and collected fees, gas, swap costs and service fees, with a clear accounting period and treatment of uncollected income.
+  - name: Outcome against a benchmark
+    benefit: Put position value and income into the context of an agreed alternative.
+    definition: Benchmark, valuation dates and external cash flows. Include costs and distinguish market exposure from the effect of management.
 operations:
   - title: Range selection
     text: Define where to place liquidity around the market. Range width is considered alongside price movement, the asset pair and the inventory available.

@@ -92,3 +92,10 @@ The approved service-mandate model uses client capital and agreed fees. Exact pe
 | `/platform` | Preserve original source. Remove the ambiguous homepage “in development” promotion pending clarification of its relationship to the live client dashboard. |
 
 Copy boundaries: service scope, FAQs, responsibility allocations and operating considerations are editorial explanations based on the approved plan; client-specific mechanics are agreed during scoping. No fabricated dashboard imagery or login URL. Actual dashboard visuals, Company biographies, new research articles and further migration mapping are later work.
+
+## Conversion-content drafts, 20 October 2026
+Owner authorised local implementation of the adversarial conversion review, with inclusion decisions later. This is editorial authorisation, not confirmation of new business facts. Service collection fields `fit`, `outcomes` and `metrics` contain proposed scoping situations, intended benefits and measurement definitions. They do not claim achieved results or availability of every metric in the dashboard.
+
+`src/data/commercial.ts` records client-problem explanations and commercial/control questions to settle. It does not assert fee amounts, minimum capital, income allocation, permissions, automation or incident coverage. `/company` now exists locally and is linked from the homepage and footer; its operating-model copy uses prior owner confirmations. Public company-page retrieval was unavailable during this pass, so no new people, credentials or registration facts were imported.
+
+Evidence still required: named biographies and firm history; permitted case study/reference; confirmed venue and protocol coverage; real dashboard media; KPI availability/methodology; latency evidence; commercial details and exact controls. Development-only `ReviewNote` placements and docs/commercial-evidence.md track these inputs. They do not ship in the static build. Existing source URLs remain unchanged.

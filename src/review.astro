@@ -2,12 +2,12 @@
 import Base from './layouts/Base.astro';
 import {directions} from './data/site';
 ---
-<Base title="Responsive review"><main id="main"><a href="/studies">All concepts</a><h1>Responsive review</h1><p>Local review tool. Each preview uses the exact viewport width shown.</p><nav aria-label="Select preview">{[{id:'home',name:'Homepage'},{id:'market-making',name:'CEX service'},{id:'dex-liquidity-management',name:'DEX service'},{id:'work',name:'How we work'},...directions].map(d=><div><strong>{d.name}</strong>{[375,768,1440].map(w=><button data-concept={d.id} data-width={w}>{d.name} {w}px</button>)}</div>)}</nav><nav id="section-review" aria-label="Review page sections"></nav><p id="result" aria-live="polite">Choose a preview.</p><div class="stage"><iframe title="Concept preview" width="375" height="2000"></iframe></div></main></Base>
+<Base title="Responsive review"><main id="main"><a href="/studies">All concepts</a><h1>Responsive review</h1><p>Local review tool. Each preview uses the exact viewport width shown.</p><nav aria-label="Select preview">{[{id:'home',name:'Homepage'},{id:'market-making',name:'CEX service'},{id:'dex-liquidity-management',name:'DEX service'},{id:'work',name:'How we work'},{id:'company',name:'Company'},...directions].map(d=><div><strong>{d.name}</strong>{[375,768,1440].map(w=><button data-concept={d.id} data-width={w}>{d.name} {w}px</button>)}</div>)}</nav><nav id="section-review" aria-label="Review page sections"></nav><p id="result" aria-live="polite">Choose a preview.</p><div class="stage"><iframe title="Concept preview" width="375" height="2000"></iframe></div></main></Base>
 <script>
 const frame=document.querySelector('iframe')!;
 const result=document.querySelector('#result')!;
 document.querySelectorAll<HTMLButtonElement>('button[data-concept]').forEach(button=>button.addEventListener('click',()=>{
- frame.width=button.dataset.width!;const page=button.dataset.concept!;frame.src=page === 'home' ? '/' : ['market-making','dex-liquidity-management','work'].includes(page)?`/${page}`:`/concepts/${page}`;result.textContent='Loading preview…';
+ frame.width=button.dataset.width!;const page=button.dataset.concept!;frame.src=page === 'home' ? '/' : ['market-making','dex-liquidity-management','work','company'].includes(page)?`/${page}`:`/concepts/${page}`;result.textContent='Loading preview…';
 }));
 frame.addEventListener('load',async()=>{
  const doc=frame.contentDocument;if(!doc||!frame.getAttribute('src'))return;

@@ -1,0 +1,5 @@
+---
+interface Props {title:string;items:string[];}
+const {title,items}=Astro.props;
+---
+{import.meta.env.DEV && <aside class="editorial-review"><details><summary>Editorial review: {title}</summary><p>Local review note. Evidence is still needed before this can become a public claim.</p><ul>{items.map(item=><li>{item}</li>)}</ul></details></aside>}

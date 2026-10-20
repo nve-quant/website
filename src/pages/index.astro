@@ -1,6 +1,7 @@
 ---
 import Marketing from '../layouts/Marketing.astro';
-import Mandate from '../components/Mandate.astro';
+import ClientNeeds from '../components/ClientNeeds.astro';
+import ReviewNote from '../components/ReviewNote.astro';
 import Access from '../components/Access.astro';
 import Reporting from '../components/Reporting.astro';
 import EngagementContact from '../components/EngagementContact.astro';
@@ -15,10 +16,13 @@ const research=(await getCollection('research'))[0].data;
 <Marketing title={homepage.title} description={homepage.description}>
  <section class="home-hero" aria-labelledby="home-title"><div><p class="hero-audience">Market making as a service</p><h1 id="home-title">Market making.<br/>On CEX and DEX.</h1></div><div class="hero-intro"><p>{homepage.intro}</p><a class="home-button" href={`mailto:${site.email}`}>{site.contact}</a></div></section>
  <LiquidityServices/>
- <Mandate/>
+ <ClientNeeds/>
+ <section class="home-scorecard editorial-section" aria-labelledby="scorecard-title"><div><p class="section-kicker">Measurement before promises</p><h2 id="scorecard-title">Judge the work<br/>by your market.</h2></div><div><p>For an order book, discuss spread, executable depth and quote availability. For a liquidity pool, consider active allocation, trading impact and the economics of the position.</p><p>Agree the measures, then compare observations with targets. Market conditions, capital and operating costs belong in the same review.</p><div class="inline-links"><a href="/market-making#measurement">CEX measurement framework</a><a href="/dex-liquidity-management#measurement">DEX measurement framework</a></div></div></section>
+ <ReviewNote title="Place verified evidence near the offer" items={['Add one permitted client case: problem, capital and market context, work performed, observed results and measurement period.','Add a concise team experience statement backed by named biographies. Do not substitute generated KPIs, testimonials or client logos.']}/>
  <Access/>
  <Reporting/>
- <section id="approach" class="home-approach" aria-labelledby="approach-title"><div class="approach-intro"><p>How we work</p><h2 id="approach-title">An agreed scope.<br/>A clear way to operate.</h2><p>The mandate defines the work, its limits and how it will be reviewed. Four steps connect the initial market review to ongoing operation.</p><a href="/work">Explore how we work</a></div><ol>{engagementSteps.map(step=><li><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol></section>
+ <ReviewNote title="Show the existing dashboard" items={['Provide a real, sanitised screenshot or recording annotated around market activity, target comparison and exceptions.','Confirm history, refresh frequency, export scope and CEX/DEX coverage. The dashboard is already operational; only its public evidence is missing.']}/>
+ <section id="approach" class="home-approach" aria-labelledby="approach-title"><div class="approach-intro"><p>How we work</p><h2 id="approach-title">An agreed scope.<br/>A clear way to operate.</h2><p>The mandate defines the work, its limits and how it will be reviewed. Four steps connect the initial market review to ongoing operation.</p><div class="inline-links"><a href="/work">Explore how we work</a><a href="/company">About Onchain Bureau</a></div></div><ol>{engagementSteps.map(step=><li><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol></section>
  <section class="home-services" aria-labelledby="services-title"><div class="section-intro"><h2 id="services-title">Around the mandate.</h2><p>Additional services for your market.<br/>Scoped to the work you need.</p></div><div class="service-list">{services.map((service)=><details class="service-row"><summary><span class="service-name">{service.name}</span><span class="service-summary">{service.summary}</span><span class="disclosure" aria-hidden="true"></span></summary><div class="service-expanded"><p class="service-for">{service.for}</p><div><p>{service.detail}</p><a href={`mailto:${site.email}?subject=${encodeURIComponent(service.name+' enquiry')}`}>Discuss {service.name.toLowerCase()}</a></div></div></details>)}</div></section>
  <div class="home-asset-studies"><AssetMarket/></div>
  <section id="research" class="home-research" aria-labelledby="research-title"><div class="research-intro"><h2 id="research-title">Questions from<br/>the market.</h2><p>Research on the details that shape how tokenized assets trade.</p></div><article><p class="research-topic">Asset structure</p><h3><a href={research.source}>{research.title}</a></h3><p>{research.summary}</p><a class="research-link" href={research.source}>Read the research note</a></article></section>

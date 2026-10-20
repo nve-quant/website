@@ -12,6 +12,7 @@ const pages=readdirSync('dist',{recursive:true}).filter(path=>path.endsWith('.ht
 const ids=new Map(pages.map(path=>[path,new Set([...readFileSync(`dist/${path}`,'utf8').matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]))]));
 for(const page of pages){
  const html=readFileSync(`dist/${page}`,'utf8');
+ assert(!html.includes('Editorial review:'),`${page}: editorial review notes must remain development-only`);
  assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1,`${page}: one h1 required`);
  assert(html.includes('noindex,nofollow'),`${page}: local review must remain noindex`);
  const base=new URL(page==='index.html'?'/':`/${page.replace(/index\.html$/,'')}`,'https://local.invalid');
@@ -26,5 +27,5 @@ for(const page of pages){
   if(url.hash&&ids.has(target))assert(ids.get(target).has(decodeURIComponent(url.hash.slice(1))),`${page}: missing anchor ${value}`);
  }
 }
-for(const route of ['market-making','dex-liquidity-management','work'])assert(ids.has(`${route}/index.html`),`Missing service route: ${route}`);
+for(const route of ['market-making','dex-liquidity-management','work','company'])assert(ids.has(`${route}/index.html`),`Missing service route: ${route}`);
 console.log(`Static page checks passed: ${pages.length} pages, local links/assets, anchors, h1 and noindex.`);

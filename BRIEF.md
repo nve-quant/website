@@ -33,3 +33,8 @@ The service is fully non-custodial: API-key access for client CEX accounts, and 
 An existing live client dashboard provides aggregate and exchange-specific candlestick charts, order books, active and filled orders, accounting, filled-order CSV downloads, and liquidity/microstructure metrics for comparison with agreed SLAs. These capabilities are owner-confirmed; screenshots and implementation details have not been independently reviewed. Do not call this dashboard “in development.” Remove the ambiguous future-platform homepage promotion while preserving its source material for clarification.
 
 This milestone adds CEX Market Making (`/market-making`), DEX Liquidity Management (`/dex-liquidity-management`) and How We Work (`/work`) alongside the expanded homepage. Company biographies, real dashboard screenshots, a dedicated tokenized-assets page, research migration and a standalone contact page follow later. Remain local-only.
+
+## Conversion-content review, 20 October 2026
+Owner requested implementing the conversion audit locally before deciding what to retain. Added problem-to-objective explanations, service-fit guidance, proposed KPI frameworks, commercial/access questions, an enquiry template and a local Company page. The homepage mandate document is replaced by client needs and measurement; detailed mandate content remains on the service pages.
+
+This request does not confirm new facts about people, results, venue support, fees or controls. Development-only editorial notes identify the missing evidence in context and are excluded from static output. See docs/commercial-evidence.md for exact inputs. Company currently describes only the confirmed operating model; biographies and substantiated track record remain pending.

@@ -1,0 +1,14 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import ReviewNote from './ReviewNote.astro';
+interface Props {service:CollectionEntry<'services'>;}
+const {service}=Astro.props;
+const {kind,metrics}=service.data;
+---
+<section id="measurement" class="measurement-section" aria-labelledby="measurement-title">
+ <div class="section-intro"><h2 id="measurement-title">Define what<br/>good looks like.</h2><p>Measures to agree for your market.<br/>Targets and results remain separate.</p></div>
+ <p class="measurement-intro">Choose measures that answer your market’s needs. Agree each definition, data source, review period and target. This is a proposed framework; reporting coverage is confirmed for the engagement.</p>
+ <div class="metric-register">{metrics?.map(metric=><article><div><h3>{metric.name}</h3><p>{metric.benefit}</p></div><p><span>Define before measuring</span>{metric.definition}</p></article>)}</div>
+ <p class="operating-note">{kind==='cex'?'A healthy server does not prove a usable quote was available. Separate our orders from total venue liquidity, and examine each market as well as the aggregate.':'Fees and time in range are only part of the picture. Review changes in asset exposure and position value alongside costs, using an explicit comparison benchmark.'}</p>
+ <ReviewNote title="Confirm the scorecard" items={['Confirm which measures are available today for this service, how they are calculated and how much history is retained.','Provide one real reporting period with targets, observations, exceptions and source data. No invented KPI values will be published.']}/>
+</section>

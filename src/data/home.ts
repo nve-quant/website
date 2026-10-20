@@ -10,7 +10,7 @@ export const services = [
 export const homepage = {
  title: 'Market making on CEX and DEX',
  description: 'Market making as a service. Low-latency liquidity management on centralized exchanges and concentrated-liquidity management on decentralized exchanges.',
- intro: 'We manage liquidity for token issuers and crypto teams. Low-latency market making on centralized exchanges. Active concentrated-liquidity management on DEXs.',
+ intro: 'Give buyers and sellers a market they can trade. We manage CEX quotes and DEX liquidity positions around your trading needs, capital and operating limits, with non-custodial access and client reporting.',
 };
 export const coreServices = [
  {

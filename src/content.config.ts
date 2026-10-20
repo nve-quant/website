@@ -8,6 +8,9 @@ export const collections = {
   audience:z.string().optional(),
   headline:z.string().optional(),
   operations:z.array(z.object({title:z.string(),text:z.string()})).optional(),
+  fit:z.array(z.string()).optional(),
+  outcomes:z.array(z.object({title:z.string(),text:z.string()})).optional(),
+  metrics:z.array(z.object({name:z.string(),benefit:z.string(),definition:z.string()})).optional(),
   access:z.string().optional(),
   considerations:z.string().optional(),
   faqs:z.array(z.object({question:z.string(),answer:z.string()})).optional()

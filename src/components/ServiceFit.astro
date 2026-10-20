@@ -1,0 +1,9 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import ReviewNote from './ReviewNote.astro';
+interface Props {service:CollectionEntry<'services'>;}
+const {service}=Astro.props;
+const {kind,fit,outcomes}=service.data;
+---
+<section class="service-fit editorial-section" aria-labelledby="fit-title"><div><p class="section-kicker">Is this relevant to your market?</p><h2 id="fit-title">{kind==='cex'?'A listing to support. A book to improve.':'A pool to manage. An allocation to review.'}</h2><ul class="fit-list">{fit?.map(item=><li>{item}</li>)}</ul></div><div class="outcome-list">{outcomes?.map(item=><article><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></section>
+<section class="coverage-section editorial-section" aria-labelledby="coverage-title"><div><h2 id="coverage-title">Start with your<br/>{kind==='cex'?'venues and pairs.':'chain and pools.'}</h2></div><div><p>{kind==='cex'?'Share the exchanges and trading pairs already in use or planned for listing. Coverage, account access and available inventory are inputs to the initial scope review.':'Share the chain, DEX, pool address, asset pair and current position. The pool type, available permissions and capital allocation are inputs to the initial scope review.'}</p><p>Confirm support for your exact setup before committing capital. An integration that needs assessment is different from one already in operation.</p><a href="#contact">Discuss your setup</a><ReviewNote title="Add verified coverage" items={[kind==='cex'?'Supply the operational exchange/pair coverage, distinguishing current integrations from past experience and integrations needing work.':'Supply supported chains, DEXs and pool versions, distinguishing current operation from proposed integrations.','Confirm practical minimum capital, excluded setups and any eligibility restrictions. Exchange logos must not imply a partnership.']}/></div></section>
