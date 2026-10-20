@@ -24,5 +24,7 @@ export function brickSurface(){
     for(let fleck=0;fleck<14;fleck++){ctx.fillStyle='rgba(42,30,22,.09)';ctx.fillRect(x+4+(fleck*17+row*3)%62,y+4+(fleck*11)%22,3,1);}
   }
   const map=new THREE.CanvasTexture(canvas);map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=8;
-  const relief=new THREE.CanvasTexture(height);relief.anisotropy=8;return {map,bumpMap:relief,bumpScale:.006};
+  const relief=new THREE.CanvasTexture(height);relief.anisotropy=8;
+  for(const texture of [map,relief]){texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(6,8);}
+  return {map,bumpMap:relief,bumpScale:.0015};
 }
