@@ -5,7 +5,7 @@ import {createEmerald} from './models/emerald';
 import type {MarketModelId} from '../data/market-model';
 
 /** Original procedural geometry; no remote models, textures or market data. */
-export function createMarketScene(host: HTMLElement, onContextLost: () => void) {
+export function createMarketScene(host: HTMLElement, onContextLost: () => void, onRotationChange: (spinning: boolean) => void) {
   const renderer = new THREE.WebGLRenderer({alpha:true, antialias:true, powerPreference:'low-power'});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
   renderer.setClearColor(0x000000, 0);
@@ -73,18 +73,22 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void) 
 
   let active:MarketModelId='gold';
   let rotation=-.2, targetRotation=-.2, tilt=0, targetTilt=0;
-  let scale=1, spinning=false, visible=true, disposed=false, contextLost=false;
+  let scale=1, spinning=true, visible=true, disposed=false, contextLost=false;
+  let drag: {id:number;startX:number;startY:number;x:number;y:number;moved:boolean}|undefined;
+  let pointerActivation:boolean|undefined;
   let frame:number|undefined, lastTime=0;
   function schedule(){if(frame===undefined&&visible&&!disposed&&!contextLost)frame=requestAnimationFrame(draw);}
   function draw(time:number){
     frame=undefined;
+    // The slow turn needs only 30 rendered frames/s; direct manipulation uses the display rate.
+    if(spinning&&!drag&&time-lastTime<1000/30){schedule();return;}
     const dt=Math.min((time-lastTime)/1000 || .016,.05);lastTime=time;
-    if(spinning)targetRotation+=dt*.3;
+    if(spinning&&!drag)targetRotation+=dt*.24;
     const ease=1-Math.exp(-dt*9);
     rotation+=(targetRotation-rotation)*ease;tilt+=(targetTilt-tilt)*ease;scale+=(1-scale)*ease;
     rig.rotation.y=rotation;rig.rotation.x=tilt;models[active].scale.setScalar(scale);
     renderer.render(scene,camera);
-    if(spinning||Math.abs(targetRotation-rotation)>.001||Math.abs(targetTilt-tilt)>.001||Math.abs(1-scale)>.001)schedule();
+    if((spinning&&!drag)||Math.abs(targetRotation-rotation)>.001||Math.abs(targetTilt-tilt)>.001||Math.abs(1-scale)>.001)schedule();
   }
   function resize(){
     const {width,height}=host.getBoundingClientRect();
@@ -94,24 +98,109 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void) 
     camera.updateProjectionMatrix();schedule();
   }
   const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(host);
-  function pointer(event:PointerEvent){
-    if(event.pointerType!=='mouse')return;
+  const raycaster=new THREE.Raycaster();
+  const pointerPosition=new THREE.Vector2();
+  function overObject(event:PointerEvent){
     const bounds=host.getBoundingClientRect();
-    targetTilt=((event.clientY-bounds.top)/bounds.height-.5)*.12;schedule();
+    pointerPosition.set((event.clientX-bounds.left)/bounds.width*2-1,1-(event.clientY-bounds.top)/bounds.height*2);
+    raycaster.setFromCamera(pointerPosition,camera);
+    return raycaster.intersectObject(models[active],true).some(hit=>hit.object instanceof THREE.Mesh);
   }
-  function leave(){targetTilt=0;schedule();}
-  function lost(event:Event){event.preventDefault();contextLost=true;spinning=false;if(frame!==undefined)cancelAnimationFrame(frame);frame=undefined;onContextLost();}
-  host.addEventListener('pointermove',pointer);host.addEventListener('pointerleave',leave);
+  function endDrag(){
+    if(!drag)return;
+    const id=drag.id;
+    drag=undefined;
+    delete host.dataset.dragging;
+    if(host.hasPointerCapture(id))host.releasePointerCapture(id);
+    schedule();
+  }
+  function toggleRotation(){
+    spinning=!spinning;
+    onRotationChange(spinning);
+    schedule();
+  }
+  function pointerDown(event:PointerEvent){
+    if(!visible||contextLost||drag||!event.isPrimary||event.button!==0)return;
+    pointerActivation=false;
+    if(!overObject(event))return;
+    event.preventDefault();
+    drag={id:event.pointerId,startX:event.clientX,startY:event.clientY,x:event.clientX,y:event.clientY,moved:false};
+    host.setPointerCapture(event.pointerId);
+    host.dataset.dragging='true';
+    host.focus({preventScroll:true});
+    // Stop any residual automatic movement at the point where the object is picked up.
+    targetRotation=rotation;targetTilt=tilt;
+  }
+  function pointerMove(event:PointerEvent){
+    if(!visible||contextLost)return;
+    if(!drag){
+      host.dataset.hovered=String(overObject(event));
+      return;
+    }
+    if(event.pointerId!==drag.id)return;
+    if(event.pointerType==='mouse'&&!(event.buttons&1))return;
+    if(Math.hypot(event.clientX-drag.startX,event.clientY-drag.startY)>4)drag.moved=true;
+    if(drag.moved){
+      targetRotation+=(event.clientX-drag.x)*.009;
+      targetTilt=THREE.MathUtils.clamp(targetTilt+(event.clientY-drag.y)*.004,-.12,.25);
+      schedule();
+    }
+    drag.x=event.clientX;drag.y=event.clientY;
+  }
+  function pointerUp(event:PointerEvent){
+    if(event.pointerId!==drag?.id)return;
+    pointerActivation=!drag.moved;
+    endDrag();
+  }
+  function pointerCancel(event:PointerEvent){
+    if(event.pointerId===drag?.id){pointerActivation=undefined;endDrag();}
+  }
+  function leave(){delete host.dataset.hovered;}
+  function keyboard(event:KeyboardEvent){
+    if(!visible||contextLost)return;
+    pointerActivation=undefined;
+    if(event.key===' '||event.key==='Enter'){
+      event.preventDefault();
+      if(!event.repeat)toggleRotation();
+    }else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)){
+      event.preventDefault();
+      if(spinning){spinning=false;onRotationChange(false);}
+      if(event.key==='ArrowLeft')targetRotation-=Math.PI/12;
+      if(event.key==='ArrowRight')targetRotation+=Math.PI/12;
+      if(event.key==='ArrowUp')targetTilt=Math.max(-.12,targetTilt-.06);
+      if(event.key==='ArrowDown')targetTilt=Math.min(.25,targetTilt+.06);
+      schedule();
+    }
+  }
+  function accessibleClick(event:MouseEvent){
+    // Handle a physical click once, including Safari's detail=0 compatibility clicks.
+    // Assistive technology can also activate the button without a pointer sequence.
+    const activate=pointerActivation??(event.detail===0);
+    pointerActivation=undefined;
+    if(activate&&visible&&!contextLost)toggleRotation();
+  }
+  function lost(event:Event){
+    event.preventDefault();contextLost=true;endDrag();
+    if(frame!==undefined)cancelAnimationFrame(frame);frame=undefined;onContextLost();
+  }
+  const listeners=new AbortController();
+  const signal=listeners.signal;
+  host.addEventListener('pointerdown',pointerDown,{signal});
+  host.addEventListener('pointermove',pointerMove,{signal});
+  host.addEventListener('pointerup',pointerUp,{signal});
+  host.addEventListener('pointercancel',pointerCancel,{signal});
+  host.addEventListener('lostpointercapture',pointerCancel,{signal});
+  host.addEventListener('pointerleave',leave,{signal});
+  host.addEventListener('keydown',keyboard,{signal});
+  host.addEventListener('click',accessibleClick,{signal});
   canvas.addEventListener('webglcontextlost',lost);
   resize();
   return {
-    select(id:MarketModelId){active=id;Object.entries(models).forEach(([key,model])=>{model.visible=key===id;model.scale.setScalar(1);});scale=.86;targetRotation=-.2;spinning=false;schedule();},
-    rotate(delta:number){targetRotation+=delta;schedule();},
-    spin(value:boolean){spinning=value;schedule();},
-    visible(value:boolean){visible=value;if(!value&&frame!==undefined){cancelAnimationFrame(frame);frame=undefined;}if(value){lastTime=performance.now();schedule();}},
+    select(id:MarketModelId){endDrag();active=id;Object.entries(models).forEach(([key,model])=>{model.visible=key===id;model.scale.setScalar(1);});scale=.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();},
+    visible(value:boolean){visible=value;if(!value){endDrag();leave();if(frame!==undefined){cancelAnimationFrame(frame);frame=undefined;}}if(value){lastTime=performance.now();schedule();}},
     dispose(){
-      disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);resizeObserver.disconnect();
-      host.removeEventListener('pointermove',pointer);host.removeEventListener('pointerleave',leave);canvas.removeEventListener('webglcontextlost',lost);
+      disposed=true;endDrag();if(frame!==undefined)cancelAnimationFrame(frame);resizeObserver.disconnect();
+      listeners.abort();canvas.removeEventListener('webglcontextlost',lost);
       const geometries=new Set<THREE.BufferGeometry>();const materials=new Set<THREE.Material>();const textures=new Set<THREE.Texture>();
       scene.traverse(object=>{if(object instanceof THREE.Mesh||object instanceof THREE.Line){geometries.add(object.geometry);(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>materials.add(m));}});
       geometries.forEach(g=>g.dispose());materials.forEach(m=>{Object.values(m).forEach(value=>{if(value instanceof THREE.Texture)textures.add(value);});m.dispose();});textures.forEach(t=>t.dispose());key.shadow.dispose();environment.dispose();renderer.dispose();canvas.remove();

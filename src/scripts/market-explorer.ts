@@ -3,8 +3,7 @@ import type {createMarketScene} from './market-scene';
 
 export function initMarketExplorer(root: HTMLElement) {
   const host = root.querySelector<HTMLElement>('[data-model-canvas]')!;
-  const controls = root.querySelector<HTMLElement>('.model-controls')!;
-  const spin = root.querySelector<HTMLButtonElement>('[data-spin]')!;
+  const hint = root.querySelector<HTMLElement>('[data-model-hint]')!;
   const status = root.querySelector<HTMLElement>('[data-model-status]')!;
   const desktop = matchMedia('(min-width: 701px)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -14,22 +13,25 @@ export function initMarketExplorer(root: HTMLElement) {
   let intersecting = false;
   let destroyed = false;
   let selection: MarketModelId = 'gold';
-  let spinning = false;
   const listeners = new AbortController();
   const signal = listeners.signal;
 
-  function stopSpin() {
-    spinning = false;
-    scene?.spin(false);
-    spin.setAttribute('aria-pressed', 'false');
-    spin.textContent = 'Rotate model';
+  function setReady(ready: boolean) {
+    if(!ready&&document.activeElement===host){
+      root.querySelector<HTMLInputElement>('input[name="market-asset"]:checked')?.focus({preventScroll:true});
+    }
+    root.dataset.renderer = ready ? 'ready' : 'fallback';
+    host.tabIndex = ready ? 0 : -1;
+    host.setAttribute('aria-hidden', String(!ready));
+  }
+  function rotationChanged(spinning: boolean) {
+    host.setAttribute('aria-pressed', String(!spinning));
+    hint.textContent = `Drag to rotate. Click to ${spinning ? 'pause' : 'resume'}.`;
   }
   async function update() {
     const enabled = desktop.matches && !reduced.matches && !failed;
     scene?.visible(enabled && intersecting && !document.hidden);
-    controls.hidden = !enabled || !scene;
-    root.dataset.renderer = enabled && scene ? 'ready' : 'fallback';
-    if (!enabled) stopSpin();
+    setReady(enabled && !!scene);
     if (!enabled || !intersecting || document.hidden || scene || loading || destroyed) return;
     loading = true;
     try {
@@ -37,19 +39,15 @@ export function initMarketExplorer(root: HTMLElement) {
       if (destroyed || !desktop.matches || reduced.matches || document.hidden || !intersecting) return;
       scene = createMarketScene(host, () => {
         failed = true;
-        root.dataset.renderer = 'fallback';
-        controls.hidden = true;
-        stopSpin();
-      });
+        setReady(false);
+      }, rotationChanged);
       scene.select(selection);
       scene.visible(intersecting && !document.hidden);
-      controls.hidden = false;
-      root.dataset.renderer = 'ready';
+      setReady(true);
     } catch {
       failed = true;
       // The accessible, selectable SVG scene is already present if WebGL fails.
-      root.dataset.renderer = 'fallback';
-      controls.hidden = true;
+      setReady(false);
     } finally { loading = false; }
   }
 
@@ -57,20 +55,10 @@ export function initMarketExplorer(root: HTMLElement) {
     input.addEventListener('change', () => {
       if (!input.checked) return;
       selection = input.value as MarketModelId;
-      stopSpin();
       scene?.select(selection);
       status.textContent = `${input.nextElementSibling?.textContent}: market explanation updated.`;
     }, {signal});
   });
-  root.querySelectorAll<HTMLButtonElement>('[data-rotate]').forEach(button => {
-    button.addEventListener('click', () => {stopSpin(); scene?.rotate(Number(button.dataset.rotate) * Math.PI / 5);}, {signal});
-  });
-  spin.addEventListener('click', () => {
-    spinning = !spinning;
-    spin.setAttribute('aria-pressed', String(spinning));
-    spin.textContent = spinning ? 'Pause rotation' : 'Rotate model';
-    scene?.spin(spinning);
-  }, {signal});
   desktop.addEventListener('change', update, {signal});
   reduced.addEventListener('change', update, {signal});
   document.addEventListener('visibilitychange', update, {signal});

@@ -55,11 +55,13 @@ Next: owner review of the developed homepage, then build service/research pages 
 ## Interactive asset explorer
 The owner requested more dynamic and 3D treatment after reviewing the static homepage. Replace its static diagram with three selectable illustrative asset studies: gold ingots, portfolio-share layers and a faceted unique asset. The selected study changes reference-price, liquidity and redemption explanations together. This gives the motion a business-specific purpose.
 
-Use original procedural Three.js geometry with a pale green surface (#e6ebd9), physical lighting and restrained model transitions. Rotation is opt-in and pausable; pointer movement produces a small tilt. Render on demand and pause offscreen/in background. Small screens (700px and below), reduced-motion preferences and WebGL failures retain original SVG illustrations and the same selectable content. CSS handles selection independently of JavaScript. Brief entrance and disclosure transitions respect reduced motion.
+Use original procedural Three.js geometry with a pale green surface (#e6ebd9), physical lighting and restrained model transitions. The selected asset rotates automatically. Drag the object directly to turn and tilt it; click the object or press Space/Enter while the scene has focus to pause or resume. Arrow keys turn or tilt the object and pause automatic rotation. Keep the scene focusable with visible focus and interaction instructions. Preserve the visitor's pause choice when switching assets or returning to the scene.
+
+Cap automatic rotation at 30 rendered frames per second. Direct dragging can use the display rate while movement settles; a stationary held drag does not keep rendering. Stop rendering outside the model's viewport observation area or while the document is hidden. Small screens (700px and below), reduced-motion preferences and WebGL failures retain original SVG illustrations and the same selectable content, without an inactive scene tab stop. CSS handles selection independently of JavaScript. Brief entrance and disclosure transitions respect reduced motion.
 
 Next: review this interaction and approve business copy before expanding service and research pages. The live site remains untouched.
 
-### Asset detail refinement
+### Asset detail refinement (earlier iteration)
 Refined the three models with tighter gold bevels and a local 256×512 stamp texture, metallic fund layers with perimeter inlays, and an original 112-triangle stepped emerald cut. Reduced fill light/exposure to preserve material contrast. Reused ingot and share geometry. Kept the 1.75 pixel-ratio cap, 1024px shadow map, lazy loading and on-demand rendering; no bloom, transmission pass, downloaded textures or new dependencies.
 
 ### Bullion / studio rendering pass
@@ -67,4 +69,4 @@ The owner rejected the incremental detail pass as still too basic. Rebuilt the a
 
 Bullion silhouette/reference context: [Argor-Heraeus cast bar catalogue](https://www.argor-heraeus.com/en/products-and-services/products/cast-and-minted-bars/1000g-au-cast-classic-999.9/). No manufacturer logos, images or model files are reused.
 
-Performance: one visible asset group, original procedural geometry and generated maps, no external asset fetches. Reflection environment is generated once. Retain DPR cap 1.75 and one 1024² shadow map; the gemstone uses one half-resolution transmission pass. Rendering stops when settled/offscreen, and initialization waits for a visible document and model area. Dispose shared maps once on teardown.
+Performance: one visible asset group, original procedural geometry and generated maps, no external asset fetches. Reflection environment is generated once. Retain DPR cap 1.75 and one 1024² shadow map; the gemstone uses one half-resolution transmission pass. Automatic rotation uses a 30fps cap. Rendering stops once paused movement settles, outside the model's viewport observation area or while the document is hidden. Initialization waits for a visible document and model area. Dispose shared maps once on teardown.
