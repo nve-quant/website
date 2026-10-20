@@ -1,0 +1,62 @@
+---
+import {bookGeometry, rangeGeometry} from '../scripts/liquidity-geometry';
+import '../styles/liquidity-diagrams.css';
+interface Props { kind: 'cex' | 'dex' }
+const {kind} = Astro.props;
+const book = bookGeometry(0);
+const range = rangeGeometry(0);
+const name = kind === 'cex' ? 'order book' : 'liquidity range';
+---
+<figure class="market-diagram" data-liquidity-animation={kind}>
+  <div class="diagram-topline">
+    <span>{kind === 'cex' ? 'Order-book depth' : 'Concentrated liquidity'}</span>
+    <span class="diagram-phase" data-phase>{kind === 'cex' ? 'Two-sided quoting' : 'Positioned around price'}</span>
+  </div>
+  <div class="diagram-legend" aria-hidden="true">
+    {kind === 'cex' ? <><span><i class="legend-bid"></i>Bids</span><span><i class="legend-ask"></i>Asks</span></> : <><span><i class="legend-base"></i>Pool liquidity</span><span><i class="legend-bid"></i>Managed position</span></>}
+  </div>
+  <svg class="market-chart" viewBox="0 0 540 292" role="img" aria-labelledby={`${kind}-chart-title ${kind}-chart-description`}>
+    <title id={`${kind}-chart-title`}>{kind === 'cex' ? 'Illustrative cumulative order-book depth' : 'Illustrative liquidity range rebalancing'}</title>
+    <desc id={`${kind}-chart-description`}>{kind === 'cex' ? 'Cumulative bid and ask depth changes around a central spread. The horizontal axis represents price; the vertical axis represents cumulative size. This is a generated illustration, not market data.' : 'A price marker moves across liquidity allocated to price ranges. After the price moves, a managed position is rebalanced around it. This sequence is illustrative, not a trading strategy or live data.'}</desc>
+    <g class="chart-grid">{[76,120,164,208].map(y=><path d={`M32 ${y}H508`}/>)}{[32,111,191,270,349,429,508].map(x=><path d={`M${x} 54V236`}/>)}</g>
+    <text class="chart-axis-label" x="32" y="34">{kind === 'cex' ? 'Cumulative size' : 'Liquidity'}</text>
+    {kind === 'cex' ? <>
+      <path class="book-fill book-bid-fill" data-bid-fill d={book.bidFill}/>
+      <path class="book-fill book-ask-fill" data-ask-fill d={book.askFill}/>
+      <path class="book-line book-bid-line" data-bid-line d={book.bidLine}/>
+      <path class="book-line book-ask-line" data-ask-line d={book.askLine}/>
+      <g data-book-mid transform={`translate(${book.mid} 0)`}>
+        <path class="chart-reference" d="M0 52V237"/>
+        <path class="spread-bracket" d="M-12 244V251H12V244"/>
+        <rect class="chart-tag" x="-35" y="20" width="70" height="26" rx="3"/>
+        <text class="chart-tag-text" y="38" text-anchor="middle">Spread</text>
+      </g>
+    </> : <>
+      <path class="pool-bars" d={range.background}/>
+      <rect class="position-window" data-range-window x={range.left} y="55" width={range.width} height="181"/>
+      <path class="position-bars" data-position-bars d={range.bars}/>
+      <path class="position-outline" data-position-outline d={range.outline}/>
+      <g data-range-bracket transform={`translate(${range.center} 0)`}>
+        <path class="spread-bracket" d="M-86 244V251H86V244"/>
+      </g>
+      <g data-price-marker transform={`translate(${range.price} 0)`}>
+        <path class="market-price-line" d="M0 48V236"/>
+        <circle class="market-price-dot" cy="72" r="4"/>
+        <rect class="chart-tag" x="-31" y="20" width="62" height="26" rx="3"/>
+        <text class="chart-tag-text" y="38" text-anchor="middle">Price</text>
+      </g>
+    </>}
+    <path class="chart-baseline" d="M32 236H508"/>
+    <g class="chart-ticks">{[32,111,191,270,349,429,508].map(x=><path d={`M${x} 236V241`}/>)}</g>
+    <text class="chart-axis-label" x="32" y="278">Lower price</text>
+    <text class="chart-axis-label" x="508" y="278" text-anchor="end">Higher price</text>
+  </svg>
+  <figcaption class="diagram-footer">
+    <span>Illustrative market. Not live data.</span>
+    <button class="diagram-motion" type="button" data-motion-toggle hidden aria-label={`Pause ${name} animation`} aria-pressed="false"><span data-motion-icon aria-hidden="true"></span><span data-motion-label>Pause</span></button>
+  </figcaption>
+</figure>
+<script>
+  import {initLiquidityAnimation} from '../scripts/liquidity-animation';
+  document.querySelectorAll<HTMLElement>('[data-liquidity-animation]').forEach(initLiquidityAnimation);
+</script>

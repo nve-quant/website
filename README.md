@@ -40,3 +40,5 @@ The development-only `/review` route offers exact 375/768/1440px embedded previe
 The selected asset rotates automatically. Drag the object directly to rotate it; click to pause or resume. With the scene focused, Space/Enter toggles pause and the arrow keys rotate or tilt the object manually, pausing automatic rotation. Pause remains selected when changing assets or returning to the scene.
 
 Automatic rotation is capped at 30 rendered frames per second; dragging can use the display rate while movement settles. Rendering stops outside the model's viewport observation area, when the document is hidden, or when a paused scene has settled. Mobile, reduced-motion and WebGL-unavailable views retain selectable SVG illustrations. Geometry, textures and lighting are local; no model CDN or live data is used. The separately loaded Three.js chunk triggers Vite’s size advisory; measure real-device loading before launch.
+
+For changes to the animated CEX/DEX diagrams, also run `node scripts/check-liquidity-animation.mjs`. This checks geometry invariants and animation lifecycle behavior with mocked browser events; use `/review` for the visual browser pass.
