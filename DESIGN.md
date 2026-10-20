@@ -58,3 +58,6 @@ The owner requested more dynamic and 3D treatment after reviewing the static hom
 Use original procedural Three.js geometry with a pale green surface (#e6ebd9), physical lighting and restrained model transitions. Rotation is opt-in and pausable; pointer movement produces a small tilt. Render on demand and pause offscreen/in background. Small screens (700px and below), reduced-motion preferences and WebGL failures retain original SVG illustrations and the same selectable content. CSS handles selection independently of JavaScript. Brief entrance and disclosure transitions respect reduced motion.
 
 Next: review this interaction and approve business copy before expanding service and research pages. The live site remains untouched.
+
+### Asset detail refinement
+Refined the three models with tighter gold bevels and a local 256×512 stamp texture, metallic fund layers with perimeter inlays, and an original 112-triangle stepped emerald cut. Reduced fill light/exposure to preserve material contrast. Reused ingot and share geometry. Kept the 1.75 pixel-ratio cap, 1024px shadow map, lazy loading and on-demand rendering; no bloom, transmission pass, downloaded textures or new dependencies.
