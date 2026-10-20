@@ -41,3 +41,6 @@ This request does not confirm new facts about people, results, venue support, fe
 
 ## Owner-confirmed additional services, 20 October 2026
 The owner confirmed OTC deals and systematic strategies as a service, including plug-and-play trading strategy terminals and managed vaults. Include these in navigation and the homepage service overview. Exact strategy catalogue, execution/counterparty model, custody and vault configuration, supported deployments, commercial terms and results are not confirmed by this statement. Do not extend CEX/DEX-specific access claims to every strategy product.
+
+## Asset-study expansion, 20 October 2026
+Owner requested selectable specimens within asset groups: four gemstones, four precious metals, and oil/wheat commodities. Preserve the original gold/emerald and existing fund/stock studies. Side arrows select the specimen; object dragging continues to rotate. All are illustrative studies, not a statement that these instruments are offered or managed. Keep generation lazy and the mobile/reduced-motion fallback.

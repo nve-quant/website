@@ -3,7 +3,8 @@ import {createGold} from './models/gold';
 import {createFund} from './models/fund';
 import {createStock} from './models/stock';
 import {createEmerald} from './models/emerald';
-import type {MarketModelId} from '../data/market-model';
+import {createOil,createWheat} from './models/commodities';
+import type {AssetVariantId} from '../data/market-model';
 
 /** Original procedural geometry; no remote models, textures or market data. */
 export function createMarketScene(host: HTMLElement, onContextLost: () => void, onRotationChange: (spinning: boolean) => void) {
@@ -48,9 +49,19 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   key.shadow.normalBias=.018;key.shadow.bias=-.00015;
   scene.add(key);
   const rig=new THREE.Group();scene.add(rig);
-  const models:Record<MarketModelId,THREE.Group>={gold:createGold(),fund:createFund(),stock:new THREE.Group(),unique:createEmerald()};
-  let stockReady=false;
-  Object.values(models).forEach(model=>{rig.add(model);model.visible=false;});
+  const models=new Map<AssetVariantId,THREE.Group>();
+  const builders:Record<AssetVariantId,()=>THREE.Group>={
+    gold:()=>createGold(),silver:()=>createGold('silver'),palladium:()=>createGold('palladium'),platinum:()=>createGold('platinum'),
+    fund:createFund,stock:createStock,emerald:createEmerald,ruby:()=>createEmerald('ruby'),sapphire:()=>createEmerald('sapphire'),diamond:()=>createEmerald('diamond'),oil:createOil,wheat:createWheat,
+  };
+  const disposeTree=(root:THREE.Object3D)=>{
+    const geometries=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>(),textures=new Set<THREE.Texture>();
+    root.traverse(object=>{
+      if(object instanceof THREE.Mesh||object instanceof THREE.Line){geometries.add(object.geometry);(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>materials.add(m));}
+      if(object instanceof THREE.InstancedMesh)object.dispose();
+    });
+    geometries.forEach(g=>g.dispose());materials.forEach(m=>{Object.values(m).forEach(value=>{if(value instanceof THREE.Texture)textures.add(value);});m.dispose();});textures.forEach(t=>t.dispose());
+  };
   // Clamp texture sampling once, including shared maps created by the model builders.
   const configureTextures=(root:THREE.Object3D)=>root.traverse(object=>{
     if(!(object instanceof THREE.Mesh))return;
@@ -74,7 +85,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   const contact=new THREE.Mesh(new THREE.PlaneGeometry(3.6,3.4),new THREE.MeshBasicMaterial({map:contactTexture,transparent:true,depthWrite:false,toneMapped:false}));
   contact.rotation.x=-Math.PI/2;contact.position.y=-.035;scene.add(contact);
 
-  let active:MarketModelId='gold';
+  let active:AssetVariantId='gold';
   let rotation=-.2, targetRotation=-.2, tilt=0, targetTilt=0;
   let scale=1, spinning=true, visible=true, disposed=false, contextLost=false;
   let drag: {id:number;startX:number;startY:number;x:number;y:number;moved:boolean}|undefined;
@@ -89,7 +100,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
     if(spinning&&!drag)targetRotation+=dt*.24;
     const ease=1-Math.exp(-dt*9);
     rotation+=(targetRotation-rotation)*ease;tilt+=(targetTilt-tilt)*ease;scale+=(1-scale)*ease;
-    rig.rotation.y=rotation;rig.rotation.x=tilt;models[active].scale.setScalar(scale);
+    rig.rotation.y=rotation;rig.rotation.x=tilt;models.get(active)?.scale.setScalar(scale);
     renderer.render(scene,camera);
     if((spinning&&!drag)||Math.abs(targetRotation-rotation)>.001||Math.abs(targetTilt-tilt)>.001||Math.abs(1-scale)>.001)schedule();
   }
@@ -107,7 +118,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
     const bounds=host.getBoundingClientRect();
     pointerPosition.set((event.clientX-bounds.left)/bounds.width*2-1,1-(event.clientY-bounds.top)/bounds.height*2);
     raycaster.setFromCamera(pointerPosition,camera);
-    return raycaster.intersectObject(models[active],true).some(hit=>hit.object instanceof THREE.Mesh);
+    return raycaster.intersectObject(models.get(active)!,true).some(hit=>hit.object instanceof THREE.Mesh);
   }
   function endDrag(){
     if(!drag)return;
@@ -199,20 +210,26 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   canvas.addEventListener('webglcontextlost',lost);
   resize();
   return {
-    select(id:MarketModelId){
+    select(id:AssetVariantId){
       endDrag();
-      // Generate the certificate's paper and engraving maps only when requested.
-      if(id==='stock'&&!stockReady){models.stock.add(createStock());configureTextures(models.stock);stockReady=true;}
-      active=id;Object.entries(models).forEach(([key,model])=>{model.visible=key===id;model.scale.setScalar(1);});
+      let model=models.get(id);
+      if(!model){model=builders[id]();configureTextures(model);models.set(id,model);rig.add(model);}
+      // Three recently viewed specimens at most: no upfront generation or unbounded GPU cache.
+      models.delete(id);models.set(id,model);
+      if(models.size>3){const oldest=models.keys().next().value!;const evicted=models.get(oldest)!;rig.remove(evicted);disposeTree(evicted);models.delete(oldest);}
+      contact.scale.setScalar(id==='wheat'?.35:id==='oil'?.6:1);
+      active=id;models.forEach((entry,key)=>{entry.visible=key===id;entry.scale.setScalar(1);});
       scale=.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();
+    },
+    renderStill(){
+      resize();rig.rotation.set(0,-.2,0);models.get(active)?.scale.setScalar(1);renderer.render(scene,camera);
+      return {geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,triangles:renderer.info.render.triangles};
     },
     visible(value:boolean){visible=value;if(!value){endDrag();leave();if(frame!==undefined){cancelAnimationFrame(frame);frame=undefined;}}if(value){lastTime=performance.now();schedule();}},
     dispose(){
       disposed=true;endDrag();if(frame!==undefined)cancelAnimationFrame(frame);resizeObserver.disconnect();
       listeners.abort();canvas.removeEventListener('webglcontextlost',lost);
-      const geometries=new Set<THREE.BufferGeometry>();const materials=new Set<THREE.Material>();const textures=new Set<THREE.Texture>();
-      scene.traverse(object=>{if(object instanceof THREE.Mesh||object instanceof THREE.Line){geometries.add(object.geometry);(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>materials.add(m));}});
-      geometries.forEach(g=>g.dispose());materials.forEach(m=>{Object.values(m).forEach(value=>{if(value instanceof THREE.Texture)textures.add(value);});m.dispose();});textures.forEach(t=>t.dispose());key.shadow.dispose();environment.dispose();renderer.dispose();canvas.remove();
+      disposeTree(scene);models.clear();key.shadow.dispose();environment.dispose();renderer.dispose();canvas.remove();
     },
   };
 }

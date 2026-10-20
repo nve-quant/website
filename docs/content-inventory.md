@@ -113,3 +113,8 @@ The Services dropdown reuses core and supplementary service data, with detail li
 
 ## Client-need illustrations, 20 October 2026
 Four original SVG diagrams accompany the existing client problems and objectives. Their changing order sizes, venue allocation levels, DEX movement and report marks are schematic, not live observations, client results, a specific strategy or a dashboard screenshot. The existing business copy and service links are unchanged. The venue animation redistributes a constant illustrative total; no units or monetary values are asserted.
+
+## Expanded asset specimens, 20 October 2026
+Owner requested emerald/ruby/sapphire/diamond, gold/silver/palladium/platinum, and commodities including oil and wheat. These specify illustrative subjects, not supported instruments, custody holdings, market-making clients or new commercial claims. All meshes, texture maps and fallback SVGs are original code-generated work; no downloaded or unlicensed models. Bullion purity/weight stamps are specimen artwork and do not represent refinery certification. Gem optics are lightweight visual approximations, not a grading or valuation tool.
+
+The former Tokenized gold tab becomes Precious metals, with generalized draft reference-market copy. Its original gold research URL remains unchanged as a related example. Commodities copy introduces questions to define during market design; no supporting research URL or delivery capability has been invented. These explanations remain subject to content review before publication.

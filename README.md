@@ -54,3 +54,5 @@ The local `/company` page and conversion sections are editorial drafts. Expand t
 Service navigation interaction checks: `node scripts/check-service-navigation.mjs` (hover, dismissal, keyboard focus and touch fallback).
 
 Client-need animation checks: `node scripts/check-need-illustrations.mjs` (pause, visibility, reduced motion and page lifecycle).
+
+Asset studies: `/asset-review` is a development-only material inspection page for explicit still renders of each procedural specimen. `/review` covers the actual section at responsive widths. Run `node scripts/check-asset-explorer.mjs` to check variant cycling, remembered selections, lazy initialization, accessible naming, fallback modes and lifecycle handling.

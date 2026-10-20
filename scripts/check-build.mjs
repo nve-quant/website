@@ -4,6 +4,7 @@ assert(!existsSync('dist/concepts'), 'Design concepts must not be built');
 assert(!readFileSync('dist/index.html', 'utf8').includes('href="/concepts/'), 'Production index must not link to development routes');
 console.log('Production isolation checks passed.');
 
+assert(!existsSync('dist/asset-review'), 'Asset inspection tooling must not be built');
 assert(!existsSync('dist/review'), 'Review tooling must not be built');
 assert(!existsSync('dist/studies'), 'Study index must not be built');
 

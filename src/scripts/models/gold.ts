@@ -1,7 +1,15 @@
 import * as THREE from 'three';
 
 /** A cast bullion study, with original specimen marks (not a refinery certification). */
-export function createGold(): THREE.Group {
+export type BullionMetal = 'gold' | 'silver' | 'palladium' | 'platinum';
+const finishes = {
+  gold: {rgb:[242,192,96],symbol:'Au',name:'FINE GOLD',purity:'999.9',edge:0xf2c060,light:'#ffe4a0',mark:'#80551d',rough:.25},
+  silver: {rgb:[228,232,236],symbol:'Ag',name:'FINE SILVER',purity:'999.9',edge:0xe4e8ec,light:'#ffffff',mark:'#61666c',rough:.22},
+  palladium: {rgb:[191,199,208],symbol:'Pd',name:'PALLADIUM',purity:'999.5',edge:0xbfc7d0,light:'#f1f6ff',mark:'#4a535f',rough:.28},
+  platinum: {rgb:[211,209,202],symbol:'Pt',name:'PLATINUM',purity:'999.5',edge:0xd3d1ca,light:'#fffaf1',mark:'#64615b',rough:.32},
+} as const;
+export function createGold(metal:BullionMetal = 'gold'): THREE.Group {
+  const finish=finishes[metal];
   const group=new THREE.Group();
   let seed=9183;
   const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
@@ -12,7 +20,7 @@ export function createGold(): THREE.Group {
   for(let y=0;y<1024;y++)for(let x=0;x<512;x++){
     const i=(y*512+x)*4,n=random()-.5;
     const cast=Math.sin(x*.038+Math.sin(y*.019)*2)*Math.sin(y*.026)*2;
-    colorImage.data[i]=242+n*6+cast;colorImage.data[i+1]=192+n*5+cast;colorImage.data[i+2]=96+n*4;colorImage.data[i+3]=255;
+    colorImage.data[i]=finish.rgb[0]+n*6+cast;colorImage.data[i+1]=finish.rgb[1]+n*5+cast;colorImage.data[i+2]=finish.rgb[2]+n*4;colorImage.data[i+3]=255;
     const h=180+n*5+cast; heightImage.data[i]=h;heightImage.data[i+1]=h;heightImage.data[i+2]=h;heightImage.data[i+3]=255;
     const r=112+n*20+cast*3;roughImage.data[i]=r;roughImage.data[i+1]=r;roughImage.data[i+2]=r;roughImage.data[i+3]=255;
   }
@@ -21,9 +29,9 @@ export function createGold(): THREE.Group {
   const mark=(ctx:CanvasRenderingContext2D,fill:string)=>{
     ctx.save();ctx.fillStyle=fill;ctx.strokeStyle=fill;ctx.textAlign='center';
     ctx.lineWidth=4;ctx.strokeRect(184,112,144,142);
-    ctx.font='74px Georgia,serif';ctx.fillText('Au',256,213);
-    ctx.font='600 59px sans-serif';ctx.fillText('FINE GOLD',256,389);
-    ctx.font='96px sans-serif';ctx.fillText('999.9',256,522);
+    ctx.font='74px Georgia,serif';ctx.fillText(finish.symbol,256,213);
+    ctx.font=`600 ${metal==='gold'?59:48}px sans-serif`;ctx.fillText(finish.name,256,389);
+    ctx.font='96px sans-serif';ctx.fillText(finish.purity,256,522);
     ctx.font='500 52px sans-serif';ctx.fillText('1000 g',256,632);
     ctx.font='21px monospace';ctx.fillText('SPECIMEN',256,790);
     ctx.font='28px monospace';ctx.fillText('000001',256,842);
@@ -31,7 +39,7 @@ export function createGold(): THREE.Group {
   };
   mark(heightCtx,'#222222');mark(roughCtx,'#acacac');
   // Small offset highlights mimic the lip of a struck mark, rather than printed black text.
-  colorCtx.save();colorCtx.translate(0,-2);mark(colorCtx,'#ffe4a0');colorCtx.restore();mark(colorCtx,'#80551d');
+  colorCtx.save();colorCtx.translate(0,-2);mark(colorCtx,finish.light);colorCtx.restore();mark(colorCtx,finish.mark);
   for(let i=0;i<150;i++){
     const x=random()*512,y=random()*1024,length=8+random()*65;
     heightCtx.strokeStyle=`rgba(70,70,70,${.035+random()*.07})`;heightCtx.lineWidth=.5+random();
@@ -39,7 +47,7 @@ export function createGold(): THREE.Group {
   }
   const texture=(c:HTMLCanvasElement,srgb=false)=>{const t=new THREE.CanvasTexture(c);if(srgb)t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return t;};
   const topMaterial=new THREE.MeshStandardMaterial({map:texture(color,true),bumpMap:texture(height),bumpScale:.028,roughnessMap:texture(rough),roughness:.52,metalness:1});
-  const sideMaterial=new THREE.MeshStandardMaterial({color:0xf2c060,metalness:1,roughness:.25});
+  const sideMaterial=new THREE.MeshStandardMaterial({color:finish.edge,metalness:1,roughness:finish.rough});
   // Smooth rounded perimeter; broad taper and softened lips distinguish cast from minted bars.
   const ring=(w:number,d:number,r:number,y:number)=>{
     const points:THREE.Vector3[]=[];

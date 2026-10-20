@@ -6,17 +6,31 @@ type CutRing = {scale: number; height: number};
  * An original emerald-cut study, not a scan of a graded or certified gemstone.
  * Crisp, separate facet normals matter more here than a high polygon count.
  */
-export function createEmerald(): THREE.Group {
+export type GemKind = 'emerald' | 'ruby' | 'sapphire' | 'diamond';
+const optics = {
+  emerald:{color:0xe0fff2,absorb:0x28b777,ior:1.58,hue:.42,emissive:0x185f3e},
+  ruby:{color:0xffe3eb,absorb:0xc6224e,ior:1.76,hue:.97,emissive:0x590d26},
+  sapphire:{color:0xe1eaff,absorb:0x245dcc,ior:1.76,hue:.62,emissive:0x102654},
+  diamond:{color:0xffffff,absorb:0xf0f6ff,ior:2.42,hue:.59,emissive:0x000000},
+} as const;
+export function createEmerald(kind:GemKind = 'emerald'): THREE.Group {
+  const optical=optics[kind];
   const group = new THREE.Group();
-  group.name = 'Emerald-cut asset study';
+  group.name = `${kind} illustrative cut`;
 
   // The clipped corners, broad table and parallel crown/pavilion steps are the
   // characteristic emerald cut. The extremely thin girdle is a real edge bevel,
   // rather than a wireframe painted over a generic polyhedron.
-  const outline: [number, number][] = [
+  const emeraldOutline: [number, number][] = [
     [-.59, -1.04], [.59, -1.04], [.82, -.81], [.82, .81],
     [.59, 1.04], [-.59, 1.04], [-.82, .81], [-.82, -.81],
   ];
+  const outline: [number,number][] = kind==='emerald' ? emeraldOutline : Array.from({length:16},(_,i)=>{
+    const angle=i*Math.PI/8;
+    const cushion=(v:number)=>Math.sign(v)*Math.pow(Math.abs(v),.65);
+    if(kind==='sapphire')return [cushion(Math.cos(angle))*.88,cushion(Math.sin(angle))*.96];
+    return [Math.cos(angle)*(kind==='ruby'?.78:1.03),Math.sin(angle)*(kind==='ruby'?1.1:1.03)];
+  });
   const cut: CutRing[] = [
     {scale: .61, height: 1.41}, // table
     {scale: .76, height: 1.30},
@@ -32,7 +46,9 @@ export function createEmerald(): THREE.Group {
   ];
 
   const point = (ring: CutRing, index: number) => {
-    const [x, z] = outline[index % outline.length]!;
+    const [ox, oz] = outline[index % outline.length]!;
+    const angle=kind==='emerald'?0:(cut.indexOf(ring)%2===0?.055:-.055);
+    const x=ox*Math.cos(angle)-oz*Math.sin(angle),z=ox*Math.sin(angle)+oz*Math.cos(angle);
     return new THREE.Vector3(x * ring.scale, ring.height, z * ring.scale);
   };
 
@@ -76,14 +92,14 @@ export function createEmerald(): THREE.Group {
   // One transmission surface. The renderer's existing lazy-loading and
   // selected-model visibility mean this extra pass runs only for this study.
   const material = new THREE.MeshPhysicalMaterial({
-    color: 0xe0fff2,
+    color: optical.color,
     metalness: 0,
     roughness: .028,
-    ior: 1.58,
+    ior: optical.ior,
     transmission: .96,
     thickness: .92,
-    attenuationColor: 0x28b777,
-    attenuationDistance: 1.8,
+    attenuationColor: optical.absorb,
+    attenuationDistance: kind==='diamond'?8:1.8,
     envMapIntensity: .9,
     specularIntensity: .85,
     flatShading: true,
@@ -113,14 +129,15 @@ export function createEmerald(): THREE.Group {
   ];
   const tierBrightness = [.86, 1.12, .72, 1.16];
   for (let tier = 0; tier < returnRings.length - 1; tier++) {
-    for (let facet = 0; facet < 8; facet++) {
+    for (let facet = 0; facet < outline.length; facet++) {
       const color = new THREE.Color(returnTones[(facet + tier * 2) % 8]!);
+      if(kind!=='emerald')color.setHSL(optical.hue,kind==='diamond'?.08:.68,[.38,.54,.73,.46,.61,.28,.66,.85][(facet+tier)%8]!);
       color.multiplyScalar(tierBrightness[tier]!);
       for (let vertex = 0; vertex < 6; vertex++) returnColors.push(color.r, color.g, color.b);
     }
   }
-  const culetColor = new THREE.Color(0x65c898);
-  for (let vertex = 0; vertex < 24; vertex++) returnColors.push(culetColor.r, culetColor.g, culetColor.b);
+  const culetColor = new THREE.Color(kind==='emerald'?0x65c898:optical.color);
+  for (let vertex = 0; vertex < outline.length*3; vertex++) returnColors.push(culetColor.r, culetColor.g, culetColor.b);
   returnGeometry.setAttribute('color', new THREE.Float32BufferAttribute(returnColors, 3));
   const returnMaterial = new THREE.MeshStandardMaterial({
     color: 0xffffff,
@@ -128,7 +145,7 @@ export function createEmerald(): THREE.Group {
     metalness: .12,
     roughness: .12,
     envMapIntensity: 1.05,
-    emissive: 0x185f3e,
+    emissive: optical.emissive,
     emissiveIntensity: .16,
     side: THREE.BackSide,
     flatShading: true,
@@ -174,7 +191,8 @@ export function createEmerald(): THREE.Group {
     new THREE.MeshBasicMaterial({vertexColors: true, side: THREE.DoubleSide}),
   );
   veins.name = 'Sparse internal mineral veils';
-  group.add(veins);
+  if(kind==='emerald')group.add(veins);
+  else {veinsGeometry.dispose();(veins.material as THREE.Material).dispose();}
 
   // Slightly turn the elongated cut toward the camera, while preserving a
   // level table so the precise polished steps catch the studio softboxes.

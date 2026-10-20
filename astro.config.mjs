@@ -3,6 +3,7 @@ export default defineConfig({ output: 'static', devToolbar: {enabled: false}, in
   if (command === 'dev') {
  injectRoute({pattern: '/concepts/[direction]', entrypoint: './src/concepts.astro'});
  injectRoute({pattern: '/studies', entrypoint: './src/studies.astro'});
+ injectRoute({pattern: '/asset-review', entrypoint: './src/asset-review.astro'});
  injectRoute({pattern: '/review', entrypoint: './src/review.astro'});
  }
 }}}] });

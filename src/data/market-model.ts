@@ -1,15 +1,15 @@
 // Illustrative design questions, not claims about a specific instrument or live market.
 export const marketModels = [
   {
-    id: 'gold', label: 'Tokenized gold', object: 'A claim on physical gold',
+    id: 'gold', label: 'Precious metals', object: 'A claim on physical metal',
     title: 'A familiar asset. A different market.',
-    intro: 'The reference may come from a global gold market. The token still has its own trading venues, access rules and redemption terms.',
-    reference: 'An external gold reference',
+    intro: 'The reference may come from the underlying metal’s market. The token still has its own trading venues, access rules and redemption terms.',
+    reference: 'A reference for the underlying metal',
     liquidity: 'Inventory across pools and order books',
     redemption: 'Defined by the issuer and custodian',
     question: 'What happens when the reference market closes?',
     answer: 'The design needs rules for reference age, trading hours and the next price update. A token can trade around the clock while its reference does not.',
-    route: ['Gold reference', 'Token market', 'Issuer redemption'],
+    route: ['Metal reference', 'Token market', 'Issuer redemption'],
     source: 'https://onchainbureau.com/research/tokenized-gold-thin-markets',
   },
   {
@@ -48,5 +48,27 @@ export const marketModels = [
     route: ['Asset valuation', 'Market structure', 'Asset-specific exit'],
     source: 'https://onchainbureau.com/research/assets-that-differ-unit-by-unit',
   },
+  {
+    id: 'commodities', label: 'Commodities', object: 'A physical commodity, with defined delivery terms',
+    title: 'The specification shapes the contract.',
+    intro: 'Oil and wheat make the underlying questions tangible: what is represented, where it is held and how a holder can exit. The illustration is a starting point for defining the instrument.',
+    reference: 'A benchmark matched to the contract specification',
+    liquidity: 'Inventory and venues appropriate to the instrument',
+    redemption: 'Agreed delivery or settlement terms',
+    question: 'What needs to be defined before a market can trade?',
+    answer: 'Set out the commodity, quality, quantity, location and settlement terms. Then establish how the token relates to that specification and who fulfils each obligation.',
+    route: ['Contract specification', 'Token market', 'Agreed settlement'],
+    source: null,
+  },
 ] as const;
 export type MarketModelId = typeof marketModels[number]['id'];
+
+/** Original illustrative specimens, not available products or certified holdings. */
+export const assetVariants = {
+  gold: [{id:'gold',label:'Gold',detail:'Cast bullion'}, {id:'silver',label:'Silver',detail:'Cast bullion'}, {id:'palladium',label:'Palladium',detail:'Cast bullion'}, {id:'platinum',label:'Platinum',detail:'Cast bullion'}],
+  fund: [{id:'fund',label:'Fund share',detail:'Underlying portfolio'}],
+  stock: [{id:'stock',label:'Share certificate',detail:'Illustrative specimen'}],
+  unique: [{id:'emerald',label:'Emerald',detail:'Emerald cut'}, {id:'ruby',label:'Ruby',detail:'Oval cut'}, {id:'sapphire',label:'Sapphire',detail:'Cushion cut'}, {id:'diamond',label:'Diamond',detail:'Round brilliant study'}],
+  commodities: [{id:'oil',label:'Crude oil',detail:'Steel drum'}, {id:'wheat',label:'Wheat',detail:'Harvest sheaf'}],
+} as const satisfies Record<MarketModelId, readonly {id:string;label:string;detail:string}[]>;
+export type AssetVariantId = typeof assetVariants[MarketModelId][number]['id'];

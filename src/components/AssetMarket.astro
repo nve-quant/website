@@ -1,5 +1,5 @@
 ---
-import {marketModels} from '../data/market-model';
+import {marketModels,assetVariants} from '../data/market-model';
 import '../styles/market-model.css';
 ---
 <section id="asset-studies" class="market-explorer" aria-labelledby="explorer-title" data-market-explorer>
@@ -9,16 +9,44 @@ import '../styles/market-model.css';
     <div class="model-stage">
       <div class="model-canvas" data-model-canvas role="button" tabindex="-1" aria-hidden="true" aria-label="Pause automatic asset rotation" aria-pressed="false" aria-describedby="model-interaction-help"></div>
       <div class="model-fallback" aria-hidden="true">
-        <svg class="fallback-gold" viewBox="0 0 500 400"><ellipse cx="250" cy="313" rx="169" ry="41" fill="#c4cdac"/><g stroke="#80642c" stroke-width="2"><path d="m100 210 185-70 110 55-186 78Z" fill="#e4bc62"/><path d="m100 210 109 63v46l-109-63Z" fill="#a48237"/><path d="m209 273 186-78v45l-186 79Z" fill="#c79a42"/><path d="m137 155 143-56 91 44-145 60Z" fill="#f4d78e"/><path d="m137 155 89 48v40l-89-48Z" fill="#b08a3d"/><path d="m226 203 145-60v40l-145 60Z" fill="#d5ab50"/></g><g transform="matrix(.83 -.34 .8 .43 137 155)" fill="#80551d" text-anchor="middle" font-family="Arial,sans-serif"><text x="86" y="40" font-size="15" font-weight="600">FINE GOLD</text><text x="86" y="66" font-size="24">999.9</text><text x="86" y="87" font-size="13">1000 g</text></g></svg>
+        <svg class="fallback-gold" viewBox="0 0 500 400"><ellipse cx="250" cy="313" rx="169" ry="41" fill="#c4cdac"/><g stroke="#80642c" stroke-width="2"><path d="m100 210 185-70 110 55-186 78Z" fill="#e4bc62"/><path d="m100 210 109 63v46l-109-63Z" fill="#a48237"/><path d="m209 273 186-78v45l-186 79Z" fill="#c79a42"/><path d="m137 155 143-56 91 44-145 60Z" fill="#f4d78e"/><path d="m137 155 89 48v40l-89-48Z" fill="#b08a3d"/><path d="m226 203 145-60v40l-145 60Z" fill="#d5ab50"/></g><g transform="matrix(.83 -.34 .8 .43 137 155)" fill="#80551d" text-anchor="middle" font-family="Arial,sans-serif"><text data-bullion-stamp x="86" y="40" font-size="15" font-weight="600">FINE GOLD</text><text data-bullion-purity x="86" y="66" font-size="24">999.9</text><text x="86" y="87" font-size="13">1000 g</text></g></svg>
         <svg class="fallback-fund" viewBox="0 0 500 400"><ellipse cx="250" cy="323" rx="150" ry="32" fill="#c4cdac"/>{[0,1,2,3].map(i=><g transform={`translate(0 ${-i*44})`} stroke="#476654" stroke-width="2"><path d="m130 260 120-44 120 44-120 44Z" fill="#e9efd7"/><path d="m130 260 120 44v16l-120-44Z" fill="#668a6b"/><path d="m250 304 120-44v16l-120 44Z" fill="#adc795"/></g>)}</svg>
         <svg class="fallback-stock" viewBox="0 0 500 400"><ellipse cx="250" cy="313" rx="181" ry="26" fill="#c4cdac"/><g transform="translate(45 65) rotate(-7 205 132)"><path d="M0 12Q200-8 410 10L410 260Q210 245 0 270Z" fill="#d2c5a6"/><path d="M0 8Q200-12 410 6L410 256Q210 241 0 266Z" fill="#f4edda"/><g fill="none" stroke="#244452"><rect x="14" y="23" width="382" height="222" stroke-width="2"/><rect x="20" y="29" width="370" height="210" stroke-width=".8"/><rect x="28" y="37" width="354" height="194" stroke-width="1.5"/>{[44,366].map(x=>[53,215].map(y=><g><circle cx={x} cy={y} r="13"/><circle cx={x} cy={y} r="9"/></g>))}<path d="m181 72 24-14 24 14Zm0 4h48m-43 4v24m12-24v24m12-24v24m12-24v24m-47 3h60M112 155h188M170 205h79m23 0h78" stroke-width="1"/></g><g fill="#244452" text-anchor="middle" font-family="Georgia,serif"><text x="205" y="120" font-size="10">SHARE CERTIFICATE</text><text x="205" y="147" font-size="27">Common stock</text><text x="205" y="172" font-size="8">Registered ownership</text><text x="205" y="226" font-size="7">ILLUSTRATIVE SPECIMEN</text></g><circle cx="100" cy="201" r="21" fill="#c8a35b" stroke="#8a682e"/><circle cx="100" cy="201" r="16" fill="none" stroke="#8a682e"/><text x="100" y="204" text-anchor="middle" font-family="Georgia,serif" font-size="6" fill="#6e4c20">SPECIMEN</text></g></svg>
         <svg class="fallback-unique" viewBox="0 0 500 400"><ellipse cx="250" cy="332" rx="122" ry="26" fill="#c4cdac"/><g stroke="#295644" stroke-width="2"><path d="m250 60 105 80-20 131-85 55-108-99 13-105Z" fill="#619b75"/><path d="m250 60-15 111 120-31Z" fill="#b6d7a4"/><path d="m155 122 80 49 15-111Z" fill="#88ba8a"/><path d="m235 171 100 100 20-131Z" fill="#396f56"/><path d="m235 171 15 155 85-55Z" fill="#234d3f"/><path d="m142 227 108 99-15-155Z" fill="#76a17c"/></g></svg>
+        {(['ruby','sapphire','diamond'] as const).map(kind=>{
+          const hue=kind==='ruby'?345:kind==='sapphire'?220:210;
+          const saturation=kind==='diamond'?8:58;
+          const outline=Array.from({length:16},(_,i)=>{const angle=i*Math.PI/8;const curve=(v:number)=>kind==='sapphire'?Math.sign(v)*Math.pow(Math.abs(v),.65):v;return [curve(Math.cos(angle))*(kind==='ruby'?108:143),curve(Math.sin(angle))*(kind==='ruby'?94:75)];});
+          const table=outline.map(([x,y])=>`${250+x*.58},${150+y*.58}`).join(' ');
+          return <svg class={`fallback-gem fallback-${kind}`} viewBox="0 0 500 400"><ellipse cx="250" cy="334" rx="122" ry="23" fill="#c4cdac"/>{outline.map(([x,y],i)=>{const [nx,ny]=outline[(i+1)%16];return <g stroke={`hsl(${hue} ${saturation}% 35%)`} stroke-width=".7"><path d={`M${250+x*.58} ${150+y*.58}L${250+nx*.58} ${150+ny*.58}L${250+nx} ${192+ny}L${250+x} ${192+y}Z`} fill={`hsl(${hue} ${saturation}% ${[72,58,82,45][i%4]}%)`}/><path d={`M${250+x} ${192+y}L${250+nx} ${192+ny}L250 320Z`} fill={`hsl(${hue} ${saturation}% ${[45,65,38,78][i%4]}%)`}/></g>;})}<polygon points={table} fill={`hsl(${hue} ${saturation}% ${kind==='diamond'?91:78}%)`} stroke={`hsl(${hue} ${saturation}% 45%)`}/></svg>;
+        })}
+        <svg class="fallback-commodities" viewBox="0 0 500 400">
+          <ellipse cx="250" cy="339" rx="116" ry="22" fill="#c4cdac"/>
+          <g data-commodity-oil>
+            <path d="M164 95Q250 58 336 95V309Q250 353 164 309Z" fill="#354548" stroke="#263638" stroke-width="3"/>
+            <path d="M165 172Q250 205 335 172V231Q250 265 165 231Z" fill="#dfcc88"/>
+            <ellipse cx="250" cy="95" rx="86" ry="27" fill="#63706c" stroke="#263638" stroke-width="4"/>
+            <ellipse cx="250" cy="95" rx="75" ry="20" fill="none" stroke="#8e9a8a"/>
+            <ellipse cx="285" cy="93" rx="12" ry="5" fill="#263638" stroke="#b7bcb0" stroke-width="3"/>
+            <ellipse cx="206" cy="95" rx="7" ry="3" fill="#263638"/>
+            <g fill="none" stroke="#77817c" stroke-width="5"><path d="M163 141Q250 177 337 141M163 271Q250 307 337 271M164 310Q250 345 336 310"/></g>
+            <text x="250" y="220" fill="#263638" font-size="22" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600">CRUDE OIL</text>
+          </g>
+          <g data-commodity-wheat>
+            {Array.from({length:11},(_,i)=>{const x=158+i*18,y=92+Math.abs(i-5)*10;return <g transform={`rotate(${(i-5)*3} ${x} ${y})`}><path d={`M250 329Q${x} 245 ${x} ${y}`} fill="none" stroke="#9a7e43" stroke-width="2"/>{Array.from({length:6},(_,j)=><g><ellipse cx={x-6} cy={y+j*10} rx="5" ry="10" transform={`rotate(-35 ${x-6} ${y+j*10})`} fill="#d7b475" stroke="#9a7e43"/><ellipse cx={x+6} cy={y+j*10} rx="5" ry="10" transform={`rotate(35 ${x+6} ${y+j*10})`} fill="#c6a25c" stroke="#9a7e43"/><path d={`M${x-10} ${y+j*10}l-8-25M${x+10} ${y+j*10}l8-25`} stroke="#b69550" stroke-width="1"/></g>)}</g>;})}
+            <path d="M230 270l39 2m-38 4 37 2m-36 4 35 2" stroke="#806840" stroke-width="4"/>
+          </g>
+        </svg>
       </div>
-      <div class="model-caption">{marketModels.map(model=><p data-caption={model.id}>{model.object}</p>)}<span>Illustrative asset study</span><span class="model-interaction" data-model-hint>Drag to rotate. Click to pause.</span></div>
+      <div class="specimen-controls" data-specimen-controls hidden role="group" aria-label="Choose an asset specimen">
+        <button type="button" class="specimen-arrow specimen-previous" data-specimen-step="-1" aria-label="Previous specimen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h12"/></svg></button>
+        <button type="button" class="specimen-arrow specimen-next" data-specimen-step="1" aria-label="Next specimen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6M16 12H4"/></svg></button>
+      </div>
+      <div class="model-caption">{marketModels.map(model=><p data-caption={model.id}><strong data-specimen-name>{assetVariants[model.id][0].label}</strong><span data-specimen-detail>{assetVariants[model.id][0].detail}</span><span class="specimen-count" data-specimen-count>{assetVariants[model.id].length>1?`1 / ${assetVariants[model.id].length}`:""}</span></p>)}<span>Illustrative asset study</span><span class="model-interaction" data-model-hint>Drag to rotate. Click to pause.</span></div>
       <p id="model-interaction-help" hidden>Drag the object to rotate it. Click or press Space or Enter to pause or resume automatic rotation. Use the arrow keys to turn the object.</p>
     </div>
     <div class="model-explanation">
-      {marketModels.map(model=><article id={`model-${model.id}`} class="model-panel" data-panel={model.id} aria-labelledby={`title-${model.id}`}><h3 id={`title-${model.id}`}>{model.title}</h3><p class="model-intro">{model.intro}</p><dl><div><dt>Reference price</dt><dd>{model.reference}</dd></div><div><dt>Liquidity</dt><dd>{model.liquidity}</dd></div><div><dt>Redemption</dt><dd>{model.redemption}</dd></div></dl><details class="model-question"><summary>{model.question}<span aria-hidden="true">+</span></summary><p>{model.answer}</p><a href={model.source}>Read more about this structure</a></details></article>)}
+      {marketModels.map(model=><article id={`model-${model.id}`} class="model-panel" data-panel={model.id} aria-labelledby={`title-${model.id}`}><h3 id={`title-${model.id}`}>{model.title}</h3><p class="model-intro">{model.intro}</p><dl><div><dt>Reference price</dt><dd>{model.reference}</dd></div><div><dt>Liquidity</dt><dd>{model.liquidity}</dd></div><div><dt>Redemption</dt><dd>{model.redemption}</dd></div></dl><details class="model-question"><summary>{model.question}<span aria-hidden="true">+</span></summary><p>{model.answer}</p>{model.source && <a href={model.source}>Read more about this structure</a>}</details></article>)}
     </div>
   </div>
   <div class="model-routes" aria-label="Illustrative market relationships">{marketModels.map(model=><ol data-route={model.id}>{model.route.map(item=><li>{item}</li>)}</ol>)}</div>
