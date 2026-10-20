@@ -44,3 +44,6 @@ The owner confirmed OTC deals and systematic strategies as a service, including 
 
 ## Asset-study expansion, 20 October 2026
 Owner requested selectable specimens within asset groups: four gemstones, four precious metals, and oil/wheat commodities. Preserve the original gold/emerald and existing fund/stock studies. Side arrows select the specimen; object dragging continues to rotate. All are illustrative studies, not a statement that these instruments are offered or managed. Keep generation lazy and the mobile/reduced-motion fallback.
+
+### Expanded asset studies — 20 October 2026
+Owner requested distinct Metals, Grains (wheat, corn and soy) and Real estate categories. Metals now includes the original gold, silver, palladium and platinum plus copper and aluminium. Real estate uses original residential, office and industrial architectural miniatures. Oil remains under Commodities. These are illustrative market-design studies, not a portfolio, available products, certified holdings or evidence of existing client mandates. New grain/property copy is a draft for owner review.

@@ -1,7 +1,7 @@
 // Illustrative design questions, not claims about a specific instrument or live market.
 export const marketModels = [
   {
-    id: 'gold', label: 'Precious metals', object: 'A claim on physical metal',
+    id: 'gold', label: 'Metals', object: 'A claim on physical metal',
     title: 'A familiar asset. A different market.',
     intro: 'The reference may come from the underlying metal’s market. The token still has its own trading venues, access rules and redemption terms.',
     reference: 'A reference for the underlying metal',
@@ -39,7 +39,7 @@ export const marketModels = [
   {
     id: 'unique', label: 'Unique asset', object: 'An asset with its own characteristics',
     title: 'Two assets. Not necessarily one price.',
-    intro: 'An emerald, a building or a single lot may differ from every other unit. The first question is what can reasonably trade together.',
+    intro: 'An emerald, another gemstone or a single lot may differ from every other unit. The first question is what can reasonably trade together.',
     reference: 'An appraisal or asset-specific valuation',
     liquidity: 'A lot, a grade or a pooled structure',
     redemption: 'Specific to the asset and its legal structure',
@@ -49,9 +49,33 @@ export const marketModels = [
     source: 'https://onchainbureau.com/research/assets-that-differ-unit-by-unit',
   },
   {
+    id: 'grains', label: 'Grains', object: 'A specified agricultural lot',
+    title: 'The crop is only the beginning.',
+    intro: 'Wheat, corn and soybeans give a market its starting point. Define the lot, quality, storage location and delivery terms before deciding what can trade together.',
+    reference: 'A reference matched to crop, quality and location',
+    liquidity: 'Lots grouped by an agreed specification',
+    redemption: 'Storage, delivery and settlement terms',
+    question: 'What exactly does the token represent?',
+    answer: 'Specify the claim, quantity and quality, who holds the underlying lot, and how delivery or settlement works. The illustration does not establish those rights.',
+    route: ['Crop specification', 'Lot market', 'Agreed delivery'],
+    source: null,
+  },
+  {
+    id: 'realestate', label: 'Real estate', object: 'A property with a defined ownership structure',
+    title: 'One property. Clearly defined rights.',
+    intro: 'An apartment building, office or warehouse needs an asset-specific explanation: what the token represents, how the property is valued and how holders can exit.',
+    reference: 'A property or vehicle-specific valuation',
+    liquidity: 'A secondary market within the structure’s transfer rules',
+    redemption: 'The exit terms of the ownership or financing structure',
+    question: 'Does a token represent direct ownership of the building?',
+    answer: 'That must be established in the instrument’s terms. Explain the ownership or financing structure, any income entitlement, expenses and exit arrangements before designing its market.',
+    route: ['Property structure', 'Holder rights', 'Defined exit'],
+    source: null,
+  },
+  {
     id: 'commodities', label: 'Commodities', object: 'A physical commodity, with defined delivery terms',
     title: 'The specification shapes the contract.',
-    intro: 'Oil and wheat make the underlying questions tangible: what is represented, where it is held and how a holder can exit. The illustration is a starting point for defining the instrument.',
+    intro: 'Oil makes the underlying questions tangible: what is represented, where it is held and how a holder can exit. The illustration is a starting point for defining the instrument.',
     reference: 'A benchmark matched to the contract specification',
     liquidity: 'Inventory and venues appropriate to the instrument',
     redemption: 'Agreed delivery or settlement terms',
@@ -65,10 +89,12 @@ export type MarketModelId = typeof marketModels[number]['id'];
 
 /** Original illustrative specimens, not available products or certified holdings. */
 export const assetVariants = {
-  gold: [{id:'gold',label:'Gold',detail:'Cast bullion'}, {id:'silver',label:'Silver',detail:'Cast bullion'}, {id:'palladium',label:'Palladium',detail:'Cast bullion'}, {id:'platinum',label:'Platinum',detail:'Cast bullion'}],
+  gold: [{id:'gold',label:'Gold',detail:'Cast bullion'}, {id:'silver',label:'Silver',detail:'Cast bullion'}, {id:'palladium',label:'Palladium',detail:'Cast bullion'}, {id:'platinum',label:'Platinum',detail:'Cast bullion'}, {id:'copper',label:'Copper',detail:'Rolled strip'}, {id:'aluminium',label:'Aluminium',detail:'Cast ingots'}],
   fund: [{id:'fund',label:'Fund share',detail:'Underlying portfolio'}],
   stock: [{id:'stock',label:'Share certificate',detail:'Illustrative specimen'}],
   unique: [{id:'emerald',label:'Emerald',detail:'Emerald cut'}, {id:'ruby',label:'Ruby',detail:'Oval cut'}, {id:'sapphire',label:'Sapphire',detail:'Cushion cut'}, {id:'diamond',label:'Diamond',detail:'Round brilliant study'}],
-  commodities: [{id:'oil',label:'Crude oil',detail:'Steel drum'}, {id:'wheat',label:'Wheat',detail:'Harvest sheaf'}],
+  grains: [{id:'wheat',label:'Wheat',detail:'Harvest sheaf'}, {id:'corn',label:'Corn',detail:'Ear and husk'}, {id:'soy',label:'Soybeans',detail:'Dry pods and seed'}],
+  realestate: [{id:'residential',label:'Residential',detail:'Apartment building'}, {id:'office',label:'Office',detail:'Commercial tower'}, {id:'warehouse',label:'Industrial',detail:'Logistics warehouse'}],
+  commodities: [{id:'oil',label:'Crude oil',detail:'Steel drum'}],
 } as const satisfies Record<MarketModelId, readonly {id:string;label:string;detail:string}[]>;
 export type AssetVariantId = typeof assetVariants[MarketModelId][number]['id'];

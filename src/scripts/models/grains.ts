@@ -1,0 +1,67 @@
+import * as THREE from 'three';
+
+export function createCorn():THREE.Group {
+  const group=new THREE.Group();
+  const cream=new THREE.MeshStandardMaterial({color:0xead9a0,roughness:.85});
+  const cob=new THREE.Mesh(new THREE.CylinderGeometry(.075,.16,1.64,24),cream);cob.position.y=1.01;cob.castShadow=true;group.add(cob);
+  const grain=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.55});
+  const kernels=new THREE.InstancedMesh(new THREE.SphereGeometry(1,10,7),grain,18*16);
+  const dummy=new THREE.Object3D();let n=0;
+  for(let row=0;row<18;row++)for(let column=0;column<16;column++){
+    const y=.28+row*.086,a=(column+(row%2)*.10)/16*Math.PI*2;
+    const taper=1-Math.pow(row/21,4),r=.165*taper;
+    dummy.position.set(Math.sin(a)*r,y,Math.cos(a)*r);dummy.rotation.set(0,a,0);dummy.scale.set(.036*taper,.047,.044);dummy.updateMatrix();kernels.setMatrixAt(n,dummy.matrix);
+    kernels.setColorAt(n,new THREE.Color().setHSL(.115+(column%3)*.003,.75,.50+(row%4)*.018));n++;
+  }
+  kernels.castShadow=true;group.add(kernels);
+  const leafMaterial=new THREE.MeshStandardMaterial({color:0x8e9953,roughness:.85,side:THREE.DoubleSide});
+  for(let leaf=0;leaf<5;leaf++){
+    const angle=leaf*Math.PI*2/5,positions:number[]=[],indices:number[]=[],veins:number[]=[];
+    for(let row=0;row<=20;row++){
+      const t=row/20,width=Math.sin(Math.PI*t)*.20,reach=.10+Math.pow(t,2)*.62;
+      const y=.10+t*1.30-Math.pow(t,3)*.65;
+      for(let column=0;column<=6;column++){
+        const side=(column/6-.5)*2,x=side*width,z=reach+(1-side*side)*.04;
+        positions.push(x*Math.cos(angle)+z*Math.sin(angle),y,z*Math.cos(angle)-x*Math.sin(angle));
+        if(row<20&&column<6){const i=row*7+column;indices.push(i,i+7,i+1,i+1,i+7,i+8);}
+      }
+      if(row<20){const nt=(row+1)/20,nr=.10+nt*nt*.62,ny=.10+nt*1.30-nt*nt*nt*.65;veins.push((reach+.04)*Math.sin(angle),y+.002,(reach+.04)*Math.cos(angle),(nr+.04)*Math.sin(angle),ny+.002,(nr+.04)*Math.cos(angle));}
+    }
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();
+    const husk=new THREE.Mesh(geometry,leafMaterial);husk.castShadow=true;group.add(husk);
+    const line=new THREE.BufferGeometry();line.setAttribute('position',new THREE.Float32BufferAttribute(veins,3));group.add(new THREE.LineSegments(line,new THREE.LineBasicMaterial({color:0xc3c68b})));
+  }
+  const stalk=new THREE.Mesh(new THREE.CylinderGeometry(.045,.06,.22,10),cream);stalk.position.y=.07;stalk.castShadow=true;group.add(stalk);
+  group.rotation.z=-.12;group.position.y=.04;return new THREE.Group().add(group);
+}
+
+export function createSoy():THREE.Group {
+  const group=new THREE.Group();
+  const shellMaterial=new THREE.MeshStandardMaterial({color:0xaa9766,roughness:.94,side:THREE.DoubleSide});
+  const seedMaterial=new THREE.MeshStandardMaterial({color:0xd8c899,roughness:.64});
+  const seedGeometry=new THREE.SphereGeometry(1,16,10);
+  const hilumMaterial=new THREE.MeshStandardMaterial({color:0x847553,roughness:.86});
+  const hilumGeometry=new THREE.SphereGeometry(1,8,6);
+  const bean=(parent:THREE.Group,x:number,y:number,z:number,size=.16)=>{
+    const seed=new THREE.Mesh(seedGeometry,seedMaterial);seed.position.set(x,y,z);seed.scale.set(size,size*.9,size*.86);seed.castShadow=true;parent.add(seed);
+    const hilum=new THREE.Mesh(hilumGeometry,hilumMaterial);hilum.scale.set(size*.14,size*.35,.008);hilum.position.set(x,y,z+size*.85);parent.add(hilum);
+  };
+  for(let pod=0;pod<3;pod++){
+    const body=new THREE.Group();const positions:number[]=[],indices:number[]=[];
+    // Three swollen seed chambers, tapered ends and an open front seam.
+    for(let row=0;row<=36;row++)for(let column=0;column<=20;column++){
+      const t=row/36,y=t*1.42;
+      const lobes=[.30,.70,1.10].reduce((sum,c)=>sum+Math.exp(-Math.pow((y-c)/.19,2)),0);
+      const radius=(.065+.13*lobes)*Math.sin(Math.PI*t)**.3;
+      const a=.70+column/20*(Math.PI*2-1.4);
+      positions.push(Math.sin(a)*radius,y,Math.cos(a)*radius);
+      if(row<36&&column<20){const i=row*21+column;indices.push(i,i+21,i+1,i+1,i+21,i+22);}
+    }
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();
+    const shell=new THREE.Mesh(geometry,shellMaterial);shell.castShadow=true;body.add(shell);
+    for(const y of [.30,.70,1.10])bean(body,0,y,.015,.155);
+    body.rotation.z=(pod-1)*.32;body.rotation.y=(pod-1)*.35;body.position.set((pod-1)*.35,.04,pod===1?.20:-.10);group.add(body);
+  }
+  bean(group,.56,.14,.58,.14);bean(group,-.42,.13,.54,.13);bean(group,.08,.13,.70,.13);
+  group.rotation.y=-.15;return group;
+}

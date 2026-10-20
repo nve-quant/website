@@ -143,3 +143,8 @@ Build only selected specimens; retain at most three in a least-recently-used cac
 
 ### Wheat shadow grounding
 Include stalks and twine in the wheat's directional shadow, align the cut ends with the receiving floor, and use a tighter, lighter contact shadow. Apply a smaller normal bias only for wheat so its thin stems remain connected in projection. Preserve the material colour and all other asset lighting settings.
+
+### Metals, grains and property — 20 October 2026
+Expanded the explorer to seven categories and nineteen specimens. Kept the existing category identifiers and original gold/gem geometry. Wheat and its corrected shadow move intact into Grains. Copper uses a rolled strip coil; aluminium uses a restrained cast finish. Corn uses instanced kernels and curved husks; soy shows opened dry pods and seed. Property uses original architectural miniatures with balconies, mullions, loading bays and roof equipment, avoiding implied photographs of real holdings. Repeated building details are instanced by material.
+
+The category row can wrap and becomes a two-column selector on mobile. Each new specimen has an original SVG companion for mobile, reduced motion and unavailable WebGL. Side arrows retain wrapping, category memory and accessible names. Models are created on demand, with the existing three-model eviction limit. No new dependencies, downloaded textures or models.

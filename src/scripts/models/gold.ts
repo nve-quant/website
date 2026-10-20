@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 
 /** A cast bullion study, with original specimen marks (not a refinery certification). */
-export type BullionMetal = 'gold' | 'silver' | 'palladium' | 'platinum';
+export type BullionMetal = 'gold' | 'silver' | 'palladium' | 'platinum' | 'aluminium';
 const finishes = {
+  aluminium: {rgb:[217,222,224],symbol:'Al',name:'ALUMINIUM',purity:'PRIMARY',edge:0xd9dee0,light:'#ffffff',mark:'#686f73',rough:.46},
   gold: {rgb:[242,192,96],symbol:'Au',name:'FINE GOLD',purity:'999.9',edge:0xf2c060,light:'#ffe4a0',mark:'#80551d',rough:.25},
   silver: {rgb:[228,232,236],symbol:'Ag',name:'FINE SILVER',purity:'999.9',edge:0xe4e8ec,light:'#ffffff',mark:'#61666c',rough:.22},
   palladium: {rgb:[191,199,208],symbol:'Pd',name:'PALLADIUM',purity:'999.5',edge:0xbfc7d0,light:'#f1f6ff',mark:'#4a535f',rough:.28},
@@ -32,7 +33,7 @@ export function createGold(metal:BullionMetal = 'gold'): THREE.Group {
     ctx.font='74px Georgia,serif';ctx.fillText(finish.symbol,256,213);
     ctx.font=`600 ${metal==='gold'?59:48}px sans-serif`;ctx.fillText(finish.name,256,389);
     ctx.font='96px sans-serif';ctx.fillText(finish.purity,256,522);
-    ctx.font='500 52px sans-serif';ctx.fillText('1000 g',256,632);
+    ctx.font='500 52px sans-serif';ctx.fillText(metal==='aluminium'?'METAL':'1000 g',256,632);
     ctx.font='21px monospace';ctx.fillText('SPECIMEN',256,790);
     ctx.font='28px monospace';ctx.fillText('000001',256,842);
     ctx.restore();

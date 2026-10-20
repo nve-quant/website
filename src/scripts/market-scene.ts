@@ -4,6 +4,9 @@ import {createFund} from './models/fund';
 import {createStock} from './models/stock';
 import {createEmerald} from './models/emerald';
 import {createOil,createWheat} from './models/commodities';
+import {createCorn,createSoy} from './models/grains';
+import {createCopper} from './models/metals';
+import {createRealEstate} from './models/real-estate';
 import type {AssetVariantId} from '../data/market-model';
 
 /** Original procedural geometry; no remote models, textures or market data. */
@@ -52,7 +55,8 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   const models=new Map<AssetVariantId,THREE.Group>();
   const builders:Record<AssetVariantId,()=>THREE.Group>={
     gold:()=>createGold(),silver:()=>createGold('silver'),palladium:()=>createGold('palladium'),platinum:()=>createGold('platinum'),
-    fund:createFund,stock:createStock,emerald:createEmerald,ruby:()=>createEmerald('ruby'),sapphire:()=>createEmerald('sapphire'),diamond:()=>createEmerald('diamond'),oil:createOil,wheat:createWheat,
+    fund:createFund,stock:createStock,emerald:createEmerald,ruby:()=>createEmerald('ruby'),sapphire:()=>createEmerald('sapphire'),diamond:()=>createEmerald('diamond'),oil:createOil,wheat:createWheat,corn:createCorn,soy:createSoy,copper:createCopper,aluminium:()=>createGold('aluminium'),
+    residential:()=>createRealEstate('residential'),office:()=>createRealEstate('office'),warehouse:()=>createRealEstate('warehouse'),
   };
   const disposeTree=(root:THREE.Object3D)=>{
     const geometries=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>(),textures=new Set<THREE.Texture>();

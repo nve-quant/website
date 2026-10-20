@@ -1,6 +1,7 @@
 ---
 import {marketModels,assetVariants} from '../data/market-model';
 import '../styles/market-model.css';
+import AdditionalAssetFallbacks from './AdditionalAssetFallbacks.astro';
 ---
 <section id="asset-studies" class="market-explorer" aria-labelledby="explorer-title" data-market-explorer>
   <div class="explorer-heading"><div><p>Tokenized asset studies</p><h2 id="explorer-title">The asset shapes<br/>the market.</h2></div><p>Explore how reference prices, liquidity and redemption vary by asset.</p></div>
@@ -9,7 +10,7 @@ import '../styles/market-model.css';
     <div class="model-stage">
       <div class="model-canvas" data-model-canvas role="button" tabindex="-1" aria-hidden="true" aria-label="Pause automatic asset rotation" aria-pressed="false" aria-describedby="model-interaction-help"></div>
       <div class="model-fallback" aria-hidden="true">
-        <svg class="fallback-gold" viewBox="0 0 500 400"><ellipse cx="250" cy="313" rx="169" ry="41" fill="#c4cdac"/><g stroke="#80642c" stroke-width="2"><path d="m100 210 185-70 110 55-186 78Z" fill="#e4bc62"/><path d="m100 210 109 63v46l-109-63Z" fill="#a48237"/><path d="m209 273 186-78v45l-186 79Z" fill="#c79a42"/><path d="m137 155 143-56 91 44-145 60Z" fill="#f4d78e"/><path d="m137 155 89 48v40l-89-48Z" fill="#b08a3d"/><path d="m226 203 145-60v40l-145 60Z" fill="#d5ab50"/></g><g transform="matrix(.83 -.34 .8 .43 137 155)" fill="#80551d" text-anchor="middle" font-family="Arial,sans-serif"><text data-bullion-stamp x="86" y="40" font-size="15" font-weight="600">FINE GOLD</text><text data-bullion-purity x="86" y="66" font-size="24">999.9</text><text x="86" y="87" font-size="13">1000 g</text></g></svg>
+        <svg class="fallback-gold" viewBox="0 0 500 400"><ellipse cx="250" cy="313" rx="169" ry="41" fill="#c4cdac"/><g stroke="#80642c" stroke-width="2"><path d="m100 210 185-70 110 55-186 78Z" fill="#e4bc62"/><path d="m100 210 109 63v46l-109-63Z" fill="#a48237"/><path d="m209 273 186-78v45l-186 79Z" fill="#c79a42"/><path d="m137 155 143-56 91 44-145 60Z" fill="#f4d78e"/><path d="m137 155 89 48v40l-89-48Z" fill="#b08a3d"/><path d="m226 203 145-60v40l-145 60Z" fill="#d5ab50"/></g><g transform="matrix(.83 -.34 .8 .43 137 155)" fill="#80551d" text-anchor="middle" font-family="Arial,sans-serif"><text data-bullion-stamp x="86" y="40" font-size="15" font-weight="600">FINE GOLD</text><text data-bullion-purity x="86" y="66" font-size="24">999.9</text><text data-bullion-weight x="86" y="87" font-size="13">1000 g</text></g></svg>
         <svg class="fallback-fund" viewBox="0 0 500 400"><ellipse cx="250" cy="323" rx="150" ry="32" fill="#c4cdac"/>{[0,1,2,3].map(i=><g transform={`translate(0 ${-i*44})`} stroke="#476654" stroke-width="2"><path d="m130 260 120-44 120 44-120 44Z" fill="#e9efd7"/><path d="m130 260 120 44v16l-120-44Z" fill="#668a6b"/><path d="m250 304 120-44v16l-120 44Z" fill="#adc795"/></g>)}</svg>
         <svg class="fallback-stock" viewBox="0 0 500 400"><ellipse cx="250" cy="313" rx="181" ry="26" fill="#c4cdac"/><g transform="translate(45 65) rotate(-7 205 132)"><path d="M0 12Q200-8 410 10L410 260Q210 245 0 270Z" fill="#d2c5a6"/><path d="M0 8Q200-12 410 6L410 256Q210 241 0 266Z" fill="#f4edda"/><g fill="none" stroke="#244452"><rect x="14" y="23" width="382" height="222" stroke-width="2"/><rect x="20" y="29" width="370" height="210" stroke-width=".8"/><rect x="28" y="37" width="354" height="194" stroke-width="1.5"/>{[44,366].map(x=>[53,215].map(y=><g><circle cx={x} cy={y} r="13"/><circle cx={x} cy={y} r="9"/></g>))}<path d="m181 72 24-14 24 14Zm0 4h48m-43 4v24m12-24v24m12-24v24m12-24v24m-47 3h60M112 155h188M170 205h79m23 0h78" stroke-width="1"/></g><g fill="#244452" text-anchor="middle" font-family="Georgia,serif"><text x="205" y="120" font-size="10">SHARE CERTIFICATE</text><text x="205" y="147" font-size="27">Common stock</text><text x="205" y="172" font-size="8">Registered ownership</text><text x="205" y="226" font-size="7">ILLUSTRATIVE SPECIMEN</text></g><circle cx="100" cy="201" r="21" fill="#c8a35b" stroke="#8a682e"/><circle cx="100" cy="201" r="16" fill="none" stroke="#8a682e"/><text x="100" y="204" text-anchor="middle" font-family="Georgia,serif" font-size="6" fill="#6e4c20">SPECIMEN</text></g></svg>
         <svg class="fallback-unique" viewBox="0 0 500 400"><ellipse cx="250" cy="332" rx="122" ry="26" fill="#c4cdac"/><g stroke="#295644" stroke-width="2"><path d="m250 60 105 80-20 131-85 55-108-99 13-105Z" fill="#619b75"/><path d="m250 60-15 111 120-31Z" fill="#b6d7a4"/><path d="m155 122 80 49 15-111Z" fill="#88ba8a"/><path d="m235 171 100 100 20-131Z" fill="#396f56"/><path d="m235 171 15 155 85-55Z" fill="#234d3f"/><path d="m142 227 108 99-15-155Z" fill="#76a17c"/></g></svg>
@@ -32,11 +33,13 @@ import '../styles/market-model.css';
             <g fill="none" stroke="#77817c" stroke-width="5"><path d="M163 141Q250 177 337 141M163 271Q250 307 337 271M164 310Q250 345 336 310"/></g>
             <text x="250" y="220" fill="#263638" font-size="22" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600">CRUDE OIL</text>
           </g>
-          <g data-commodity-wheat>
+
+        </svg>
+        <svg class="fallback-wheat" viewBox="0 0 500 400"><ellipse cx="250" cy="330" rx="45" ry="10" fill="#c4cdac"/>          <g>
             {Array.from({length:11},(_,i)=>{const x=158+i*18,y=92+Math.abs(i-5)*10;return <g transform={`rotate(${(i-5)*3} ${x} ${y})`}><path d={`M250 329Q${x} 245 ${x} ${y}`} fill="none" stroke="#9a7e43" stroke-width="2"/>{Array.from({length:6},(_,j)=><g><ellipse cx={x-6} cy={y+j*10} rx="5" ry="10" transform={`rotate(-35 ${x-6} ${y+j*10})`} fill="#d7b475" stroke="#9a7e43"/><ellipse cx={x+6} cy={y+j*10} rx="5" ry="10" transform={`rotate(35 ${x+6} ${y+j*10})`} fill="#c6a25c" stroke="#9a7e43"/><path d={`M${x-10} ${y+j*10}l-8-25M${x+10} ${y+j*10}l8-25`} stroke="#b69550" stroke-width="1"/></g>)}</g>;})}
             <path d="M230 270l39 2m-38 4 37 2m-36 4 35 2" stroke="#806840" stroke-width="4"/>
-          </g>
-        </svg>
+          </g></svg>
+        <AdditionalAssetFallbacks/>
       </div>
       <div class="specimen-controls" data-specimen-controls hidden role="group" aria-label="Choose an asset specimen">
         <button type="button" class="specimen-arrow specimen-previous" data-specimen-step="-1" aria-label="Previous specimen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h12"/></svg></button>

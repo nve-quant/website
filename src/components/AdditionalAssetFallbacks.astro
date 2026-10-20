@@ -1,0 +1,51 @@
+---
+// Original vector companions for mobile, reduced motion and unavailable WebGL.
+---
+<svg class="fallback-copper" viewBox="0 0 500 400">
+  <ellipse cx="250" cy="326" rx="150" ry="24" fill="#c4cdac"/>
+  <path d="M142 295h220v25H142Z" fill="#928369"/>
+  <path d="M190 80h95c140 0 140 240 0 240h-95Z" fill="#a96940" stroke="#70462d" stroke-width="2"/>
+  <ellipse cx="190" cy="200" rx="96" ry="120" fill="#d29669" stroke="#70462d" stroke-width="2"/>
+  {[...Array(12)].map((_,i)=><ellipse cx="190" cy="200" rx={40+i*4.5} ry={50+i*5.7} fill="none" stroke="#925a39" stroke-width=".8"/>)}
+  <ellipse cx="190" cy="200" rx="35" ry="44" fill="#5e4936"/><path d="M188 158q28 43 0 84q62-12 62-42t-62-42" fill="#935f3e"/>
+</svg>
+<svg class="fallback-corn" viewBox="0 0 500 400">
+  <ellipse cx="250" cy="337" rx="86" ry="17" fill="#c4cdac"/>
+  <path d="M246 335Q178 273 199 171Q205 248 248 274Q294 229 300 172Q330 285 254 335Z" fill="#88964d" stroke="#65713b" stroke-width="2"/>
+  <path d="M222 260Q208 122 247 61Q289 120 278 260Z" fill="#cc9f49"/>
+  {Array.from({length:18},(_,row)=>Array.from({length:5},(_,col)=>{const width=1-Math.pow((17-row)/21,3);return <ellipse cx={250+(col-2)*12*width} cy={81+row*10} rx={5.9*width} ry="5" fill={['#dfb65f','#ecc879','#e5bd65'][col%3]} stroke="#c79c4c" stroke-width=".6"/>;}))}
+  <path d="M246 337Q186 299 167 217Q227 246 253 317Q284 263 324 228Q307 313 254 338Z" fill="#a1aa67" stroke="#748044" stroke-width="2"/>
+  <path d="M249 327q-48-47-72-91m77 91q34-50 58-80" stroke="#cad09a" fill="none" stroke-width="2"/>
+</svg>
+<svg class="fallback-soy" viewBox="0 0 500 400">
+  <ellipse cx="250" cy="334" rx="120" ry="21" fill="#c4cdac"/>
+  {[-1,0,1].map(i=><g transform={`rotate(${i*20} 250 325) translate(${i*25} 0)`}>
+    <path d="M250 62q-41 31-25 70q-28 33-8 67q-26 38-4 67q-3 39 37 63q40-27 36-63q21-35-4-67q18-38-9-67q14-41-23-70Z" fill="#b7a57b" stroke="#89764f" stroke-width="2"/>
+    <path d="M250 80v228" stroke="#786742" stroke-width="3"/>
+    {[126,197,265].map(y=><g><ellipse cx="251" cy={y} rx="22" ry="24" fill="#d8c798" stroke="#ac9867"/><path d={`M255 ${y-7}q5 7 0 14`} fill="none" stroke="#89764d" stroke-width="3"/></g>)}
+  </g>)}
+  {[205,265,305].map((x,i)=><g transform={`translate(${x} ${326+i%2*9}) rotate(${i*40})`}><ellipse rx="16" ry="13" fill="#d8c798" stroke="#ac9867"/><path d="M-4-3q4 6 8 0" fill="none" stroke="#89764d" stroke-width="2"/></g>)}
+</svg>
+{(['residential','office'] as const).map(kind=>{
+  const office=kind==='office',floors=office?10:5;
+  return <svg class={`fallback-${kind}`} viewBox="0 0 500 400">
+    <path d="m102 305 175-57 137 60-174 60Z" fill="#b7bfb0"/>
+    <path d="m152 105 108-37 103 46v204l-107 39-104-47Z" fill={office?'#668080':'#aa8870'} stroke="#53655c" stroke-width="1"/>
+    <path d="m152 105 104 44 107-35-103-46Z" fill="#d6d5c8"/><path d="M256 149v208l107-39V114Z" fill={office?'#4a666b':'#92745e'}/>
+    {Array.from({length:floors},(_,floor)=>[0,1,2].map(col=><g>
+      <path d={`m${162+col*29} ${122+col*12+floor*(office?19:37)} 21 9v${office?14:25}l-21-9Z`} fill="#5c7776" stroke="#c3c6b9" stroke-width={office?1:2}/>
+      <path d={`m${266+col*29} ${156-col*10+floor*(office?18:36)} 21-7v${office?13:25}l-21 7Z`} fill="#7c9692" stroke="#b9bdae" stroke-width={office?1:2}/>
+      {!office&&floor>0&&<path d={`m${159+col*29} ${151+col*12+floor*37} 26 11 9-3-26-11Z`} fill="#dbd8c9"/>}
+    </g>))}
+    <path d="m198 102 32-11 28 12v15l-32 11-28-12Z" fill="#9baba0"/><path d="m198 102 28 12 32-11-28-12Z" fill="#bec5b8"/>
+  </svg>;
+})}
+<svg class="fallback-warehouse" viewBox="0 0 500 400">
+  <path d="m50 235 205-81 201 95-204 94Z" fill="#bac1b1"/>
+  <path d="m87 201 174-66 142 66v73l-178 71-138-66Z" fill="#cfcebc"/>
+  <path d="m225 250 178-72v96l-178 71Z" fill="#a6ad9f"/>
+  <path d="m79 200 88-65 101-9 145 68-92 10-96 47Z" fill="#4e605c" stroke="#354b43" stroke-width="2"/>
+  <path d="m167 135 154 69" stroke="#89958a" stroke-width="2"/>
+  {[0,1,2].map(i=><g><path d={`m${246+i*51} ${253-i*20} 35-14v49l-35 14Z`} fill="#50635a"/>{[0,1,2,3,4,5].map(j=><path d={`m${250+i*51} ${258-i*20+j*6} 27-11`} stroke="#acb6a5" stroke-width="3"/>)}<path d={`m${244+i*51} ${305-i*20} 38-15 12 7-38 15Z`} fill="#8d9b8a"/></g>)}
+  {[0,1,2,3,4,5,6,7,8].map(i=><path d={`m${96+i*14} ${217+i*5}v55`} stroke="#a8b09f" stroke-width="2"/>)}
+</svg>
