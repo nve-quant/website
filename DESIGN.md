@@ -61,3 +61,10 @@ Next: review this interaction and approve business copy before expanding service
 
 ### Asset detail refinement
 Refined the three models with tighter gold bevels and a local 256×512 stamp texture, metallic fund layers with perimeter inlays, and an original 112-triangle stepped emerald cut. Reduced fill light/exposure to preserve material contrast. Reused ingot and share geometry. Kept the 1.75 pixel-ratio cap, 1024px shadow map, lazy loading and on-demand rendering; no bloom, transmission pass, downloaded textures or new dependencies.
+
+### Bullion / studio rendering pass
+The owner rejected the incremental detail pass as still too basic. Rebuilt the assets as product studies: tapered cast bullion with rounded lips, recessed specimen typography and surface variation; enamel fund-share certificates with original guilloché engraving; and an emerald cut with optical depth. A custom photographic studio reflection environment replaces the general room. Removed the decorative pedestal, orbit ring and crosshair. Tightened the camera framing so material detail is legible. Gold typography depicts an illustrative specimen; it is not evidence of a refinery certification or an asset held by the business.
+
+Bullion silhouette/reference context: [Argor-Heraeus cast bar catalogue](https://www.argor-heraeus.com/en/products-and-services/products/cast-and-minted-bars/1000g-au-cast-classic-999.9/). No manufacturer logos, images or model files are reused.
+
+Performance: one visible asset group, original procedural geometry and generated maps, no external asset fetches. Reflection environment is generated once. Retain DPR cap 1.75 and one 1024² shadow map; the gemstone uses one half-resolution transmission pass. Rendering stops when settled/offscreen, and initialization waits for a visible document and model area. Dispose shared maps once on teardown.

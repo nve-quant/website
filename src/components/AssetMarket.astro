@@ -7,7 +7,6 @@ import '../styles/market-model.css';
   <fieldset class="asset-selector"><legend class="visually-hidden">Choose an illustrative asset type</legend>{marketModels.map((model,index)=><label><input type="radio" name="market-asset" value={model.id} checked={index===0} aria-controls={`model-${model.id}`}/><span>{model.label}</span></label>)}</fieldset>
   <div class="explorer-body">
     <div class="model-stage">
-      <div class="model-axis axis-a" aria-hidden="true"></div><div class="model-axis axis-b" aria-hidden="true"></div>
       <div class="model-canvas" data-model-canvas aria-hidden="true"></div>
       <div class="model-fallback" aria-hidden="true">
         <svg class="fallback-gold" viewBox="0 0 500 400"><ellipse cx="250" cy="313" rx="169" ry="41" fill="#c4cdac"/><g stroke="#80642c" stroke-width="2"><path d="m100 210 185-70 110 55-186 78Z" fill="#e4bc62"/><path d="m100 210 109 63v46l-109-63Z" fill="#a48237"/><path d="m209 273 186-78v45l-186 79Z" fill="#c79a42"/><path d="m137 155 143-56 91 44-145 60Z" fill="#f4d78e"/><path d="m137 155 89 48v40l-89-48Z" fill="#b08a3d"/><path d="m226 203 145-60v40l-145 60Z" fill="#d5ab50"/></g></svg>

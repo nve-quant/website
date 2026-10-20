@@ -30,11 +30,11 @@ export function initMarketExplorer(root: HTMLElement) {
     controls.hidden = !enabled || !scene;
     root.dataset.renderer = enabled && scene ? 'ready' : 'fallback';
     if (!enabled) stopSpin();
-    if (!enabled || !intersecting || scene || loading || destroyed) return;
+    if (!enabled || !intersecting || document.hidden || scene || loading || destroyed) return;
     loading = true;
     try {
       const {createMarketScene} = await import('./market-scene');
-      if (destroyed || !desktop.matches || reduced.matches) return;
+      if (destroyed || !desktop.matches || reduced.matches || document.hidden || !intersecting) return;
       scene = createMarketScene(host, () => {
         failed = true;
         root.dataset.renderer = 'fallback';
@@ -78,7 +78,7 @@ export function initMarketExplorer(root: HTMLElement) {
     intersecting = entries[0].isIntersecting;
     void update();
   }, {rootMargin:'100px'});
-  observer.observe(root);
+  observer.observe(host);
   window.addEventListener('pagehide', (event) => {
     if (event.persisted) { scene?.visible(false); return; }
     destroyed = true;

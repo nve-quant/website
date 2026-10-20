@@ -68,3 +68,9 @@ Select a direction. Confirm copy claims and research date, then develop final to
 
 ### Asset detail refinement
 All three refined models visually reviewed in Chrome; captures are refined-gold.png, refined-fund.png and refined-emerald.png. Responsive harness passed 375/768/1440px without overflow or broken section targets. Type checks and build pass. Same render resolution and shadow-map allocation as before; a single 256×512 generated stamp texture and small procedural geometry details add no asset requests. GPU frame times on low-end hardware have not been benchmarked; no universal speed guarantee is claimed. Vite’s existing lazy-chunk size advisory remains.
+
+### Studio model rebuild
+- Replaced the incremental models with cast bullion, enamel certificates and a transmissive emerald. Inspected gold/gem in Chrome and all three models in Safari. Captures: studio-gold.png, studio-fund.png, studio-emerald.png.
+- Fixed an opaque floor canvas covering the first caption line: captions now sit above the canvas. Tightened camera framing and inspected the complete model at 768px; studio-tablet-768.png records the result. Responsive harness passed 375/768/1440px with no horizontal overflow and zero broken section targets.
+- Independent structural audit: gold 1,872 triangles, fund 8,636, emerald 264. Modest geometry; material/texture and transmission costs matter more. Reduced fund shadow casters, removed per-pixel temporary array allocations in gold texture generation, capped gemstone transmission to half resolution, and verified texture disposal. These are structural/Node checks, not a real-device GPU benchmark.
+- Type/content check and static build passed; existing lazy chunk advisory remains. No new dependencies or model/texture downloads. Compressed lazy scene bundle measured about 141 KiB including Three.js; real-device FPS and load timings remain a launch check.
