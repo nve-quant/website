@@ -27,6 +27,12 @@ for(let t=0;t<64;t+=.05){
     });
   }
   assert(r.left>=32&&r.left+r.width<=508);assert(r.price>=32&&r.price<=508);assert.equal(r.width,176);
+  assert(Math.abs(r.price-r.center)<32,'Managed range follows price without the previous long lag');
+  for(const level of r.poolLevels){
+    assert.equal(level.total,level.other+level.managed,'Pool liquidity includes the managed position');
+    assert(level.managed===0||level.managed===r.managedHeight,'One range has constant liquidity L');
+    assert(level.total>0&&level.total<=181,'Pool bars remain inside the plot');
+  }
   assert(!/NaN|Infinity/.test(r.bars+b.fill+b.line+b.volume));
 }
 const quotes=Array.from({length:9},(_,i)=>bookGeometry(i*.12));
@@ -46,6 +52,12 @@ for(const time of [0,.11,.25,1.34,8.51]){
 }
 assert(Math.abs(rangeGeometry(0).center-rangeGeometry(5-1e-5).center)<.001);
 assert(Math.abs(rangeGeometry(0).price-rangeGeometry(5-1e-5).price)<.001);
+assert.equal(rangeGeometry(.75).center,270,'A small explanatory delay remains');
+assert(rangeGeometry(.9).center>270,'Repositioning starts soon after price movement');
+for(const t of [.9,1.3,2.8,3.3,4.5]){
+  assert(Math.abs(rangeGeometry(t).center-rangeGeometry(t-.1875).price)<1e-8,'Range tracks the delayed price path');
+}
+assert.equal(new Set([...rangeGeometry(1).bars.matchAll(/v-(\d+)/g)].map(match=>match[1])).size,1,'Managed bars are flat within the selected range');
 
 // Exercise lifecycle without a browser: offscreen, hidden, pause, motion preference and teardown.
 const pending=new Map();let next=0,observe;

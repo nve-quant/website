@@ -7,7 +7,7 @@ export function initLiquidityAnimation(root: HTMLElement) {
   const phase=root.querySelector<HTMLElement>('[data-phase]')!;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const nodes=new Map<string,SVGElement>();
-  root.querySelectorAll<SVGElement>('svg [data-trade-fill],svg [data-trade-line],svg [data-trade-volume],svg [data-trade-dot],svg [data-last-price],svg [data-last-price-rule],svg [data-range-window],svg [data-position-bars],svg [data-position-outline],svg [data-range-bracket],svg [data-price-marker],svg [data-depth-bid-fill],svg [data-depth-ask-fill],svg [data-depth-bid-line],svg [data-depth-ask-line]').forEach(node=>{
+  root.querySelectorAll<SVGElement>('svg [data-trade-fill],svg [data-trade-line],svg [data-trade-volume],svg [data-trade-dot],svg [data-last-price],svg [data-last-price-rule],svg [data-range-window],svg [data-position-bars],svg [data-pool-bars],svg [data-position-outline],svg [data-range-bracket],svg [data-price-marker],svg [data-depth-bid-fill],svg [data-depth-ask-fill],svg [data-depth-bid-line],svg [data-depth-ask-line]').forEach(node=>{
     for(const key of Object.keys(node.dataset)) nodes.set(key,node);
   });
   const bookRows = (side: string) => Array.from(root.querySelectorAll<SVGGElement>(`[data-book-${side}]`)).map(row=>({
@@ -80,7 +80,7 @@ export function initLiquidityAnimation(root: HTMLElement) {
       }
     }else{
       const g=rangeGeometry(elapsed);
-      attr('positionBars','d',g.bars); attr('positionOutline','d',g.outline);
+      attr('positionBars','d',g.bars); attr('positionOutline','d',g.outline);attr('poolBars','d',g.background);
       attr('rangeWindow','x',g.left);
       attr('rangeBracket','transform',`translate(${g.center} 0)`);
       attr('priceMarker','transform',`translate(${g.price} 0)`);

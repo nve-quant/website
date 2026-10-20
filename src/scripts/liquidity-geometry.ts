@@ -48,22 +48,29 @@ export function bookGeometry(seconds: number) {
 
 export function rangeGeometry(seconds: number) {
   const t=(seconds*3.2)%16;
-  // Price moves first; allocation follows after a deliberate observation period.
-  const price=270+58*ease((t-2)/3)-104*ease((t-8)/3)+46*ease((t-13)/2);
-  const center=270+58*ease((t-5)/2)-104*ease((t-11)/2)+46*ease((t-15));
+  // Same path with a short illustrative lag (~188ms), not an execution-speed claim.
+  const priceAt=(time:number)=>270+58*ease((time-2)/3)-104*ease((time-8)/3)+46*ease((time-13)/2);
+  const price=priceAt(t),center=priceAt(t-.6);
+  const left=center-88,width=176,managedHeight=110;
+  const poolLevels=[];
   let bars='', background='';
   for(let i=0;i<48;i++){
     const x=32+i*10;
-    const base=17+72*Math.exp(-Math.pow((x-260)/158,2)) + 7*Math.sin(i*.68);
-    background+=`M${x} 236v-${fixed(base)}h7v${fixed(base)}Z`;
+    // Liquidity L per price interval, not cumulative depth or token value.
+    // Other LP ranges form a stepped profile; pool totals include our range.
+    const sample=x+3.5;
+    const other=15+(sample>=86&&sample<176?18:0)+(sample>=156&&sample<356?25:0)+(sample>=296&&sample<456?14:0);
+    const managed=sample>=left&&sample<left+width?managedHeight:0,total=other+managed;
+    poolLevels.push({x,other,managed,total});
+    background+=`M${x} 236v-${total}h7v${total}Z`;
   }
   for(let i=0;i<22;i++){
     const x=center-86+i*8;
-    const h= i<3||i>18?55:i<6||i>15?91:137;
+    const h=managedHeight;
     bars+=`M${fixed(x)} 236v-${h}h5.5v${h}Z`;
   }
-  const left=center-88, width=176;
-  const outline=`M${fixed(left)} 236V181h24v-36h24v-46h80v46h24v36h24v55`;
-  const phase=t<2?'Positioned around price':t<5?'Price moves':t<7?'Ranges rebalance':t<8?'Positioned around price':t<11?'Price moves':t<13?'Ranges rebalance':t<15?'Price moves':'Ranges rebalance';
-  return {price,center,left,width,bars,background,outline,phase};
+  const outline=`M${fixed(left)} 236V${236-managedHeight}h${width}V236`;
+  const moving=[[2,5],[8,11],[13,15]];
+  const phase=moving.some(([start])=>t>=start&&t<start+.6)?'Price moves':moving.some(([start,end])=>t>=start+.6&&t<end+.6)?'Range rebalances':'Positioned around price';
+  return {price,center,left,width,bars,background,outline,phase,managedHeight,poolLevels};
 }
