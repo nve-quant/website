@@ -97,3 +97,7 @@ Keep LaunchLab, Meteora DBC, Pump.fun and Moonit apart from Solana LP products. 
 ### Owner update: venue artwork and Moonit removal
 Owner supplied cake.svg, pump.svg and orca.svg and requested their use. Remove Moonit from all current website coverage and FAQ copy; owner described it as no longer operational. Treat this as a coverage/display decision, without publishing an independently unverified closure claim. Earlier inventory mentions are historical.
 Owner explicitly requested vector versions derived from the existing Tessera V and SolFi images. These are reconstructions, not newly sourced official brand masters. Retain raster originals outside public assets for provenance.
+
+### Jupiter Studio and transparent marks
+Owner confirmed the requested Jupiter launch platform is Jupiter Studio, distinct from Raydium LaunchLab and Jupiter's routing aggregator. Add it under current Solana launchpads with the broad Token launches label. Owner supplied jup.svg and requested Studio's different palette. No aggregator listing or additional pool implementation claim inferred.
+Remove the square backgrounds from Tessera and SolFi. SolFi needs a light-surface monochrome treatment so its previously white lettering remains visible on the site's pale ground.

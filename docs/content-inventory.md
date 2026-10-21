@@ -264,3 +264,7 @@ Local logo search: inventoried SVG files including ignored files in Developer, D
 Owner requested removing Moonit entirely from the current coverage list and logo assets, describing it as no longer operational. Removed from shared coverage and the DEX FAQ. Do not turn this display decision into a public closure claim. Historical inventory entries above remain a record of previous scope.
 
 Owner supplied original PancakeSwap, Pump and Orca SVG files, and authorized reconstructing Tessera V and SolFi SVGs from the existing images. Published replacements are identified in docs/assets.md; the two reconstructed images are derivative vector approximations, not official vector masters. Source rasters preserved outside public assets for audit/reference.
+
+### Jupiter Studio coverage — 21 October 2026
+Owner explicitly confirmed Jupiter Studio when asked to distinguish it from Raydium LaunchLab and Jupiter LFG. Publish Jupiter Studio in current Solana launchpads, with Token launches; update the shared directory and DEX FAQ. This does not add Jupiter's routing aggregator to the venue list.
+Sources: https://studio.jup.ag/ describes its launch/manage/verify suite; https://studio.jup.ag/launch identifies the token creation workflow. Product palette reference: https://studio.jup.ag/images/banner.jpg. No specific curve, contract or pool-family support inferred beyond the owner-authorized launchpad entry.

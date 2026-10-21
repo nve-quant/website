@@ -6,7 +6,7 @@
  <clipPath id="edge"><ellipse cx="128" cy="126.5" rx="96.5" ry="99.5"/></clipPath>
  <filter id="blend" x="-3%" y="-3%" width="106%" height="106%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation=".55"/></filter>
 </defs>
-<path fill="#071216" d="M0 0H256V256H0Z"/>
+
 <ellipse cx="128" cy="126.5" rx="108" ry="111" fill="url(#halo)"/>
 <ellipse cx="128" cy="126.5" rx="96.5" ry="99.5" fill="url(#sphere)"/>
 <g clip-path="url(#edge)"><g opacity=".88" filter="url(#blend)">

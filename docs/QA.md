@@ -353,3 +353,18 @@ Logo-search limitation: additional local Solana/launchpad SVGs were not located 
 [Source/vector comparison](screenshots/venue-vector-comparison.png).
 [Home 375](screenshots/venue-vectors-home-375.png), [Home 768](screenshots/venue-vectors-home-768.png), [Home 1440](screenshots/venue-vectors-home-1440.png).
 [DEX 375](screenshots/venue-vectors-dex-375.png), [DEX 768](screenshots/venue-vectors-dex-768.png), [DEX 1440](screenshots/venue-vectors-dex-1440.png).
+
+## Transparent venue marks and Jupiter Studio — 21 October 2026
+
+- Removed Tessera/SolFi full-canvas backgrounds. Canvas pixel checks in Chrome confirm alpha=0 at all four corners; SolFi's empty ring interior is transparent. Tessera's planet remains opaque. SolFi's lettering/geometry uses a dark-on-light variant for legibility.
+- Jupiter Studio added only to Solana launchpads and the DEX FAQ, following explicit owner clarification. Supplied Jupiter path geometry preserved; gradient visually matched to the Studio banner, with original uploaded SVG archived.
+- npm run check: 78 files, no errors/warnings/hints. Static build and five-route link/asset/noindex/isolation checks pass. Existing Three.js chunk-size warning unchanged.
+- Both routes checked at 375×812, 768×1000 and 1440×1000, including every venue row and footnote. No overflow, broken assets, console/page errors or HTTP failures. Four Solana launchpad entries include Jupiter Studio; no aggregator entry or Moonit restored.
+- Browser screenshots captured for all six cases; desktop home, tablet DEX and mobile home inspected visually. Enlarged and actual-size transparent-logo comparison inspected on the site background.
+- Hover colour, reduced-motion 0s transitions, visible keyboard focus, service navigation and FAQ keyboard opening pass.
+- Validation harness corrections: initial transparency sample hit SolFi's lettering rather than empty interior; moved sample below the wordmark. A broad test-string replacement initially put Jupiter Studio in the expected trading group; corrected expected group to launchpads. Neither failure indicated a production rendering/category defect.
+- No JavaScript or dependency changes.
+
+[Transparent logo comparison](screenshots/transparent-venue-logos.png).
+[Home 375](screenshots/transparent-studio-home-375.png), [Home 768](screenshots/transparent-studio-home-768.png), [Home 1440](screenshots/transparent-studio-home-1440.png).
+[DEX 375](screenshots/transparent-studio-dex-375.png), [DEX 768](screenshots/transparent-studio-dex-768.png), [DEX 1440](screenshots/transparent-studio-dex-1440.png).

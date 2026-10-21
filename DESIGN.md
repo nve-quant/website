@@ -223,3 +223,7 @@ Add concise, per-protocol EVM chain labels from the supplied uniswap-mm registry
 
 ### Vector venue artwork
 Use the owner's original PancakeSwap, Pump and Orca SVGs unchanged. Pump.fun and PumpSwap share the provided Pump mark. Reconstruct SolFi's circular geometry with traced lettering; reconstruct Tessera's photographic avatar using traced colour contours, a smooth sphere boundary and SVG lighting. Tessera is necessarily an approximation of the raster texture. No embedded raster, invented lettering, JavaScript animation or remote resource in either SVG. Preserve hover desaturation behaviour and the existing 40px logo layout. Remove Moonit rather than leaving a gap or placeholder.
+
+### Transparent venue marks and Jupiter Studio
+Remove the full-canvas background paths from Tessera and SolFi. Keep Tessera's sphere shading and transparent halo. Invert SolFi's monochrome light/dark treatment for the pale site ground, preserving its path geometry and transparent interior. No replacement backing tile.
+Use supplied Jupiter contours with the warm yellow/pink/lavender/mint Studio palette visually matched against its official banner. Retain the supplied circular dark badge for Jupiter, which is part of that mark. Add Jupiter Studio to launchpads, restoring the fourth entry naturally. Preserve grayscale at rest, colour on hover and reduced-motion behaviour.

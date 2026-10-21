@@ -131,6 +131,7 @@ export const dexDeployments: DexDeployment[] = [
  {logo:'/images/venues/raydium.svg',protocol:'Raydium LaunchLab',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
  {logo:'/images/venues/meteora.svg',protocol:'Meteora DBC',network:'Solana',category:'launchpads',products:['Dynamic Bonding Curve'],status:'available'},
  {logo:'/images/venues/pump.svg',protocol:'Pump.fun',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
+ {logo:'/images/venues/jupiter-studio.svg',protocol:'Jupiter Studio',network:'Solana',category:'launchpads',products:['Token launches'],status:'available'},
  {logo:'/images/venues/phoenix.webp',protocol:'Phoenix',network:'Solana',category:'trading',products:['Spot order book'],status:'available'},
  {logo:'/images/venues/solfi.svg',protocol:'SolFi',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
  {logo:'/images/venues/tessera.svg',protocol:'Tessera V',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
