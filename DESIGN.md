@@ -183,3 +183,6 @@ Corn husks now peel outside the kernel envelope below the first row; centre-vein
 Warehouse bays use one U-shaped gasket frame, recessed shutter and independent lower bumpers. Remove the stacked full-width backplate, oversized outer jambs and duplicate leveler-edge plate; slim the canopy supports. Preserve other property types.
 
 Replace upright soybean tubes with a low split-pod composition: separate inner/outer shell surfaces with actual rim thickness, an opened opposite valve, cream seeds with small hila and scattered grounded seeds. Coffee uses an asymmetric flattened sack, folded uneven cuff, quieter printed mark and flattened cleft-faced green beans. Appearance still requires browser review; geometry checks alone do not establish photorealism.
+
+### Direct attachment and surface support correction
+Owner found detached corn leaves and floating coffee beans, and rejected the split-soybean-pod composition. Corn husks now start with a finite-width root inside the stalk radius at y=.10, then peel clear below the first kernel row. Coffee no longer stacks kernels on bounding-box tops: each visible kernel rests on the same filled height-field mesh used by the scene. Footprint bounds only reject overlap. Soy now uses a loose sample of16 nearly spherical dry yellow seeds, small inset hila, subtle variation and actual per-seed ground contact. No pods.

@@ -31,13 +31,33 @@ for(const id of ids){
         object.getMatrixAt(i,matrix);const box=new THREE.Box3();
         for(let j=0;j<vertices.count;j++)box.expandByPoint(point.fromBufferAttribute(vertices,j).applyMatrix4(matrix));
         for(const previous of boxes){const overlap=box.clone().intersect(previous);assert(overlap.isEmpty()||overlap.max.y-overlap.min.y<1e-6,'Coffee kernels interpenetrate');}
+        if(box.min.y>.1){
+          const bed=model.getObjectByName('coffee support surface');assert(bed,'Coffee needs a filled support surface');
+          const ray=new THREE.Raycaster(),worldPoint=new THREE.Vector3();let nearestGap=Infinity;
+          for(let j=0;j<vertices.count;j++){
+            worldPoint.fromBufferAttribute(vertices,j).applyMatrix4(matrix).applyMatrix4(object.matrixWorld);
+            ray.set(new THREE.Vector3(worldPoint.x,3,worldPoint.z),new THREE.Vector3(0,-1,0));
+            const hit=ray.intersectObject(bed,false)[0];
+            if(hit)nearestGap=Math.min(nearestGap,worldPoint.y-hit.point.y);
+          }
+          assert(nearestGap>=-.001&&nearestGap<.001,`Coffee kernel floats above or penetrates support (${nearestGap})`);
+        }
         boxes.push(box);
       }
       assert(boxes.filter(box=>Math.abs(box.min.y)<1e-6).length>=10,'Spilled coffee kernels must rest on the ground');
     }
     if(object.name==='peeled-corn-husk'){
       const points=g.getAttribute('position');
+      for(let i=0;i<7;i++)assert(Math.hypot(points.getX(i),points.getZ(i))<.045,'Corn husk root must attach inside stalk');
       for(let i=0;i<points.count;i++)if(points.getY(i)>=.23)assert(Math.hypot(points.getX(i),points.getZ(i))>.215,'Corn husk intersects the kernel envelope');
+    }
+    if(object.name==='loose soybean seeds'&&object instanceof THREE.InstancedMesh){
+      const matrix=new THREE.Matrix4(),point=new THREE.Vector3(),vertices=g.getAttribute('position');
+      for(let i=0;i<object.count;i++){
+        object.getMatrixAt(i,matrix);let minimum=Infinity;
+        for(let j=0;j<vertices.count;j++)minimum=Math.min(minimum,point.fromBufferAttribute(vertices,j).applyMatrix4(matrix).y);
+        assert(Math.abs(minimum+.035)<1e-6,'Each loose soybean must contact the ground');
+      }
     }
     for(const attribute of Object.values(g.attributes))assert(Array.from(attribute.array).every(Number.isFinite),`${id}: finite attributes`);
     if(object instanceof THREE.InstancedMesh)assert(Array.from(object.instanceMatrix.array).every(Number.isFinite),`${id}: finite instances`);

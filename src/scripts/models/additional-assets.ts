@@ -108,35 +108,41 @@ export function createCoffee():THREE.Group {
   beanGeometry.computeVertexNormals();
   const dummy=new THREE.Object3D(),point=new THREE.Vector3();
   const placements:{matrix:THREE.Matrix4;bounds:THREE.Box3;color:THREE.Color}[]=[];
-  // Settle individually rotated kernels on prior support bounds. Rejection prevents
-  // solid overlap and stops the heap at the mouth, instead of sprinkling through it.
-  for(let attempt=0;attempt<2500&&placements.length<118;attempt++){
-    const loose=attempt>=2100;
+  const bedHeight=(x:number,z:number)=>.99-.12*(((x-.05)/.44)**2+(z/.28)**2);
+  // Each visible kernel rests on the filled surface itself, never on a neighbour's box.
+  // Boxes only reject overlapping footprints; they do not determine support height.
+  for(let attempt=0;attempt<6000&&placements.length<120;attempt++){
+    const loose=attempt>=5500;
     let x:number,z:number,r:number;
-    if(!loose){do{x=(random()*2-1)*.40;z=(random()*2-1)*.21;r=(x/.43)**2+(z/.24)**2;}while(r>.87);}
+    if(!loose){do{x=(random()*2-1)*.39;z=(random()*2-1)*.20;r=(x/.42)**2+(z/.235)**2;}while(r>.87);}
     else{do{x=(random()*2-1)*.95;z=.28+random()*.66;r=(x/.68)**2+(z/.47)**2;}while(r<1.3);}
-    const size=.88+random()*.18;
-    dummy.position.set(x+.05,0,z);dummy.rotation.set((random()-.5)*.40,random()*Math.PI*2,(random()-.5)*.30);
+    if(loose&&placements.filter(p=>p.bounds.min.y<.01).length>=20)break;
+    const size=.90+random()*.15;
+    dummy.position.set(x+.05,0,z);dummy.rotation.set((random()-.5)*.35,random()*Math.PI*2,(random()-.5)*.25);
     if(attempt%11===0)dummy.rotation.x+=Math.PI;
-    dummy.scale.set(.029*size,.043*size,.043*size);dummy.updateMatrix();
-    const bounds=new THREE.Box3();
-    for(let j=0;j<bp.count;j++){point.fromBufferAttribute(bp,j).applyMatrix4(dummy.matrix);bounds.expandByPoint(point);}
-    let support=loose?0:.79;
-    for(const prior of placements){const p=prior.bounds;
-      if(bounds.max.x>p.min.x&&bounds.min.x<p.max.x&&bounds.max.z>p.min.z&&bounds.min.z<p.max.z)support=Math.max(support,p.max.y+.001);
+    dummy.scale.set(.024*size,.038*size,.035*size);dummy.updateMatrix();
+    const bounds=new THREE.Box3();let lift=-Infinity;
+    for(let j=0;j<bp.count;j++){
+      point.fromBufferAttribute(bp,j).applyMatrix4(dummy.matrix);bounds.expandByPoint(point);
+      lift=Math.max(lift,(loose?0:bedHeight(point.x,point.z))-point.y);
     }
-    const lift=support-bounds.min.y;
-    if(!loose&&bounds.max.y+lift>.89+.18*(1-r))continue;
-    if(loose&&support>0)continue;
+    if(placements.some(p=>bounds.max.x>p.bounds.min.x-.001&&bounds.min.x<p.bounds.max.x+.001&&bounds.max.z>p.bounds.min.z-.001&&bounds.min.z<p.bounds.max.z+.001))continue;
     dummy.position.y=lift;dummy.updateMatrix();bounds.translate(new THREE.Vector3(0,lift,0));
     placements.push({matrix:dummy.matrix.clone(),bounds,color:new THREE.Color().setHSL(.18+random()*.035,.13+random()*.08,.44+random()*.13)});
   }
   const beans=new THREE.InstancedMesh(beanGeometry,new THREE.MeshStandardMaterial({color:0xffffff,roughness:.83,bumpMap:surfaceRelief('grain'),bumpScale:.0008}),placements.length);
   beans.name='coffee kernels';
   placements.forEach((placement,i)=>{beans.setMatrixAt(i,placement.matrix);beans.setColorAt(i,placement.color);});
-  // Bulk below the individual kernels closes deep interstices instead of revealing an empty bag.
-  const bulk=new THREE.Mesh(new THREE.CylinderGeometry(1,1,.10,64),new THREE.MeshStandardMaterial({color:0x717660,roughness:1,bumpMap:surfaceRelief('grain'),bumpScale:.003}));
-  bulk.scale.set(.44,1,.28);bulk.position.set(.05,.74,0);bulk.castShadow=bulk.receiveShadow=true;group.add(bulk);
+  // The support mesh is the same height field used for contact placement.
+  const bedPositions:number[]=[],bedUv:number[]=[],bedIndices:number[]=[];
+  for(let ring=0;ring<=20;ring++)for(let sector=0;sector<=80;sector++){
+    const r=ring/20,a=sector/80*Math.PI*2,x=.05+Math.cos(a)*r*.44,z=Math.sin(a)*r*.28;
+    bedPositions.push(x,bedHeight(x,z),z);bedUv.push((x-.05)/.88+.5,z/.56+.5);
+    if(ring<20&&sector<80){const i=ring*81+sector;bedIndices.push(i,i+1,i+81,i+1,i+82,i+81);}
+  }
+  const bedGeometry=new THREE.BufferGeometry();bedGeometry.setAttribute('position',new THREE.Float32BufferAttribute(bedPositions,3));bedGeometry.setAttribute('uv',new THREE.Float32BufferAttribute(bedUv,2));bedGeometry.setIndex(bedIndices);bedGeometry.computeVertexNormals();
+  const bulk=new THREE.Mesh(bedGeometry,new THREE.MeshStandardMaterial({color:0x717660,roughness:1,bumpMap:surfaceRelief('grain'),bumpScale:.001}));
+  bulk.name='coffee support surface';bulk.castShadow=bulk.receiveShadow=true;group.add(bulk);
   beans.castShadow=beans.receiveShadow=true;group.add(beans);
   group.rotation.y=-.45;group.position.y=-.035;return group;
 }
