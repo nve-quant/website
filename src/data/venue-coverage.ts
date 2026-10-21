@@ -142,3 +142,16 @@ export const dexDeployments: DexDeployment[] = [
  {logo:'/images/venues/pools-trade.svg',protocol:'Pools.trade',network:'EVM',category:'launchpads',products:['Crowd Launch','Instant Launch'],chains:['Robinhood Chain'],status:'coming-soon'},
  {logo:'/images/venues/pons.png',protocol:'Pons',network:'EVM',category:'launchpads',products:['Token launches'],chains:['Robinhood Chain'],status:'coming-soon'},
 ];
+
+
+// Owner-supplied chain artwork. Registry names remain the source of coverage.
+export const chainLogos: Record<string,string> = {
+ 'Ethereum':'/images/chains/ethereum.svg',
+ 'Arbitrum':'/images/chains/arbitrum.svg',
+ 'Optimism':'/images/chains/optimism.svg',
+ 'Polygon':'/images/chains/polygon.svg',
+ 'Base':'/images/chains/base.svg',
+ 'BNB Chain':'/images/chains/bnb.svg',
+ 'Robinhood Chain':'/images/chains/robinhood.svg',
+ 'Solana':'/images/chains/solana.svg',
+};
