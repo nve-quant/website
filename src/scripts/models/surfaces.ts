@@ -25,6 +25,19 @@ export function brickSurface(){
   }
   const map=new THREE.CanvasTexture(canvas);map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=8;
   const relief=new THREE.CanvasTexture(height);relief.anisotropy=8;
-  for(const texture of [map,relief]){texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(6,8);}
+  for(const texture of [map,relief]){texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(2,4);}
   return {map,bumpMap:relief,bumpScale:.0015};
+}
+
+/** A recessed room behind glazing: shared atlas, no extra transparency passes. */
+export function glazingSurface():THREE.CanvasTexture {
+  const c=document.createElement('canvas');c.width=c.height=512;const ctx=c.getContext('2d')!;
+  const room=ctx.createLinearGradient(0,0,0,512);room.addColorStop(0,'#273a40');room.addColorStop(.58,'#405657');room.addColorStop(1,'#718382');ctx.fillStyle=room;ctx.fillRect(0,0,512,512);
+  // Perspective reveals make the glass read as a window with depth.
+  ctx.fillStyle='#203238';ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(55,65);ctx.lineTo(55,455);ctx.lineTo(0,512);ctx.fill();
+  ctx.fillStyle='#81908a';ctx.beginPath();ctx.moveTo(0,512);ctx.lineTo(55,455);ctx.lineTo(460,455);ctx.lineTo(512,512);ctx.fill();
+  ctx.fillStyle='#526260';ctx.fillRect(55,65,405,92);
+  for(let y=72;y<152;y+=10){ctx.fillStyle='rgba(187,193,177,.3)';ctx.fillRect(55,y,405,2);}
+  ctx.fillStyle='rgba(190,210,210,.10)';ctx.beginPath();ctx.moveTo(190,0);ctx.lineTo(340,0);ctx.lineTo(512,400);ctx.lineTo(512,512);ctx.fill();
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t;
 }

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
-import {brickSurface,surfaceRelief} from './surfaces';
+import {brickSurface,surfaceRelief,glazingSurface} from './surfaces';
 
 type PropertyKind='residential'|'office'|'warehouse';
 /** Original architectural miniatures; no named development or implied portfolio. */
@@ -11,7 +11,7 @@ export function createRealEstate(kind:PropertyKind):THREE.Group {
     stone:new THREE.MeshStandardMaterial({color:0xd7d2c2,roughness:.83,bumpMap:stoneRelief,bumpScale:.002}),
     concrete:new THREE.MeshStandardMaterial({color:0x9fa49b,roughness:.9,bumpMap:stoneRelief,bumpScale:.004}),
     dark:new THREE.MeshStandardMaterial({color:0x35423f,roughness:.55,metalness:.2}),
-    glass:new THREE.MeshPhysicalMaterial({color:0x526f76,roughness:.13,metalness:.62,clearcoat:1,clearcoatRoughness:.12}),
+    glass:new THREE.MeshPhysicalMaterial({color:0xffffff,map:glazingSurface(),roughness:.19,metalness:.28,clearcoat:1,clearcoatRoughness:.1}),
     frame:new THREE.MeshStandardMaterial({color:0xc4c9c3,roughness:.35,metalness:.65}),
     brick:new THREE.MeshStandardMaterial({color:0xffffff,roughness:.88,...(kind==='residential'?brickSurface():{})}),
     warm:new THREE.MeshStandardMaterial({color:0xb2aa86,roughness:.36,metalness:.15}),
@@ -142,6 +142,28 @@ export function createRealEstate(kind:PropertyKind):THREE.Group {
       for(const dx of [-.26,.26])box('warm',.025,.15,.025,x+dx,.105,.83);
       box('dark',.38,.009,.035,x,.083,.74);
     }
+  }
+  // Roof equipment has real relief and shadow, sharing one instanced fan mesh.
+  if(kind!=='warehouse'){
+    const fanGeometry=new THREE.TorusGeometry(.075,.006,6,24);
+    const fans=new THREE.InstancedMesh(fanGeometry,materials.frame,kind==='office'?4:2);
+    for(let i=0;i<fans.count;i++){
+      dummy.position.set(kind==='office'?(i<2?-.22:.22):-.28,kind==='office'?1.926:1.69,-.20+(i%2)*.14);
+      dummy.rotation.set(Math.PI/2,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();fans.setMatrixAt(i,dummy.matrix);
+    }
+    fans.castShadow=true;group.add(fans);
+  }
+  // Door reveals, concrete expansion joints and restrained paving joints anchor scale.
+  if(kind==='warehouse'){
+    for(const x of [-.67,0,.67]){
+      for(const dx of [-.255,.255])box('dark',.022,.43,.075,x+dx,.26,.59);
+      box('dark',.53,.025,.075,x,.475,.59);
+      box('frame',.12,.035,.055,x,.52,.59);
+    }
+    for(const x of [-1.2,-.4,.4,1.2])box('dark',.002,.001,2.04,x,.028,.12);
+  }else{
+    for(const x of [-.78,-.39,0,.39,.78])box('dark',.002,.001,1.38,x,.028,0);
+    for(const z of [-.65,-.32,0,.32,.65])box('dark',1.65,.001,.002,0,.028,z);
   }
   // Repeated façade details share a single geometry and one draw per material.
   const cube=new RoundedBoxGeometry(1,1,1,1,.012);

@@ -101,21 +101,28 @@ export type MarketModelId = typeof marketModels[number]['id'];
 
 /** Original illustrative specimens, not available products or certified holdings. */
 export const assetVariants = {
-  gold: [{id:'gold',label:'Gold',detail:'Cast bullion'}, {id:'silver',label:'Silver',detail:'Cast bullion'}, {id:'palladium',label:'Palladium',detail:'Cast bullion'}, {id:'platinum',label:'Platinum',detail:'Cast bullion'}],
-  industrial: [{id:'copper',label:'Copper',detail:'Rolled strip'},{id:'aluminium',label:'Aluminium',detail:'Cast ingots'},{id:'nickel',label:'Nickel',detail:'Cathode plates'}],
-  fund: [{id:'fund',label:'Fund shares',detail:'Underlying portfolio'},{id:'treasury',label:'Treasury bill',detail:'Illustrative document'},{id:'bond',label:'Corporate bond',detail:'Illustrative document'}],
-  stock: [{id:'stock',label:'Share certificate',detail:'Illustrative specimen'}],
+  gold: [{id:'gold',label:'Fine gold cast bars',detail:'1 kg · 999.9 fineness'}, {id:'silver',label:'Fine silver cast bars',detail:'1 kg · 999.9 fineness'}, {id:'palladium',label:'Palladium cast bars',detail:'1 kg · 999.5 fineness'}, {id:'platinum',label:'Platinum cast bars',detail:'1 kg · 999.5 fineness'}],
+  industrial: [{id:'copper',label:'Copper strip coil',detail:'Rolled product · not cathode metal'},{id:'aluminium',label:'Primary aluminium',detail:'P1020A specification · cast ingots'},{id:'nickel',label:'Nickel cathode plates',detail:'Primary nickel · plate form'}],
+  fund: [{id:'fund',label:'Treasury fund shares',detail:'Portfolio interest · NAV-based valuation'},{id:'treasury',label:'13-week U.S. Treasury bill',detail:'Discount instrument · defined maturity'},{id:'bond',label:'Fixed-rate corporate bond',detail:'Coupon-bearing debt · issuer credit exposure'}],
+  stock: [{id:'stock',label:'Common stock',detail:'Equity ownership · illustrative certificate'}],
   unique: [{id:'emerald',label:'Emerald',detail:'Emerald cut'}, {id:'ruby',label:'Ruby',detail:'Oval cut'}, {id:'sapphire',label:'Sapphire',detail:'Cushion cut'}, {id:'diamond',label:'Diamond',detail:'Round brilliant study'}],
-  grains: [{id:'wheat',label:'Wheat',detail:'Harvest sheaf'}, {id:'corn',label:'Corn',detail:'Ear and husk'}, {id:'soy',label:'Soybeans',detail:'Dry pods and seed'},{id:'coffee',label:'Coffee',detail:'Green beans and burlap'},{id:'cotton',label:'Cotton',detail:'Open bolls'}],
-  realestate: [{id:'residential',label:'Residential',detail:'Apartment building'}, {id:'office',label:'Office',detail:'Commercial tower'}, {id:'warehouse',label:'Industrial',detail:'Logistics warehouse'}],
-  commodities: [{id:'oil',label:'Crude oil',detail:'Steel drum'},{id:'gas',label:'Natural gas',detail:'Illustrative storage vessel'}],
+  grains: [{id:'wheat',label:'Hard Red Winter wheat',detail:'U.S. wheat class · harvested ears'}, {id:'corn',label:'No. 2 yellow corn',detail:'U.S. grade reference · dent corn study'}, {id:'soy',label:'No. 2 yellow soybeans',detail:'U.S. grade reference · oilseed'},{id:'coffee',label:'Arabica coffee',detail:'Green beans · Coffee C market reference'},{id:'cotton',label:'Upland cotton',detail:'Cotton No. 2 market reference · open bolls'}],
+  realestate: [{id:'residential',label:'Multifamily residential',detail:'Mid-rise apartment building'}, {id:'office',label:'Commercial office',detail:'Multi-storey curtain-wall building'}, {id:'warehouse',label:'Logistics real estate',detail:'Distribution warehouse · loading docks'}],
+  commodities: [{id:'oil',label:'West Texas Intermediate',detail:'WTI · light sweet crude oil'},{id:'gas',label:'Henry Hub natural gas',detail:'U.S. delivery benchmark · infrastructure study'}],
 } as const satisfies Record<MarketModelId, readonly {id:string;label:string;detail:string}[]>;
 export type AssetVariantId = typeof assetVariants[MarketModelId][number]['id'];
 
 export const assetNotes: Partial<Record<AssetVariantId,string>> = {
+  oil: 'WTI identifies a light sweet crude benchmark. The drum is a symbolic study, not its delivery container or evidence of a deliverable lot.',
+  wheat: 'Hard Red Winter is a wheat class, not a complete lot specification. Grade, protein, moisture and delivery terms still need to be defined.',
+  corn: 'No. 2 yellow is a U.S. grain grade used as a contract reference. The ear illustrates the crop; grading applies to the delivered grain lot.',
+  soy: 'No. 2 yellow is a U.S. soybean grade. Oilseed quality, storage and delivery terms distinguish the lot; the illustration is not a grading certificate.',
+  cotton: 'Upland cotton is the physical subject. Cotton No. 2 also specifies quality and staple requirements that an open-boll illustration cannot establish.',
+  copper: 'Rolled copper strip is a fabricated product. It is distinct from exchange-deliverable Grade A copper cathodes.',
+  aluminium: 'P1020A is a primary-aluminium specification. These ingots illustrate the material and form, not tested or exchange-approved inventory.',
   fund: 'Fund shares represent an interest in an underlying portfolio. A fund holding Treasuries is not the same instrument as a direct Treasury bill holding.',
-  treasury: 'A Treasury bill has a defined maturity and is sold at a discount or at face value. This paper study is illustrative; it is not an issued security or evidence of a token holder’s claim.',
-  bond: 'A corporate bond is debt, not company equity. Coupon terms, maturity and the issuer’s ability to pay interest and principal affect the instrument. This is an illustrative document.',
-  coffee: 'Origin, grade, storage and delivery specification define the lot. The beans are an illustrative physical study, not an available product.',
-  gas: 'The vessel illustrates storage infrastructure, not the gas itself. Location, delivery arrangements and the precise contract must be defined.',
+  treasury: 'This study uses a 13-week U.S. Treasury bill. A Treasury bill has a defined maturity and is sold at a discount or at face value. This paper study is illustrative; it is not an issued security or evidence of a token holder’s claim.',
+  bond: 'This study represents a fixed-rate corporate bond: debt with a stated coupon, not company equity. Coupon terms, maturity and the issuer’s ability to pay interest and principal affect the instrument. This is an illustrative document.',
+  coffee: 'Arabica and Robusta are distinct coffee markets. This Arabica study references Coffee C; origin, grade, storage and delivery specification still define the lot. The beans are an illustrative physical study, not an available product.',
+  gas: 'Henry Hub identifies a U.S. natural-gas delivery benchmark. The vessel is a symbolic infrastructure study, not a model of Henry Hub or its delivery mechanism. Location, delivery arrangements and the precise contract must be defined.',
 };

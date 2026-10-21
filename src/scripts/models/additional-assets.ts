@@ -46,12 +46,13 @@ export function createGas():THREE.Group {
 
 export function createCoffee():THREE.Group {
   const group=new THREE.Group(),cloth=surfaceRelief('cloth',512);cloth.repeat.set(5,3);
-  const art=document.createElement('canvas');art.width=1024;art.height=512;const ctx=art.getContext('2d')!;ctx.fillStyle='#a18b60';ctx.fillRect(0,0,1024,512);ctx.fillStyle='#334239';ctx.textAlign='center';ctx.font='600 62px serif';ctx.fillText('COFFEE',256,255);ctx.font='23px monospace';ctx.fillText('GREEN BEANS',256,298);ctx.font='17px monospace';ctx.fillText('ILLUSTRATIVE LOT',256,337);
+  const art=document.createElement('canvas');art.width=1024;art.height=512;const ctx=art.getContext('2d')!;ctx.fillStyle='#a18b60';ctx.fillRect(0,0,1024,512);ctx.fillStyle='#334239';ctx.textAlign='center';ctx.font='600 62px serif';ctx.fillText('ARABICA',256,255);ctx.font='23px monospace';ctx.fillText('GREEN BEANS',256,298);ctx.font='17px monospace';ctx.fillText('ILLUSTRATIVE LOT',256,337);
   const map=new THREE.CanvasTexture(art);map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=8;
   const sackMaterial=new THREE.MeshStandardMaterial({map,bumpMap:cloth,bumpScale:.012,roughness:.94,side:THREE.DoubleSide});
   const profile=[new THREE.Vector2(.30,0),new THREE.Vector2(.48,.04),new THREE.Vector2(.55,.22),new THREE.Vector2(.51,.66),new THREE.Vector2(.43,.99),new THREE.Vector2(.45,1.07)];
-  const sackGeometry=new THREE.LatheGeometry(profile,80);const position=sackGeometry.getAttribute('position');
-  for(let i=0;i<position.count;i++){const x=position.getX(i),z=position.getZ(i),y=position.getY(i),a=Math.atan2(z,x),r=1+.018*Math.sin(a*13+y*8);position.setXYZ(i,x*r,y,z*r);}sackGeometry.computeVertexNormals();
+  const curve=new THREE.SplineCurve(profile);
+  const sackGeometry=new THREE.LatheGeometry(curve.getPoints(48),80);const position=sackGeometry.getAttribute('position');
+  for(let i=0;i<position.count;i++){const x=position.getX(i),z=position.getZ(i),y=position.getY(i),a=Math.atan2(z,x),r=1+.025*Math.sin(a*13+y*8)+.018*Math.sin(a*7-y*5)*(y+.2);position.setXYZ(i,x*r,y,z*r);}sackGeometry.computeVertexNormals();
   const sack=new THREE.Mesh(sackGeometry,sackMaterial);sack.castShadow=sack.receiveShadow=true;group.add(sack);
   const rim=new THREE.Mesh(new THREE.TorusGeometry(.445,.025,10,80),new THREE.MeshStandardMaterial({color:0xb2a076,bumpMap:cloth,bumpScale:.01,roughness:.94}));rim.rotation.x=Math.PI/2;rim.position.y=1.065;rim.castShadow=true;group.add(rim);
   const beansGeometry=new THREE.SphereGeometry(1,18,12),p=beansGeometry.getAttribute('position');

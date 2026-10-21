@@ -29,6 +29,7 @@ for(const id of ids){
     if(object instanceof THREE.InstancedMesh)assert(Array.from(object.instanceMatrix.array).every(Number.isFinite),`${id}: finite instances`);
     if(object instanceof THREE.Mesh){triangles+=(g.index?g.index.count:g.attributes.position.count)/3*(object.count??1);calls+=1;}
     for(const material of Array.isArray(object.material)?object.material:[object.material]){
+      if(material.map||material.bumpMap||material.roughnessMap)assert(g.attributes.uv,`${id}: mapped surfaces need texture coordinates`);
       materials.add(material);for(const value of Object.values(material))if(value instanceof THREE.Texture)textures.add(value);
     }
   });

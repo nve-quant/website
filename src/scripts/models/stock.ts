@@ -87,7 +87,7 @@ export function createStock(kind:'stock'|'treasury'|'bond'='stock'): THREE.Group
   ink.font = '32px Georgia,serif'; ink.fillText(kind==='stock'?'S H A R E   C E R T I F I C A T E':'D E B T   I N S T R U M E N T',768,338);
   ink.font = '106px Georgia,serif'; ink.fillText(kind==='treasury'?'Treasury bill':kind==='bond'?'Corporate bond':'Common stock',768,448);
   ink.strokeStyle = lightBlue; line(414,521,1122,521);
-  ink.font = '23px Georgia,serif'; ink.fillText(kind==='treasury'?'Defined maturity':kind==='bond'?'Issuer credit · Coupon terms · Maturity':'Registered ownership',768,562);
+  ink.font = '23px Georgia,serif'; ink.fillText(kind==='treasury'?'U.S. Treasury · 13-week maturity':kind==='bond'?'Fixed coupon · Issuer credit · Maturity':'Registered ownership',768,562);
   ink.font = '22px Georgia,serif'; ink.fillText(kind==='stock'?'This specimen illustrates a physical share certificate.':'Illustrative document. Not an issued or redeemable security.',768,613);
   ink.font = '20px Georgia,serif'; ink.fillText('Rights and transfer terms depend on the issuing structure.',768,650);
 

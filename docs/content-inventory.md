@@ -132,3 +132,20 @@ Bill and corporate-debt explanatory facts checked against primary sources:
 - TreasuryDirect, https://www.treasurydirect.gov/marketable-securities/treasury-bills/ — bills sold at discount or face value, defined maturity.
 - Investor.gov, https://www.investor.gov/introduction-investing/investing-basics/investment-products/bonds-or-fixed-income-products — corporate debt, interest/principal and issuer payment risk.
 The fund-versus-direct-instrument distinction was explicitly requested by the owner. The 3D paper studies are marked illustrative, not issued securities. Commodity form/grade/location and property copy remain draft market-design questions, without specific commercial commitments. All model/fallback artwork is locally authored; no external assets or new licences.
+
+### Market-specific specimen naming — 22 October 2026
+Owner requested meaningful market distinctions and a realism pass. These are illustrative subjects, not newly confirmed products, certified inventory or exchange affiliations. Specimens now identify WTI light sweet crude, Henry Hub natural gas, Hard Red Winter wheat, No. 2 yellow corn/soybeans, Arabica coffee and Upland cotton. Primary aluminium references P1020A; rolled copper remains a fabricated strip coil rather than being mislabeled Grade A cathodes. Precious-metal captions reflect the existing specimen stamps. Financial studies distinguish Treasury fund shares, a 13-week U.S. Treasury bill, fixed-rate corporate debt and common stock. Property names specify multifamily residential, commercial office and logistics real estate without invented locations, tenants or valuations. Gem cuts remain unchanged; no unverified origin, treatment or grading claims.
+
+Primary specification references:
+- WTI: https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.contract.html
+- Henry Hub: https://www.cmegroup.com/markets/energy/natural-gas/natural-gas.contractSpecs.html
+- Wheat classes: https://uswheat.org/crop-and-quality/
+- Corn grade: https://www.cmegroup.com/markets/agriculture/grains/corn/specs
+- Soybean grade: https://www.cmegroup.com/content/dam/cmegroup/market-regulation/rule-filings/2024/12/24-443.pdf
+- Arabica/Coffee C: https://www.ice.com/products/15/data
+- Cotton specification: https://www.theice.com/publicdocs/futures_us_reports/cotton/Cotton_Deliverers_Guide.pdf
+- Upland cotton: https://www.ams.usda.gov/grades-standards/universal-upland-color-and-leaf-grade-cotton-standards
+- Primary aluminium: https://www.lme.com/en/metals/non-ferrous/lme-aluminium/contract-specifications
+- Treasury maturities: https://www.treasurydirect.gov/marketable-securities/treasury-bills/
+
+Captions and specimen notes separate a reference specification from a complete lot/contract. The oil drum and gas vessel are symbolic illustrations, not actual delivery arrangements. Agricultural shapes cannot certify grades. No protein percentage, origin, credit rating or security identifier has been invented.

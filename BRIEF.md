@@ -50,3 +50,5 @@ Owner requested distinct Metals, Grains (wheat, corn and soy) and Real estate ca
 
 ### Asset taxonomy and detail pass — 21 October 2026
 Owner approved eight groups: Precious metals; Industrial metals; Energy; Agriculture; Gemstones & collectibles; Real estate; Equities; Fixed income & funds. Add nickel, natural gas, coffee, cotton, Treasury bill and corporate bond specimens. Watches/art remain future possibilities, not additions in this milestone. Fund shares, direct bills and corporate debt must be distinguished in the explanation. These remain illustrative market studies, not a product catalogue or claimed holdings. Owner also requested more detailed grains, buildings and barrel, with the existing performance-conscious rendering approach retained.
+
+Owner requested market-specific specimen names and a realism upgrade on 22 October 2026. Use appropriate benchmark/class/grade/form distinctions in the asset explorer, with primary references in the inventory. Treat these as illustrative subjects, not supported-product or certified-inventory claims. Prioritise agriculture, property and the oil drum while preserving gold/gem appearance and rendering budgets.

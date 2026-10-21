@@ -160,3 +160,8 @@ Canvas pixel ratio is capped at 2 and 2.4 million pixels; shadow map is 2048 squ
 
 ### Preserve 3D detail across viewport and motion preferences
 Supersedes the mobile/reduced-motion SVG policy above. Load the same detailed models on small screens, retaining lazy initialization, bounded pixels, 30fps idle rotation, offscreen suspension and three-model cache. Reduced motion shows stationary 3D with direct manipulation, without entrance easing or automatic rotation. SVGs remain for unavailable WebGL/no JavaScript, not a viewport-based quality tier. Explicitly label a renderer failure instead of presenting the simplified artwork as the intended model.
+
+### Market distinctions and material refinement — 22 October 2026
+Keep the eight category labels; use benchmark, crop class, grade reference, material form and instrument type at specimen level. Give detail captions their own line and reserve 120px below the canvas for wrapped labels. Retain the current studio lighting, original bullion and gem geometry.
+
+Refine dent-corn crown geometry and mature husk colour; add UV coordinates to previously unmapped corn husks and soybean pod shells, plus pod seams. Wheat spikelets have pointed glumes/keels and restrained dimensional variation. Coffee sack uses a continuous curved profile and folds. Building glazing has a shared room-depth texture, more appropriate brick scale, rooftop fan relief, door reveals and paving joints. Oil has WTI specimen artwork, hoop-localised paint chips, fine scratches and relief on the lid. Geometry remains instanced/shared, textures local, and loading lazy. These are procedural realism improvements; final photorealism is a visual review judgement, not established by a geometry check.

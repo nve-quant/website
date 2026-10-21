@@ -30,7 +30,7 @@ export function initMarketExplorer(root: HTMLElement) {
     const note=root.querySelector<HTMLElement>(`[data-specimen-note="${selection}"]`)!;
     note.textContent=assetNotes[current.id]??'';note.hidden=!note.textContent;
     if(selection==='gold'||selection==='industrial'){
-      root.querySelector('[data-bullion-stamp]')!.textContent=(['gold','silver'].includes(current.id)?'FINE ':'')+current.label.toUpperCase();
+      root.querySelector('[data-bullion-stamp]')!.textContent=(['gold','silver'].includes(current.id)?'FINE ':'')+current.id.toUpperCase();
       root.querySelector('[data-bullion-purity]')!.textContent=current.id==='aluminium'?'PRIMARY':['gold','silver'].includes(current.id)?'999.9':'999.5';
       root.querySelector('[data-bullion-weight]')!.textContent=current.id==='aluminium'?'METAL':'1000 g';
     }

@@ -23,3 +23,9 @@
 @media(max-width:700px){.asset-selector{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}.asset-selector label{min-height:52px}}
 
 .market-explorer[data-renderer-reason="unavailable"] .model-interaction{display:block}
+
+/* Reserve caption space for actual market specifications, including narrow screens. */
+.model-caption [data-specimen-name]{max-width:100%;overflow-wrap:break-word}
+.model-caption [data-specimen-detail]{flex-basis:100%}
+.model-canvas,.model-fallback{bottom:120px}
+@media(max-width:700px){.model-stage{min-height:350px}.model-canvas,.model-fallback{bottom:120px}}
