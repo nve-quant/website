@@ -3,7 +3,14 @@
 // okx-x is a duplicate mark. Hyperliquid product scope remains pending.
 // Operational coverage does not imply partnership or endorsement.
 export interface CexVenue { name: string; logo?: string; }
-export interface DexDeployment { logo: string; protocol: string; networks: string[]; poolTypes: string[]; }
+export interface DexDeployment {
+ logo?: string;
+ protocol: string;
+ networks: ('EVM' | 'Solana')[];
+ poolTypes: string[];
+ launchTypes?: string[];
+ marketTypes?: string[];
+}
 export const cexVenues: CexVenue[] = [
   {
     "name": "Binance",
@@ -108,8 +115,17 @@ export const dexDeployments: DexDeployment[] = [
  {logo:'/images/venues/aerodrome.svg',protocol:'Aerodrome',networks:['EVM'],poolTypes:[]},
  {logo:'/images/venues/velodrome.svg',protocol:'Velodrome',networks:['EVM'],poolTypes:[]},
  {logo:'/images/venues/pancakeswap.png',protocol:'PancakeSwap',networks:['EVM'],poolTypes:[]},
- {logo:'/images/venues/raydium.svg',protocol:'Raydium',networks:['Solana'],poolTypes:['All pool types']},
- {logo:'/images/venues/meteora.svg',protocol:'Meteora',networks:['Solana'],poolTypes:['All pool types']},
- {logo:'/images/venues/orca.png',protocol:'Orca',networks:['Solana'],poolTypes:['All pool types']},
- {logo:'/images/venues/pumpswap.png',protocol:'PumpSwap',networks:['Solana'],poolTypes:['All pool types']},
+ // Owner confirmed trading venues in the recovered SOL_DEX_MM_2 inventory for publication.
+ // Launch curves, spot order books and proprietary AMMs are not LP-position products.
+ // Aggregators (Jupiter, DFlow, OKX routing), Jito and base programs are deliberately excluded.
+ {logo:'/images/venues/raydium.svg',protocol:'Raydium',networks:['Solana'],poolTypes:['AMM v4','CPMM','CLMM'],launchTypes:['LaunchLab']},
+ {logo:'/images/venues/meteora.svg',protocol:'Meteora',networks:['Solana'],poolTypes:['DLMM','DAMM v1','DAMM v2'],launchTypes:['Dynamic Bonding Curve (DBC)']},
+ {logo:'/images/venues/orca.png',protocol:'Orca',networks:['Solana'],poolTypes:['Whirlpools']},
+ {logo:'/images/venues/pumpswap.png',protocol:'PumpSwap',networks:['Solana'],poolTypes:['Constant-product AMM']},
+ {logo:'/images/venues/pumpswap.png',protocol:'Pump.fun',networks:['Solana'],poolTypes:[],launchTypes:['Bonding curves']},
+ {logo:'/images/venues/moonit.png',protocol:'Moonit',networks:['Solana'],poolTypes:[],launchTypes:['Bonding curves']},
+ {logo:'/images/venues/phoenix.webp',protocol:'Phoenix',networks:['Solana'],poolTypes:[],marketTypes:['Spot order book']},
+ {logo:'/images/venues/solfi.webp',protocol:'SolFi',networks:['Solana'],poolTypes:[],marketTypes:['Proprietary AMM']},
+ {logo:'/images/venues/tessera.png',protocol:'Tessera V',networks:['Solana'],poolTypes:[],marketTypes:['Proprietary AMM']},
+ {logo:'/images/venues/zerofi.png',protocol:'ZeroFi',networks:['Solana'],poolTypes:[],marketTypes:['Proprietary AMM']},
 ];

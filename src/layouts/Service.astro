@@ -6,6 +6,7 @@ import LiquidityDiagram from '../components/LiquidityDiagram.astro';
 import Mandate from '../components/Mandate.astro';
 import EngagementContact from '../components/EngagementContact.astro';
 import ServiceFit from '../components/ServiceFit.astro';
+import DexCoverage from '../components/DexCoverage.astro';
 import Measurement from '../components/Measurement.astro';
 import ReviewNote from '../components/ReviewNote.astro';
 interface Props {service:CollectionEntry<'services'>;}
@@ -19,6 +20,7 @@ const {Content}=await render(service);
  <section class="service-operation editorial-section" aria-labelledby="operation-title"><div class="editorial-intro"><p class="section-kicker">{audience}</p><h2 id="operation-title">{kind==='cex'?'A market that needs ongoing attention.':'An allocation that moves with the market.'}</h2><Content/></div><LiquidityDiagram kind={kind}/></section>
  <section class="operation-details" aria-label="Service scope">{operations.map(item=><article><h3>{item.title}</h3><p>{item.text}</p></article>)}</section>
  <ServiceFit service={service}/>
+ {kind==='dex'&&<DexCoverage standalone/>}
  <Measurement service={service}/>
  <ReviewNote title={kind==='cex'?'Add CEX results and execution evidence':'Add DEX results and position evidence'} items={['Provide a permitted case study: starting problem, dates, venues or pools, capital and constraints, work performed, outcome and limitations.','Supply named client permission or a defensible anonymised example; distinguish prior team experience from Onchain Bureau engagements.',...(kind==='cex'?['Substantiate low latency with the measured execution path, venue, period and methodology. Animation speed is not evidence.']:['For a position example, include cash flows, fees, transaction costs and an explicit comparison benchmark.'])]}/>
  <section id="access" class="service-access editorial-section" aria-labelledby="service-access-title"><div><p class="section-kicker">Non-custodial operation</p><h2 id="service-access-title">{kind==='cex'?'Your accounts. Agreed API access.':'Your vaults. Agreed permissions.'}</h2></div><div><p>{access}</p><a href="/work#responsibilities">Who is responsible for what</a></div></section>

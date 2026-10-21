@@ -194,3 +194,32 @@ Removed BitMart, CoinEx and AscendEX from the public coverage list and removed t
 
 ### Dynamic measurement and permissions diagrams
 New diagrams use the existing measurement definitions and owner-confirmed access rules only. All values are unnumbered schematic geometry; no client records, performance results, trading latency timing, product screenshots or return projections introduced. Moving packets depict operating instructions, not transfers. Market-price crossing highlights the appropriate schematic ranges. Quote-history gaps are explanatory examples, not evidence of actual interruptions. Scenario switches change the explanation, not a live data feed.
+
+### Solana venue and pool-family expansion
+**Authority:** owner instruction following recovery of `~/.Trash/SOL_DEX_MM_2/sol_trading/scripts/algos/exchanges/idls/`, then explicit confirmation to include trading venues and exclude aggregators. The related GitHub tree is https://github.com/nve-quant/Dex-System/tree/main/scripts/algos/exchanges/idls; the recovered local inventory additionally contains `solfi`, `tessera_v` and `zerofi`.
+
+| Interface family | Published treatment |
+| --- | --- |
+| raydium_amm_v4, raydium_cpmm, raydium_clmm | Raydium AMM v4, CPMM, CLMM |
+| raydium_launchlab | LaunchLab, separately identified as a launch market |
+| meteora_dlmm, meteora_damm, meteora_damm_v2 | Meteora DLMM, DAMM v1 and DAMM v2; explicit names combine the owner's all-pool-types confirmation with protocol terminology, not an IDL-only deployment audit |
+| meteora_dbc | Dynamic Bonding Curve (DBC), launch market |
+| orca_whirlpools | Orca Whirlpools |
+| pumpswap_amm, pumpfun | PumpSwap constant-product AMM; Pump.fun bonding curves as a separate entry |
+| moonit | Moonit bonding curves; no unsupported curve-version promise |
+| phoenix | Phoenix spot order book; no inference of perpetual-futures support |
+| solfi, tessera_v, zerofi | SolFi, Tessera V and ZeroFi proprietary-AMM trading; no claim that their LP capital is managed by Bureau |
+| jupiter, dflow_agg_v4, okx_dex_aggregator_v2 | Excluded: routing/aggregation, per owner instruction |
+| jito, solana, kamino_limit_order | Excluded from the venue directory: infrastructure or product interface, not evidence of a separate liquidity-pool offering |
+
+IDL presence is interface/decoder evidence, not a test of live execution. The owner's confirmation is the source of public operational coverage; no trading code was run or credentials copied.
+
+Terminology references:
+- https://docs.raydium.io/raydium/protocol/protocol-fees — AMM v4, CPMM, CLMM naming.
+- https://github.com/raydium-io/raydium-docs-v1/blob/main/reference/fee-comparison.mdx — LaunchLab versus pool products.
+- https://docs.meteora.ag/get-started — DLMM, DAMM v1/v2 and Dynamic Bonding Curve.
+- https://docs.orca.so/ — Whirlpools and concentrated liquidity.
+- https://github.com/pump-fun/pump-public-docs — distinct bonding-curve and PumpSwap programs; no claim of support for every newly added instruction.
+- https://docs.moon.it/docs/welcome — Moonit bonding curves; no specific curve variant asserted.
+- https://github.com/Ellipsis-Labs/phoenix-v1 — legacy spot order book, distinguished from the current perpetual product at phoenix.trade.
+- https://github.com/LimeChain/pmm-sim — proprietary-AMM integration terminology; not evidence of Bureau's deployment or permission to manage another market maker's capital.

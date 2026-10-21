@@ -29,3 +29,15 @@ Local identification artwork, not endorsement claims. Uniswap copied from the ow
 - Orca: official orca-so GitHub organisation avatar, https://avatars.githubusercontent.com/u/74166425?v=4&s=128
 - PumpSwap: Pump.fun organisation's shared brand mark, https://avatars.githubusercontent.com/u/148890315?v=4&s=128 (not a newly drawn PumpSwap-specific logo).
 PNG marks visually inspected. SVGs checked for active/external content. Images load locally and lazily; trademarks remain with their owners. No third-party tracking or remote runtime asset dependency.
+
+### Additional Solana venue identification
+- Pump.fun reuses the previously sourced Pump.fun brand mark also used for PumpSwap. Visible names distinguish the two programs.
+- Moonit: https://moon.it/apple-touch-icon.png (official 180px PNG).
+- Phoenix spot: https://icons.llamao.fi/icons/protocols/phoenix-spot (400px WebP); exact Solana spot entry, not the unrelated Phoenix-branded protocols or the newer perpetual product.
+- SolFi: https://icons.llamao.fi/icons/protocols/solfi-v1 (303px WebP); project metadata links to https://x.com/SolFiAMM.
+- Tessera V: https://static1.tokenterminal.com//tesserav/logo.png?logo_hash=ef2333cc38612682e99fa92a8cbd8fbee7405dc9 (256px PNG, project-specific image from https://tokenterminal.com/explorer/projects/tesserav).
+- ZeroFi: https://static1.tokenterminal.com//zerofi/logo.png?logo_hash=710e16191d115c51dd362877a24225f3c8138f38 (256px PNG, project-specific image from https://tokenterminal.com/explorer/projects/zerofi).
+
+The DefiLlama and Token Terminal assets are third-party venue-identification sources, not independently supplied official brand kits. They are not claimed as original art or broadly licensed assets. The generic question-mark avatars returned for Tessera/ZeroFi by the first registry were rejected. All final marks visually inspected, stored locally, rendered via lazy-loaded images with visible venue names, and used only for identification. Five new images total approximately 119 KiB; no remote requests at runtime.
+
+`public/favicon.svg`: original geometric OB monogram using the established site colours; added after browser review found the missing default favicon request. Not copied from a venue or stamped onto asset models.
