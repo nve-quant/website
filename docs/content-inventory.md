@@ -188,3 +188,6 @@ Research sources:
 - https://uk.linkedin.com/company/onchainbureau — lists founding year 2023, differing from owner-provided 2022 operating start. Preserve owner-defined operating history and separately label legal incorporation 2024; LinkedIn company history should be reconciled later. Its older service catalogue was not imported.
 
 Website bios intentionally use owner-confirmed roles and public profile links. Published numeric latency is a first-party p50 claim with measurement definition and non-guarantee qualifier; no fabricated benchmark chart or p99 figure. Detailed clock/measurement evidence remains outstanding. Client-only transfer control is explicit across CEX service and access schematic.
+
+### Coverage removal requested by owner
+Removed BitMart, CoinEx and AscendEX from the public coverage list and removed their unused logo files. CEX display now contains 24 venues. This records a display/coverage decision; no independent statement about venue closure is published.

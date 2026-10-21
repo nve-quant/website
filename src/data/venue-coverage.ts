@@ -6,10 +6,6 @@ export interface CexVenue { name: string; logo?: string; }
 export interface DexDeployment { logo: string; protocol: string; networks: string[]; poolTypes: string[]; }
 export const cexVenues: CexVenue[] = [
   {
-    "name": "AscendEX",
-    "logo": "/images/venues/ascendex.svg"
-  },
-  {
     "name": "Binance",
     "logo": "/images/venues/binance.svg"
   },
@@ -30,10 +26,6 @@ export const cexVenues: CexVenue[] = [
     "logo": "/images/venues/bithumb.svg"
   },
   {
-    "name": "BitMart",
-    "logo": "/images/venues/bitmart.svg"
-  },
-  {
     "name": "Bitstamp",
     "logo": "/images/venues/bitstamp.svg"
   },
@@ -52,10 +44,6 @@ export const cexVenues: CexVenue[] = [
   {
     "name": "CoinDCX",
     "logo": "/images/venues/coindcx.svg"
-  },
-  {
-    "name": "CoinEx",
-    "logo": "/images/venues/coinex.svg"
   },
   {
     "name": "Coinone",
