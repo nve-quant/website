@@ -223,3 +223,26 @@ Terminology references:
 - https://docs.moon.it/docs/welcome — Moonit bonding curves; no specific curve variant asserted.
 - https://github.com/Ellipsis-Labs/phoenix-v1 — legacy spot order book, distinguished from the current perpetual product at phoenix.trade.
 - https://github.com/LimeChain/pmm-sim — proprietary-AMM integration terminology; not evidence of Bureau's deployment or permission to manage another market maker's capital.
+
+### EVM source review and Robinhood coming-soon scope — 21 October 2026
+**Authority:** owner supplied the local uniswap-mm repository for exact EVM coverage and requested Robinhood Chain DEXs/launchpads marked coming soon. Read-only inspection; no bot execution, account access, live calls, credential files or private operational details imported.
+
+Source root: /Users/nicholasvaneerde/Developer/Onchain Bureau/DEX/uniswap-mm
+
+| Source | Finding | Website treatment |
+| --- | --- | --- |
+| src/config/chains.rs (supported_chains, address registries), src/config/market.rs (Dex), src/main.rs dispatch | Uniswap v3/v4 registry for Ethereum, Arbitrum, Optimism, Polygon, Base, BNB; four CL connector variants | Explicit chain names and Uni versions; no claim of live client operations on all combinations |
+| src/services/blockchain/aerodrome_slipstream.rs, velodrome_slipstream.rs and chain registry | Aerodrome Slipstream on Base; Velodrome Slipstream on Optimism | Name the family and its chain |
+| src/services/blockchain/aerodrome_amm.rs and aerodrome_amm registry | Classic stable/volatile AMM on Base; no configured classic Velodrome deployment | Add Aerodrome classic stable/volatile; do not infer Velodrome classic support |
+| docs/PROJECT-STATUS.md, docs/plans/dex-chain-expansion.md, README.md | Production/fork-test evidence varies by deployment; registry presence is broader than live operation | Coverage is scoping information, not evidence of results, client history or universal strategy suitability |
+| Existing owner interview; expansion plan marks PancakeSwap as future connector work in this repo | Owner previously confirmed PancakeSwap; exact implementation/version/chain not corroborated here | Retain separately confirmed brand; leave versions/chains unspecified pending reconciliation |
+| Robinhood chain registry and whitelisted chain/dex config fields | Robinhood mainnet/testnet v4 configuration; v3 registry empty | Coming soon for Bureau service; do not advertise v3/v2/UniswapX based on ecosystem availability |
+| Owner request + official launchpad announcement below | Launchpad names unspecified by owner; optional clarification requested | Initial proposed coming-soon launchpad: Pools.trade. No live or completed launchpad integration claim |
+
+Public terminology/ecosystem sources:
+- https://blog.uniswap.org/robinhood-chain-is-live — official Robinhood Uniswap deployment announcement; ecosystem availability is not Bureau integration evidence.
+- https://blog.uniswap.org/pools-trade-a-new-way-to-launch-on-robinhood-chain — Pools.trade is a Robinhood launchpad with Crowd Launch and Instant Launch; both lead to Uniswap v4. Locked launch liquidity is distinct from a client-managed LP position.
+- https://robinhood.com/us/en/crypto/chain/ecosystem/ — ecosystem context only, not a Bureau support list. Aggregators and infrastructure omitted.
+- https://pools.trade/favicon.svg — official icon, copied unchanged to public/images/venues/pools-trade.svg (2,596 bytes). Trademark identifies the planned venue; no affiliation/endorsement implied.
+
+Separate Solana display entries for LaunchLab and Meteora DBC reuse their existing protocol logos. Current pool, launch and other-trading entries have explicit typed categories; planned coverage has a separate typed status. Robinhood is excluded from the current six-chain list. No claims about the chain or launchpad being unreleased.

@@ -1,63 +1,72 @@
 ---
-import {dexDeployments} from '../data/venue-coverage';
+import {dexDeployments,evmChains} from '../data/venue-coverage';
+import DexProtocolList from './DexProtocolList.astro';
 interface Props {standalone?: boolean;}
 const {standalone=false}=Astro.props;
 const Heading=standalone?'h2':'h3';
 const GroupHeading=standalone?'h3':'h4';
+const CategoryHeading=standalone?'h4':'h5';
 const groups=[
- {name:'EVM',description:'Across supported EVM deployments',protocols:dexDeployments.filter(item=>item.networks.includes('EVM'))},
- {name:'Solana',description:'Pools, launch markets and onchain trading',protocols:dexDeployments.filter(item=>item.networks.includes('Solana'))},
-];
+ {name:'EVM',description:evmChains.join(' · ')},
+ {name:'Solana',description:'Liquidity pools, launch markets and direct onchain execution.'},
+] as const;
+const categories=[
+ {id:'pools',name:'Liquidity pools',description:'Concentrated and full-range liquidity.'},
+ {id:'launchpads',name:'Launchpads & bonding curves',description:'Launch-market execution, scoped separately from pool management.'},
+ {id:'trading',name:'Other trading venues',description:'Order-book and proprietary-AMM execution.'},
+] as const;
 ---
 <section class:list={['dex-coverage',{'dex-standalone':standalone}]} aria-label="Decentralized exchange coverage">
- <div class="dex-intro"><Heading>{standalone?'Supported DEXs and pool families.':'Decentralized exchanges'}</Heading><p>Liquidity pools, launch curves and onchain order books.</p></div>
- <div class="dex-ecosystems">{groups.map(group=><section class:list={['dex-ecosystem',{'solana-ecosystem':group.name==='Solana'}]} aria-label={`${group.name} protocol coverage`}>
-  <header><GroupHeading>{group.name}</GroupHeading><p>{group.description}</p></header>
-  <ul class="protocol-marks">{group.protocols.map(protocol=><li>
-   {protocol.logo&&<div class="protocol-mark"><img src={protocol.logo} alt="" width="48" height="48" loading="lazy" draggable="false"/></div>}
-   <div class="protocol-description">
-    <span class="protocol-name">{protocol.protocol}</span>
-    {protocol.poolTypes.length>0&&<ul class="pool-families" aria-label={`${protocol.protocol} pool families`}>{protocol.poolTypes.map(pool=><li>{pool}</li>)}</ul>}
-    {protocol.launchTypes&&<p class="launch-families"><span>Launch markets</span>{protocol.launchTypes.join(' / ')}</p>}
-    {protocol.marketTypes&&<p class="market-families">{protocol.marketTypes.join(' / ')}</p>}
+ <div class="dex-intro"><Heading>{standalone?'Supported DEXs and market structures.':'Decentralized exchanges'}</Heading><p>Find the right venue for your liquidity or trading mandate.</p></div>
+ <div class="dex-ecosystems">{groups.map(group=>{
+  const upcoming=dexDeployments.filter(item=>item.network===group.name&&item.status==='coming-soon');
+  return <section class:list={['dex-ecosystem',{'solana-ecosystem':group.name==='Solana'}]} aria-label={group.name+' protocol coverage'}>
+   <header class="ecosystem-heading"><GroupHeading>{group.name}</GroupHeading><p>{group.description}</p></header>
+   <div class="ecosystem-markets">
+    {categories.map(category=>{
+     const protocols=dexDeployments.filter(item=>item.network===group.name&&item.status==='available'&&item.category===category.id);
+     return protocols.length>0&&<section class="market-category" aria-label={group.name+' '+category.name}>
+      <header class="category-heading"><CategoryHeading>{category.name}</CategoryHeading><p>{category.description}</p></header>
+      <DexProtocolList protocols={protocols}/>
+     </section>;
+    })}
+    {upcoming.length>0&&<section class="upcoming-coverage" aria-label="Robinhood Chain coverage coming soon">
+     <header class="upcoming-heading"><CategoryHeading>Robinhood Chain</CategoryHeading><span class="coverage-status">Coming soon</span></header>
+     <p class="upcoming-intro">Our next EVM coverage: liquidity pools and token launches.</p>
+     <DexProtocolList protocols={upcoming} planned/>
+    </section>}
    </div>
-  </li>)}</ul>
- </section>)}</div>
- <div class="dex-footnote"><p>Pool management, launch-market execution and order-book trading are scoped separately. We agree the protocol version, market and permitted activity for your engagement.</p>{!standalone&&<a href="/dex-liquidity-management">Explore DEX liquidity management</a>}</div>
+  </section>;
+ })}</div>
+ <div class="dex-footnote"><p>Pool management, launch-market execution and other trading are separate activities. We agree the deployment, pool or market, and permissions for your engagement.</p>{!standalone&&<a href="/dex-liquidity-management">Explore DEX liquidity management</a>}</div>
 </section>
 <style>
 .dex-coverage{margin-top:56px}
 .dex-standalone{margin:0 0 var(--section);padding-top:32px}
 .dex-intro{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:28px}
 .dex-intro h3{font-size:1rem;margin:0}
-.dex-intro h2{font-size:clamp(1.8rem,3.2vw,3rem);max-width:21ch;margin:0}
+.dex-intro h2{font-size:clamp(1.8rem,3.2vw,3rem);max-width:23ch;margin:0}
 .dex-intro>p{font-size:.85rem;line-height:1.6;color:var(--muted);max-width:32ch;margin:0}
 .dex-ecosystems{border-block:1px solid var(--line)}
-.dex-ecosystem{display:grid;grid-template-columns:minmax(140px,1fr) minmax(0,4fr);gap:40px;padding:32px 0 38px}
+.dex-ecosystem{display:grid;grid-template-columns:minmax(140px,1fr) minmax(0,5fr);gap:40px;padding:32px 0 38px}
 .dex-ecosystem+section{border-top:1px solid var(--line)}
-.dex-ecosystem header{min-width:0}
-.dex-ecosystem header :is(h3,h4){font-weight:400;font-size:1.8rem;letter-spacing:-.04em;margin:0 0 10px}
-.dex-ecosystem header p{font-size:.75rem;line-height:1.65;color:var(--muted);max-width:19ch;margin:0}
-.protocol-marks{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px;align-items:start}
-.solana-ecosystem .protocol-marks{grid-template-columns:repeat(3,minmax(0,1fr));gap:38px 32px}
-.protocol-marks>li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;align-items:start;min-width:0}
-.protocol-mark{height:48px;display:flex;justify-content:center;align-items:center}
-.protocol-mark img{object-fit:contain;max-width:100%;filter:grayscale(1)}
-.protocol-marks>li:hover img{filter:grayscale(0)}
-.protocol-description{padding-top:2px;min-width:0}
-.protocol-marks>li:not(:has(.protocol-mark)) .protocol-description{grid-column:1/-1}
-.protocol-name{display:block;font-size:.9rem;line-height:1.5;font-weight:500}
-.pool-families{list-style:none;padding:0;margin:7px 0 0;display:flex;flex-wrap:wrap;gap:3px 0;font-size:.75rem;line-height:1.6;color:var(--muted)}
-.pool-families li{white-space:nowrap}
-.pool-families li:not(:last-child)::after{content:'/';padding:0 7px;color:var(--muted)}
-.launch-families,.market-families{font-size:.75rem;line-height:1.6;color:var(--muted);margin:10px 0 0}
-.market-families{margin-top:7px}
-.launch-families span{display:block;font-size:.65rem;margin-bottom:1px}
+.ecosystem-heading{min-width:0}
+.ecosystem-heading :is(h3,h4){font-weight:400;font-size:1.8rem;letter-spacing:-.04em;margin:0 0 10px}
+.ecosystem-heading p{font-size:.75rem;line-height:1.8;color:var(--muted);max-width:20ch;margin:0}
+.ecosystem-markets{min-width:0}
+.market-category+.market-category{margin-top:32px;padding-top:26px;border-top:1px solid var(--line)}
+.category-heading{margin:0 0 24px}
+.category-heading :is(h4,h5){font-size:.85rem;font-weight:500;letter-spacing:0;margin:0}
+.category-heading p{font-size:.75rem;line-height:1.6;color:var(--muted);margin:6px 0 0}
+.upcoming-coverage{background:var(--ground);border:1px solid var(--line);margin-top:32px;padding:22px 24px}
+.upcoming-heading{display:flex;gap:12px 20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.upcoming-heading :is(h4,h5){font-size:1rem;font-weight:500;letter-spacing:0;margin:0}
+.coverage-status{font-size:.65rem;line-height:1.5;color:var(--ink);background:var(--accent);padding:5px 9px;border-radius:2px;white-space:nowrap}
+.upcoming-intro{font-size:.75rem;line-height:1.6;color:var(--muted);margin:10px 0 22px}
 .dex-footnote{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-top:20px}
 .dex-footnote p{font-size:.75rem;line-height:1.65;color:var(--muted);max-width:76ch;margin:0}
 .dex-footnote a{font-size:.8rem;flex-shrink:0}
-@media(max-width:1100px){.dex-ecosystem{grid-template-columns:130px minmax(0,1fr);gap:28px}.protocol-marks,.solana-ecosystem .protocol-marks{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 24px}}
-@media(max-width:700px){.dex-ecosystem{grid-template-columns:1fr;gap:26px}.dex-ecosystem header{display:flex;justify-content:space-between;align-items:baseline;gap:24px}.dex-ecosystem header p{max-width:23ch}.dex-ecosystem header :is(h3,h4){margin:0}.dex-intro{display:block}.dex-intro>p{margin-top:12px}.dex-intro>p br{display:none}.dex-footnote{display:block}.dex-footnote a{display:inline-block;margin-top:16px}}
-@media(max-width:440px){.solana-ecosystem .protocol-marks{grid-template-columns:1fr;gap:26px}.protocol-marks>li{gap:12px}.protocol-name{font-size:.85rem}.solana-ecosystem .protocol-name{font-size:1rem}.solana-ecosystem .pool-families,.solana-ecosystem .launch-families,.solana-ecosystem .market-families{font-size:.8rem}.launch-families span{font-size:.7rem}.dex-ecosystem header p{max-width:19ch}.dex-ecosystem{padding:28px 0 32px}}
-@media(prefers-reduced-motion:no-preference){.protocol-mark img{transition:filter .2s ease}}
+@media(max-width:1100px){.dex-ecosystem{grid-template-columns:130px minmax(0,1fr);gap:28px}}
+@media(max-width:700px){.dex-ecosystem{grid-template-columns:1fr;gap:26px}.ecosystem-heading{display:flex;justify-content:space-between;align-items:baseline;gap:24px}.ecosystem-heading p{max-width:28ch}.ecosystem-heading :is(h3,h4){margin:0}.dex-intro{display:block}.dex-intro>p{margin-top:12px}.dex-footnote{display:block}.dex-footnote a{display:inline-block;margin-top:16px}}
+@media(max-width:440px){.ecosystem-heading p{max-width:25ch}.dex-ecosystem{padding:28px 0 32px}.upcoming-coverage{padding:20px}.category-heading{margin-bottom:22px}.coverage-status{font-size:.7rem}}
 </style>

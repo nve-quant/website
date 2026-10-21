@@ -41,3 +41,6 @@ PNG marks visually inspected. SVGs checked for active/external content. Images l
 The DefiLlama and Token Terminal assets are third-party venue-identification sources, not independently supplied official brand kits. They are not claimed as original art or broadly licensed assets. The generic question-mark avatars returned for Tessera/ZeroFi by the first registry were rejected. All final marks visually inspected, stored locally, rendered via lazy-loaded images with visible venue names, and used only for identification. Five new images total approximately 119 KiB; no remote requests at runtime.
 
 `public/favicon.svg`: original geometric OB monogram using the established site colours; added after browser review found the missing default favicon request. Not copied from a venue or stamped onto asset models.
+
+### Robinhood coming-soon launchpad identification
+Pools.trade: https://pools.trade/favicon.svg, copied unchanged to public/images/venues/pools-trade.svg (2,596 bytes). Official vector with embedded gradients only; no scripts, external references or runtime fetches. Used to identify planned coverage, not a partnership. Uniswap v4 reuses the existing Uniswap mark. LaunchLab and Meteora DBC reuse Raydium/Meteora marks with distinct visible product names.

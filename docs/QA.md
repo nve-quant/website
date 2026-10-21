@@ -291,3 +291,31 @@ CUA again returned no enabled apps/browsers and native pipe startup failure. No 
 - First pass found the existing `/favicon.ico` 404. Added a local SVG favicon and verified no resource or console errors on the final static preview. A running Astro dev server retained older component markup; restarted it with `npm run dev -- --force` and served the fresh build separately on localhost:4322 for final verification. The dev server remains on localhost:4321.
 - Screenshots: `solana-coverage-{home,dex}-{375,768,1440}.png` show the complete directory, with matching `solana-context-*` viewport captures. The mobile capture uses a taller viewport to fit the whole directory; width remains exactly 375px. An initial oversized element capture showed a fixed skip-link capture artifact; final captures fit inside their viewport and normal viewport review confirmed the skip link remains offscreen until focused.
 - Subtraction pass: removed the generic all-pool-types label and the initial promotional tagline; rejected generic unknown-project logo placeholders. Five new local identification images total 121,665 bytes, loaded lazily. No fabricated operating metrics, pool addresses, current balances or partner claims.
+
+## DEX market categories and EVM deployment scope — 21 October 2026
+
+Changes reviewed on / and /dex-liquidity-management. Raydium LaunchLab, Meteora DBC, Pump.fun and Moonit now sit under Launchpads & bonding curves; Raydium/Meteora LP products, Orca and PumpSwap remain under Liquidity pools. Phoenix spot and proprietary AMMs have their own execution group. Robinhood Uniswap v4 and the initial proposed Pools.trade launchpad entry are visibly Coming soon, outside current coverage.
+
+Validation:
+- npm run check: 78 files, no errors, warnings or hints.
+- npm run build: all five static pages; internal links, local assets, anchors, one h1 and noindex checks passed; development-only routes excluded. Existing Three.js chunk-size warning persists, unrelated to this static directory change.
+- Venue-carousel and services-navigation harnesses passed.
+- Headless Chrome review of both pages at 375×812, 768×1000 and 1440×1000. Scrolled through every coverage entry and the lower footnote. No horizontal overflow, broken/undecodable images, page errors, console errors or HTTP failures.
+- Confirmed 16 current entries and two upcoming entries on each page. All four Solana LP products, four launch products and four other trading venues are in the correct groups. Robinhood is absent from the current six-chain heading and present in the coming-soon inset only.
+- Full-section screenshots captured with extended viewport height after checking the normal viewport; restored normal height for lower-section checks. All six screenshots inspected visually.
+- Normal-motion Moonit hover changed grayscale(1) to grayscale(0). Reduced-motion logo transition is 0s.
+- Keyboard-focused DEX detail link has a visible 3px outline; Enter navigates correctly. The new Robinhood FAQ opens with Enter.
+- Calculated text contrast: muted on ground 5.88:1, primary on ground 10.62:1, coming-soon badge 8.86:1.
+- Official Pools.trade SVG parses, contains no script/foreignObject/event attributes or external resource references, and adds 2.6 KB with no runtime request or JavaScript.
+
+Observed problems addressed: the former brand-level rows mixed LP products and launch curves; those now have separate named sections. Generic EVM labels omitted chain/version scope; Uniswap, Aerodrome and Velodrome now show their specific mappings. PancakeSwap remains owner-confirmed with unspecified chain/version details because this repository does not corroborate them. Mobile uses single-column venue rows to keep product names readable.
+
+Screenshots:
+- [Homepage, 375px](screenshots/dex-market-types-home-375.png)
+- [Homepage, 768px](screenshots/dex-market-types-home-768.png)
+- [Homepage, 1440px](screenshots/dex-market-types-home-1440.png)
+- [DEX service, 375px](screenshots/dex-market-types-dex-375.png)
+- [DEX service, 768px](screenshots/dex-market-types-dex-768.png)
+- [DEX service, 1440px](screenshots/dex-market-types-dex-1440.png)
+
+Scope limit: the source audit establishes connector and deployment configuration, not successful production execution on every chain. No trading bot was run. Pools.trade is an initial proposed launchpad name pending optional owner clarification; it is not claimed as an implemented integration.

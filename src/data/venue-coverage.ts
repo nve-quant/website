@@ -6,10 +6,11 @@ export interface CexVenue { name: string; logo?: string; }
 export interface DexDeployment {
  logo?: string;
  protocol: string;
- networks: ('EVM' | 'Solana')[];
- poolTypes: string[];
- launchTypes?: string[];
- marketTypes?: string[];
+ network: 'EVM' | 'Solana';
+ category: 'pools' | 'launchpads' | 'trading';
+ products: string[];
+ chains?: string[];
+ status: 'available' | 'coming-soon';
 }
 export const cexVenues: CexVenue[] = [
   {
@@ -109,23 +110,31 @@ export const cexVenues: CexVenue[] = [
     "logo": "/images/venues/xt.svg"
   }
 ];
-export const dexCoverageNote = 'We support EVM chains and Solana. Protocol availability depends on the chain; the engagement identifies the specific deployment and pool.';
+// Supported registry + connector families in the owner's uniswap-mm repository.
+// This is deployment scope, not a claim of client operation on every chain.
+export const evmChains = ['Ethereum', 'Arbitrum', 'Optimism', 'Polygon', 'Base', 'BNB Chain'];
 export const dexDeployments: DexDeployment[] = [
- {logo:'/images/venues/uniswap.svg',protocol:'Uniswap',networks:['EVM'],poolTypes:['v3','v4']},
- {logo:'/images/venues/aerodrome.svg',protocol:'Aerodrome',networks:['EVM'],poolTypes:[]},
- {logo:'/images/venues/velodrome.svg',protocol:'Velodrome',networks:['EVM'],poolTypes:[]},
- {logo:'/images/venues/pancakeswap.png',protocol:'PancakeSwap',networks:['EVM'],poolTypes:[]},
+ {logo:'/images/venues/uniswap.svg',protocol:'Uniswap',network:'EVM',category:'pools',products:['v3','v4'],chains:evmChains,status:'available'},
+ {logo:'/images/venues/aerodrome.svg',protocol:'Aerodrome',network:'EVM',category:'pools',products:['Slipstream','Classic stable & volatile'],chains:['Base'],status:'available'},
+ {logo:'/images/venues/velodrome.svg',protocol:'Velodrome',network:'EVM',category:'pools',products:['Slipstream'],chains:['Optimism'],status:'available'},
+ // PancakeSwap is separately owner-confirmed. This repo does not establish its versions or chain mappings.
+ {logo:'/images/venues/pancakeswap.png',protocol:'PancakeSwap',network:'EVM',category:'pools',products:[],status:'available'},
  // Owner confirmed trading venues in the recovered SOL_DEX_MM_2 inventory for publication.
  // Launch curves, spot order books and proprietary AMMs are not LP-position products.
  // Aggregators (Jupiter, DFlow, OKX routing), Jito and base programs are deliberately excluded.
- {logo:'/images/venues/raydium.svg',protocol:'Raydium',networks:['Solana'],poolTypes:['AMM v4','CPMM','CLMM'],launchTypes:['LaunchLab']},
- {logo:'/images/venues/meteora.svg',protocol:'Meteora',networks:['Solana'],poolTypes:['DLMM','DAMM v1','DAMM v2'],launchTypes:['Dynamic Bonding Curve (DBC)']},
- {logo:'/images/venues/orca.png',protocol:'Orca',networks:['Solana'],poolTypes:['Whirlpools']},
- {logo:'/images/venues/pumpswap.png',protocol:'PumpSwap',networks:['Solana'],poolTypes:['Constant-product AMM']},
- {logo:'/images/venues/pumpswap.png',protocol:'Pump.fun',networks:['Solana'],poolTypes:[],launchTypes:['Bonding curves']},
- {logo:'/images/venues/moonit.png',protocol:'Moonit',networks:['Solana'],poolTypes:[],launchTypes:['Bonding curves']},
- {logo:'/images/venues/phoenix.webp',protocol:'Phoenix',networks:['Solana'],poolTypes:[],marketTypes:['Spot order book']},
- {logo:'/images/venues/solfi.webp',protocol:'SolFi',networks:['Solana'],poolTypes:[],marketTypes:['Proprietary AMM']},
- {logo:'/images/venues/tessera.png',protocol:'Tessera V',networks:['Solana'],poolTypes:[],marketTypes:['Proprietary AMM']},
- {logo:'/images/venues/zerofi.png',protocol:'ZeroFi',networks:['Solana'],poolTypes:[],marketTypes:['Proprietary AMM']},
+ {logo:'/images/venues/raydium.svg',protocol:'Raydium',network:'Solana',category:'pools',products:['AMM v4','CPMM','CLMM'],status:'available'},
+ {logo:'/images/venues/meteora.svg',protocol:'Meteora',network:'Solana',category:'pools',products:['DLMM','DAMM v1','DAMM v2'],status:'available'},
+ {logo:'/images/venues/orca.png',protocol:'Orca',network:'Solana',category:'pools',products:['Whirlpools'],status:'available'},
+ {logo:'/images/venues/pumpswap.png',protocol:'PumpSwap',network:'Solana',category:'pools',products:['Constant-product AMM'],status:'available'},
+ {logo:'/images/venues/raydium.svg',protocol:'Raydium LaunchLab',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
+ {logo:'/images/venues/meteora.svg',protocol:'Meteora DBC',network:'Solana',category:'launchpads',products:['Dynamic Bonding Curve'],status:'available'},
+ {logo:'/images/venues/pumpswap.png',protocol:'Pump.fun',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
+ {logo:'/images/venues/moonit.png',protocol:'Moonit',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
+ {logo:'/images/venues/phoenix.webp',protocol:'Phoenix',network:'Solana',category:'trading',products:['Spot order book'],status:'available'},
+ {logo:'/images/venues/solfi.webp',protocol:'SolFi',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
+ {logo:'/images/venues/tessera.png',protocol:'Tessera V',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
+ {logo:'/images/venues/zerofi.png',protocol:'ZeroFi',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
+ // Coming soon is Bureau's service status, not the chain's launch status.
+ {logo:'/images/venues/uniswap.svg',protocol:'Uniswap',network:'EVM',category:'pools',products:['v4'],chains:['Robinhood Chain'],status:'coming-soon'},
+ {logo:'/images/venues/pools-trade.svg',protocol:'Pools.trade',network:'EVM',category:'launchpads',products:['Crowd Launch','Instant Launch'],chains:['Robinhood Chain'],status:'coming-soon'},
 ];

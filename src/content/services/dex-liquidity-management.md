@@ -46,9 +46,11 @@ access: Your assets remain under your control. Safe or Squads vault roles restri
 considerations: A narrower range concentrates liquidity but can move out of range as prices change. Asset exposure changes as trades occur, and repositioning incurs transaction costs. Active management does not remove market, smart-contract or inventory risk, or guarantee returns.
 faqs:
   - question: Which protocols and chains do you support?
-    answer: We support Uniswap v3 and v4, Aerodrome, Velodrome and PancakeSwap across their EVM deployments. Solana pool coverage includes Raydium AMM v4, CPMM and CLMM; Meteora DLMM, DAMM v1 and DAMM v2; Orca Whirlpools; and PumpSwap constant-product pools. We identify the specific protocol version, pool address, asset pair and permitted activity when scoping the engagement.
+    answer: Uniswap v3 and v4 coverage spans Ethereum, Arbitrum, Optimism, Polygon, Base and BNB Chain. Aerodrome coverage includes Slipstream and classic stable/volatile pools on Base; Velodrome Slipstream is on Optimism. PancakeSwap is also supported, with the deployment agreed for the engagement. Solana liquidity pools include Raydium AMM v4, CPMM and CLMM; Meteora DLMM, DAMM v1 and DAMM v2; Orca Whirlpools; and PumpSwap constant-product pools. We agree the version, pool, asset pair and permitted activity before operation.
   - question: Does your Solana coverage extend beyond liquidity pools?
     answer: Yes. Launch-market execution covers Raydium LaunchLab, Meteora Dynamic Bonding Curve (DBC), Pump.fun and Moonit. Trading coverage also includes the Phoenix spot order book and the SolFi, Tessera V and ZeroFi proprietary AMMs. These are distinct market structures, with activities and permissions agreed separately from concentrated-liquidity management. Trading against a proprietary AMM does not mean we manage its liquidity.
+  - question: Is Robinhood Chain coverage available yet?
+    answer: Our Robinhood Chain coverage is coming soon. The planned scope starts with Uniswap v4 liquidity pools and Pools.trade launches. These are separate activities, and the coming-soon status refers to our service availability. Contact us to discuss a future mandate.
   - question: Who controls the assets?
     answer: You retain control through your Safe or Squads vault. Our roles are restricted to the specified pool and asset pair, with no withdrawal or send authority. The configuration is agreed for the engagement. These permission boundaries do not remove market, smart-contract or inventory risk.
   - question: Can you work with an existing pool?
