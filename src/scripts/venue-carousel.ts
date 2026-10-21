@@ -10,7 +10,7 @@ export function initVenueCarousels() {
   const copies = originals.map(item => {
    const copy = item.cloneNode(true) as HTMLElement;
    copy.setAttribute('aria-hidden', 'true');
-   copy.inert = true;
+   // Entries contain no links or controls; aria-hidden hides duplicates without blocking hover.
    rail.append(copy);
    return copy;
   });

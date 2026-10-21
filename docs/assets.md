@@ -18,3 +18,14 @@
 
 ### Venue identification marks
 27 SVGs in public/images/venues copied from the owner-supplied DataIndexer/frontend/src/assets/venues/crypto directory following explicit coverage/public-site instructions. Original third-party brand artwork, used to identify supported venues, not original Onchain Bureau art or endorsements. No ownership or blanket licence asserted. Source provenance is owner-supplied; retain appropriate trademark usage. Blockfinex SVG contains an embedded PNG. Total files approximately 89 KB; lazy-loaded via img, no executable SVG embedding. PNG-only and DEX assets omitted pending scope confirmation. This supersedes the earlier statement that no third-party logos are used.
+
+### DEX protocol marks
+Local identification artwork, not endorsement claims. Uniswap copied from the owner-supplied DataIndexer directory. Other source assets:
+- Aerodrome: https://aerodrome.finance/svg/AERO/favicon.svg (3.2 KB official vector, replacing the much larger supplied illustration).
+- Velodrome: https://velodrome.finance/svg/VELO/favicon.svg
+- Meteora: https://www.meteora.ag/icons/v2.svg
+- PancakeSwap: https://pancakeswap.finance/logo.png
+- Raydium: https://raw.githubusercontent.com/raydium-io/media-assets/master/logo.svg
+- Orca: official orca-so GitHub organisation avatar, https://avatars.githubusercontent.com/u/74166425?v=4&s=128
+- PumpSwap: Pump.fun organisation's shared brand mark, https://avatars.githubusercontent.com/u/148890315?v=4&s=128 (not a newly drawn PumpSwap-specific logo).
+PNG marks visually inspected. SVGs checked for active/external content. Images load locally and lazily; trademarks remain with their owners. No third-party tracking or remote runtime asset dependency.

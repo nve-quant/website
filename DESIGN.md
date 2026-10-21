@@ -200,3 +200,7 @@ Populate the CEX rail with 27 distinct owner-confirmed venue marks. Use visible 
 
 ### Owner-requested venue carousel motion
 Supersedes manual-only CEX rail: slow 18px/s automatic scroll with a seamless duplicate visual set hidden from assistive technology. Hide scrollbar/arrows; direct pointer dragging and keyboard navigation remain. Retain a small pause/resume text control. Stop RAF offscreen, while document hidden, on hover/focus/drag, explicit pause and reduced motion. Reduced motion keeps manual browsing. Original accessible list remains single; no new dependency.
+
+### Hover colour and DEX ecosystem grouping
+Restore original CEX colours on the entire venue entry hover; target the li because images disable pointer events for dragging. Loop duplicates keep aria-hidden without inert (there are no focusable children), allowing identical pointer hover behaviour. White-logo backgrounds remain dark while their marks start desaturated.
+Replace DEX matrix with two static ecosystem groups, EVM and Solana. Show original protocol marks and names, Uniswap versions beneath its name, and shared all-pool-types scope once at the Solana group level. No repeated table headers, boxes around individual marks or second moving carousel. Two-column grouping becomes a single column on mobile. Logo hover colour transitions respect reduced motion.

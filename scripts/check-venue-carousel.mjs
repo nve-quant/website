@@ -24,7 +24,7 @@ globalThis.cancelAnimationFrame=id=>frames.delete(id);
 const emit=(target,type,props={})=>{const event=new Event(type,{cancelable:true});Object.assign(event,props);target.dispatchEvent(event);};
 const tick=time=>{const batch=[...frames.values()];frames.clear();for(const callback of batch)callback(time);};
 initVenueCarousels();
-assert.equal(rail.children.length,54);assert(rail.children.slice(27).every(item=>item.inert&&item['aria-hidden']==='true'));
+assert.equal(rail.children.length,54);assert(rail.children.slice(27).every(item=>item['aria-hidden']==='true'));
 assert.equal(frames.size,0,'Offscreen carousel should not animate');
 intersectionCallback([{isIntersecting:true}]);tick(100);tick(150);assert(Math.abs(rail.scrollLeft-.9)<.001,'18px per second, retained subpixel movement');
 emit(rail,'pointerenter',{pointerType:'mouse'});assert.equal(frames.size,0);

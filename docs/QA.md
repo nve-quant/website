@@ -270,3 +270,7 @@ Updated named engagement examples, short founder profiles with LinkedIn links, v
 
 ### CEX carousel automatic motion and direct drag
 71-file type check and static build pass. New check-venue-carousel.mjs validates 18px/s pacing, subpixel accumulation, modulo wrapping, hidden duplicate semantics, pointer drag, keyboard browsing, pause persistence, focus, reduced motion, visibility and page lifecycle with DOM mocks. These are logic tests, not observed browser rendering. Visual review/screenshots still outstanding. No arrows or visible scrollbar; subtle pause control retained.
+
+### Venue hover and DEX logo display
+Fixed ineffective image:hover target (images are pointer-events:none), replacing with entry:hover. Removed inert from decorative clone entries so their hover works; aria-hidden retains single accessible list. Replaced DEX table with two responsive ecosystem groups and eight local marks. PNGs visually inspected; SVGs scanned for active/external content. Aerodrome uses a 3.2KB vector rather than supplied 482KB artwork.
+Type check: 73 files, zero diagnostics. Static build and all local link/asset/isolation checks pass; carousel lifecycle/drag/motion checks pass. Browser layout/hover verification still outstanding.

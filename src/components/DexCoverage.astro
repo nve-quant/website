@@ -1,0 +1,25 @@
+---
+import {dexDeployments} from '../data/venue-coverage';
+const groups=[
+ {name:'EVM',description:'Across supported EVM deployments',protocols:dexDeployments.filter(item=>item.networks.includes('EVM'))},
+ {name:'Solana',description:'All pool types across these protocols',protocols:dexDeployments.filter(item=>item.networks.includes('Solana'))},
+];
+---
+<div class="dex-coverage">
+ <div class="dex-intro"><h3>Decentralized exchanges</h3><p>Two ecosystems. The protocols your liquidity runs on.</p></div>
+ <div class="dex-ecosystems">{groups.map(group=><section class="dex-ecosystem" aria-label={`${group.name} protocol coverage`}>
+  <header><h4>{group.name}</h4><p>{group.description}</p></header>
+  <ul class="protocol-marks">{group.protocols.map(protocol=><li>
+   <div class="protocol-mark"><img src={protocol.logo} alt="" width="56" height="56" loading="lazy" draggable="false"/></div>
+   <span class="protocol-name">{protocol.protocol}</span>
+   {group.name==='EVM'&&protocol.poolTypes.length>0&&<span class="protocol-version">{protocol.poolTypes.join(' / ')}</span>}
+  </li>)}</ul>
+ </section>)}</div>
+ <div class="dex-footnote"><p>We agree the specific chain, protocol deployment and pool for your engagement.</p><a href="/dex-liquidity-management">Explore DEX liquidity management</a></div>
+</div>
+<style>
+.dex-coverage{margin-top:56px}.dex-intro{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:24px}.dex-intro h3{font-size:1rem;margin:0}.dex-intro>p{font-size:.8rem;color:var(--muted);margin:0;max-width:38ch}.dex-ecosystems{display:grid;grid-template-columns:1fr 1fr;gap:40px;border-block:1px solid var(--line)}.dex-ecosystem{min-width:0;padding:26px 0 34px}.dex-ecosystem+section{padding-left:40px;border-left:1px solid var(--line)}.dex-ecosystem header{margin-bottom:32px}.dex-ecosystem h4{font-weight:400;font-size:1.8rem;letter-spacing:-.04em;margin:0 0 8px}.dex-ecosystem header p{font-size:.75rem;color:var(--muted);margin:0}.protocol-marks{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.protocol-marks li{text-align:center;min-width:0}.protocol-mark{height:64px;display:flex;justify-content:center;align-items:center;margin-bottom:16px}.protocol-mark img{object-fit:contain;max-width:100%;filter:grayscale(1)}.protocol-marks li:hover img{filter:grayscale(0)}.protocol-name{display:block;font-size:.78rem;line-height:1.5;overflow-wrap:anywhere}.protocol-version{display:block;margin-top:5px;color:var(--muted);font-size:.68rem}.dex-footnote{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-top:20px}.dex-footnote p{font-size:.75rem;color:var(--muted);max-width:52ch;margin:0}.dex-footnote a{font-size:.8rem}
+@media(max-width:1050px){.dex-ecosystems{gap:28px}.dex-ecosystem+section{padding-left:28px}.protocol-marks{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 20px}.protocol-mark{margin-bottom:10px}}
+@media(max-width:600px){.dex-intro{display:block}.dex-intro>p{margin-top:12px}.dex-ecosystems{grid-template-columns:1fr;gap:0}.dex-ecosystem+section{padding-left:0;border-left:0;border-top:1px solid var(--line)}.dex-ecosystem header{margin-bottom:24px}.dex-footnote{display:block}.dex-footnote a{display:inline-block;margin-top:16px}}
+@media(prefers-reduced-motion:no-preference){.protocol-mark img{transition:filter .2s ease}}
+</style>

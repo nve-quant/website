@@ -3,7 +3,7 @@
 // okx-x is a duplicate mark. Hyperliquid product scope remains pending.
 // Operational coverage does not imply partnership or endorsement.
 export interface CexVenue { name: string; logo?: string; }
-export interface DexDeployment { protocol: string; networks: string[]; poolTypes: string[]; }
+export interface DexDeployment { logo: string; protocol: string; networks: string[]; poolTypes: string[]; }
 export const cexVenues: CexVenue[] = [
   {
     "name": "AscendEX",
@@ -116,12 +116,12 @@ export const cexVenues: CexVenue[] = [
 ];
 export const dexCoverageNote = 'We support EVM chains and Solana. Protocol availability depends on the chain; the engagement identifies the specific deployment and pool.';
 export const dexDeployments: DexDeployment[] = [
- {protocol:'Uniswap',networks:['EVM'],poolTypes:['v3','v4']},
- {protocol:'Aerodrome',networks:['EVM'],poolTypes:[]},
- {protocol:'Velodrome',networks:['EVM'],poolTypes:[]},
- {protocol:'PancakeSwap',networks:['EVM'],poolTypes:[]},
- {protocol:'Raydium',networks:['Solana'],poolTypes:['All pool types']},
- {protocol:'Meteora',networks:['Solana'],poolTypes:['All pool types']},
- {protocol:'Orca',networks:['Solana'],poolTypes:['All pool types']},
- {protocol:'PumpSwap',networks:['Solana'],poolTypes:['All pool types']},
+ {logo:'/images/venues/uniswap.svg',protocol:'Uniswap',networks:['EVM'],poolTypes:['v3','v4']},
+ {logo:'/images/venues/aerodrome.svg',protocol:'Aerodrome',networks:['EVM'],poolTypes:[]},
+ {logo:'/images/venues/velodrome.svg',protocol:'Velodrome',networks:['EVM'],poolTypes:[]},
+ {logo:'/images/venues/pancakeswap.png',protocol:'PancakeSwap',networks:['EVM'],poolTypes:[]},
+ {logo:'/images/venues/raydium.svg',protocol:'Raydium',networks:['Solana'],poolTypes:['All pool types']},
+ {logo:'/images/venues/meteora.svg',protocol:'Meteora',networks:['Solana'],poolTypes:['All pool types']},
+ {logo:'/images/venues/orca.png',protocol:'Orca',networks:['Solana'],poolTypes:['All pool types']},
+ {logo:'/images/venues/pumpswap.png',protocol:'PumpSwap',networks:['Solana'],poolTypes:['All pool types']},
 ];
