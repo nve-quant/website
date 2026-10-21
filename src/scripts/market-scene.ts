@@ -79,6 +79,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
 
   let active:AssetVariantId='gold';
   let rotation=-.2, targetRotation=-.2, tilt=0, targetTilt=0;
+  let reducedMotion=false;
   let scale=1, spinning=true, visible=true, disposed=false, contextLost=false;
   let drag: {id:number;startX:number;startY:number;x:number;y:number;moved:boolean}|undefined;
   let pointerActivation:boolean|undefined;
@@ -90,7 +91,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
     if(spinning&&!drag&&time-lastTime<1000/30){schedule();return;}
     const dt=Math.min((time-lastTime)/1000 || .016,.05);lastTime=time;
     if(spinning&&!drag)targetRotation+=dt*.24;
-    const ease=1-Math.exp(-dt*9);
+    const ease=reducedMotion?1:1-Math.exp(-dt*9);
     rotation+=(targetRotation-rotation)*ease;tilt+=(targetTilt-tilt)*ease;scale+=(1-scale)*ease;
     rig.rotation.y=rotation;rig.rotation.x=tilt;models.get(active)?.scale.setScalar(scale);
     renderer.render(scene,camera);
@@ -122,6 +123,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
     schedule();
   }
   function toggleRotation(){
+    if(reducedMotion)return;
     spinning=!spinning;
     onRotationChange(spinning);
     schedule();
@@ -203,6 +205,11 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   canvas.addEventListener('webglcontextlost',lost);
   resize();
   return {
+    setReducedMotion(value:boolean){
+      reducedMotion=value;
+      if(value){spinning=false;scale=1;rotation=targetRotation;tilt=targetTilt;}
+      onRotationChange(spinning);schedule();
+    },
     select(id:AssetVariantId){
       endDrag();
       let model=models.get(id);
@@ -215,7 +222,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
       // Thin stalks need a smaller shadow bias than the broad bullion surfaces.
       key.shadow.normalBias=id==='wheat'?.003:.018;
       active=id;models.forEach((entry,key)=>{entry.visible=key===id;entry.scale.setScalar(1);});
-      scale=.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();
+      scale=reducedMotion?1:.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();
     },
     renderStill(){
       resize();rig.rotation.set(0,-.2,0);models.get(active)?.scale.setScalar(1);renderer.render(scene,camera);

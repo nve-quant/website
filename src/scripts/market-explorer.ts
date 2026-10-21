@@ -5,7 +5,6 @@ export function initMarketExplorer(root: HTMLElement) {
   const host = root.querySelector<HTMLElement>('[data-model-canvas]')!;
   const hint = root.querySelector<HTMLElement>('[data-model-hint]')!;
   const status = root.querySelector<HTMLElement>('[data-model-status]')!;
-  const desktop = matchMedia('(min-width: 701px)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let scene: ReturnType<typeof createMarketScene> | undefined;
   let loading = false;
@@ -46,31 +45,41 @@ export function initMarketExplorer(root: HTMLElement) {
       root.querySelector<HTMLInputElement>('input[name="market-asset"]:checked')?.focus({preventScroll:true});
     }
     root.dataset.renderer = ready ? 'ready' : 'fallback';
+    root.dataset.rendererReason = ready ? 'webgl' : failed ? 'unavailable' : 'loading';
+    if(failed)hint.textContent = '3D unavailable in this browser. Showing a simplified illustration.';
     host.tabIndex = ready ? 0 : -1;
     host.setAttribute('aria-hidden', String(!ready));
   }
   function rotationChanged(spinning: boolean) {
     host.setAttribute('aria-pressed', String(!spinning));
     host.setAttribute('aria-label', `${spinning?'Pause':'Resume'} automatic asset rotation`);
+    if(reduced.matches){
+      host.setAttribute('aria-label','Rotate asset with drag or arrow keys');
+      hint.textContent='Drag to rotate. Automatic rotation is off.';
+      return;
+    }
     hint.textContent = `Drag to rotate. Click to ${spinning ? 'pause' : 'resume'}.`;
   }
   async function update() {
-    const enabled = desktop.matches && !reduced.matches && !failed;
+    const enabled = !failed;
     scene?.visible(enabled && intersecting && !document.hidden);
     setReady(enabled && !!scene);
     if (!enabled || !intersecting || document.hidden || scene || loading || destroyed) return;
     loading = true;
     try {
       const {createMarketScene} = await import('./market-scene');
-      if (destroyed || !desktop.matches || reduced.matches || document.hidden || !intersecting) return;
+      if (destroyed || document.hidden || !intersecting) return;
       scene = createMarketScene(host, () => {
         failed = true;
         setReady(false);
       }, rotationChanged);
+      scene.setReducedMotion(reduced.matches);
       scene.select(variant().id);
       scene.visible(intersecting && !document.hidden);
       setReady(true);
-    } catch {
+    } catch (error) {
+      console.error('Asset study 3D renderer failed to initialize:', error);
+      scene?.dispose(); scene = undefined;
       failed = true;
       // The accessible, selectable SVG scene is already present if WebGL fails.
       setReady(false);
@@ -90,8 +99,7 @@ export function initMarketExplorer(root: HTMLElement) {
     selectSpecimen(true);
   },{signal}));
   selectSpecimen();
-  desktop.addEventListener('change', update, {signal});
-  reduced.addEventListener('change', update, {signal});
+  reduced.addEventListener('change', () => {scene?.setReducedMotion(reduced.matches); void update();}, {signal});
   document.addEventListener('visibilitychange', update, {signal});
   const observer = new IntersectionObserver(entries => {
     intersecting = entries[0].isIntersecting;
