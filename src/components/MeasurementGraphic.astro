@@ -1,0 +1,69 @@
+---
+import {measurementViews} from '../data/measurement-graphic';
+interface Props { id?: string }
+const {id='measurement-explainer'}=Astro.props;
+---
+<div class="measurement-graphic">
+ <fieldset class="measurement-choice">
+  <legend>Explore the measures</legend>
+  {measurementViews.map((view,index)=><label><input type="radio" name={`${id}-view`} value={view.id} checked={index===0}/><span>{view.label}</span></label>)}
+ </fieldset>
+ {measurementViews.map(view=><div class="measurement-panel" data-measurement-view={view.id}>
+  {view.metrics.map(metric=><article class="measurement-row">
+   <div class="measurement-drawing" aria-hidden="true"><svg viewBox="0 0 260 112" focusable="false">
+    {metric.id==='spread'&&<>
+     <path class="rule" d="M16 83H244"/><path class="bid" d="M22 83V22H45V31H69V47H95V57H111V83Z"/><path class="ask" d="M149 83V57H165V47H191V31H215V22H238V83Z"/>
+     <path class="ink" d="M111 17V8H149V17M111 91H149"/><path class="rule" stroke-dasharray="3 4" d="M130 20V83"/>
+     <text x="111" y="107" text-anchor="end">Best bid</text><text x="149" y="107">Best ask</text>
+    </>}
+    {metric.id==='depth'&&<>
+     <rect class="wash" x="65" y="12" width="130" height="70"/><path class="rule" d="M16 82H244M130 10V83"/>
+     {[18,35,52,69].map((y,i)=><><rect class="bid" x={116-17*(i+1)} y={y} width={17*(i+1)} height="9"/><rect class="ask" x="144" y={y} width={14*(i+1)} height="9"/></>)}
+     <path class="ink" d="M65 87V93H195V87"/><text x="130" y="108" text-anchor="middle">Agreed price band</text>
+    </>}
+    {metric.id==='availability'&&<>
+     <text x="15" y="19">Bid</text><text x="15" y="65">Ask</text>
+     <path class="rule" d="M15 42H245M15 88H245"/>
+     {[15,38,61,84,107,153,176,199,222].map(x=><rect class="bid" x={x} y="26" width="18" height="16"/>)}
+     {[15,38,61,84,153,176,199,222].map(x=><rect class="ask" x={x} y="72" width="18" height="16"/>)}
+     <path class="ink" stroke-dasharray="2 3" d="M128 21V89"/><text x="244" y="108" text-anchor="end">Observation window</text>
+    </>}
+    {metric.id==='allocation'&&<>
+     <path class="rule" d="M16 85H244"/><rect class="wash" x="49" y="14" width="163" height="71"/>
+     <rect class="ask" x="26" y="62" width="65" height="17"/><rect class="bid" x="59" y="39" width="123" height="17"/><rect class="ask" x="147" y="16" width="81" height="17"/>
+     <path class="ink" d="M130 7V87"/><circle class="bid" cx="130" cy="7" r="3"/><text x="130" y="106" text-anchor="middle">Market price within ranges</text>
+    </>}
+    {metric.id==='impact'&&<>
+     <path class="rule" d="M23 12V85H241"/><path class="ink impact-line" d="M24 73C67 72 92 68 123 58S181 35 232 16"/>
+     <circle class="bid" cx="123" cy="58" r="4"/><path class="rule" stroke-dasharray="3 4" d="M123 58V85M23 58H123"/>
+     <text x="31" y="18">Impact</text><text x="239" y="106" text-anchor="end">Trade size</text>
+    </>}
+    {metric.id==='economics'&&<>
+     <path class="rule" d="M16 61H244"/><rect class="bid" x="29" y="23" width="39" height="38"/><rect class="ask" x="110" y="61" width="39" height="22"/>
+     <path class="ink" d="M210 23V83M202 31L210 23L218 31M202 75L210 83L218 75"/>
+     <text x="49" y="105" text-anchor="middle">Fees</text><text x="130" y="105" text-anchor="middle">Costs</text><text x="211" y="105" text-anchor="middle">Inventory</text>
+    </>}
+   </svg></div>
+   <div class="measurement-copy"><h3>{metric.title}</h3><p class="measurement-question">{metric.question}</p><p>{metric.text}</p></div>
+  </article>)}
+ </div>)}
+ <p class="measurement-caption">Illustrative measurement guide. Definitions, targets and review periods are agreed for each engagement.</p>
+</div>
+<style>
+ .measurement-graphic{grid-column:1/-1;min-width:0;margin-top:22px;color:var(--ink,#243f35)}
+ .measurement-choice{display:flex;flex-wrap:wrap;gap:8px;border:0;border-bottom:1px solid var(--line,#b4bfb1);padding:0 0 18px;margin:0}
+ .measurement-choice legend{font-size:.75rem;margin-bottom:13px;color:var(--muted,#526457)}
+ .measurement-choice label{position:relative;cursor:pointer}.measurement-choice input{position:absolute;opacity:0;width:1px;height:1px}
+ .measurement-choice span{display:block;padding:11px 16px;border:1px solid var(--line,#b4bfb1);font-size:.8rem}
+ .measurement-choice input:checked+span{background:var(--ink,#243f35);border-color:var(--ink,#243f35);color:var(--ground,#f6f7f2)}
+ .measurement-choice input:focus-visible+span{outline:3px solid #a13d00;outline-offset:4px}
+ .measurement-panel{display:none}.measurement-graphic:has(input[value=cex]:checked) [data-measurement-view=cex],.measurement-graphic:has(input[value=dex]:checked) [data-measurement-view=dex]{display:block}
+ .measurement-row{display:grid;grid-template-columns:minmax(200px,.75fr) minmax(0,1.6fr);gap:clamp(24px,5vw,70px);align-items:center;padding:24px 0;border-bottom:1px solid var(--line,#b4bfb1)}
+ .measurement-drawing{max-width:340px;width:100%;background:#e9ede2;padding:12px 14px}.measurement-drawing svg{display:block;width:100%;overflow:visible}
+ .measurement-drawing .rule{stroke:#a1ad9b;fill:none;stroke-width:1}.measurement-drawing .ink{stroke:#243f35;fill:none;stroke-width:1.5}.measurement-drawing .bid{fill:#365a48}.measurement-drawing .ask{fill:#819369}.measurement-drawing .wash{fill:#dce9a9}
+ .measurement-drawing text{font-family:inherit;font-size:10px;fill:#243f35}.measurement-drawing .impact-line{stroke-width:2}
+ .measurement-copy h3{font-size:1.15rem;letter-spacing:-.025em;margin:0 0 7px}.measurement-copy p{font-size:.8rem;line-height:1.65;max-width:67ch;margin:0}.measurement-copy .measurement-question{font-size:.85rem;margin-bottom:5px}.measurement-copy p:last-child{color:var(--muted,#526457)}
+ .measurement-caption{font-size:.7rem;color:var(--muted,#526457);margin:15px 0 0;line-height:1.6}
+ @media(max-width:600px){.measurement-row{grid-template-columns:1fr;gap:18px;padding:24px 0}.measurement-drawing{max-width:none;padding:15px 20px}.measurement-drawing svg{max-width:300px;margin:auto}.measurement-choice span{padding:10px 12px;font-size:.75rem}}
+ @media(prefers-reduced-motion:no-preference){.measurement-choice span{transition:background-color .15s,color .15s}}
+</style>

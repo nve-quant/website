@@ -1,0 +1,14 @@
+---
+import {cexVenues,dexDeployments} from '../data/venue-coverage';
+import {site} from '../data/site';
+---
+{(cexVenues.length>0||dexDeployments.length>0)&&<section class="venue-coverage" aria-labelledby="venue-coverage-title">
+ <div class="section-intro"><h2 id="venue-coverage-title">The venues where<br/>we operate.</h2><p>Operational coverage for<br/>your market.</p></div>
+ {cexVenues.length>0&&<div class="cex-coverage"><h3>Centralized exchanges</h3><ul class="venue-rail" tabindex={cexVenues.length>6?0:undefined} aria-label="Centralized exchange coverage">{cexVenues.map(venue=><li>{venue.logo?<img src={venue.logo} alt={venue.name} width="140" height="48" loading="lazy"/>:<span>{venue.name}</span>}</li>)}</ul><a href="/market-making">Explore CEX market making</a></div>}
+ {dexDeployments.length>0&&<div class="dex-coverage"><h3>Decentralized exchanges</h3><ul class="deployment-list">{dexDeployments.map(deployment=><li><h4>{deployment.protocol}</h4><div><span class="coverage-label">Networks</span><ul>{deployment.networks.map(network=><li>{network}</li>)}</ul></div><div><span class="coverage-label">Pool types</span><p>{deployment.poolTypes.join(' · ')}</p></div></li>)}</ul><a href="/dex-liquidity-management">Explore DEX liquidity management</a></div>}
+ <p class="coverage-contact">Need another venue? <a href={`mailto:${site.email}?subject=Venue%20coverage%20enquiry`}>Discuss coverage.</a></p>
+</section>}
+<style>
+.venue-coverage{padding:var(--section) 0;border-top:1px solid var(--line)}.venue-coverage h3{font-size:1rem;margin:0 0 20px}.venue-coverage a{font-size:.8rem}.cex-coverage{margin-bottom:44px}.venue-rail{display:flex;overflow-x:auto;gap:32px;padding:24px 0;margin:0 0 20px;list-style:none;border-block:1px solid var(--line);scroll-snap-type:x proximity}.venue-rail>li{flex:0 0 140px;align-self:center;scroll-snap-align:start;font-size:1.1rem;text-align:center}.venue-rail img{display:block;object-fit:contain;max-width:100%;filter:grayscale(1)}.venue-rail img:hover{filter:none}.deployment-list{padding:0;margin:0 0 20px;list-style:none;border-top:1px solid var(--line)}.deployment-list>li{display:grid;grid-template-columns:1fr 1.3fr 1.2fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:start}.deployment-list h4{font-size:1.1rem;margin:0}.coverage-label{font-size:.7rem;color:var(--muted);display:block;margin-bottom:10px}.deployment-list ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}.deployment-list ul li{font-size:.8rem;padding:5px 9px;background:#e9ede2}.deployment-list p{font-size:.85rem;margin:0}.coverage-contact{margin:30px 0 0;font-size:.85rem}
+@media(max-width:600px){.deployment-list>li{grid-template-columns:1fr;gap:16px}.venue-rail{gap:20px}.venue-rail>li{flex-basis:120px}}
+</style>

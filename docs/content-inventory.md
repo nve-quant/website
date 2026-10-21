@@ -152,3 +152,8 @@ Captions and specimen notes separate a reference specification from a complete l
 
 ### Owner-requested model refinement and caption subtraction
 Owner authorised removing the oil barrel’s illustrative stamp and repeated asset-study/rotation caption. The section-level context still distinguishes studies from actual offerings. Gas/coffee model captions also omit redundant illustrative wording. No product support, certifications, provenance, tenants or performance claims added. Changes use local procedural geometry/materials only; no external model/image licences introduced. Excluded metals/gems/equities/fixed-income/fund model definitions remain unchanged.
+
+## Commercial graphics and copy interview
+Owner requested parallel work on the proposed graphics while answering a broad business-copy interview. New access/handoff/reporting visuals use the existing owner-confirmed operating model. Measurement diagrams are educational drafts, not measured results or confirmation that every measure is available in the dashboard. OTC/strategy diagrams explain discussion scope, without inferring settlement, custody, returns or principal/agency models.
+
+Coverage data in src/data/venue-coverage.ts is intentionally empty pending owner-confirmed venues, protocol/network combinations and publication permission. No coverage section renders without data. Real sanitized dashboard imagery and team/client evidence remain outstanding; the reporting capability map does not substitute for such proof. Interview questions and outstanding source dependencies are recorded in docs/copy-interview.md. No new owner answers have been received during this implementation pass.

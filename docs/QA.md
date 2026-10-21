@@ -246,3 +246,11 @@ All25 geometry/UV/budget checks pass. Browser access was retried: native pipe st
 
 ### Client-need DEX stacking fix
 Owner reported the bars in “A DEX position that needs attention” were not stacked. They were two baseline-sharing silhouettes. Fixed bin lower bars now anchor managed upper bars. Regression samples101 interpolation frames for nonnegative contributions, chart bounds, segment contact and constant managed total. Existing illustration pause/visibility/reduced-motion checks pass. Astro type check and static build pass. Browser-rendered animation remains unverified because browser access is unavailable in this session.
+
+## Commercial graphics and copy interview
+- Added permissions pathways, native CEX/DEX measurement selector, reporting capability map, client/operator handoff and OTC/strategy disclosure diagrams. Coverage component is data-gated pending confirmed public names.
+- `npm run check`: 68 files, zero diagnostics. `npm run build`: five routes; local links/assets/anchors, h1, noindex and development-route isolation pass. Existing large Three.js chunk warning remains; no dependency added.
+- Existing liquidity animation, need illustration and service navigation checks pass. No new animation loop introduced.
+- Reporting component was corrected during integration from dark text to #f6f7f2 / #d6dfd3 against #243f35 (calculated contrast 10.62:1 / 8.36:1).
+- CUA returned no apps/browsers and a native pipe startup error. Desktop/mobile screenshots and observed browser keyboard/overflow checks remain outstanding; responsive CSS is implemented but not visually verified.
+- Owner interview questions sent in three groups. Venue logos, actual DEX deployments, dashboard media and experience/results await evidence; no placeholders for those ship publicly.

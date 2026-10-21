@@ -1,0 +1,18 @@
+---
+const steps = [
+ {stage:'Market review',client:'Token, venues, capital and priorities',bureau:'Proposed scope and market objectives'},
+ {stage:'Mandate',client:'Agree allocation and operating limits',bureau:'Define the work and basis for review'},
+ {stage:'Permissions',client:'Approve account or vault access',bureau:'Configure access for the agreed activity'},
+ {stage:'Operation',client:'Inspect activity and discuss changes',bureau:'Manage liquidity and review the metrics'},
+];
+---
+<div class="engagement-handoff" aria-label="Client and Onchain Bureau contributions through an engagement">
+ <div class="handoff-key"><span>Your team</span><span>Onchain Bureau</span></div>
+ <ol class="handoff-stages">{steps.map((step,i)=><li class="handoff-stage"><div class="handoff-stage-name"><span aria-hidden="true">{i+1}</span><h3>{step.stage}</h3></div><div class="handoff-contributions"><p><span class="mobile-role">Your team</span>{step.client}</p><div class="handoff-joint" aria-hidden="true"><i></i><b></b><i></i></div><p><span class="mobile-role">Onchain Bureau</span>{step.bureau}</p></div></li>)}</ol>
+ <p class="handoff-note">The mandate connects your decisions with the work we operate.</p>
+</div>
+<style>
+.engagement-handoff{min-width:0}.handoff-key{display:grid;grid-template-columns:1fr 1fr;gap:46px;padding:0 0 16px;border-bottom:1px solid var(--line,#b4bfb1);font-size:.78rem;color:var(--muted,#526457)}
+ol.handoff-stages{list-style:none;margin:0;padding:0;counter-reset:none}ol.handoff-stages>li.handoff-stage{padding:22px 0;margin:0;border-bottom:1px solid var(--line,#b4bfb1);counter-increment:none}ol.handoff-stages>li.handoff-stage:before{content:none}.handoff-stage-name{display:flex;gap:12px;align-items:baseline;margin-bottom:14px}.handoff-stage-name>span{font-size:.75rem;color:var(--muted,#526457)}.handoff-stage-name h3{font-size:1.1rem;margin:0;letter-spacing:-.025em}.handoff-contributions{display:grid;grid-template-columns:1fr 30px 1fr;gap:8px;align-items:center}.handoff-contributions p{font-size:.85rem!important;line-height:1.5;margin:0!important;max-width:28ch}.handoff-joint{display:flex;align-items:center}.handoff-joint i{height:1px;background:#7a8e72;flex:1}.handoff-joint b{width:8px;height:8px;border:1px solid #526457;background:#dce9a9;border-radius:50%}.mobile-role{display:none}.handoff-note{font-size:.75rem!important;color:var(--muted,#526457);margin:16px 0 0!important;max-width:50ch}
+@media(max-width:450px){.handoff-key{display:none}.handoff-contributions{grid-template-columns:1fr;gap:12px;padding-left:20px}.handoff-joint{display:none}.mobile-role{display:block;font-size:.7rem;color:var(--muted,#526457);margin-bottom:3px}.handoff-contributions p{max-width:none}}
+</style>

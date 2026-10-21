@@ -1,0 +1,46 @@
+---
+import {reporting} from '../data/engagement';
+---
+<figure class="reporting-capabilities">
+ <div class="capability-map">
+  {reporting.map((item,index)=><div class="capability-item">
+   <svg viewBox="0 0 240 96" aria-hidden="true" focusable="false">
+    {index===0&&<>
+     <path class="line" d="M19 17H80V77H19ZM160 17H221V77H160ZM80 47H160"/>
+     <path class="solid" d="M34 33H64V38H34ZM34 45H58V50H34ZM34 57H69V62H34ZM175 33H199V38H175ZM175 45H207V50H175ZM175 57H203V62H175Z"/>
+     <circle class="ground" cx="120" cy="47" r="14"/><circle class="line" cx="120" cy="47" r="14"/><path class="line" d="M113 47H127M120 40V54"/>
+    </>}
+    {index===1&&<>
+     <path class="line" d="M22 22H90V74H22ZM90 48H139M139 48V26H173M139 48V70H173"/>
+     <path class="solid" d="M35 34H77V39H35ZM35 46H68V51H35ZM35 58H73V63H35Z"/>
+     <rect class="sage" x="173" y="12" width="46" height="28"/><rect class="solid" x="173" y="56" width="46" height="28"/>
+     <path class="ground-line" d="M185 70L192 76L206 63"/>
+    </>}
+    {index===2&&<>
+     <path class="line" d="M29 14H211V82H29ZM29 37H211M145 14V82M29 59H211"/>
+     <path class="solid" d="M43 24H116V28H43ZM43 46H98V50H43ZM43 68H107V72H43ZM163 24H196V28H163ZM172 46H196V50H172ZM158 68H196V72H158Z"/>
+    </>}
+    {index===3&&<>
+     <path class="line" d="M24 25H216M24 48H216M24 71H216"/>
+     <rect class="sage" x="110" y="17" width="58" height="16"/><rect class="sage" x="73" y="40" width="80" height="16"/><rect class="sage" x="133" y="63" width="53" height="16"/>
+     <path class="heavy" d="M151 14V36M101 37V59M124 60V82"/>
+    </>}
+   </svg>
+   <h3>{item.title}</h3><p>{item.text}</p>
+   <span class="capability-annotation">{['Across markets and by exchange','From active orders to filled-order exports','An accounting view of the engagement','Observed metrics against agreed service levels'][index]}</span>
+  </div>)}
+ </div>
+ <figcaption>Dashboard capability map. These diagrams explain the available views; they are not screenshots or client data.</figcaption>
+</figure>
+<style>
+ .reporting-capabilities{grid-column:1/-1;min-width:0;margin:0;color:#f6f7f2}
+ .capability-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid #718575}
+ .capability-item{padding:24px 22px 25px;min-width:0}.capability-item:first-child{padding-left:0}.capability-item:last-child{padding-right:0}.capability-item+.capability-item{border-left:1px solid #718575}
+ .capability-item svg{display:block;width:100%;max-width:250px;margin:0 auto 26px;background:#e9ede2}
+ .line{fill:none;stroke:#526457;stroke-width:1.3}.solid{fill:#365a48}.sage{fill:#b4c38d}.ground{fill:#e9ede2}.ground-line{stroke:#f6f7f2;stroke-width:1.5;fill:none}.heavy{fill:none;stroke:#243f35;stroke-width:2.5}
+ .capability-item h3{font-size:1.15rem;font-weight:400;letter-spacing:-.025em;margin:0 0 12px}.capability-item p{font-size:.8rem;line-height:1.65;margin:0;color:#d6dfd3}
+ .capability-annotation{display:block;margin-top:19px;padding-top:13px;border-top:1px solid #718575;font-size:.7rem;line-height:1.5}
+ figcaption{font-size:.68rem;color:#d6dfd3;line-height:1.6;margin-top:14px;max-width:90ch}
+ @media(max-width:1000px){.capability-map{grid-template-columns:repeat(2,minmax(0,1fr))}.capability-item:nth-child(2){padding-right:0}.capability-item:nth-child(3){padding-left:0;border-left:0}.capability-item:nth-child(n+3){border-top:1px solid #718575}}
+ @media(max-width:600px){.capability-map{grid-template-columns:1fr}.capability-item,.capability-item:first-child,.capability-item:last-child{padding:24px 0}.capability-item+.capability-item{border-left:0;border-top:1px solid #718575}.capability-item svg{max-width:240px;margin:0 0 20px}.capability-annotation{margin-top:12px}}
+</style>

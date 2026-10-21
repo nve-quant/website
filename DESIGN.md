@@ -189,3 +189,8 @@ Owner found detached corn leaves and floating coffee beans, and rejected the spl
 
 ### Small DEX need diagram: true stacked contributions
 Replace independently overlaid moving silhouettes with eight fixed price bands. Other pool liquidity is the lower sage segment; managed allocation grows upward from its top. Reallocate managed heights across the same bins while price and range markers move, retaining the short tracking lag. Endpoint allocations have equal total height, so interpolation preserves capital in this schematic. Reduced-motion state shares the same initial price, range and allocation alignment. Original section pause/offscreen/visibility controls continue to govern CSS animation.
+
+### Commercial explanatory graphics and owner interview
+Add a permissions map separating client account/vault, agreed access and Bureau operations. Measurement uses a native CEX/DEX radio selector with explanatory diagrams rather than generated performance results. Reporting replaces the existing capability list with annotated graphic rows; these are not a trading-app mockup or a screenshot. Keep light text on the dark reporting surface. Replace the homepage process list with paired client inputs/Bureau outputs. OTC and strategies have scoped diagrams inside their existing disclosures, without inventing principal/agency or settlement arrangements.
+
+Use static geometry and native interaction, with no new dependencies or perpetual animation alongside the existing moving market illustrations. VenueCoverage is data-gated: CEX logo rail and DEX deployment matrix remain absent until public coverage is owner-confirmed. Do not populate it with competitor venue lists. Full interview scope is tracked in docs/copy-interview.md.
