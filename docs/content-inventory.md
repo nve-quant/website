@@ -149,3 +149,6 @@ Primary specification references:
 - Treasury maturities: https://www.treasurydirect.gov/marketable-securities/treasury-bills/
 
 Captions and specimen notes separate a reference specification from a complete lot/contract. The oil drum and gas vessel are symbolic illustrations, not actual delivery arrangements. Agricultural shapes cannot certify grades. No protein percentage, origin, credit rating or security identifier has been invented.
+
+### Owner-requested model refinement and caption subtraction
+Owner authorised removing the oil barrel’s illustrative stamp and repeated asset-study/rotation caption. The section-level context still distinguishes studies from actual offerings. Gas/coffee model captions also omit redundant illustrative wording. No product support, certifications, provenance, tenants or performance claims added. Changes use local procedural geometry/materials only; no external model/image licences introduced. Excluded metals/gems/equities/fixed-income/fund model definitions remain unchanged.

@@ -52,7 +52,7 @@ const selectorStyles=marketModels.map(model=>{
         <button type="button" class="specimen-arrow specimen-previous" data-specimen-step="-1" aria-label="Previous specimen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h12"/></svg></button>
         <button type="button" class="specimen-arrow specimen-next" data-specimen-step="1" aria-label="Next specimen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6M16 12H4"/></svg></button>
       </div>
-      <div class="model-caption">{marketModels.map(model=><p data-caption={model.id}><strong data-specimen-name>{assetVariants[model.id][0].label}</strong><span data-specimen-detail>{assetVariants[model.id][0].detail}</span><span class="specimen-count" data-specimen-count>{assetVariants[model.id].length>1?`1 / ${assetVariants[model.id].length}`:""}</span></p>)}<span>Illustrative asset study</span><span class="model-interaction" data-model-hint>Drag to rotate. Click to pause.</span></div>
+      <div class="model-caption">{marketModels.map(model=><p data-caption={model.id}><strong data-specimen-name>{assetVariants[model.id][0].label}</strong><span data-specimen-detail>{assetVariants[model.id][0].detail}</span><span class="specimen-count" data-specimen-count>{assetVariants[model.id].length>1?`1 / ${assetVariants[model.id].length}`:""}</span></p>)}<span class="model-render-error" data-model-hint hidden></span></div>
       <p id="model-interaction-help" hidden>Drag the object to rotate it. Click or press Space or Enter to pause or resume automatic rotation. Use the arrow keys to turn the object.</p>
     </div>
     <div class="model-explanation">

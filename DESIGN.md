@@ -165,3 +165,14 @@ Supersedes the mobile/reduced-motion SVG policy above. Load the same detailed mo
 Keep the eight category labels; use benchmark, crop class, grade reference, material form and instrument type at specimen level. Give detail captions their own line and reserve 120px below the canvas for wrapped labels. Retain the current studio lighting, original bullion and gem geometry.
 
 Refine dent-corn crown geometry and mature husk colour; add UV coordinates to previously unmapped corn husks and soybean pod shells, plus pod seams. Wheat spikelets have pointed glumes/keels and restrained dimensional variation. Coffee sack uses a continuous curved profile and folds. Building glazing has a shared room-depth texture, more appropriate brick scale, rooftop fan relief, door reveals and paving joints. Oil has WTI specimen artwork, hoop-localised paint chips, fine scratches and relief on the lid. Geometry remains instanced/shared, textures local, and loading lazy. These are procedural realism improvements; final photorealism is a visual review judgement, not established by a geometry check.
+
+### Focused asset refinement and removal of repeated instructions
+Owner requested a multi-agent pass limited to energy, agriculture and property. Preserve precious/industrial metals, gems, equity/fixed-income/fund geometry and the shared renderer/lighting.
+
+Agriculture: mature corn has less glossy irregular dent kernels, folded dry husks and curved silk; soy has narrower side-pod openings, smaller seed hila and batched pod hairs; wheat has geometric tapered awns, stem nodes and twisted binding. Coffee uses a woven sack, stitched irregular lip and smaller varied grooved beans; cotton has asymmetric lobes, curved bracts and surface-rooted fibres transformed with each lobe. Grain textures remain small and tiled.
+
+Energy: replace invented oil-bung flange bolts with sealing rings, add restrained handling dents and correct painted-steel response. Gas has contoured saddles, welded seams, nozzle hardware and a conforming identification plate. Ground the drum and coffee with their actual bounds rather than leaving a floor gap.
+
+Property: apartment masonry now has actual apertures and recessed glazing; roof access and vents follow floor scale. Office gets all-sided spandrels, corner caps and supported canopy. Warehouse gets raised docks, levelers, down-pitch standing seams, curbed rooflights, sheltered loading and personnel access. Ground all bases. Repeated details stay instanced.
+
+Remove the oil illustrative stamp and the caption’s repeated asset-study/rotation instructions per owner request. Rotation remains on the object, keyboard-accessible, with its hidden accessible description and state. Only a genuine renderer error displays an explanatory message. The existing single section-level context remains.

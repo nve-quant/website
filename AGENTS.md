@@ -6,7 +6,7 @@ Read BRIEF.md, DESIGN.md and docs/content-inventory.md before changing content o
 - For cloud work, read docs/CLOUD_HANDOFF.md. Use the frontend-design skill when available; otherwise follow the checked-in DESIGN.md and existing components without blocking routine edits on a machine-specific skill path.
 - Market mechanics is selected. Develop the homepage at / using its scoped design system. Preserve the original concepts at /studies as development-only references.
 - Keep shared content in src/data and typed content collections. Concept-specific styles must be scoped to their body class; shared mechanics may be reused.
-- Never invent proof. Preserve source URLs, draft status and illustrative labels. New business claims need explicit sourcing and owner review.
+- Never invent proof. Preserve source URLs, draft status and the section-level distinction between asset studies and actual offerings. The owner requested removing redundant on-model illustrative labels and visible rotation instructions; do not reintroduce them. New business claims need explicit sourcing and owner review.
 - Maintain semantic HTML, visible keyboard focus, readable contrast, reduced motion and mobile layouts.
 - Use npm and the lockfile. Run npm run check and npm run build after substantive changes. Build must exclude concept routes and links.
 - Review 375, 768 and 1440px layouts in the browser, including lower sections. Capture screenshots and record failures/fixes in docs/QA.md. Never report a browser test as passed without observing it.

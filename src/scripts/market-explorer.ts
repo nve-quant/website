@@ -35,7 +35,7 @@ export function initMarketExplorer(root: HTMLElement) {
       root.querySelector('[data-bullion-weight]')!.textContent=current.id==='aluminium'?'METAL':'1000 g';
     }
     scene?.select(current.id);
-    if(announce)status.textContent=`${current.label}. ${current.detail}. ${positions[selection]+1} of ${list.length}. Illustrative asset study.`;
+    if(announce)status.textContent=`${current.label}. ${current.detail}. ${positions[selection]+1} of ${list.length}.`;
   }
   const listeners = new AbortController();
   const signal = listeners.signal;
@@ -46,6 +46,7 @@ export function initMarketExplorer(root: HTMLElement) {
     }
     root.dataset.renderer = ready ? 'ready' : 'fallback';
     root.dataset.rendererReason = ready ? 'webgl' : failed ? 'unavailable' : 'loading';
+    hint.hidden = !failed;
     if(failed)hint.textContent = '3D unavailable in this browser. Showing a simplified illustration.';
     host.tabIndex = ready ? 0 : -1;
     host.setAttribute('aria-hidden', String(!ready));
@@ -55,10 +56,8 @@ export function initMarketExplorer(root: HTMLElement) {
     host.setAttribute('aria-label', `${spinning?'Pause':'Resume'} automatic asset rotation`);
     if(reduced.matches){
       host.setAttribute('aria-label','Rotate asset with drag or arrow keys');
-      hint.textContent='Drag to rotate. Automatic rotation is off.';
       return;
     }
-    hint.textContent = `Drag to rotate. Click to ${spinning ? 'pause' : 'resume'}.`;
   }
   async function update() {
     const enabled = !failed;
