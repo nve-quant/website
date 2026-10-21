@@ -39,3 +39,15 @@ No answers are inferred from competitor copy, chart animation or use of Safe/Squ
 - Owner approval:
 
 Do not turn illustrative data into client evidence. Separate achieved results, engagement targets and proposed measurement methods.
+
+
+## Current status after follow-up interview — 21 October 2026
+This update supersedes the broad missing-input checklist above where answered.
+- Confirmed: company identity/history, founder names and functional roles, publication of named engagements, base commercial model and capital minimum, transfer restrictions, dashboard scope and reporting cadence. Do not re-ask these.
+- Newly confirmed: all listed CEX/DEX metric capabilities, exchange-supplied order acceptance timestamps with chrony/exchange-time alignment, redundant price feeds and automatic reconnect/restart behavior. See BRIEF.md for precise qualifications.
+- Still needed: one measured client example; approved client testimonial; intended dashboard location and public redaction scope; metric methodology and latency records; precise client pause channel/DEX authorities; exit arrangements; extended founder histories; PancakeSwap/Hyperliquid specifics; supporting-service scope; research attribution and future-platform purpose.
+- Priority next questions: complete dashboard location; disambiguate the one-word client-control reply; select one engagement and a before/after reporting period. Remaining interview questions 10–14 were not answered and remain pending.
+
+
+### Follow-up resolutions
+Dashboard identified as DataIndexer/frontend; owner permits any view for public presentation. Need inspection and selection of an actual capture. Pause is requested through operations; Telegram kill switch available by request. Manual DEX close/fee collection can be performed on request; changing permitted pools requires a client-signed role-change transaction. Earlier income language refers to market-making P&L, with fees/rebates depending on the engagement. Still no selected measured case. Remaining interview: exit mechanics, extended founder backgrounds, PancakeSwap/Hyperliquid specifics, supporting-service scope, research attribution and future-platform purpose.
