@@ -3,6 +3,8 @@ import {dexDeployments,evmChains} from '../data/venue-coverage';
 import DexProtocolList from './DexProtocolList.astro';
 interface Props {standalone?: boolean;}
 const {standalone=false}=Astro.props;
+const Ecosystem=standalone?'section':'details';
+const EcosystemHeader=standalone?'header':'summary';
 const Heading=standalone?'h2':'h3';
 const GroupHeading=standalone?'h3':'h4';
 const CategoryHeading=standalone?'h4':'h5';
@@ -20,8 +22,8 @@ const categories=[
  <div class="dex-intro"><Heading>{standalone?'Supported DEXs and market structures.':'Decentralized exchanges'}</Heading><p>Find the right venue for your liquidity or trading mandate.</p></div>
  <div class="dex-ecosystems">{groups.map(group=>{
   const upcoming=dexDeployments.filter(item=>item.network===group.name&&item.status==='coming-soon');
-  return <section class:list={['dex-ecosystem',{'solana-ecosystem':group.name==='Solana'}]} aria-label={group.name+' protocol coverage'}>
-   <header class="ecosystem-heading"><GroupHeading>{group.name}</GroupHeading><p>{group.description}</p></header>
+  return <Ecosystem class:list={['dex-ecosystem',{'solana-ecosystem':group.name==='Solana'}]} aria-label={group.name+' protocol coverage'}>
+   <EcosystemHeader class="ecosystem-heading"><GroupHeading>{group.name}</GroupHeading><p>{group.description}</p>{!standalone&&<span class="coverage-expand"><span>Explore protocols</span><span aria-hidden="true">+</span></span>}</EcosystemHeader>
    <div class="ecosystem-markets">
     {categories.map(category=>{
      const protocols=dexDeployments.filter(item=>item.network===group.name&&item.status==='available'&&item.category===category.id);
@@ -36,7 +38,7 @@ const categories=[
      <DexProtocolList protocols={upcoming} planned/>
     </section>}
    </div>
-  </section>;
+  </Ecosystem>;
  })}</div>
  <div class="dex-footnote"><p>Pool management, launch-market execution and other trading are separate activities. We agree the deployment, pool or market, and permissions for your engagement.</p>{!standalone&&<a href="/dex-liquidity-management">Explore DEX liquidity management</a>}</div>
 </section>
@@ -49,7 +51,7 @@ const categories=[
 .dex-intro>p{font-size:.85rem;line-height:1.6;color:var(--muted);max-width:32ch;margin:0}
 .dex-ecosystems{border-block:1px solid var(--line)}
 .dex-ecosystem{display:grid;grid-template-columns:minmax(140px,1fr) minmax(0,5fr);gap:40px;padding:32px 0 38px}
-.dex-ecosystem+section{border-top:1px solid var(--line)}
+.dex-ecosystem+.dex-ecosystem{border-top:1px solid var(--line)}
 .ecosystem-heading{min-width:0}
 .ecosystem-heading :is(h3,h4){font-weight:400;font-size:1.8rem;letter-spacing:-.04em;margin:0 0 10px}
 .ecosystem-heading p{font-size:.75rem;line-height:1.8;color:var(--muted);max-width:20ch;margin:0}
@@ -69,4 +71,16 @@ const categories=[
 @media(max-width:1100px){.dex-ecosystem{grid-template-columns:130px minmax(0,1fr);gap:28px}}
 @media(max-width:700px){.dex-ecosystem{grid-template-columns:1fr;gap:26px}.ecosystem-heading{display:flex;justify-content:space-between;align-items:baseline;gap:24px}.ecosystem-heading p{max-width:28ch}.ecosystem-heading :is(h3,h4){margin:0}.dex-intro{display:block}.dex-intro>p{margin-top:12px}.dex-footnote{display:block}.dex-footnote a{display:inline-block;margin-top:16px}}
 @media(max-width:440px){.ecosystem-heading p{max-width:25ch}.dex-ecosystem{padding:28px 0 32px}.upcoming-coverage{padding:20px}.category-heading{margin-bottom:22px}.coverage-status{font-size:.7rem}}
+
+.dex-ecosystem:is(details){display:block;padding:0}
+details>.ecosystem-heading{display:grid;grid-template-columns:150px 1fr auto;gap:28px;align-items:center;cursor:pointer;list-style:none;padding:28px 0}
+details>.ecosystem-heading::-webkit-details-marker{display:none}
+details>.ecosystem-heading :is(h3,h4){margin:0}
+details>.ecosystem-heading p{max-width:60ch}
+.coverage-expand{display:flex;gap:24px;align-items:center;font-size:.75rem}
+.coverage-expand>span:last-child{font-size:1.8rem;font-weight:400;transition:transform .2s}
+details[open] .coverage-expand>span:last-child{transform:rotate(45deg)}
+details>.ecosystem-markets{padding:8px 0 32px 178px}
+@media(max-width:700px){details>.ecosystem-heading{grid-template-columns:1fr auto;gap:10px 18px}details>.ecosystem-heading p{grid-column:1;grid-row:2}details>.ecosystem-heading .coverage-expand{grid-column:2;grid-row:1/3}.coverage-expand>span:first-child{display:none}details>.ecosystem-markets{padding:8px 0 28px}}
+@media(prefers-reduced-motion:reduce){.coverage-expand>span:last-child{transition:none}}
 </style>

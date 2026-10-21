@@ -1,0 +1,65 @@
+---
+import {marketScenarios} from '../data/market-scenarios';
+---
+<section class="market-scenarios" aria-labelledby="scenarios-title" data-scenarios>
+ <div class="section-intro"><h2 id="scenarios-title">What the market does.<br/>How we respond.</h2><p>Four situations.<br/>An operating decision in each.</p></div>
+ <div class="scenario-tabs" hidden aria-label="Market scenarios">{marketScenarios.map((s,i)=><button type="button" id={`scenario-tab-${s.id}`} data-scenario-tab={i} aria-controls={`scenario-${s.id}`}>{s.label}</button>)}</div>
+ {marketScenarios.map((s,i)=><article id={`scenario-${s.id}`} class="scenario-panel" aria-labelledby={`scenario-tab-${s.id}`} data-scenario-panel>
+  <figure class="scenario-figure"><svg viewBox="0 0 600 340" role="img" aria-label={[
+   'A funded exchange account connects through trade-only access to bid and ask quotes.',
+   'Uneven inventory across two exchanges prompts an alert and a transfer controlled by the client.',
+   'Price moves beyond the initial liquidity range; a reviewed allocation follows the new price.',
+   'A reference market closes while the token price continues moving; quoting limits change.'
+  ][i]}>
+   <defs><pattern id={`scenario-grid-${i}`} width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#315044" stroke-width=".5"/></pattern></defs>
+   <rect x="20" y="20" width="560" height="280" fill={`url(#scenario-grid-${i})`}/>
+   {i===0&&<>
+    <text x="40" y="55">Client account</text><rect class="sc-outline" x="40" y="90" width="140" height="135" rx="4"/><text x="60" y="125">Base asset</text><path class="sc-mint" d="M60 140H150V153H60Z"/><text x="60" y="183">Quote asset</text><path class="sc-gold" d="M60 198H150V211H60Z"/>
+    <path class="sc-route" d="M180 158H290V108H340M290 158V208H340"/><circle class="sc-signal" cx="290" cy="158" r="6"/><text x="205" y="260">Trade-only access</text>
+    <text x="348" y="66">Bids</text><text x="462" y="66">Asks</text>
+    {[0,1,2,3,4].map(n=><g class="sc-reveal" style={`--delay:${n*.15}s`}><rect class="sc-mint" x={420-(35+n*12)} y={88+n*27} width={35+n*12} height="15"/><rect class="sc-gold" x="448" y={88+n*27} width={28+n*14} height="15"/></g>)}
+    <path class="sc-outline" d="M434 78V227"/><text x="346" y="260">Quotes within limits</text>
+   </>}
+   {i===1&&<>
+    <text x="44" y="55">Exchange A</text><text x="365" y="55">Exchange B</text>
+    {[44,365].map((x,n)=><g><rect class="sc-outline" x={x} y="85" width="180" height="138" rx="4"/><text x={x+16} y="115">Base / quote balance</text><rect class="sc-mint" x={x+16} y="143" width={n?125:25} height="20"/><rect class="sc-gold" x={x+16} y="178" width={n?35:135} height="20"/></g>)}
+    <path class="sc-route" d="M225 155H364"/><circle class="sc-signal" cx="295" cy="155" r="7"/><text x="255" y="132">Alert</text>
+    <path class="sc-route sc-reveal" d="M455 225V267H135V225"/><text x="180" y="306">Transfer controlled by the client</text>
+   </>}
+   {i===2&&<>
+    <text x="40" y="55">Price and managed range</text><rect class="sc-old-range" x="130" y="100" width="150" height="160"/><text x="130" y="284">Initial range</text>
+    <g class="sc-new-range"><rect x="310" y="75" width="160" height="160"/><text x="316" y="284">Reviewed allocation</text></g>
+    <path class="sc-price" d="M40 228 76 211 100 218 135 190 162 199 196 166 228 175 260 144 285 157 320 124 355 132 380 106 415 119 448 95 490 102 550 79"/>
+    <circle class="sc-signal" cx="448" cy="95" r="6"/><text x="40" y="320">Reallocation considers costs and inventory exposure</text>
+   </>}
+   {i===3&&<>
+    <rect x="310" y="80" width="240" height="180" fill="#d4b775" opacity=".07"/><text x="40" y="55">Reference open</text><text x="332" y="55">Reference closed</text>
+    <path class="sc-outline" d="M310 72V266" stroke-dasharray="4 6"/><path class="sc-band sc-reveal" d="M40 187 100 172 160 183 230 158 310 162 400 125 480 105 550 83V240L480 218 400 205 310 190 230 185 160 210 100 200 40 215Z"/>
+    <path class="sc-price" d="M40 201 100 186 160 197 230 172 310 176 350 159 380 178 420 149 455 170 490 144 520 156 550 139"/>
+    <path class="sc-reference" d="M310 176H550"/><text x="340" y="297">Last reference</text><text x="40" y="297">Illustrative quoting envelope</text>
+   </>}
+  </svg><figcaption>Illustrative operating sequence. Not live market data.</figcaption></figure>
+  <div class="scenario-copy"><h3>{s.title}</h3><p>{s.intro}</p><ol>{s.steps.map(step=><li>{step}</li>)}</ol><p class="scenario-decision">{s.decision}</p><a href={s.link}>{s.linkLabel}</a><button class="scenario-replay" type="button" hidden>Replay diagram</button></div>
+ </article>)}
+</section>
+<style>
+.scenario-tabs[hidden]{display:none}.market-scenarios{padding:var(--section) 0}.scenario-tabs{display:flex;border-bottom:1px solid var(--line);gap:30px;margin-bottom:36px;flex-wrap:wrap}.scenario-tabs button{font:inherit;font-size:.9rem;color:var(--muted);background:none;border:0;border-bottom:3px solid transparent;padding:17px 0;cursor:pointer}.scenario-tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--ink)}.scenario-panel{display:grid;grid-template-columns:1.2fr 1fr;gap:6vw;align-items:center}.scenario-panel[hidden]{display:none}.scenario-figure{background:#142e26;color:#e8eee3;margin:0;padding:24px 16px 20px}.scenario-figure svg{display:block;width:100%;height:auto}.scenario-figure text{fill:#d4dfd2;font-family:'Public Sans',sans-serif;font-size:13px}.scenario-figure figcaption{font-size:.65rem;color:#b6c8bb;padding:12px 24px 0}.sc-outline{fill:none;stroke:#7f9d88;stroke-width:1.3}.sc-route{fill:none;stroke:#d4b775;stroke-width:1.5;stroke-dasharray:5 5}.sc-mint{fill:#9fbea3}.sc-gold{fill:#d4b775}.sc-signal{fill:#e9ce91;stroke:#142e26;stroke-width:3}.sc-price{fill:none;stroke:#f6f7f2;stroke-width:2.3;stroke-linejoin:round}.sc-old-range{fill:#91ad91;fill-opacity:.12;stroke:#819b85;stroke-dasharray:5 5}.sc-new-range rect{fill:#aac6a2;fill-opacity:.25;stroke:#aac6a2}.sc-reference{stroke:#d4b775;stroke-width:1.5;stroke-dasharray:5 5}.sc-band{fill:#97b7a2;fill-opacity:.18;stroke:#718e7d;stroke-width:1}.scenario-copy h3{font-size:clamp(1.65rem,2.5vw,2.6rem);letter-spacing:-.035em;line-height:1.15;margin:0 0 20px}.scenario-copy p{font-size:.9rem}.scenario-copy ol{padding:0;list-style:none;counter-reset:sequence;display:grid;gap:10px;margin:24px 0}.scenario-copy li{counter-increment:sequence;font-size:.8rem;display:flex;align-items:baseline;gap:14px}.scenario-copy li:before{content:counter(sequence);font-size:.7rem;color:var(--muted);border-bottom:1px solid var(--line);padding:0 3px 3px}.scenario-decision{border-top:1px solid var(--line);padding-top:18px;color:var(--muted)}.scenario-copy a,.scenario-replay{font-size:.8rem}.scenario-replay{display:block;background:none;border:0;padding:0;margin-top:20px;font-family:inherit;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:4px}.scenario-replay[hidden]{display:none}
+@media(prefers-reduced-motion:no-preference){.scenario-panel.is-playing .sc-price{stroke-dasharray:800;animation:trace-market 2.8s ease both}.scenario-panel.is-playing .sc-reveal{animation:show-orders 2s ease both;animation-delay:var(--delay,0s)}.scenario-panel.is-playing .sc-new-range{animation:shift-range 3s ease both}.scenario-panel.is-playing .sc-signal{animation:signal-event 2.5s ease both}}
+@keyframes trace-market{from{stroke-dashoffset:800}to{stroke-dashoffset:0}}@keyframes show-orders{from{opacity:.15}to{opacity:1}}@keyframes shift-range{0%,30%{opacity:0;transform:translateX(-100px)}100%{opacity:1;transform:translateX(0)}}@keyframes signal-event{0%,30%{opacity:0}50%{opacity:1}65%{opacity:.2}100%{opacity:1}}
+@media(max-width:800px){.scenario-panel{grid-template-columns:1fr;gap:30px}.scenario-figure{max-width:650px}.scenario-copy{max-width:65ch}.scenario-tabs{gap:0 24px}.scenario-tabs button{font-size:.8rem}}@media(max-width:440px){.scenario-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.scenario-tabs button{text-align:left}.scenario-figure{padding:12px 0 18px}.scenario-figure figcaption{padding-inline:18px}}
+</style>
+<script>
+ document.querySelectorAll<HTMLElement>('[data-scenarios]').forEach(root=>{
+  const tabs=Array.from(root.querySelectorAll<HTMLButtonElement>('[data-scenario-tab]'));
+  const panels=Array.from(root.querySelectorAll<HTMLElement>('[data-scenario-panel]'));
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const tablist=root.querySelector<HTMLElement>('.scenario-tabs')!;tablist.hidden=false;tablist.setAttribute('role','tablist');
+  function play(panel:HTMLElement){panel.classList.remove('is-playing');if(!reduced.matches){void panel.offsetWidth;panel.classList.add('is-playing');}}
+  function select(index:number){tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;panels[i].hidden=i!==index;});play(panels[index]);}
+  tabs.forEach((tab,i)=>{tab.setAttribute('role','tab');panels[i].setAttribute('role','tabpanel');panels[i].tabIndex=0;tab.addEventListener('click',()=>select(i));tab.addEventListener('keydown',event=>{let next=i;if(event.key==='ArrowRight')next=(i+1)%tabs.length;else if(event.key==='ArrowLeft')next=(i+tabs.length-1)%tabs.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=tabs.length-1;else return;event.preventDefault();select(next);tabs[next].focus();});});
+  const replay=Array.from(root.querySelectorAll<HTMLButtonElement>('.scenario-replay'));
+  replay.forEach((button,i)=>button.addEventListener('click',()=>play(panels[i])));
+  const motion=()=>{replay.forEach(button=>button.hidden=reduced.matches);if(reduced.matches)panels.forEach(panel=>panel.classList.remove('is-playing'));};motion();reduced.addEventListener('change',motion);select(0);
+  const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){play(panels.find(p=>!p.hidden)!);observer.disconnect();}},{threshold:.25});observer.observe(root);
+ });
+</script>

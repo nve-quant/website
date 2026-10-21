@@ -63,7 +63,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
     }));
   });
   configureTextures(scene);
-  const floor=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.MeshBasicMaterial({color:0xe6ebd9,toneMapped:false}));
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.MeshBasicMaterial({color:host.closest('.home-asset-studies')?0x142e26:0xe6ebd9,toneMapped:false}));
   floor.rotation.x=-Math.PI/2;floor.position.y=-.045;scene.add(floor);
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.ShadowMaterial({opacity:.12}));
   ground.rotation.x=-Math.PI/2;ground.position.y=-.04;ground.receiveShadow=true;scene.add(ground);

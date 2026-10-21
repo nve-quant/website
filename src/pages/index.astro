@@ -3,7 +3,8 @@ import VenueCoverage from '../components/VenueCoverage.astro';
 import Experience from '../components/Experience.astro';
 import Marketing from '../layouts/Marketing.astro';
 import MeasurementGraphic from '../components/MeasurementGraphic.astro';
-import ClientNeeds from '../components/ClientNeeds.astro';
+import MarketScenarios from '../components/MarketScenarios.astro';
+import {experience} from '../data/experience';
 import ReviewNote from '../components/ReviewNote.astro';
 import Access from '../components/Access.astro';
 import Reporting from '../components/Reporting.astro';
@@ -18,13 +19,19 @@ import {getCollection} from 'astro:content';
 const research=(await getCollection('research'))[0].data;
 ---
 <Marketing title={homepage.title} description={homepage.description}>
- <section class="home-hero" aria-labelledby="home-title"><div><p class="hero-audience">Market making as a service</p><h1 id="home-title">Market making.<br/>On CEX and DEX.</h1></div><div class="hero-intro"><p>{homepage.intro}</p><a class="home-button" href={`mailto:${site.email}`}>{site.contact}</a></div></section>
+ <section class="home-hero" aria-labelledby="home-title">
+  <a class="hero-research" href={research.source}><span>From our research</span><span>{research.title}</span><span aria-hidden="true">↗</span></a>
+  <div class="hero-main"><p class="hero-audience">For exchanges, token teams and asset issuers</p><h1 id="home-title">The work behind<br/>a liquid market.</h1></div>
+  <div class="hero-intro"><p>Market making on CEX and DEX. We manage quotes, inventory and liquidity positions from your own accounts, with real-time visibility into the work.</p><a class="home-button" href={`mailto:${site.email}`}>Discuss your market</a><a class="hero-secondary" href="/work">How we work</a></div>
+  <div class="hero-foot"><span>CEX market making</span><span>DEX liquidity management</span><span>Non-custodial operation</span></div>
+ </section>
  <LiquidityServices/>
  <VenueCoverage/>
- <ClientNeeds/>
+ <MarketScenarios/>
  <section class="home-scorecard editorial-section" aria-labelledby="scorecard-title"><div><p class="section-kicker">Measurement before promises</p><h2 id="scorecard-title">Judge the work<br/>by your market.</h2></div><div><p>For an order book, discuss spread, executable depth and quote availability. For a liquidity pool, consider active allocation, trading impact and the economics of the position.</p><p>Agree the measures, then compare observations with targets. Market conditions, capital and operating costs belong in the same review.</p><div class="inline-links"><a href="/market-making#measurement">CEX measurement framework</a><a href="/dex-liquidity-management#measurement">DEX measurement framework</a></div></div><MeasurementGraphic/></section>
  <ReviewNote title="Place verified evidence near the offer" items={['Add one permitted client case: problem, capital and market context, work performed, observed results and measurement period.','Named engagements are owner-approved. Add measured case outcomes and approved biographies when available.']}/>
  <Experience/>
+ <section class="home-people" aria-labelledby="home-people-title"><div><p>People behind the operation</p><h2 id="home-people-title">Close to the systems.<br/>Close to your market.</h2><a href="/company">Meet Onchain Bureau</a></div><div class="people-names">{experience.people.map(person=><article><h3>{person.name}</h3><p>{person.role}</p></article>)}<p>Both co-founders work across technical, operational and commercial decisions.</p></div></section>
  <Access/>
  <Reporting/>
  <ReviewNote title="Show the existing dashboard" items={['Provide a real, sanitised screenshot or recording annotated around market activity, target comparison and exceptions.','Confirm history, refresh frequency, export scope and CEX/DEX coverage. The dashboard is already operational; only its public evidence is missing.']}/>

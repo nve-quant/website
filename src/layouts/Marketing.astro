@@ -6,7 +6,9 @@ import '@fontsource/public-sans/400.css';
 import '@fontsource/public-sans/500.css';
 import '../styles/home.css';
 import '../styles/services.css';
+import '../styles/refresh.css';
+import '@fontsource/newsreader/400.css';
 interface Props {title:string;description:string;}
 const {title,description}=Astro.props;
 ---
-<Base title={title} description={description} theme="home"><div class="home-shell"><SiteHeader/><main id="main"><slot/></main><SiteFooter/></div></Base>
+<Base title={title} description={description} theme="home"><div class:list={["home-shell", {"home-refresh":Astro.url.pathname==='/'}]}><SiteHeader/><main id="main"><slot/></main><SiteFooter/></div></Base>

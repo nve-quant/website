@@ -101,3 +101,6 @@ Owner explicitly requested vector versions derived from the existing Tessera V a
 ### Jupiter Studio and transparent marks
 Owner confirmed the requested Jupiter launch platform is Jupiter Studio, distinct from Raydium LaunchLab and Jupiter's routing aggregator. Add it under current Solana launchpads with the broad Token launches label. Owner supplied jup.svg and requested Studio's different palette. No aggregator listing or additional pool implementation claim inferred.
 Remove the square backgrounds from Tessera and SolFi. SolFi needs a light-surface monochrome treatment so its previously white lettering remains visible on the site's pale ground.
+
+### Owner-approved homepage presentation refresh
+Adapt the updated live site's outlined B mark, stronger dark opening, research entry point and scenario storytelling. Retain existing market charts and 3D assets. Use a dark gallery stage without modifying specimen geometry. Compact founder copy may reuse the already approved Company content. Replace the repetitive homepage problem-list with four illustrative operating scenarios. Keep all DEX coverage on the homepage within clickable, keyboard-accessible EVM/Solana disclosures; expanded directory stays on the DEX service page. No fabricated dashboard screenshot or additional service claims.
