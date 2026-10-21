@@ -44,3 +44,8 @@ The DefiLlama and Token Terminal assets are third-party venue-identification sou
 
 ### Robinhood coming-soon launchpad identification
 Pools.trade: https://pools.trade/favicon.svg, copied unchanged to public/images/venues/pools-trade.svg (2,596 bytes). Official vector with embedded gradients only; no scripts, external references or runtime fetches. Used to identify planned coverage, not a partnership. Uniswap v4 reuses the existing Uniswap mark. LaunchLab and Meteora DBC reuse Raydium/Meteora marks with distinct visible product names.
+
+### Additional Robinhood-native venue marks
+- GIGA DEX: https://gigadex.app/giga-icon.png (official 150×150 transparent PNG, 1,833 bytes).
+- Pons: https://docs.ponsfamily.com/pons.png (official documentation logo, 256×256 transparent PNG, 43,277 bytes).
+Both downloaded unchanged, inspected visually, stored locally and rendered at 40 CSS pixels. Public page/documentation asset links provide provenance. SVG versions were not identified in the accessible local collection or these first-party pages; these remain genuine raster assets. No tracing, generated brand artwork, raster-to-SVG wrappers or remote runtime requests.

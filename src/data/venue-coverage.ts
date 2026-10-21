@@ -10,6 +10,7 @@ export interface DexDeployment {
  category: 'pools' | 'launchpads' | 'trading';
  products: string[];
  chains?: string[];
+ additionalDeployments?: {products: string[]; chains: string[]}[];
  status: 'available' | 'coming-soon';
 }
 export const cexVenues: CexVenue[] = [
@@ -112,9 +113,10 @@ export const cexVenues: CexVenue[] = [
 ];
 // Supported registry + connector families in the owner's uniswap-mm repository.
 // This is deployment scope, not a claim of client operation on every chain.
-export const evmChains = ['Ethereum', 'Arbitrum', 'Optimism', 'Polygon', 'Base', 'BNB Chain'];
+const uniswapV3V4Chains = ['Ethereum', 'Arbitrum', 'Optimism', 'Polygon', 'Base', 'BNB Chain'];
+export const evmChains = [...uniswapV3V4Chains, 'Robinhood Chain'];
 export const dexDeployments: DexDeployment[] = [
- {logo:'/images/venues/uniswap.svg',protocol:'Uniswap',network:'EVM',category:'pools',products:['v3','v4'],chains:evmChains,status:'available'},
+ {logo:'/images/venues/uniswap.svg',protocol:'Uniswap',network:'EVM',category:'pools',products:['v3','v4'],chains:uniswapV3V4Chains,additionalDeployments:[{products:['v4'],chains:['Robinhood Chain']}],status:'available'},
  {logo:'/images/venues/aerodrome.svg',protocol:'Aerodrome',network:'EVM',category:'pools',products:['Slipstream','Classic stable & volatile'],chains:['Base'],status:'available'},
  {logo:'/images/venues/velodrome.svg',protocol:'Velodrome',network:'EVM',category:'pools',products:['Slipstream'],chains:['Optimism'],status:'available'},
  // PancakeSwap is separately owner-confirmed. This repo does not establish its versions or chain mappings.
@@ -135,6 +137,8 @@ export const dexDeployments: DexDeployment[] = [
  {logo:'/images/venues/tessera.png',protocol:'Tessera V',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
  {logo:'/images/venues/zerofi.png',protocol:'ZeroFi',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
  // Coming soon is Bureau's service status, not the chain's launch status.
- {logo:'/images/venues/uniswap.svg',protocol:'Uniswap',network:'EVM',category:'pools',products:['v4'],chains:['Robinhood Chain'],status:'coming-soon'},
+ // Owner clarified Uniswap v4 on Robinhood is already covered. New venues below remain planned.
+ {logo:'/images/venues/giga.png',protocol:'GIGA DEX',network:'EVM',category:'pools',products:['Stable','Volatile','Concentrated'],chains:['Robinhood Chain'],status:'coming-soon'},
  {logo:'/images/venues/pools-trade.svg',protocol:'Pools.trade',network:'EVM',category:'launchpads',products:['Crowd Launch','Instant Launch'],chains:['Robinhood Chain'],status:'coming-soon'},
+ {logo:'/images/venues/pons.png',protocol:'Pons',network:'EVM',category:'launchpads',products:['Token launches'],chains:['Robinhood Chain'],status:'coming-soon'},
 ];

@@ -319,3 +319,21 @@ Screenshots:
 - [DEX service, 1440px](screenshots/dex-market-types-dex-1440.png)
 
 Scope limit: the source audit establishes connector and deployment configuration, not successful production execution on every chain. No trading bot was run. Pools.trade is an initial proposed launchpad name pending optional owner clarification; it is not claimed as an implemented integration.
+
+## Robinhood availability correction — 21 October 2026
+
+Supersedes the prior screenshot/state that marked Uniswap on Robinhood as coming soon. Owner confirms it is already covered.
+
+- Type/content checks: 78 files, no errors/warnings/hints. Static build and all five-route isolation/link/asset/heading/noindex checks pass.
+- Browser: homepage and DEX page at 375×812, 768×1000 and 1440×1000; every coverage row and the lower footnote visited. No overflow, broken images, console/page errors or HTTP errors.
+- Current Uniswap entry explicitly maps v3/v4 to the original six chains and v4 to Robinhood Chain. Exactly one current Uniswap entry; no Uniswap item among upcoming entries. EVM chain heading now includes Robinhood.
+- Upcoming entries are GIGA DEX, Pools.trade and Pons only. Pool/launch labels remain distinct. Copy explicitly says Uniswap v4 is already supported.
+- Normal-motion colour hover works; reduced-motion duration remains 0s. DEX link has visible 3px keyboard focus and navigates with Enter; corrected Robinhood FAQ opens with Enter.
+- Inspected all six full-section screenshots. Three columns at desktop, two at tablet, one on narrow phones. The longer upcoming heading and badge wrap naturally on mobile. Source logos for GIGA/Pons inspected at native resolution.
+- No dependencies or client scripts added. Two official raster icons total 45,110 bytes; no invented SVG replacements. Existing Three.js build size warning remains unrelated.
+
+Screenshots:
+[Home 375](screenshots/robinhood-coverage-home-375.png), [Home 768](screenshots/robinhood-coverage-home-768.png), [Home 1440](screenshots/robinhood-coverage-home-1440.png),
+[DEX 375](screenshots/robinhood-coverage-dex-375.png), [DEX 768](screenshots/robinhood-coverage-dex-768.png), [DEX 1440](screenshots/robinhood-coverage-dex-1440.png).
+
+Logo-search limitation: additional local Solana/launchpad SVGs were not located in the searched folders. macOS blocked Trash enumeration even on an unsandboxed read-only retry. Existing images remain intact pending the owner's folder clarification.

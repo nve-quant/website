@@ -236,7 +236,7 @@ Source root: /Users/nicholasvaneerde/Developer/Onchain Bureau/DEX/uniswap-mm
 | src/services/blockchain/aerodrome_amm.rs and aerodrome_amm registry | Classic stable/volatile AMM on Base; no configured classic Velodrome deployment | Add Aerodrome classic stable/volatile; do not infer Velodrome classic support |
 | docs/PROJECT-STATUS.md, docs/plans/dex-chain-expansion.md, README.md | Production/fork-test evidence varies by deployment; registry presence is broader than live operation | Coverage is scoping information, not evidence of results, client history or universal strategy suitability |
 | Existing owner interview; expansion plan marks PancakeSwap as future connector work in this repo | Owner previously confirmed PancakeSwap; exact implementation/version/chain not corroborated here | Retain separately confirmed brand; leave versions/chains unspecified pending reconciliation |
-| Robinhood chain registry and whitelisted chain/dex config fields | Robinhood mainnet/testnet v4 configuration; v3 registry empty | Coming soon for Bureau service; do not advertise v3/v2/UniswapX based on ecosystem availability |
+| Robinhood chain registry and whitelisted chain/dex config fields | Robinhood mainnet/testnet v4 configuration; v3 registry empty | Owner subsequently confirms existing v4 coverage; list as current. Do not advertise v3/v2/UniswapX based on ecosystem availability |
 | Owner request + official launchpad announcement below | Launchpad names unspecified by owner; optional clarification requested | Initial proposed coming-soon launchpad: Pools.trade. No live or completed launchpad integration claim |
 
 Public terminology/ecosystem sources:
@@ -245,4 +245,17 @@ Public terminology/ecosystem sources:
 - https://robinhood.com/us/en/crypto/chain/ecosystem/ — ecosystem context only, not a Bureau support list. Aggregators and infrastructure omitted.
 - https://pools.trade/favicon.svg — official icon, copied unchanged to public/images/venues/pools-trade.svg (2,596 bytes). Trademark identifies the planned venue; no affiliation/endorsement implied.
 
-Separate Solana display entries for LaunchLab and Meteora DBC reuse their existing protocol logos. Current pool, launch and other-trading entries have explicit typed categories; planned coverage has a separate typed status. Robinhood is excluded from the current six-chain list. No claims about the chain or launchpad being unreleased.
+Separate Solana display entries for LaunchLab and Meteora DBC reuse their existing protocol logos. Current pool, launch and other-trading entries have explicit typed categories; planned coverage has a separate typed status. The initial version excluded Robinhood from the current six-chain list; this was corrected after the owner confirmed existing Uniswap v4 coverage. No claims about the chain or launchpad being unreleased.
+
+### Robinhood status correction and additional native venues — 21 October 2026
+Owner clarified that Uniswap on Robinhood Chain is already covered. Corrected current coverage, the chain heading and both service FAQs to identify v4 specifically. The prior coming-soon classification of Uniswap was a misinterpretation, not a change in the business.
+
+Coming soon now concerns additional venues only:
+- GIGA DEX: stable, volatile and concentrated pools, verified in first-party documentation at https://docs.gigadex.app/protocol/liquidity and https://docs.gigadex.app/what-is-giga. Robinhood-native status: https://docs.gigadex.app/.
+- Pons: Robinhood token launchpad, https://docs.ponsfamily.com/. The current documentation describes immediate locked-pool trading without a bonding curve or later migration. Use the broad, accurate Token launches label, not an assumed curve/migration implementation.
+- Pools.trade: retain the previously sourced launchpad entry.
+These are selected future coverage entries within the owner's requested scope, not a claim that new connectors have been built or tested.
+
+Other findings kept out of the public support list: Pleiades is named as a proprietary AMM in Robinhood's launch announcement; current documentation instead lists Rialto among PropAMM/aggregation services. No inference that they are the same product or that Bureau supports either. Source: https://robinhood.com/newsroom/robinhood-accelerates-global-expansion-robinhood-chain-mainnet-stock-tokens-agentic-trading/ and https://docs.robinhood.com/chain/. Routing aggregators remain excluded.
+
+Local logo search: inventoried SVG files including ignored files in Developer, Downloads, Desktop and Documents; checked relevant names, SVG metadata and Spotlight. Found the known DataIndexer CEX collections (frontend and dashboard_bsv), but no identifiable additional Solana/launchpad SVG collection. Trash enumeration was blocked by macOS with Operation not permitted, including an unsandboxed read-only retry; it was not searched successfully. Asked owner for a possible other folder/repo. Preserve existing venue artwork rather than inventing vector versions or presenting embedded raster images as true SVGs.
