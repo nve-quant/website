@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {needLiquidityBands} from '../src/data/need-liquidity.ts';
 import {initNeedIllustrations} from '../src/scripts/need-illustrations.ts';
 
 let observe;
@@ -26,3 +27,19 @@ window.dispatchEvent(new Event('pagehide'));running(false);
 window.dispatchEvent(new Event('pageshow'));running(true);
 observe([{isIntersecting:false}]);running(false);
 console.log('Need illustration checks passed: four-diagram pause, offscreen suspension, persistent pause, visibility, reduced motion and page lifecycle.');
+
+// Each contribution grows from the fixed top of the other-liquidity bar.
+const totals=[];
+for(let frame=0;frame<=100;frame++){
+ const progress=frame/100;let managedTotal=0;
+ for(const band of needLiquidityBands){
+  const height=band.managedStart*(1-progress)+band.managedEnd*progress;
+  const baseTop=80-band.other,managedTop=baseTop-height;
+  assert(height>=0&&managedTop>=18,'Stack remains nonnegative and inside chart');
+  assert(Math.abs(managedTop+height-baseTop)<1e-9,'Managed segment rests on pool segment');
+  managedTotal+=height;
+ }
+ totals.push(managedTotal);
+}
+assert(totals.every(total=>Math.abs(total-totals[0])<1e-9),'Reallocation preserves total managed contribution');
+console.log('DEX need diagram: stacked contributions and constant allocation through animation.');

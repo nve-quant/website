@@ -1,10 +1,11 @@
 ---
+import {needLiquidityBands} from '../data/need-liquidity';
 interface Props {kind:'book'|'venues'|'range'|'report'}
 const {kind}=Astro.props;
 const labels={
  book:'Illustration: uneven bid and ask sizes adjust around a spread.',
  venues:'Illustration: inventory allocations change across three venues.',
- range:'Illustration: a selected liquidity allocation follows a moving market price.',
+ range:'Illustration: managed liquidity stacks above other pool liquidity at each price, as allocation follows the market.',
  report:'Illustration: market activity is collected into a report for review.',
 };
 ---
@@ -28,12 +29,14 @@ const labels={
  </>}
  {kind==='range'&&<>
   <path class="guide" d="M12 36H148M12 58H148M12 80H148"/>
-  <path class="sage" d="M16 80V66h16V54h16V62h16V70h16V66h16V46h16V54h16V64h16V80Z"/>
-  <g class="motion range-allocation">
-   <rect class="range-fill" x="54" y="23" width="52" height="57"/>
-   <path class="ink" d="M58 80V49h8v12h8v10h12V61h8V49h8v31Z"/>
-   <path class="rule" d="M54 18V86M106 18V86"/>
-  </g>
+  <g class="motion range-allocation"><rect class="range-fill" x="54" y="18" width="52" height="62"/></g>
+  {needLiquidityBands.map(band=><g>
+   <rect class="pool-band" x={band.x} y={80-band.other} width="16" height={band.other}/>
+   <g transform={`translate(0 ${80-band.other})`}>
+    <rect class="ink motion range-stack" x={band.x} y="-1" width="16" height="1" style={`--start:${band.managedStart};--end:${band.managedEnd}`}/>
+   </g>
+  </g>)}
+  <g class="motion range-allocation"><path class="rule" d="M54 18V86M106 18V86"/></g>
   <g class="motion range-price"><path class="price-line" d="M80 15V86"/><circle class="price-dot" cx="80" cy="27" r="4"/></g>
  </>}
  {kind==='report'&&<>
@@ -65,8 +68,11 @@ const labels={
  .level-0{animation-delay:-.6s}.level-1{animation-delay:-1.2s}.level-2{animation-delay:-2.1s}.level-3{animation-delay:-2.8s}
  .venue-0,.venue-1,.venue-2{transform-box:fill-box;transform-origin:bottom}
  .venue-0{animation-name:venue-first}.venue-1{animation-name:venue-second}.venue-2{animation-name:venue-third}
+ .pool-band{fill:#b3c1a5}
+ .range-stack{transform-box:view-box;transform-origin:0 0;transform:scaleY(var(--start));animation-name:range-stack;animation-delay:.18s}
  .range-allocation{animation-name:range-follow;animation-delay:.18s}
  .range-price{animation-name:price-travel}
+ .range-allocation,.range-price{transform:translateX(-12px)}
  .report-input{animation-name:collect}
  .input-two{animation-delay:-1.2s}.input-three{animation-delay:-2.4s}
  .report-trace,.report-check{fill:none;stroke:#315c49;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -77,6 +83,7 @@ const labels={
  @keyframes venue-first{0%,100%{transform:scaleY(1)}40%,65%{transform:scaleY(.65)}}
  @keyframes venue-second{0%,100%{transform:scaleY(.35)}40%,65%{transform:scaleY(.85)}}
  @keyframes venue-third{0%,100%{transform:scaleY(.75)}40%,65%{transform:scaleY(.6)}}
+ @keyframes range-stack{0%,100%{transform:scaleY(var(--start))}40%,55%{transform:scaleY(var(--end))}}
  @keyframes range-follow{0%,100%{transform:translateX(-12px)}40%,55%{transform:translateX(20px)}}
  @keyframes price-travel{0%,100%{transform:translateX(-12px)}40%,55%{transform:translateX(20px)}}
  @keyframes collect{0%,15%{transform:translateX(0);opacity:0}25%{opacity:1}65%{transform:translateX(43px);opacity:1}75%,100%{transform:translateX(43px);opacity:0}}

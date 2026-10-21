@@ -186,3 +186,6 @@ Replace upright soybean tubes with a low split-pod composition: separate inner/o
 
 ### Direct attachment and surface support correction
 Owner found detached corn leaves and floating coffee beans, and rejected the split-soybean-pod composition. Corn husks now start with a finite-width root inside the stalk radius at y=.10, then peel clear below the first kernel row. Coffee no longer stacks kernels on bounding-box tops: each visible kernel rests on the same filled height-field mesh used by the scene. Footprint bounds only reject overlap. Soy now uses a loose sample of16 nearly spherical dry yellow seeds, small inset hila, subtle variation and actual per-seed ground contact. No pods.
+
+### Small DEX need diagram: true stacked contributions
+Replace independently overlaid moving silhouettes with eight fixed price bands. Other pool liquidity is the lower sage segment; managed allocation grows upward from its top. Reallocate managed heights across the same bins while price and range markers move, retaining the short tracking lag. Endpoint allocations have equal total height, so interpolation preserves capital in this schematic. Reduced-motion state shares the same initial price, range and allocation alignment. Original section pause/offscreen/visibility controls continue to govern CSS animation.
