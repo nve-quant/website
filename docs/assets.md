@@ -49,3 +49,13 @@ Pools.trade: https://pools.trade/favicon.svg, copied unchanged to public/images/
 - GIGA DEX: https://gigadex.app/giga-icon.png (official 150×150 transparent PNG, 1,833 bytes).
 - Pons: https://docs.ponsfamily.com/pons.png (official documentation logo, 256×256 transparent PNG, 43,277 bytes).
 Both downloaded unchanged, inspected visually, stored locally and rendered at 40 CSS pixels. Public page/documentation asset links provide provenance. SVG versions were not identified in the accessible local collection or these first-party pages; these remain genuine raster assets. No tracing, generated brand artwork, raster-to-SVG wrappers or remote runtime requests.
+
+### Owner SVG uploads and requested vector reconstruction — 21 October 2026
+- Owner upload cake.svg moved unchanged to public/images/venues/pancakeswap.svg (3,122 bytes).
+- Owner upload pump.svg moved unchanged to public/images/venues/pump.svg (2,653 bytes); shared by Pump.fun and PumpSwap.
+- Owner upload orca.svg moved unchanged to public/images/venues/orca.svg (3,890 bytes).
+- Superseded PancakeSwap, Pump and Orca PNGs removed. Moonit logo removed with its directory entry.
+- public/images/venues/solfi.svg: reconstruction from the previously sourced SolFi image. Original wordmark outlined with Potrace; circular ring/spokes rebuilt as mathematical paths with gradients. Approximately 4 KB, 1.6 KB gzip.
+- public/images/venues/tessera.svg: colour contours traced from the existing Tessera V avatar using VTracer, with SVG gradients, a smooth sphere clip and static sub-pixel blending. Approximately 131 KB, 43 KB gzip. This preserves the blue/pink sphere treatment but simplifies the photographic surface; it is not a newly discovered official vector master.
+- Both reconstructions contain vector paths/gradients only, with no image element, embedded raster, scripts or external dependencies. Tessera uses a static SVG blur filter; neither adds a runtime animation or site script.
+- Raster source files retained at docs/reference-assets/venues/solfi.webp and docs/reference-assets/venues/tessera.png. Earlier source URLs remain the provenance. Native-size and actual 40px Chrome comparison saved in docs/screenshots/venue-vector-comparison.png.

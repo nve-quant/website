@@ -120,21 +120,20 @@ export const dexDeployments: DexDeployment[] = [
  {logo:'/images/venues/aerodrome.svg',protocol:'Aerodrome',network:'EVM',category:'pools',products:['Slipstream','Classic stable & volatile'],chains:['Base'],status:'available'},
  {logo:'/images/venues/velodrome.svg',protocol:'Velodrome',network:'EVM',category:'pools',products:['Slipstream'],chains:['Optimism'],status:'available'},
  // PancakeSwap is separately owner-confirmed. This repo does not establish its versions or chain mappings.
- {logo:'/images/venues/pancakeswap.png',protocol:'PancakeSwap',network:'EVM',category:'pools',products:[],status:'available'},
+ {logo:'/images/venues/pancakeswap.svg',protocol:'PancakeSwap',network:'EVM',category:'pools',products:[],status:'available'},
  // Owner confirmed trading venues in the recovered SOL_DEX_MM_2 inventory for publication.
  // Launch curves, spot order books and proprietary AMMs are not LP-position products.
  // Aggregators (Jupiter, DFlow, OKX routing), Jito and base programs are deliberately excluded.
  {logo:'/images/venues/raydium.svg',protocol:'Raydium',network:'Solana',category:'pools',products:['AMM v4','CPMM','CLMM'],status:'available'},
  {logo:'/images/venues/meteora.svg',protocol:'Meteora',network:'Solana',category:'pools',products:['DLMM','DAMM v1','DAMM v2'],status:'available'},
- {logo:'/images/venues/orca.png',protocol:'Orca',network:'Solana',category:'pools',products:['Whirlpools'],status:'available'},
- {logo:'/images/venues/pumpswap.png',protocol:'PumpSwap',network:'Solana',category:'pools',products:['Constant-product AMM'],status:'available'},
+ {logo:'/images/venues/orca.svg',protocol:'Orca',network:'Solana',category:'pools',products:['Whirlpools'],status:'available'},
+ {logo:'/images/venues/pump.svg',protocol:'PumpSwap',network:'Solana',category:'pools',products:['Constant-product AMM'],status:'available'},
  {logo:'/images/venues/raydium.svg',protocol:'Raydium LaunchLab',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
  {logo:'/images/venues/meteora.svg',protocol:'Meteora DBC',network:'Solana',category:'launchpads',products:['Dynamic Bonding Curve'],status:'available'},
- {logo:'/images/venues/pumpswap.png',protocol:'Pump.fun',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
- {logo:'/images/venues/moonit.png',protocol:'Moonit',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
+ {logo:'/images/venues/pump.svg',protocol:'Pump.fun',network:'Solana',category:'launchpads',products:['Bonding curves'],status:'available'},
  {logo:'/images/venues/phoenix.webp',protocol:'Phoenix',network:'Solana',category:'trading',products:['Spot order book'],status:'available'},
- {logo:'/images/venues/solfi.webp',protocol:'SolFi',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
- {logo:'/images/venues/tessera.png',protocol:'Tessera V',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
+ {logo:'/images/venues/solfi.svg',protocol:'SolFi',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
+ {logo:'/images/venues/tessera.svg',protocol:'Tessera V',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
  {logo:'/images/venues/zerofi.png',protocol:'ZeroFi',network:'Solana',category:'trading',products:['Proprietary AMM'],status:'available'},
  // Coming soon is Bureau's service status, not the chain's launch status.
  // Owner clarified Uniswap v4 on Robinhood is already covered. New venues below remain planned.

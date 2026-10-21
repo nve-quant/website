@@ -337,3 +337,19 @@ Screenshots:
 [DEX 375](screenshots/robinhood-coverage-dex-375.png), [DEX 768](screenshots/robinhood-coverage-dex-768.png), [DEX 1440](screenshots/robinhood-coverage-dex-1440.png).
 
 Logo-search limitation: additional local Solana/launchpad SVGs were not located in the searched folders. macOS blocked Trash enumeration even on an unsandboxed read-only retry. Existing images remain intact pending the owner's folder clarification.
+
+## Owner SVGs, reconstructed vectors and Moonit removal — 21 October 2026
+
+- Replaced PancakeSwap, Pump.fun/PumpSwap and Orca raster marks with the owner's supplied SVGs, unchanged. Replaced SolFi/Tessera V with requested vector reconstructions. Removed Moonit from the shared directory, FAQ and public assets.
+- Validated all five SVG files: no embedded image, script, foreignObject, event handler or external resource. SolFi lettering is outlined; no font dependency.
+- Compared both reconstructed assets against their original rasters in Chrome at 256px and the site's actual 40px size, including grayscale. SolFi retains its ring/lettering; Tessera approximates photographic surface detail. Rejected the first coarse colour trace because it flattened lighting. Source rasters archived under docs/reference-assets/venues/.
+- npm run check: 78 files, no errors/warnings/hints. Build passes all five static pages and link/asset/anchor/h1/noindex/development-route checks. Existing Three.js size warning unchanged.
+- Homepage and DEX route reviewed in Chrome at 375×812, 768×1000 and 1440×1000; all coverage entries and footnotes traversed. No horizontal overflow, missing/undecodable logos, console/page errors or HTTP failures.
+- Browser assertions confirm no Moonit text on either page, 15 current venue entries, all six affected venue entries loading SVGs, and unchanged Robinhood v4/current versus three-upcoming status.
+- Hovering Pump.fun changes grayscale(1) to grayscale(0); reduced-motion transition remains 0s. Service link retains visible 3px keyboard outline, Enter navigation works, and FAQ opens by keyboard.
+- Screenshots captured for all six page/width combinations. Desktop home, tablet DEX and mobile home screenshots visually inspected along with the detailed source/vector comparison.
+- No site JavaScript or dependencies added. Reconstructed files measure approximately 1.6 KB (SolFi) and 43 KB (Tessera) when gzipped. Static vector rendering only; existing image lazy loading retained.
+
+[Source/vector comparison](screenshots/venue-vector-comparison.png).
+[Home 375](screenshots/venue-vectors-home-375.png), [Home 768](screenshots/venue-vectors-home-768.png), [Home 1440](screenshots/venue-vectors-home-1440.png).
+[DEX 375](screenshots/venue-vectors-dex-375.png), [DEX 768](screenshots/venue-vectors-dex-768.png), [DEX 1440](screenshots/venue-vectors-dex-1440.png).
