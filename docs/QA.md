@@ -264,3 +264,9 @@ Owner reported the bars in “A DEX position that needs attention” were not st
 
 ### Confirmed DEX coverage
 Enabled eight-protocol EVM/Solana coverage matrix and updated both service FAQs. Type checks (70 files, no diagnostics), static build and link/asset/isolation checks pass. No new dependencies or animation changes. Browser layout verification remains outstanding. Numeric latency wording remains held for the precise percentile/threshold/timestamp definition.
+
+### Founders, entity and enquiry conversion
+Updated named engagement examples, short founder profiles with LinkedIn links, verified UK entity/number, client-only CEX transfers, per-asset/per-exchange starting capital, latency FAQ and free assessment/proposal CTA. Checks and static build pass with 70 files and five routes; existing bundle-size warning remains. New external links sourced from public LinkedIn results and Companies House. Browser visual validation remains outstanding.
+
+### CEX carousel automatic motion and direct drag
+71-file type check and static build pass. New check-venue-carousel.mjs validates 18px/s pacing, subpixel accumulation, modulo wrapping, hidden duplicate semantics, pointer drag, keyboard browsing, pause persistence, focus, reduced motion, visibility and page lifecycle with DOM mocks. These are logic tests, not observed browser rendering. Visual review/screenshots still outstanding. No arrows or visible scrollbar; subtle pause control retained.

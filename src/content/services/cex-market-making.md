@@ -42,15 +42,17 @@ operations:
     text: Agree the quoting, inventory, hedging and cross-venue allocation needed for your markets. Review each venue individually as well as the aggregate position.
   - title: Monitoring and trade operations
     text: Human trade operations monitor books around the clock, supported by internal logging, data pipelines, dashboards and alerts. Machine-learning volatility forecasts and order-management controls inform the operation.
-access: Your assets remain under your control. Onchain Bureau operates through API-key access to your exchange accounts. Permissions and the account setup are agreed with you before operation, within a non-custodial arrangement.
+access: Your assets remain under your control. Onchain Bureau operates through API-key access to your exchange accounts. Transfer permissions are disabled on our API keys. You make any transfers or replenishments; we operate within the agreed trading permissions.
 considerations: Market conditions, available inventory and venue availability affect quoting. The mandate defines objectives and operating limits; it does not guarantee a token price, trading volume or uninterrupted exchange availability.
 faqs:
+  - question: How do you measure execution latency?
+    answer: Our operational measurements show p50 latency below 3 ms across supported venues, measured from sending an order to its acceptance timestamp. This is a measured percentile, not a maximum or a standard contractual guarantee. Measurement conditions and any contractual target are agreed for the engagement.
   - question: Can latency requirements be included in the agreement?
     answer: Yes. Latency commitments can be agreed for an engagement, although they are not part of the standard contract. The measurement, target and applicable conditions are defined together.
   - question: Who supplies the trading capital?
-    answer: You fund both assets in each trading account at the start. Starting balances and operating limits are agreed before trading. If an account becomes one-sided, we may request replenishment or coordinate redistribution between venues, using the agreed transfer arrangements.
+    answer: Start with at least US$3,000 worth of each asset in each exchange account. For a token/USDT market, that means US$3,000 in the token and US$3,000 in USDT per exchange. The capital needed for your objectives may be higher. If an account becomes one-sided, we may request replenishment or redistribution; you execute the transfers.
   - question: Do we transfer custody to Onchain Bureau?
-    answer: No. The service is non-custodial and uses API-key access to client-controlled exchange accounts. The permissions and account arrangement are defined during setup.
+    answer: No. The service is non-custodial and uses API-key access to client-controlled exchange accounts. Transfer permissions are never enabled on our API keys. You retain responsibility for moving funds.
   - question: Can we inspect individual orders?
     answer: Yes. The live client dashboard includes active and filled orders, order books, accounting, and aggregate and exchange-specific candlestick charts. Trade history is available on charts and in tables, with timeframe-selected CSV and JSON exports.
   - question: How are objectives and fees agreed?

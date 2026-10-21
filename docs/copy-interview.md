@@ -59,3 +59,13 @@ Eight DEX protocols and EVM/Solana coverage confirmed and integrated. Latency is
 
 ### Funding and operating response answered
 Owner: 3k per asset initially; refill or redistribution when one-sided; reduced quote size plus internal and client-bot alerts at limits. DEX cost/benefit versus gas generally guides rebalancing; dynamic fees, hedging elsewhere and arbitrage case-specific. Remaining: currency/per-exchange unit and transfer authority, people bios, client names, first-call deliverable, legal identity and precise latency wording. Sent a consolidated reminder at owner's request; no need to repeat answered questions.
+
+### Latest answers integrated
+- Funding minimum: confirmed each asset/each exchange, following explicit US$3,000 example. Client makes transfers; no transfer permissions on our API keys.
+- Co-founders: Nicholas technical, Nahuel operations/BD, both cross-functional. LinkedIn URLs found; full employment history not publicly accessible.
+- Named clients/projects: EMRL.D, RUBY.D, BlockFinex; prior MNEE/BSV permission retained.
+- Free project/market/liquidity assessment plus proposal/quote, no obligation.
+- Entity: Onchain Bureau Capital Limited (UK), registration and incorporation checked.
+- Latency threshold: 3ms, applied to prior p50 definition. Timestamp/clock provenance, evidence window and percentile records remain to document, not reasons to ask the same threshold question again.
+
+Main remaining evidence rather than broad interview questions: approved dashboard capture, actual case outcomes/date windows, expanded founder histories if desired, exact notice/exit mechanics, Hyperliquid scope and contact language/time-zone preferences. OTC/strategies remain deferred by owner. Do not repeatedly ask resolved questions.

@@ -6,7 +6,7 @@ export const clientNeeds = [
  {diagram:'report' as const,problem:'Too little visibility into the operation',objective:'Inspect orders, accounting and market activity in the client dashboard, then review the work against the agreed service levels.',link:'/work#review',label:'Reporting and review'},
 ];
 export const commercialQuestions = [
- {title:'Capital & allocation',text:'Fund both assets in each trading account before operation. Agree the starting balances and how replenishment or redistribution will be handled if an account becomes one-sided.'},
+ {title:'Capital & allocation',text:'Start with at least US$3,000 worth of each asset per exchange account. Required capital depends on the trading objectives. If balances become one-sided, we may request replenishment or redistribution; you make the transfers.'},
  {title:'Fees & operating costs',text:'Separate the service fee from exchange fees, pool fees, gas and other execution costs. Establish who pays each cost and when.'},
  {title:'P&L, income & rebates',text:'Specify how trading gains and losses, LP fees and venue rebates are attributed. Review these alongside asset exposure, rather than treating trading volume as a return.'},
  {title:'Duration & exit',text:'Set the engagement period, notice arrangements, outstanding-order or position handling, and the process for removing access.'},

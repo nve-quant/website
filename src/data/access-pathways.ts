@@ -5,7 +5,7 @@ export const accessPathways = [
     account: 'Your exchange accounts',
     accountDetail: 'Client-funded liquidity',
     permission: 'API-key access',
-    permissionDetail: 'Permissions agreed before trading',
+    permissionDetail: 'Trading access only. Transfers disabled.',
     operation: 'CEX market making',
     operationDetail: 'Spot and perpetual markets',
     href: '/market-making#access',

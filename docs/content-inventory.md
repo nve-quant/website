@@ -177,3 +177,14 @@ Latency clarification: owner reports p50 values across venues, close p99, send-t
 
 ### Funding, limits and DEX tool clarification
 Source: direct owner response. 3k per asset at launch, currency/per-account scope awaiting final confirmation. Publish funding of both assets and replenishment/redistribution coordination; hold numerical minimum and exact transfer authority. Confirmed CEX size reduction plus internal and client-bot alerts. DEX cost-benefit-aware rebalancing and case-specific dynamic fees/hedging/arbitrage added to service copy. No universal availability or returns claimed.
+
+### Founder research and final interview clarifications
+Owner authorizes named EMRL.D, RUBY.D and BlockFinex engagements, co-founder role descriptions, minimum funding per asset per exchange, client-only transfers, free assessment/proposal, UK legal identity and 3ms latency threshold. These are first-party confirmations, not independent outcome evidence.
+
+Research sources:
+- https://uk.linkedin.com/in/nicholas-van-eerde — search-indexed public profile identifies Onchain Bureau and University of Bath; lists software/blockchain courses. Direct open returned LinkedIn 999. Employment titles/history and degrees were not visible; do not invent them or equate courses with employment/degree credentials.
+- https://es.linkedin.com/in/nahuel-angelone-oliver/es — public indexed profile identifies CryptoMondays Ibiza and WorldQuant University, with market-maker/treasury writing and certificates. Direct open returned 999. No degree completion or hidden employment history inferred.
+- https://find-and-update.company-information.service.gov.uk/company/15636039 — verified legal name, company number and 11 April 2024 incorporation. No personal address or birth data copied.
+- https://uk.linkedin.com/company/onchainbureau — lists founding year 2023, differing from owner-provided 2022 operating start. Preserve owner-defined operating history and separately label legal incorporation 2024; LinkedIn company history should be reconciled later. Its older service catalogue was not imported.
+
+Website bios intentionally use owner-confirmed roles and public profile links. Published numeric latency is a first-party p50 claim with measurement definition and non-guarantee qualifier; no fabricated benchmark chart or p99 figure. Detailed clock/measurement evidence remains outstanding. Client-only transfer control is explicit across CEX service and access schematic.

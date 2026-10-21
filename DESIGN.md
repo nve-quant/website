@@ -197,3 +197,6 @@ Use static geometry and native interaction, with no new dependencies or perpetua
 
 ### Confirmed venue coverage and operating evidence
 Populate the CEX rail with 27 distinct owner-confirmed venue marks. Use visible names as well as logos, native horizontal touch/keyboard scrolling and previous/next controls. No automatic movement is needed alongside the existing animated market charts. Retain colour on original marks; white Bybit/OKX/Crypto.com artwork gets a dark backing. No implied partnership labels. DEX deployment matrix remains data-gated pending protocol/network details. Add concise owner-approved engagement examples and distinguish pilot-stage strategies in both navigation summaries and homepage copy.
+
+### Owner-requested venue carousel motion
+Supersedes manual-only CEX rail: slow 18px/s automatic scroll with a seamless duplicate visual set hidden from assistive technology. Hide scrollbar/arrows; direct pointer dragging and keyboard navigation remain. Retain a small pause/resume text control. Stop RAF offscreen, while document hidden, on hover/focus/drag, explicit pause and reduced motion. Reduced motion keeps manual browsing. Original accessible list remains single; no new dependency.

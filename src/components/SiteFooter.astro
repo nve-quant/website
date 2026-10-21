@@ -1,4 +1,5 @@
 ---
+import {company} from '../data/experience';
 import {site} from '../data/site';
 ---
-<footer class="home-footer"><a class="footer-name" href="/">Onchain Bureau</a><nav aria-label="Footer navigation"><a href="/company">Company</a><a href="https://onchainbureau.com/legal">Legal</a><a href="https://t.me/onchainbureau">Telegram</a><a href={`mailto:${site.email}`}>Email</a></nav><p>CEX market making. DEX liquidity management.</p></footer>
+<footer class="home-footer"><a class="footer-name" href="/">Onchain Bureau</a><nav aria-label="Footer navigation"><a href="/company">Company</a><a href="https://onchainbureau.com/legal">Legal</a><a href="https://t.me/onchainbureau">Telegram</a><a href={`mailto:${site.email}`}>Email</a></nav><p>{company.name}<br/>UK company {company.number}</p></footer>
