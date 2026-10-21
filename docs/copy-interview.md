@@ -56,3 +56,6 @@ Focused outstanding follow-ups:
 
 ### Coverage follow-up answered
 Eight DEX protocols and EVM/Solana coverage confirmed and integrated. Latency is p50, owner says p99 virtually same and applicable across venues; contractual latency optional. Pending narrowed question: 3ms or 5ms threshold, exchange timestamp versus locally received acknowledgement, and clock synchronization if exchange timestamp. Do not repeat already answered broad coverage questions. Hyperliquid scope remains unknown.
+
+### Funding and operating response answered
+Owner: 3k per asset initially; refill or redistribution when one-sided; reduced quote size plus internal and client-bot alerts at limits. DEX cost/benefit versus gas generally guides rebalancing; dynamic fees, hedging elsewhere and arbitrage case-specific. Remaining: currency/per-exchange unit and transfer authority, people bios, client names, first-call deliverable, legal identity and precise latency wording. Sent a consolidated reminder at owner's request; no need to repeat answered questions.

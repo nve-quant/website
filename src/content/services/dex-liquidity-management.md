@@ -37,7 +37,9 @@ operations:
   - title: Range selection
     text: Agree ranges and token balances with your team. Range width is considered alongside price movement, the asset pair and the inventory available.
   - title: Position rebalancing
-    text: Adjustments are primarily automated within the agreed approach, with discretionary intervention for exceptions or client requests. Decisions consider the current allocation, inventory exposure and transaction costs.
+    text: Adjustments are primarily automated within the agreed approach, with discretionary intervention for exceptions or client requests. Repositioning generally proceeds when the expected benefit outweighs gas costs, alongside the current allocation and inventory exposure.
+  - title: Engagement-specific tools
+    text: Depending on the pool and mandate, management may include dynamic fees, hedging on another market or arbitrage execution. These tools are selected for the engagement rather than included in every setup.
   - title: Capital allocation
     text: Agree how much capital to allocate and which pools fall within scope. Review the distribution of that capital as prices and liquidity needs change.
 access: Your assets remain under your control. Safe or Squads vault roles restrict our operation to the specified pool and asset pair, without withdrawal or send authority. We agree the vault configuration, ranges, balances and operating limits with your team before operation.

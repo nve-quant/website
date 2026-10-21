@@ -37,7 +37,7 @@ operations:
   - title: Two-sided quoting
     text: Manage bids and offers around your trading pairs. Quoting objectives, depth and operating limits are defined around the market and the capital allocated to it.
   - title: Inventory management
-    text: Review token and quote-asset balances as orders fill. Manage quoting within the inventory limits agreed for each market.
+    text: Review token and quote-asset balances as orders fill. When agreed limits are reached, reduce quote size and alert internal trade operations and the client through automated notifications. If an account becomes one-sided, coordinate replenishment or redistribution between venues.
   - title: Coordination across venues
     text: Agree the quoting, inventory, hedging and cross-venue allocation needed for your markets. Review each venue individually as well as the aggregate position.
   - title: Monitoring and trade operations
@@ -48,7 +48,7 @@ faqs:
   - question: Can latency requirements be included in the agreement?
     answer: Yes. Latency commitments can be agreed for an engagement, although they are not part of the standard contract. The measurement, target and applicable conditions are defined together.
   - question: Who supplies the trading capital?
-    answer: You allocate the token and quote assets used for the engagement. The capital, markets and operating limits are agreed as part of the service mandate.
+    answer: You fund both assets in each trading account at the start. Starting balances and operating limits are agreed before trading. If an account becomes one-sided, we may request replenishment or coordinate redistribution between venues, using the agreed transfer arrangements.
   - question: Do we transfer custody to Onchain Bureau?
     answer: No. The service is non-custodial and uses API-key access to client-controlled exchange accounts. The permissions and account arrangement are defined during setup.
   - question: Can we inspect individual orders?

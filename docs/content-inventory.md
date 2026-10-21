@@ -174,3 +174,6 @@ Source code does not independently establish production availability, direct fee
 ### DEX deployment and latency follow-up
 Direct owner reply confirms eight protocols: Uniswap v3/v4, Aerodrome, Velodrome, PancakeSwap across EVM deployments; Raydium, Meteora, Orca and PumpSwap on Solana across pool types. Matrix uses EVM/Solana families rather than inventing individual deployments. No version inferred for Aerodrome/Velodrome/PancakeSwap. Hyperliquid remains omitted pending product scope.
 Latency clarification: owner reports p50 values across venues, close p99, send-to-order-acceptance timestamp. Exact threshold and timestamp/clock methodology still pending; do not relabel percentile evidence as a hard maximum or received-acknowledgement RTT. Latency terms may be negotiated but are not standard contractual guarantees.
+
+### Funding, limits and DEX tool clarification
+Source: direct owner response. 3k per asset at launch, currency/per-account scope awaiting final confirmation. Publish funding of both assets and replenishment/redistribution coordination; hold numerical minimum and exact transfer authority. Confirmed CEX size reduction plus internal and client-bot alerts. DEX cost-benefit-aware rebalancing and case-specific dynamic fees/hedging/arbitrage added to service copy. No universal availability or returns claimed.
