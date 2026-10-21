@@ -166,9 +166,12 @@ export function createRealEstate(kind:PropertyKind):THREE.Group {
     }
     for(let i=0;i<23;i++)for(const x of [-1.035,1.035])box('frame',.012,.49,.007,x,.33,-.76+i*.058);
     for(const x of [-.67,0,.67]){
-      box('dark',.48,.34,.035,x,.34,.56);box('frame',.38,.29,.018,x,.34,.585);
-      for(let i=0;i<8;i++)box('concrete',.38,.007,.021,x,.211+i*.036,.597);
-      for(const dx of [-.22,.22])box('dark',.045,.13,.055,x+dx,.105,.665);
+      // One flush U-shaped gasket around the shutter; no stacked full-width black plates.
+      for(const dx of [-.205,.205])box('dark',.030,.31,.032,x+dx,.34,.568);
+      box('dark',.44,.025,.032,x,.5075,.568);
+      box('frame',.38,.29,.014,x,.34,.565);
+      for(let i=0;i<8;i++)box('concrete',.375,.004,.005,x,.211+i*.036,.575);
+      for(const dx of [-.22,.22])box('dark',.040,.10,.022,x+dx,.105,.753);
       box('concrete',.51,.14,.20,x,.10,.64);box('dark',.36,.012,.22,x,.176,.65);
       for(const dx of [-.23,.23])box('stone',.018,.003,.42,x+dx,.03,1.0);
     }
@@ -187,7 +190,6 @@ export function createRealEstate(kind:PropertyKind):THREE.Group {
     for(const x of [-.67,0,.67]){
       box('frame',.065,.013,.012,x,.19,.616);
       for(const dx of [-.26,.26])box('warm',.025,.15,.025,x+dx,.105,.83);
-      box('dark',.38,.009,.035,x,.174,.74);
     }
   }
   // Roof equipment has real relief and shadow, sharing one instanced fan mesh.
@@ -203,15 +205,13 @@ export function createRealEstate(kind:PropertyKind):THREE.Group {
   // Door reveals, concrete expansion joints and restrained paving joints anchor scale.
   if(kind==='warehouse'){
     for(const x of [-.67,0,.67]){
-      for(const dx of [-.255,.255])box('dark',.022,.36,.075,x+dx,.34,.59);
-      box('dark',.53,.025,.075,x,.525,.59);
       box('frame',.12,.020,.055,x,.565,.59);
     }
     // Side access stair, personnel door, and a sheltered loading canopy.
     box('dark',.015,.26,.14,1.045,.31,-.51);box('sill',.018,.23,.12,1.057,.31,-.51);box('dark',.025,.008,.025,1.074,.30,-.47);
     for(let step=0;step<3;step++)box('concrete',.07,.045*(step+1),.23,1.28-step*.065,.025+.0225*(step+1),-.51);
     box('sill',2.03,.02,.20,0,.567,.66);
-    for(const x of [-.97,.97])box('dark',.018,.12,.16,x,.51,.62);
+    for(const x of [-.97,.97])box('frame',.012,.12,.012,x,.497,.735);
     for(const x of [-1.2,-.4,.4,1.2])box('dark',.002,.001,2.04,x,.028,.12);
   }else{
     for(const x of [-.78,-.39,0,.39,.78])box('dark',.002,.001,1.38,x,.028,0);

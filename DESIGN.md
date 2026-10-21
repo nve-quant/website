@@ -176,3 +176,10 @@ Energy: replace invented oil-bung flange bolts with sealing rings, add restraine
 Property: apartment masonry now has actual apertures and recessed glazing; roof access and vents follow floor scale. Office gets all-sided spandrels, corner caps and supported canopy. Warehouse gets raised docks, levelers, down-pitch standing seams, curbed rooflights, sheltered loading and personnel access. Ground all bases. Repeated details stay instanced.
 
 Remove the oil illustrative stamp and the caption’s repeated asset-study/rotation instructions per owner request. Rotation remains on the object, keyboard-accessible, with its hidden accessible description and state. Only a genuine renderer error displays an explanatory message. The existing single section-level context remains.
+
+### Owner-observed corn/dock defects and soybean/coffee reconstruction
+Corn husks now peel outside the kernel envelope below the first row; centre-vein positions follow the same path. Replace the capsule cob with a tapered core so it cannot protrude through the narrow upper rows. A geometry regression checks the husk clearance above y=.23.
+
+Warehouse bays use one U-shaped gasket frame, recessed shutter and independent lower bumpers. Remove the stacked full-width backplate, oversized outer jambs and duplicate leveler-edge plate; slim the canopy supports. Preserve other property types.
+
+Replace upright soybean tubes with a low split-pod composition: separate inner/outer shell surfaces with actual rim thickness, an opened opposite valve, cream seeds with small hila and scattered grounded seeds. Coffee uses an asymmetric flattened sack, folded uneven cuff, quieter printed mark and flattened cleft-faced green beans. Appearance still requires browser review; geometry checks alone do not establish photorealism.

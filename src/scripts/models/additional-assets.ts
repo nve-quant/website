@@ -57,40 +57,88 @@ export function createGas():THREE.Group {
 }
 
 export function createCoffee():THREE.Group {
-  const group=new THREE.Group(),cloth=surfaceRelief('cloth',512);cloth.repeat.set(5,3);
-  const art=document.createElement('canvas');art.width=1024;art.height=512;const ctx=art.getContext('2d')!;ctx.fillStyle='#a18b60';ctx.fillRect(0,0,1024,512);ctx.fillStyle='#334239';ctx.textAlign='center';ctx.font='600 62px serif';ctx.fillText('ARABICA',256,255);ctx.font='23px monospace';ctx.fillText('GREEN BEANS',256,298);
-  // Fine alternating yarns retain the printed legend while giving the sack a woven colour surface.
-  for(let y=0;y<512;y+=4){ctx.fillStyle=y%8?'rgba(42,29,13,.13)':'rgba(236,220,170,.15)';ctx.fillRect(0,y,1024,1);}
-  for(let x=0;x<1024;x+=5){ctx.fillStyle=x%10?'rgba(37,30,18,.10)':'rgba(227,210,163,.18)';ctx.fillRect(x,0,1,512);}
+  const group=new THREE.Group();group.name='Arabica green coffee in an open jute sack';
+  let seed=87193;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  const cloth=surfaceRelief('cloth',512);cloth.repeat.set(4,2);
+  const art=document.createElement('canvas');art.width=1024;art.height=1024;const ctx=art.getContext('2d')!;
+  ctx.fillStyle='#a48e68';ctx.fillRect(0,0,1024,1024);
+  // Yarn-sized colour variations, rather than a uniform checkered noise overlay.
+  for(let y=0;y<1024;y+=3){ctx.fillStyle=`rgba(231,213,171,${.05+random()*.10})`;ctx.fillRect(0,y,1024,1);}
+  for(let x=0;x<1024;x+=3){ctx.fillStyle=`rgba(66,48,28,${.05+random()*.10})`;ctx.fillRect(x,0,1,1024);}
+  for(let i=0;i<5000;i++){ctx.fillStyle=i%2?'rgba(228,210,170,.15)':'rgba(58,42,24,.12)';ctx.fillRect(random()*1024,random()*1024,.5+random(),2+random()*9);}
+  ctx.fillStyle='rgba(45,56,40,.65)';ctx.textAlign='center';ctx.font='500 36px monospace';ctx.fillText('ARABICA',255,565);ctx.font='19px monospace';ctx.fillText('GREEN COFFEE',255,600);
   const map=new THREE.CanvasTexture(art);map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=8;
-  const sackMaterial=new THREE.MeshStandardMaterial({map,bumpMap:cloth,bumpScale:.012,roughness:.94,side:THREE.DoubleSide});
-  const profile=[new THREE.Vector2(.30,0),new THREE.Vector2(.48,.04),new THREE.Vector2(.55,.22),new THREE.Vector2(.51,.66),new THREE.Vector2(.43,.99),new THREE.Vector2(.45,1.07)];
-  const curve=new THREE.SplineCurve(profile);
-  const sackGeometry=new THREE.LatheGeometry(curve.getPoints(48),80);const position=sackGeometry.getAttribute('position');
-  for(let i=0;i<position.count;i++){const x=position.getX(i),z=position.getZ(i),y=position.getY(i),a=Math.atan2(z,x),r=1+.025*Math.sin(a*13+y*8)+.018*Math.sin(a*7-y*5)*(y+.2);position.setXYZ(i,x*r,y,z*r);}sackGeometry.computeVertexNormals();
-  const sack=new THREE.Mesh(sackGeometry,sackMaterial);sack.castShadow=sack.receiveShadow=true;group.add(sack);
-  const mouth:THREE.Vector3[]=[];
-  for(let i=0;i<80;i++){const a=i/80*Math.PI*2,r=.445*(1+.025*Math.sin(a*13+1.07*8)+.018*Math.sin(a*7-1.07*5)*1.27);mouth.push(new THREE.Vector3(Math.cos(a)*r,1.067+.009*Math.sin(a*5),Math.sin(a)*r));}
-  const rim=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(mouth,true),120,.016,8,true),new THREE.MeshStandardMaterial({color:0xb2a076,bumpMap:cloth,bumpScale:.003,roughness:.94}));rim.castShadow=true;group.add(rim);
-  const stitches:number[]=[];
-  for(let i=0;i<80;i++){const a=i/80*Math.PI*2,r=.45;stitches.push(Math.cos(a)*r,1.045,Math.sin(a)*r,Math.cos(a+.012)*r,1.025,Math.sin(a+.012)*r);}
-  const stitchGeometry=new THREE.BufferGeometry();stitchGeometry.setAttribute('position',new THREE.Float32BufferAttribute(stitches,3));group.add(new THREE.LineSegments(stitchGeometry,new THREE.LineBasicMaterial({color:0x6d5838})));
-  const beansGeometry=new THREE.SphereGeometry(1,22,14),p=beansGeometry.getAttribute('position');
-  for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);if(z>0)p.setZ(i,z-.30*Math.exp(-Math.pow((x+.08*Math.sin(y*4))/.14,2))*(1-y*y));}beansGeometry.computeVertexNormals();beansGeometry.rotateX(-Math.PI/2);
-  sackGeometry.computeBoundingBox();const sackFloor=sackGeometry.boundingBox!.min.y,beanPoint=new THREE.Vector3();
-  const beans=new THREE.InstancedMesh(beansGeometry,new THREE.MeshStandardMaterial({color:0xa4ac7b,roughness:.72,bumpMap:surfaceRelief('grain'),bumpScale:.002}),210),dummy=new THREE.Object3D();
-  for(let i=0;i<210;i++){
-    const a=i*2.39996,r=i<186?Math.sqrt(i/186)*.40:.56+(i%3)*.10;
-    dummy.position.set(Math.cos(a)*r,i<186?1.04+.12*(1-r/.45)+.008*Math.sin(i*13):.015,Math.sin(a)*r);dummy.rotation.set((i%3-.5)*.15,a,(i%4-2)*.1);dummy.scale.set(.047*(1+.12*Math.sin(i*3)),.031,.067*(1+.12*Math.cos(i*5)));dummy.updateMatrix();
-    if(i>=186){
-      // Use the rotated kernel surface, not an assumed ellipsoid half-height.
-      let lowest=Infinity;
-      for(let vertex=0;vertex<p.count;vertex++){beanPoint.fromBufferAttribute(p,vertex).applyMatrix4(dummy.matrix);lowest=Math.min(lowest,beanPoint.y);}
-      dummy.position.y+=sackFloor-lowest;dummy.updateMatrix();
-    }
-    beans.setMatrixAt(i,dummy.matrix);beans.setColorAt(i,new THREE.Color().setScalar(.75+(i%7)*.045));
+  const fabric=new THREE.MeshStandardMaterial({map,bumpMap:cloth,bumpScale:.003,roughness:.98,side:THREE.DoubleSide});
+  // A slumped, flattened bag: broad gusseted base, weight-bearing belly and an uneven folded mouth.
+  const surface=(a:number,t:number)=>{
+    const width=.43+.24*Math.sin(Math.PI*t*.91)-.045*t;
+    const depth=.28+.15*Math.sin(Math.PI*t*.92)-.015*t;
+    const crease=(.018*Math.sin(a*5+t*7)+.012*Math.sin(a*9-t*4))*Math.sin(Math.PI*t);
+    const mouthHeight=1.04-.11*Math.sin(a)+.025*Math.sin(a*3+.7);
+    const pinch=.055*Math.exp(-Math.pow((Math.cos(a)-.92)/.19,2))*Math.pow(t,3);
+    return new THREE.Vector3(.055*t*t+(width+crease-pinch)*Math.cos(a),t*mouthHeight,(depth+crease)*Math.sin(a)+.035*Math.sin(t*Math.PI));
+  };
+  const vertices:number[]=[],uv:number[]=[],indices:number[]=[];
+  const columns=96,rows=48;
+  for(let row=0;row<=rows;row++)for(let col=0;col<=columns;col++){
+    const a=col/columns*Math.PI*2,t=row/rows,p=surface(a,t);vertices.push(p.x,p.y,p.z);uv.push(col/columns,t);
+    if(row<rows&&col<columns){const n=row*(columns+1)+col;indices.push(n,n+columns+1,n+1,n+1,n+columns+1,n+columns+2);}
   }
-  beans.castShadow=beans.receiveShadow=true;group.add(beans);group.rotation.y=-.95;group.position.y=-.035-sackFloor;return group;
+  const bodyGeometry=new THREE.BufferGeometry();bodyGeometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));bodyGeometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));bodyGeometry.setIndex(indices);bodyGeometry.computeVertexNormals();
+  const sack=new THREE.Mesh(bodyGeometry,fabric);sack.castShadow=sack.receiveShadow=true;group.add(sack);
+  const cuffVertices:number[]=[],cuffUv:number[]=[],cuffIndices:number[]=[];
+  for(let row=0;row<=8;row++)for(let col=0;col<=columns;col++){
+    const a=col/columns*Math.PI*2,t=row/8,p=surface(a,1),out=.008+.022*Math.sin(Math.PI*t);
+    cuffVertices.push(p.x+Math.cos(a)*out,p.y-.105*t+.006*Math.sin(a*7)*t,p.z+Math.sin(a)*out);cuffUv.push(col/columns,.9+t*.1);
+    if(row<8&&col<columns){const n=row*(columns+1)+col;cuffIndices.push(n,n+1,n+columns+1,n+1,n+columns+2,n+columns+1);}
+  }
+  const cuffGeometry=new THREE.BufferGeometry();cuffGeometry.setAttribute('position',new THREE.Float32BufferAttribute(cuffVertices,3));cuffGeometry.setAttribute('uv',new THREE.Float32BufferAttribute(cuffUv,2));cuffGeometry.setIndex(cuffIndices);cuffGeometry.computeVertexNormals();
+  const cuff=new THREE.Mesh(cuffGeometry,fabric);cuff.castShadow=cuff.receiveShadow=true;group.add(cuff);
+  const seams:number[]=[];
+  for(let i=0;i<65;i++){
+    const t=.025+i*.014,a=-1.8,p=surface(a,t),q=surface(a+.018,t+.008);p.add(new THREE.Vector3(Math.cos(a)*.004,0,Math.sin(a)*.004));q.add(new THREE.Vector3(Math.cos(a)*.004,0,Math.sin(a)*.004));seams.push(...p.toArray(),...q.toArray());
+  }
+  const seamGeometry=new THREE.BufferGeometry();seamGeometry.setAttribute('position',new THREE.Float32BufferAttribute(seams,3));group.add(new THREE.LineSegments(seamGeometry,new THREE.LineBasicMaterial({color:0x6e5c40})));
+  const beanGeometry=new THREE.SphereGeometry(1,20,12),bp=beanGeometry.getAttribute('position');
+  for(let i=0;i<bp.count;i++){
+    const x=bp.getX(i),y=bp.getY(i),z=bp.getZ(i),taper=1-.13*z;
+    const cleft=.26*Math.exp(-Math.pow((x+.055*Math.sin(z*4))/.13,2))*Math.max(0,1-z*z);
+    bp.setXYZ(i,x*taper,y>0?.36*y-cleft:y*.70,z+.035*Math.sin(x*3)*(1-z*z));
+  }
+  beanGeometry.computeVertexNormals();
+  const dummy=new THREE.Object3D(),point=new THREE.Vector3();
+  const placements:{matrix:THREE.Matrix4;bounds:THREE.Box3;color:THREE.Color}[]=[];
+  // Settle individually rotated kernels on prior support bounds. Rejection prevents
+  // solid overlap and stops the heap at the mouth, instead of sprinkling through it.
+  for(let attempt=0;attempt<2500&&placements.length<118;attempt++){
+    const loose=attempt>=2100;
+    let x:number,z:number,r:number;
+    if(!loose){do{x=(random()*2-1)*.40;z=(random()*2-1)*.21;r=(x/.43)**2+(z/.24)**2;}while(r>.87);}
+    else{do{x=(random()*2-1)*.95;z=.28+random()*.66;r=(x/.68)**2+(z/.47)**2;}while(r<1.3);}
+    const size=.88+random()*.18;
+    dummy.position.set(x+.05,0,z);dummy.rotation.set((random()-.5)*.40,random()*Math.PI*2,(random()-.5)*.30);
+    if(attempt%11===0)dummy.rotation.x+=Math.PI;
+    dummy.scale.set(.029*size,.043*size,.043*size);dummy.updateMatrix();
+    const bounds=new THREE.Box3();
+    for(let j=0;j<bp.count;j++){point.fromBufferAttribute(bp,j).applyMatrix4(dummy.matrix);bounds.expandByPoint(point);}
+    let support=loose?0:.79;
+    for(const prior of placements){const p=prior.bounds;
+      if(bounds.max.x>p.min.x&&bounds.min.x<p.max.x&&bounds.max.z>p.min.z&&bounds.min.z<p.max.z)support=Math.max(support,p.max.y+.001);
+    }
+    const lift=support-bounds.min.y;
+    if(!loose&&bounds.max.y+lift>.89+.18*(1-r))continue;
+    if(loose&&support>0)continue;
+    dummy.position.y=lift;dummy.updateMatrix();bounds.translate(new THREE.Vector3(0,lift,0));
+    placements.push({matrix:dummy.matrix.clone(),bounds,color:new THREE.Color().setHSL(.18+random()*.035,.13+random()*.08,.44+random()*.13)});
+  }
+  const beans=new THREE.InstancedMesh(beanGeometry,new THREE.MeshStandardMaterial({color:0xffffff,roughness:.83,bumpMap:surfaceRelief('grain'),bumpScale:.0008}),placements.length);
+  beans.name='coffee kernels';
+  placements.forEach((placement,i)=>{beans.setMatrixAt(i,placement.matrix);beans.setColorAt(i,placement.color);});
+  // Bulk below the individual kernels closes deep interstices instead of revealing an empty bag.
+  const bulk=new THREE.Mesh(new THREE.CylinderGeometry(1,1,.10,64),new THREE.MeshStandardMaterial({color:0x717660,roughness:1,bumpMap:surfaceRelief('grain'),bumpScale:.003}));
+  bulk.scale.set(.44,1,.28);bulk.position.set(.05,.74,0);bulk.castShadow=bulk.receiveShadow=true;group.add(bulk);
+  beans.castShadow=beans.receiveShadow=true;group.add(beans);
+  group.rotation.y=-.45;group.position.y=-.035;return group;
 }
 
 export function createCotton():THREE.Group {

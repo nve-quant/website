@@ -4,7 +4,8 @@ import {surfaceRelief} from './surfaces';
 export function createCorn():THREE.Group {
   const group=new THREE.Group();group.name='Mature yellow dent corn with dry husks';
   const cream=new THREE.MeshStandardMaterial({color:0xead9a0,roughness:.85});
-  const cob=new THREE.Mesh(new THREE.CapsuleGeometry(.12,1.32,8,24),cream);cob.position.y=.95;cob.castShadow=true;group.add(cob);
+  const cobProfile=[[.035,.16],[.10,.23],[.13,.30],[.125,.95],[.115,1.30],[.085,1.50],[.04,1.67],[0,1.78]].map(([r,y])=>new THREE.Vector2(r,y));
+  const cob=new THREE.Mesh(new THREE.LatheGeometry(cobProfile,32),cream);cob.castShadow=true;group.add(cob);
   const grain=new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.48,bumpMap:surfaceRelief('grain'),bumpScale:.001,clearcoat:.07,clearcoatRoughness:.48});
   const kernelGeometry=new THREE.SphereGeometry(1,20,14),kp=kernelGeometry.getAttribute('position');
   for(let i=0;i<kp.count;i++){
@@ -26,7 +27,9 @@ export function createCorn():THREE.Group {
   for(let leaf=0;leaf<5;leaf++){
     const angle=leaf*Math.PI*2/5+Math.sin(leaf*13)*.13,positions:number[]=[],indices:number[]=[],uvs:number[]=[],veins:number[]=[];
     for(let row=0;row<=20;row++){
-      const t=row/20,width=Math.sin(Math.PI*t)**.75*(.16+(leaf%3)*.025),reach=.10+Math.pow(t,2)*(.51+(leaf%3)*.06);
+      const t=row/20,width=Math.sin(Math.PI*t)**.75*(.16+(leaf%3)*.025);
+      // Peel away below the first kernel row, then curl outward; never pass through the ear.
+      const reach=.10+.23*(1-Math.exp(-t*10))+t*t*(.30+(leaf%3)*.05);
       const y=.10+t*1.30-Math.pow(t,3)*.65;
       for(let column=0;column<=6;column++){
         const side=(column/6-.5)*2,x=side*width,z=reach+(1-side*side)*.04+Math.sin(t*17+leaf)*Math.abs(side)*.018+Math.cos(side*40+t*3)*.0025;
@@ -34,10 +37,10 @@ export function createCorn():THREE.Group {
         positions.push(x*Math.cos(angle)+z*Math.sin(angle),y,z*Math.cos(angle)-x*Math.sin(angle));
         if(row<20&&column<6){const i=row*7+column;indices.push(i,i+7,i+1,i+1,i+7,i+8);}
       }
-      if(row<20){const nt=(row+1)/20,nr=.10+nt*nt*.62,ny=.10+nt*1.30-nt*nt*nt*.65;veins.push((reach+.04)*Math.sin(angle),y+.002,(reach+.04)*Math.cos(angle),(nr+.04)*Math.sin(angle),ny+.002,(nr+.04)*Math.cos(angle));}
+      if(row<20){const nt=(row+1)/20,nr=.10+.23*(1-Math.exp(-nt*10))+nt*nt*(.30+(leaf%3)*.05),ny=.10+nt*1.30-nt*nt*nt*.65;veins.push((reach+.04)*Math.sin(angle),y+.002,(reach+.04)*Math.cos(angle),(nr+.04)*Math.sin(angle),ny+.002,(nr+.04)*Math.cos(angle));}
     }
     const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));geometry.setIndex(indices);geometry.computeVertexNormals();
-    const husk=new THREE.Mesh(geometry,leafMaterial);husk.castShadow=true;group.add(husk);
+    const husk=new THREE.Mesh(geometry,leafMaterial);husk.name='peeled-corn-husk';husk.castShadow=true;group.add(husk);
     const line=new THREE.BufferGeometry();line.setAttribute('position',new THREE.Float32BufferAttribute(veins,3));group.add(new THREE.LineSegments(line,new THREE.LineBasicMaterial({color:0xb7a473})));
   }
   const silkGeometry=new THREE.BufferGeometry(),silkPositions:number[]=[],silkIndices:number[]=[];
@@ -54,54 +57,66 @@ export function createCorn():THREE.Group {
 }
 
 export function createSoy():THREE.Group {
-  const group=new THREE.Group();group.name='Dry yellow soybean pods and seeds';
-  const shellMaterial=new THREE.MeshStandardMaterial({color:0x99845c,roughness:.9,side:THREE.DoubleSide,bumpMap:surfaceRelief('fibre'),bumpScale:.003});
-  const seedMaterial=new THREE.MeshStandardMaterial({color:0xdac897,roughness:.64,bumpMap:surfaceRelief('grain'),bumpScale:.001});
-  const seedGeometry=new THREE.SphereGeometry(1,24,16);
-  const hilumMaterial=new THREE.MeshStandardMaterial({color:0x847553,roughness:.86});
-  const hilumGeometry=new THREE.SphereGeometry(1,12,8);
-  const bean=(parent:THREE.Group,x:number,y:number,z:number,size=.16)=>{
-    const seed=new THREE.Mesh(seedGeometry,seedMaterial);seed.position.set(x,y,z);seed.scale.set(size,size*.9,size*.86);seed.castShadow=true;parent.add(seed);
-    const hilum=new THREE.Mesh(hilumGeometry,hilumMaterial);hilum.scale.set(size*.10,size*.23,.004);hilum.position.set(x,y,z+size*.85);parent.add(hilum);
+  const group=new THREE.Group();group.name='Split dry soybean pod with yellow seeds';
+  const fibre=surfaceRelief('fibre'),grain=surfaceRelief('grain');
+  const outer=new THREE.MeshStandardMaterial({color:0x9e8156,roughness:.93,bumpMap:fibre,bumpScale:.0018});
+  const inner=new THREE.MeshStandardMaterial({color:0xd2b98a,roughness:.96,bumpMap:fibre,bumpScale:.0007});
+  const seamMaterial=new THREE.MeshStandardMaterial({color:0x8c704a,roughness:.97});
+  // A split pod is two thin, concave valves, not a perforated cylindrical tube.
+  const sample=(t:number,v:number,inside=true)=>{
+    const envelope=Math.sin(Math.PI*t)**.60;
+    const chamber=.86+.14*Math.cos((t-.18)*Math.PI*6);
+    const width=.205*envelope*chamber;
+    return new THREE.Vector3((t-.5)*1.92,-.025+.135*envelope*v*v+(inside?.008:0),.035*Math.sin(t*Math.PI*1.3)+width*v);
   };
-  for(let pod=0;pod<3;pod++){
-    const body=new THREE.Group();const positions:number[]=[],indices:number[]=[],uvs:number[]=[];
-    // Three swollen seed chambers, tapered ends and an open front seam.
-    for(let row=0;row<=36;row++)for(let column=0;column<=20;column++){
-      const t=row/36,y=t*1.42;
-      const lobes=[.30,.70,1.10].reduce((sum,c)=>sum+Math.exp(-Math.pow((y-c)/.19,2)),0);
-      const radius=(.065+.13*lobes)*Math.sin(Math.PI*t)**.3;
-      const opening=pod===1?.70:.12;
-      const a=opening+column/20*(Math.PI*2-2*opening);
-      uvs.push(column/20,t);
-      positions.push(Math.sin(a)*radius,y,Math.cos(a)*radius);
-      if(row<36&&column<20){const i=row*21+column;indices.push(i,i+21,i+1,i+1,i+21,i+22);}
+  const valve=()=>{
+    const body=new THREE.Group(),positions:number[]=[],uvs:number[]=[],indices:number[]=[];
+    const rows=48,columns=20,count=(rows+1)*(columns+1);
+    for(let layer=0;layer<2;layer++)for(let row=0;row<=rows;row++)for(let col=0;col<=columns;col++){
+      const t=row/rows,v=col/columns*2-1,p=sample(t,v,layer===0);
+      positions.push(p.x,p.y,p.z);uvs.push(col/columns,t);
     }
-    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));geometry.setIndex(indices);geometry.computeVertexNormals();
-    const shell=new THREE.Mesh(geometry,shellMaterial);shell.castShadow=shell.receiveShadow=true;body.add(shell);
-    // Raised seam follows each swollen chamber, instead of a smooth open tube.
-    for(const angle of [pod===1?.70:.12,Math.PI*2-(pod===1?.70:.12)]){
-      const points=[];
-      for(let j=0;j<=36;j++){
-        const y=j/36*1.42,lobes=[.30,.70,1.10].reduce((sum,c)=>sum+Math.exp(-Math.pow((y-c)/.19,2)),0);
-        const radius=(.065+.13*lobes)*Math.sin(Math.PI*j/36)**.3;
-        points.push(new THREE.Vector3(Math.sin(angle)*radius,y,Math.cos(angle)*radius));
-      }
-      const seam=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),36,.006,5,false),shellMaterial);body.add(seam);
+    for(let layer=0;layer<2;layer++)for(let row=0;row<rows;row++)for(let col=0;col<columns;col++){
+      const a=layer*count+row*(columns+1)+col,b=a+columns+1;
+      if(layer===0)indices.push(a,a+1,b,a+1,b+1,b);else indices.push(a,b,a+1,a+1,b,b+1);
     }
-    // Mature pods retain very fine short hairs; one instance batch per pod.
-    const hairs=new THREE.InstancedMesh(new THREE.ConeGeometry(.0014,.012,3),new THREE.MeshStandardMaterial({color:0xbba77c,roughness:1}),180);
-    const hairDummy=new THREE.Object3D();
-    for(let i=0;i<180;i++){
-      const t=.05+(i%30)/30*.9,y=t*1.42,a=.85+(i*2.39996)%(Math.PI*2-1.7);
-      const lobes=[.30,.70,1.10].reduce((sum,c)=>sum+Math.exp(-Math.pow((y-c)/.19,2)),0),radius=(.065+.13*lobes)*Math.sin(Math.PI*t)**.3;
-      const normal=new THREE.Vector3(Math.sin(a),.15*Math.sin(i),Math.cos(a)).normalize();
-      hairDummy.position.set(Math.sin(a)*(radius+.004),y,Math.cos(a)*(radius+.004));hairDummy.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),normal);hairDummy.updateMatrix();hairs.setMatrixAt(i,hairDummy.matrix);
+    // Join the two surfaces at both long edges, leaving no paper-thin silhouette.
+    for(let row=0;row<rows;row++)for(const col of [0,columns]){
+      const a=row*(columns+1)+col,b=a+columns+1;indices.push(a,a+count,b,b,a+count,b+count);
     }
-    body.add(hairs);
-    for(const y of [.30,.70,1.10])bean(body,0,y,.015,.155);
-    body.rotation.z=(pod-1)*.32;body.rotation.y=(pod-1)*.35;body.position.set((pod-1)*.35,0,pod===1?.20:-.10);body.updateMatrixWorld(true);body.position.y=-.035-new THREE.Box3().setFromObject(body).min.y;group.add(body);
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));geometry.setIndex(indices);
+    geometry.addGroup(0,rows*columns*6,0);geometry.addGroup(rows*columns*6,indices.length-rows*columns*6,1);geometry.computeVertexNormals();
+    const shell=new THREE.Mesh(geometry,[inner,outer]);shell.castShadow=shell.receiveShadow=true;body.add(shell);
+    for(const v of [-1,1]){
+      const points=Array.from({length:49},(_,i)=>sample(i/48,v));
+      const edge=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),48,.004,5,false),seamMaterial);edge.castShadow=true;body.add(edge);
+    }
+    return body;
+  };
+  const occupied=valve();occupied.rotation.y=-.14;occupied.position.z=.14;group.add(occupied);
+  // The empty opposite valve has twisted open and rests behind the seeded half.
+  const empty=valve();empty.rotation.set(-.28,.16,.025);empty.position.set(-.05,0,-.41);empty.updateMatrixWorld(true);empty.position.y=-.025-new THREE.Box3().setFromObject(empty).min.y;group.add(empty);
+  const seedGeometry=new THREE.SphereGeometry(1,28,20),seedPositions=seedGeometry.getAttribute('position');
+  for(let i=0;i<seedPositions.count;i++){
+    const x=seedPositions.getX(i),y=seedPositions.getY(i),z=seedPositions.getZ(i);
+    const d=.035*Math.exp(-(x*x*20+(y-.6)**2*18+(z-.8)**2*18));
+    seedPositions.setXYZ(i,x*(1+.018*y),y-d*.6,z-d*.8);
   }
-  bean(group,.56,.091,.58,.14);bean(group,-.42,.082,.54,.13);bean(group,.08,.082,.70,.13);
-  group.rotation.y=-.15;return group;
+  seedGeometry.computeVertexNormals();
+  const hilumGeometry=new THREE.SphereGeometry(1,14,10),hilumMaterial=new THREE.MeshStandardMaterial({color:0x806744,roughness:.9});
+  const bean=(parent:THREE.Group,x:number,z:number,r:number,angle:number,lift=0)=>{
+    const seedGroup=new THREE.Group();
+    const material=new THREE.MeshStandardMaterial({color:new THREE.Color().setHSL(.115,.38,.64+.025*Math.sin(angle*7)),roughness:.67,bumpMap:grain,bumpScale:.00065});
+    const seed=new THREE.Mesh(seedGeometry,material);seed.scale.set(r,r*.91,r*.94);seed.castShadow=seed.receiveShadow=true;seedGroup.add(seed);
+    const normal=new THREE.Vector3(0,.6,.8),hilum=new THREE.Mesh(hilumGeometry,hilumMaterial);
+    hilum.scale.set(r*.075,r*.19,.003);hilum.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),normal);hilum.position.set(0,r*.91*.6,r*.94*.8);seedGroup.add(hilum);
+    seedGroup.rotation.set(.12*Math.sin(angle),angle,.08*Math.cos(angle));seedGroup.position.set(x,0,z);seedGroup.updateMatrixWorld(true);
+    seedGroup.position.y=lift-.025-new THREE.Box3().setFromObject(seedGroup).min.y;parent.add(seedGroup);
+  };
+  // Seeds sit in the valve, with independently rotated loose seeds in the foreground.
+  bean(occupied,-.51,.024,.151,.4,.010);bean(occupied,-.015,.033,.164,-.7,.010);bean(occupied,.49,.038,.153,1.8,.010);
+  bean(group,-.65,.65,.148,2.4);bean(group,.02,.77,.156,-1.2);bean(group,.62,.60,.142,.8);bean(group,.94,.25,.137,-2.4);
+  // Scale the low still-life by width while preserving contact with the studio floor.
+  group.scale.setScalar(1.12);group.updateMatrixWorld(true);group.position.y=-.035-new THREE.Box3().setFromObject(group).min.y;
+  return new THREE.Group().add(group);
 }

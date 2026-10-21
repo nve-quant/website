@@ -25,6 +25,20 @@ for(const id of ids){
   model.traverse(object=>{
     if(!(object instanceof THREE.Mesh||object instanceof THREE.Line))return;
     const g=object.geometry;geometries.add(g);
+    if(object.name==='coffee kernels'&&object instanceof THREE.InstancedMesh){
+      const boxes=[],matrix=new THREE.Matrix4(),point=new THREE.Vector3(),vertices=g.getAttribute('position');
+      for(let i=0;i<object.count;i++){
+        object.getMatrixAt(i,matrix);const box=new THREE.Box3();
+        for(let j=0;j<vertices.count;j++)box.expandByPoint(point.fromBufferAttribute(vertices,j).applyMatrix4(matrix));
+        for(const previous of boxes){const overlap=box.clone().intersect(previous);assert(overlap.isEmpty()||overlap.max.y-overlap.min.y<1e-6,'Coffee kernels interpenetrate');}
+        boxes.push(box);
+      }
+      assert(boxes.filter(box=>Math.abs(box.min.y)<1e-6).length>=10,'Spilled coffee kernels must rest on the ground');
+    }
+    if(object.name==='peeled-corn-husk'){
+      const points=g.getAttribute('position');
+      for(let i=0;i<points.count;i++)if(points.getY(i)>=.23)assert(Math.hypot(points.getX(i),points.getZ(i))>.215,'Corn husk intersects the kernel envelope');
+    }
     for(const attribute of Object.values(g.attributes))assert(Array.from(attribute.array).every(Number.isFinite),`${id}: finite attributes`);
     if(object instanceof THREE.InstancedMesh)assert(Array.from(object.instanceMatrix.array).every(Number.isFinite),`${id}: finite instances`);
     if(object instanceof THREE.Mesh){triangles+=(g.index?g.index.count:g.attributes.position.count)/3*(object.count??1);calls+=1;}
