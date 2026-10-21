@@ -43,6 +43,8 @@ operations:
 access: Your assets remain under your control. Safe or Squads vault roles restrict our operation to the specified pool and asset pair, without withdrawal or send authority. We agree the vault configuration, ranges, balances and operating limits with your team before operation.
 considerations: A narrower range concentrates liquidity but can move out of range as prices change. Asset exposure changes as trades occur, and repositioning incurs transaction costs. Active management does not remove market, smart-contract or inventory risk, or guarantee returns.
 faqs:
+  - question: Which protocols and chains do you support?
+    answer: We support EVM chains, including Uniswap v3 and v4, Aerodrome, Velodrome and PancakeSwap where deployed. On Solana, we support Raydium, Meteora, Orca and PumpSwap across their pool types. We identify the specific protocol deployment, pool and asset pair when scoping the engagement.
   - question: Who controls the assets?
     answer: You retain control through your Safe or Squads vault. Our roles are restricted to the specified pool and asset pair, with no withdrawal or send authority. The configuration is agreed for the engagement. These permission boundaries do not remove market, smart-contract or inventory risk.
   - question: Can you work with an existing pool?

@@ -1,5 +1,6 @@
 // CEX coverage confirmed by owner via supplied DataIndexer SVG directory.
-// DEX deployment details pending; okx-x is a duplicate mark.
+// DEX protocol/version coverage owner-confirmed; chain support does not imply every protocol exists on every chain.
+// okx-x is a duplicate mark. Hyperliquid product scope remains pending.
 // Operational coverage does not imply partnership or endorsement.
 export interface CexVenue { name: string; logo?: string; }
 export interface DexDeployment { protocol: string; networks: string[]; poolTypes: string[]; }
@@ -113,4 +114,14 @@ export const cexVenues: CexVenue[] = [
     "logo": "/images/venues/xt.svg"
   }
 ];
-export const dexDeployments: DexDeployment[] = [];
+export const dexCoverageNote = 'We support EVM chains and Solana. Protocol availability depends on the chain; the engagement identifies the specific deployment and pool.';
+export const dexDeployments: DexDeployment[] = [
+ {protocol:'Uniswap',networks:['EVM'],poolTypes:['v3','v4']},
+ {protocol:'Aerodrome',networks:['EVM'],poolTypes:[]},
+ {protocol:'Velodrome',networks:['EVM'],poolTypes:[]},
+ {protocol:'PancakeSwap',networks:['EVM'],poolTypes:[]},
+ {protocol:'Raydium',networks:['Solana'],poolTypes:['All pool types']},
+ {protocol:'Meteora',networks:['Solana'],poolTypes:['All pool types']},
+ {protocol:'Orca',networks:['Solana'],poolTypes:['All pool types']},
+ {protocol:'PumpSwap',networks:['Solana'],poolTypes:['All pool types']},
+];

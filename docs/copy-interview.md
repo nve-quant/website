@@ -53,3 +53,6 @@ Focused outstanding follow-ups:
 7. First-call deliverable and whether assessment is free; detailed fee/exit terms.
 8. Real sanitized dashboard media; exact JSON dataset scope and reference-price methodology.
 9. Legal identity/jurisdiction, approved bios/contact specifics and final editorial choices remain unanswered from round 3.
+
+### Coverage follow-up answered
+Eight DEX protocols and EVM/Solana coverage confirmed and integrated. Latency is p50, owner says p99 virtually same and applicable across venues; contractual latency optional. Pending narrowed question: 3ms or 5ms threshold, exchange timestamp versus locally received acknowledgement, and clock synchronization if exchange timestamp. Do not repeat already answered broad coverage questions. Hyperliquid scope remains unknown.

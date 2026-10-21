@@ -45,6 +45,8 @@ operations:
 access: Your assets remain under your control. Onchain Bureau operates through API-key access to your exchange accounts. Permissions and the account setup are agreed with you before operation, within a non-custodial arrangement.
 considerations: Market conditions, available inventory and venue availability affect quoting. The mandate defines objectives and operating limits; it does not guarantee a token price, trading volume or uninterrupted exchange availability.
 faqs:
+  - question: Can latency requirements be included in the agreement?
+    answer: Yes. Latency commitments can be agreed for an engagement, although they are not part of the standard contract. The measurement, target and applicable conditions are defined together.
   - question: Who supplies the trading capital?
     answer: You allocate the token and quote assets used for the engagement. The capital, markets and operating limits are agreed as part of the service mandate.
   - question: Do we transfer custody to Onchain Bureau?

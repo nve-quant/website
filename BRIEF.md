@@ -68,3 +68,8 @@ Source: owner answers and follow-up publication permission, 21 October 2026. Sup
 - Weekly/monthly Telegram reviews, calls if required. Real-time CEX/DEX dashboard, visual chart and table trade history, timeframe CSV/JSON exports; spread/depth snapshots/history and fair-value/oracle quotation reference.
 - Latency answer mentions sub-3–5ms, typically ~1ms and some sub-1ms RTT. Do not publish an all-venue guarantee until measurement endpoints, bound/percentile, exclusions and applicable deployments are clarified.
 - Coverage authorized from SVGs in owner-specified DataIndexer asset folder. 27 distinct CEXs copied; duplicate OKX mark excluded. Uniswap/Aerodrome/Hyperliquid deployment details remain pending; PNG-only files were outside the stated SVG selection.
+
+### Owner follow-up: DEX coverage and latency definition
+Owner confirms Uniswap v3/v4, Aerodrome, Velodrome and PancakeSwap; support across EVM chains. Solana: Raydium, Meteora, Orca and PumpSwap, all pool types. Protocol support does not imply every protocol is deployed on every EVM chain. Hyperliquid product scope still unconfirmed. Public coverage matrix and DEX FAQ updated.
+
+Latency figures described by owner as p50 across all venues, with low jitter and p99 close to p50, measured from order sending to the timestamp of accepted order. Latency clauses are available by agreement but not standard contracts. “Upper bound” conflicts with percentile terminology; exact 3ms versus 5ms threshold, timestamp origin and clock synchronization remain to clarify. Public numeric latency claim remains deferred, while contractual availability is stated accurately.

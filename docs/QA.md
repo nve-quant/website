@@ -261,3 +261,6 @@ Owner reported the bars in “A DEX position that needs attention” were not st
 - Type checks: 70 files, no diagnostics. Static build and local asset/link/anchor/noindex isolation pass. Existing service-navigation, liquidity-animation and need-illustration checks pass. Existing Three.js bundle-size warning remains.
 - Original SVGs scanned for script/foreignObject/event handlers/external references before copying. Blockfinex embeds a raster PNG; retained as owner-provided art.
 - Browser screenshot/keyboard/overflow verification remains unavailable in this environment; do not treat implemented breakpoints as observed browser passes.
+
+### Confirmed DEX coverage
+Enabled eight-protocol EVM/Solana coverage matrix and updated both service FAQs. Type checks (70 files, no diagnostics), static build and link/asset/isolation checks pass. No new dependencies or animation changes. Browser layout verification remains outstanding. Numeric latency wording remains held for the precise percentile/threshold/timestamp definition.
