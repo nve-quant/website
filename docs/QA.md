@@ -254,3 +254,10 @@ Owner reported the bars in “A DEX position that needs attention” were not st
 - Reporting component was corrected during integration from dark text to #f6f7f2 / #d6dfd3 against #243f35 (calculated contrast 10.62:1 / 8.36:1).
 - CUA returned no apps/browsers and a native pipe startup error. Desktop/mobile screenshots and observed browser keyboard/overflow checks remain outstanding; responsive CSS is implemented but not visually verified.
 - Owner interview questions sent in three groups. Venue logos, actual DEX deployments, dashboard media and experience/results await evidence; no placeholders for those ship publicly.
+
+## Owner interview integration and CEX coverage
+- Added 27 owner-supplied venue SVGs (~89 KB total), named accessible rail entries and previous/next controls. Touch/keyboard scrolling remains native; smooth scrolling disabled under reduced motion. DEX deployment details remain pending.
+- Updated company history, approved MNEE/BSV examples, reporting, spot/perpetual operation, monitoring, DEX permissions and commercial copy. Systematic strategies marked pilot/coming soon.
+- Type checks: 70 files, no diagnostics. Static build and local asset/link/anchor/noindex isolation pass. Existing service-navigation, liquidity-animation and need-illustration checks pass. Existing Three.js bundle-size warning remains.
+- Original SVGs scanned for script/foreignObject/event handlers/external references before copying. Blockfinex embeds a raster PNG; retained as owner-provided art.
+- Browser screenshot/keyboard/overflow verification remains unavailable in this environment; do not treat implemented breakpoints as observed browser passes.

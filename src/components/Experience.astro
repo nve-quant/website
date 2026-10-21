@@ -1,0 +1,7 @@
+---
+import {experience} from '../data/experience';
+---
+<section class="experience-section editorial-section" aria-labelledby="experience-title"><div><p class="section-kicker">Operating since {experience.since}</p><h2 id="experience-title">Different markets.<br/>Visible operations.</h2><p>Our work spans exchanges, stablecoins, layer-one tokens and tokenized assets.</p><a href="/company">Meet Onchain Bureau</a></div><dl>{experience.examples.map(example=><div><dt>{example.name}</dt><dd>{example.description}</dd></div>)}</dl></section>
+<style>
+.experience-section dl{margin:0}.experience-section dl>div{padding:20px 0;border-bottom:1px solid var(--line)}.experience-section dl>div:first-child{padding-top:0}.experience-section dt{font-size:1.35rem;letter-spacing:-.025em}.experience-section dd{font-size:.9rem;line-height:1.6;margin:10px 0 0;color:var(--muted)}
+</style>

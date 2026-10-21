@@ -55,3 +55,16 @@ Owner requested market-specific specimen names and a realism upgrade on 22 Octob
 
 ## Focused model refinement and caption cleanup
 Owner explicitly requested multi-agent refinement of agriculture (wheat, corn, soybeans, coffee, cotton), energy (oil and natural gas) and all three property studies. Exclude precious/industrial metals, gems, equities, fixed income and funds from model changes. Remove the oil drum’s illustrative stamp and repeated “Illustrative asset study / Drag to rotate / Click to pause” caption. Preserve accessible rotation controls and the section-level context; user authorization supersedes the earlier instruction to retain every illustrative label.
+
+## Owner interview: operating history, coverage and commercial model
+Source: owner answers and follow-up publication permission, 21 October 2026. Supersedes previous assumptions about general availability of systematic strategies.
+- Operating since 2022. Public people: Nicholas van Eerde and Nahuel Angelone; roles/approved biographies remain pending.
+- Client fit includes exchanges, stablecoins, utility/layer-one projects and gemstone-backed tokens. Owner expressly approved naming MNEE and Bitcoin SV (BSV) engagements. Emerald/ruby project names and exchange client name remain unspecified. Gem backing valuation/certification and CMC ranking are not published without supporting evidence.
+- Core priorities: CEX/DEX. OTC is a small secondary activity. Systematic terminals/vaults are testing/pilot, coming soon rather than generally available.
+- Main differentiator: bespoke transparent reporting of orders and SLA metrics in real time, including directly sourced exchange data. Case-specific introductions/additional support are not a standard promised service package.
+- CEX: spot and perpetuals; quoting, depth, availability, inventory, allocation and hedging scoped to client needs. Internal ML volatility forecasting, OMS controls, logs, data pipelines and alerting; human trade ops monitors books 24/7.
+- DEX: ranges/balances chosen with client; primarily automated adjustments, with discretionary exceptions/requests. Safe/Squads roles restrict operation to agreed pool/pair without withdrawal/send authority. This is a permission model, not proof that malicious extraction or losses are impossible.
+- Monthly retainer; 3/6/12/24-month terms. Client generally receives P&L/rebates/LP fees and pays costs, with some negotiated income-share/lower-retainer arrangements. Loan models are exceptional, not core marketing. Stated capital floor of 3k awaits currency, unit and publication wording.
+- Weekly/monthly Telegram reviews, calls if required. Real-time CEX/DEX dashboard, visual chart and table trade history, timeframe CSV/JSON exports; spread/depth snapshots/history and fair-value/oracle quotation reference.
+- Latency answer mentions sub-3–5ms, typically ~1ms and some sub-1ms RTT. Do not publish an all-venue guarantee until measurement endpoints, bound/percentile, exclusions and applicable deployments are clarified.
+- Coverage authorized from SVGs in owner-specified DataIndexer asset folder. 27 distinct CEXs copied; duplicate OKX mark excluded. Uniswap/Aerodrome/Hyperliquid deployment details remain pending; PNG-only files were outside the stated SVG selection.

@@ -1,4 +1,4 @@
-// Owner-confirmed CEX/DEX access model. Specific permission settings remain engagement-specific.
+// Owner-confirmed CEX/DEX access model, including pool/pair-scoped DEX permissions.
 export const accessPathways = [
   {
     name: 'Centralized exchanges',
@@ -7,7 +7,7 @@ export const accessPathways = [
     permission: 'API-key access',
     permissionDetail: 'Permissions agreed before trading',
     operation: 'CEX market making',
-    operationDetail: 'Quoting and inventory management',
+    operationDetail: 'Spot and perpetual markets',
     href: '/market-making#access',
     link: 'CEX access and operation',
   },
@@ -16,9 +16,9 @@ export const accessPathways = [
     account: 'Your onchain vaults',
     accountDetail: 'Safe or Squads',
     permission: 'Roles and permissions',
-    permissionDetail: 'Configuration agreed for the mandate',
+    permissionDetail: 'Specified pool and pair. No withdrawal or send authority.',
     operation: 'DEX liquidity management',
-    operationDetail: 'Allocation and range management',
+    operationDetail: 'Ranges and balances agreed with you',
     href: '/dex-liquidity-management#access',
     link: 'DEX access and operation',
   },

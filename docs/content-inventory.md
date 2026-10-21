@@ -157,3 +157,16 @@ Owner authorised removing the oil barrel’s illustrative stamp and repeated ass
 Owner requested parallel work on the proposed graphics while answering a broad business-copy interview. New access/handoff/reporting visuals use the existing owner-confirmed operating model. Measurement diagrams are educational drafts, not measured results or confirmation that every measure is available in the dashboard. OTC/strategy diagrams explain discussion scope, without inferring settlement, custody, returns or principal/agency models.
 
 Coverage data in src/data/venue-coverage.ts is intentionally empty pending owner-confirmed venues, protocol/network combinations and publication permission. No coverage section renders without data. Real sanitized dashboard imagery and team/client evidence remain outstanding; the reporting capability map does not substitute for such proof. Interview questions and outstanding source dependencies are recorded in docs/copy-interview.md. No new owner answers have been received during this implementation pass.
+
+## Owner interview answers and dashboard source review
+Source: direct owner answers, 21 October 2026; publication permission for named MNEE/BSV engagements received in follow-up. See BRIEF.md for the full confirmation/qualification ledger. Public copy now uses operating since 2022, the two named people (without invented titles), approved client examples, 24/7 human monitoring, spot/perpetual scope, permission-restricted DEX operation, reporting detail and retainer/term structure. Systematic strategies explicitly pilot/coming soon. No published latency number, 3k minimum, gem valuation/certification, CMC ranking or undisclosed client name.
+
+Read-only review of the owner-specified DataIndexer/frontend/src corroborated:
+- components/ExchangeChart.tsx:376–410: actual-trade markers on candles.
+- components/hbot/HbotInstanceDetailView.tsx:41–106,458+,638,778: CSV exports, active order fields and fills.
+- components/liquidity/LiquidityDashboard.tsx:113–133: spread/depth history, basis-point controls and bid/ask/total modes.
+- pages/MarketMicrostructure.tsx:265–266: depth relative to mid and coverage limitations.
+- components/risk/OracleMarkChart.tsx:74,378: historical/live oracle marks.
+Source code does not independently establish production availability, direct feed provenance, client entitlements or JSON export scope. Those remain owner-confirmed capabilities. Depth reference and oracle views are kept distinct in copy rather than assuming all depth uses the oracle. No private source, configurations, live records or credentials copied.
+
+27 CEX marks copied from the owner's crypto SVG directory into public/images/venues. Owner confirms operational coverage, not exchange endorsements/partnerships. Exclude Uniswap/Aerodrome/Hyperliquid pending product/network scope, duplicate okx-x, and PNG-only LBank/Coinstore. Original logo files preserved. Brand marks identify venues, not clients. Remaining questions in docs/copy-interview.md.

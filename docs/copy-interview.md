@@ -39,3 +39,17 @@ Public legal identity/jurisdiction; names and biographies approved; contacts/cha
 - Results/experience: awaiting approved evidence. Measurement graphics illustrate definitions, not delivered results.
 
 Record each answer with its owner-confirmed status and public/private distinction in BRIEF.md and docs/content-inventory.md before publishing related copy.
+
+## First answers received
+Positioning, service priorities, operating history, names, broad coverage, CEX scope/monitoring, DEX range authority/automation/permissions, reporting capabilities and retainer/term model answered. Recorded in BRIEF.md and inventory. Owner approved publishing MNEE/BSV names. OTC/strategy interview deferred at owner's request; strategy status explicitly pilot.
+
+Focused outstanding follow-ups:
+1. Roles and biographies for Nicholas/Nahuel; emerald/ruby project names; exchange client naming; case dates/scope/results and evidence.
+2. Latency bound (3 or 5ms), measurement endpoints, percentile versus maximum, deployment/venue scope and contractual conditions.
+3. DEX protocol/network/version/product combinations. okx-x identified from file inspection as an alternate OKX mark, not another venue.
+4. Capital minimum currency and per-account/pair/venue/engagement unit; public threshold versus operating floor.
+5. Actual responses to inventory/loss/price limits; outage handling and escalation (not exchange fault allocation).
+6. DEX cost thresholds, hedging, compounding and multi-pool operation.
+7. First-call deliverable and whether assessment is free; detailed fee/exit terms.
+8. Real sanitized dashboard media; exact JSON dataset scope and reference-price methodology.
+9. Legal identity/jurisdiction, approved bios/contact specifics and final editorial choices remain unanswered from round 3.

@@ -1,5 +1,6 @@
 ---
 import VenueCoverage from '../components/VenueCoverage.astro';
+import Experience from '../components/Experience.astro';
 import Marketing from '../layouts/Marketing.astro';
 import MeasurementGraphic from '../components/MeasurementGraphic.astro';
 import ClientNeeds from '../components/ClientNeeds.astro';
@@ -22,7 +23,8 @@ const research=(await getCollection('research'))[0].data;
  <VenueCoverage/>
  <ClientNeeds/>
  <section class="home-scorecard editorial-section" aria-labelledby="scorecard-title"><div><p class="section-kicker">Measurement before promises</p><h2 id="scorecard-title">Judge the work<br/>by your market.</h2></div><div><p>For an order book, discuss spread, executable depth and quote availability. For a liquidity pool, consider active allocation, trading impact and the economics of the position.</p><p>Agree the measures, then compare observations with targets. Market conditions, capital and operating costs belong in the same review.</p><div class="inline-links"><a href="/market-making#measurement">CEX measurement framework</a><a href="/dex-liquidity-management#measurement">DEX measurement framework</a></div></div><MeasurementGraphic/></section>
- <ReviewNote title="Place verified evidence near the offer" items={['Add one permitted client case: problem, capital and market context, work performed, observed results and measurement period.','Add a concise team experience statement backed by named biographies. Do not substitute generated KPIs, testimonials or client logos.']}/>
+ <ReviewNote title="Place verified evidence near the offer" items={['Add one permitted client case: problem, capital and market context, work performed, observed results and measurement period.','Named engagements are owner-approved. Add measured case outcomes and approved biographies when available.']}/>
+ <Experience/>
  <Access/>
  <Reporting/>
  <ReviewNote title="Show the existing dashboard" items={['Provide a real, sanitised screenshot or recording annotated around market activity, target comparison and exceptions.','Confirm history, refresh frequency, export scope and CEX/DEX coverage. The dashboard is already operational; only its public evidence is missing.']}/>

@@ -15,3 +15,6 @@
 
 ### Stock certificate
 `src/scripts/models/stock.ts` and the stock SVG in `AssetMarket.astro` contain original procedural artwork: engraved borders, rosettes, architectural vignette, paper fibres, curved sheet geometry and specimen foil seal. Canvas lettering uses system Georgia/sans-serif; no font or artwork is downloaded. The paper is an illustrative design study without an issuer identity, completed signature or certification claim.
+
+### Venue identification marks
+27 SVGs in public/images/venues copied from the owner-supplied DataIndexer/frontend/src/assets/venues/crypto directory following explicit coverage/public-site instructions. Original third-party brand artwork, used to identify supported venues, not original Onchain Bureau art or endorsements. No ownership or blanket licence asserted. Source provenance is owner-supplied; retain appropriate trademark usage. Blockfinex SVG contains an embedded PNG. Total files approximately 89 KB; lazy-loaded via img, no executable SVG embedding. PNG-only and DEX assets omitted pending scope confirmation. This supersedes the earlier statement that no third-party logos are used.
