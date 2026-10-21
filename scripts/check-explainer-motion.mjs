@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {initExplainerMotion} from '../src/scripts/explainer-motion.ts';
+let observe;
+globalThis.IntersectionObserver=class{constructor(callback){observe=callback;}observe(){}};
+const reduced=Object.assign(new EventTarget(),{matches:false});
+globalThis.matchMedia=()=>reduced;
+globalThis.document=Object.assign(new EventTarget(),{hidden:false});
+globalThis.window=new EventTarget();
+const attributes=new Map();
+const button=Object.assign(new EventTarget(),{hidden:true,textContent:'',setAttribute:(key,value)=>attributes.set(key,value)});
+const root={running:false,querySelector:()=>button,toggleAttribute(name,value){assert.equal(name,'data-running');this.running=value;}};
+initExplainerMotion(root);assert(!root.running);
+observe([{isIntersecting:true}]);assert(root.running);
+button.dispatchEvent(new Event('click'));assert(!root.running);assert.equal(attributes.get('aria-pressed'),'true');
+observe([{isIntersecting:false}]);observe([{isIntersecting:true}]);assert(!root.running,'Explicit pause must survive viewport changes');
+reduced.matches=true;reduced.dispatchEvent(new Event('change'));assert(button.hidden);assert(!root.running);
+reduced.matches=false;reduced.dispatchEvent(new Event('change'));assert(!button.hidden);assert(!root.running,'Preference changes must not clear user pause');
+button.dispatchEvent(new Event('click'));assert(root.running);
+document.hidden=true;document.dispatchEvent(new Event('visibilitychange'));assert(!root.running);
+document.hidden=false;document.dispatchEvent(new Event('visibilitychange'));assert(root.running);
+window.dispatchEvent(new Event('pagehide'));assert(!root.running);window.dispatchEvent(new Event('pageshow'));assert(root.running);
+// Check integration: both controllers, all six selected views and unique SVG resources.
+const html=readFileSync('dist/index.html','utf8');
+assert(html.includes('data-access-motion')&&html.includes('data-measurement-motion'));
+for(const metric of ['spread','depth','availability','allocation','impact','economics'])assert(html.includes(`data-metric="${metric}"`));
+const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);assert.equal(ids.length,new Set(ids).size,'No duplicate document/SVG identifiers');
+console.log('Explainer checks passed: persistent pause, offscreen/hidden suspension, reduced motion, lifecycle and six-view integration. Browser visual QA remains separate.');

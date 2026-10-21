@@ -1,0 +1,95 @@
+---
+interface Props {kind:string;id:string}
+const {kind,id}=Astro.props;
+const depthHeights=[105,88,120,74,95,66,44,32,26,39,56,79,62,110,92,122];
+---
+<div class:list={['metric-scene',`scene-${kind}`]}>
+ <svg viewBox="0 0 560 340" aria-hidden="true" focusable="false">
+  <defs>
+   <pattern id={`${id}-grid`} width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#cbd4c3" stroke-width=".5"/></pattern>
+   <clipPath id={`${id}-plot`}><rect x="52" y="60" width="456" height="204"/></clipPath>
+   <clipPath id={`${id}-window`}><rect x="52" y="66" width="456" height="196"/></clipPath>
+  </defs>
+  <rect x="28" y="38" width="504" height="252" fill={`url(#${id}-grid)`}/>
+  {kind==='spread'&&<>
+   <text class="axis-label" x="44" y="30">Available buy orders</text><text class="axis-label" x="516" y="30" text-anchor="end">Available sell orders</text>
+   <path class="axis" d="M44 264H516"/><path class="reference" d="M280 58V286"/>
+   <rect class="spread-wash motion" x="253" y="72" width="54" height="192"/>
+   <g class="spread-bids motion">
+    {[180,153,129,96,68,35].map((height,i)=><rect class="bid" x={54+i*34} y={264-height} width="29" height={height}/>)}
+    <path class="bid-edge" d="M54 84H83V111H117V135H151V168H185V196H219V229H253"/>
+    <circle class="point" cx="253" cy="229" r="5"/><path class="reference" d="M253 229V288"/>
+    <text x="253" y="307" text-anchor="end">Best bid</text>
+   </g>
+   <g class="spread-asks motion">
+    {[35,68,96,129,153,180].map((height,i)=><rect class="ask" x={307+i*34} y={264-height} width="29" height={height}/>)}
+    <path class="ask-edge" d="M307 229H336V196H370V168H404V135H438V111H472V84H506"/>
+    <circle class="point light" cx="307" cy="229" r="5"/><path class="reference" d="M307 229V288"/>
+    <text x="307" y="307">Best ask</text>
+   </g>
+   <g class="spread-bracket motion"><path class="ink" d="M253 91V80H307V91"/></g>
+   <text class="annotation" x="280" y="65" text-anchor="middle">Spread</text>
+   <text class="axis-label" x="280" y="332" text-anchor="middle">Price</text>
+  </>}
+  {kind==='depth'&&<>
+   <text class="axis-label" x="44" y="30">Available size</text><text class="axis-label" x="516" y="30" text-anchor="end">Both sides of the market</text>
+   <rect class="depth-band motion" x="187" y="60" width="186" height="204"/>
+   <path class="axis" d="M44 264H516"/><path class="reference" d="M280 46V284"/>
+   {depthHeights.map((height,i)=><g transform={`translate(${48+i*29} 264)`}><rect class:list={[i<8?'bid':'ask','depth-column','motion']} width="21" height={height} y={-height} style={`--delay:${-i*.24}s;--shrink:${.76+(i%4)*.04}`}/></g>)}
+   <g class="depth-bounds motion"><path class="ink" d="M187 276V286H373V276"/><path class="reference" d="M187 62V258M373 62V258"/></g>
+   <text class="annotation" x="280" y="309" text-anchor="middle">Depth within a defined price band</text>
+   <text class="axis-label" x="54" y="290">Bids</text><text class="axis-label" x="506" y="290" text-anchor="end">Asks</text>
+  </>}
+  {kind==='availability'&&<>
+   <text class="axis-label" x="52" y="30">Quotes across an observation window</text>
+   <text class="annotation" x="52" y="89">Bid available</text><text class="annotation" x="52" y="187">Ask available</text>
+   <g clip-path={`url(#${id}-window)`}>
+    {[...Array(23)].map((_,i)=><>
+     <rect class="timeline-base" x={52+i*21} y="106" width="15" height="32"/>
+     <rect class="timeline-base" x={52+i*21} y="204" width="15" height="32"/>
+     {![7,8,17].includes(i)&&<rect class="bid" x={52+i*21} y="106" width="15" height="32"/>}
+     {![8,9,17].includes(i)&&<rect class="ask" x={52+i*21} y="204" width="15" height="32"/>}
+    </>)}
+    <g class="availability-scan motion"><rect class="scanner-wash" x="-28" y="66" width="28" height="196"/><path class="ink" d="M0 66V262"/><circle class="point" cy="149" r="4"/></g>
+   </g>
+   <path class="axis" d="M52 264H508"/><path class="reference" d="M220 107V239"/>
+   <path class="ink" d="M199 274V286H262V274"/><text class="annotation" x="230" y="310" text-anchor="middle">Review interruptions</text>
+   <text class="axis-label" x="508" y="286" text-anchor="end">Time</text>
+  </>}
+  {kind==='allocation'&&<>
+   <text class="axis-label" x="44" y="30">Liquidity distributed across ranges</text>
+   {[{x:80,w:185,y:88},{x:175,w:226,y:144},{x:308,w:170,y:200}].map((range,i)=><g>
+    <rect class="range-base" x={range.x} y={range.y} width={range.w} height="30" rx="3"/>
+    <path class="range-end" d={`M${range.x} ${range.y-5}v40M${range.x+range.w} ${range.y-5}v40`}/>
+    <rect class:list={['range-highlight','motion',`range-${i}`]} x={range.x} y={range.y} width={range.w} height="30" rx="3"/>
+    <text class="range-label" x={range.x+12} y={range.y+20}>Range {i+1}</text>
+   </g>)}
+   <path class="axis" d="M44 264H516"/>
+   <g class="market-price motion"><rect class="price-wash" x="-14" y="64" width="28" height="190"/><path class="ink" d="M0 64V283"/><circle class="point" cy="64" r="5"/><text class="annotation" x="0" y="309" text-anchor="middle">Market price</text></g>
+   <text class="axis-label" x="44" y="286">Lower price</text><text class="axis-label" x="516" y="286" text-anchor="end">Higher price</text>
+  </>}
+  {kind==='impact'&&<>
+   <text class="axis-label" x="44" y="30">Impact on execution</text>
+   <path class="axis" d="M52 60V264H508"/>
+   <path class="curve-area" d="M66 248C210 247 340 205 492 72V264H66Z"/>
+   <path class="curve-line" d="M66 248C210 247 340 205 492 72"/>
+   <g clip-path={`url(#${id}-plot)`}><g class="impact-probe motion"><path class="projection" d="M0 0V264M0 0H-500"/><circle class="probe-halo" r="11"/><circle class="point" r="5"/></g></g>
+   <text class="annotation" x="280" y="310" text-anchor="middle">Larger trades travel further along the curve</text><text class="axis-label" x="508" y="285" text-anchor="end">Trade size</text>
+  </>}
+  {kind==='economics'&&<>
+   <text class="axis-label" x="44" y="30">Read the components together</text>
+   <path class="axis" d="M44 174H516"/><text class="axis-label" x="44" y="164">Reference</text>
+   <g transform="translate(122 174)"><rect class="bid economics-fees motion" x="-30" y="-90" width="60" height="90"/><path class="ink" d="M-10 -112H10M0 -122V-102"/></g>
+   <g transform="translate(280 174)"><rect class="ask economics-costs motion" x="-30" width="60" height="46"/><path class="ink" d="M-10 -24H10"/></g>
+   <g transform="translate(438 174)"><rect class="inventory-wash" x="-30" y="-91" width="60" height="159"/><path class="reference" d="M0 -91V68"/><g class="inventory-mark motion"><path class="ink" d="M-27 0H27"/><circle class="point" r="5"/></g></g>
+   <text class="annotation" x="122" y="286" text-anchor="middle">Fees earned</text><text class="annotation" x="280" y="286" text-anchor="middle">Operating costs</text><text class="annotation" x="438" y="286" text-anchor="middle">Inventory value</text>
+   <text class="axis-label" x="280" y="315" text-anchor="middle">Fee income alone is not the return</text>
+  </>}
+ </svg>
+</div>
+<style>
+.metric-scene{background:#e9ede2;min-width:0;overflow:hidden}.metric-scene svg{display:block;width:100%;height:auto}.metric-scene text{font-family:inherit;font-size:12px;fill:#243f35}.metric-scene .axis-label{font-size:10px;fill:#526457}.metric-scene .annotation{font-size:12px}.axis{fill:none;stroke:#a5b39d;stroke-width:1}.reference{fill:none;stroke:#85967b;stroke-width:1;stroke-dasharray:3 5}.ink{fill:none;stroke:#243f35;stroke-width:1.5}.bid{fill:#365a48}.ask{fill:#8fa276}.bid-edge{fill:none;stroke:#243f35;stroke-width:1.5}.ask-edge{fill:none;stroke:#697f53;stroke-width:1.5}.point{fill:#243f35;stroke:#f6f7f2;stroke-width:2}.point.light{fill:#8fa276}.spread-wash,.depth-band{fill:#dce9a9;opacity:.7}.motion{animation-play-state:paused!important;transform-box:view-box}:global([data-explainer-motion][data-running]) .motion{animation-play-state:running!important}.spread-bids{animation:bid-shift 4.8s ease-in-out infinite}.spread-asks{animation:ask-shift 4.8s ease-in-out infinite}.spread-bracket,.spread-wash{transform-origin:280px 0;animation:spread-width 4.8s ease-in-out infinite}.depth-column{transform-origin:0 0;animation:depth-pulse 3.4s ease-in-out infinite;animation-delay:var(--delay)}.depth-band,.depth-bounds{transform-origin:280px 0;animation:band-width 7s ease-in-out infinite}.timeline-base{fill:#d4dccd}.scanner-wash{fill:#dce9a9;opacity:.65}.availability-scan{transform:translateX(52px);animation:scan 8s linear infinite}.range-base{fill:#d4dccd}.range-end{fill:none;stroke:#a1b18f;stroke-width:1}.range-highlight{fill:#aac178;opacity:0}.range-0{opacity:1;animation:range-left 8s linear infinite}.range-1{opacity:1}.range-2{animation:range-right 8s linear infinite}.metric-scene .range-label{font-size:10px;fill:#243f35}.price-wash{fill:#dce9a9;opacity:.45}.market-price{transform:translateX(210px);animation:price-traverse 8s linear infinite}.curve-area{fill:#d5e0c4}.curve-line{fill:none;stroke:#365a48;stroke-width:2.5}.impact-probe{transform:translate(214px,231px);animation:probe-traverse 8s linear infinite}.projection{stroke:#7e946a;stroke-width:1;stroke-dasharray:3 5;fill:none}.probe-halo{fill:#dce9a9;opacity:.85}.economics-fees{transform-origin:0 0;animation:fees 6s ease-in-out infinite}.economics-costs{transform-origin:0 0;animation:costs 6s ease-in-out infinite}.inventory-wash{fill:#d5decb}.inventory-mark{animation:inventory 6s ease-in-out infinite}
+@keyframes bid-shift{0%,100%{transform:translateX(-9px)}50%{transform:translateX(0)}}@keyframes ask-shift{0%,100%{transform:translateX(9px)}50%{transform:translateX(0)}}@keyframes spread-width{0%,100%{transform:scaleX(1.3333)}50%{transform:scaleX(1)}}@keyframes depth-pulse{0%,100%{transform:scaleY(1)}50%{transform:scaleY(var(--shrink))}}@keyframes band-width{0%,20%,100%{transform:scaleX(.72)}50%,70%{transform:scaleX(1.7)}}@keyframes scan{from{transform:translateX(52px)}to{transform:translateX(508px)}}@keyframes price-traverse{0%,100%{transform:translateX(210px)}50%{transform:translateX(350px)}}@keyframes range-left{0%,19.6%,80.4%,100%{opacity:1}20%,80%{opacity:0}}@keyframes range-right{0%,34.9%,65.1%,100%{opacity:0}35%,65%{opacity:1}}@keyframes probe-traverse{0.0000%,100.0000%{transform:translate(117.297px,245.782px)}4.1667%,95.8333%{transform:translate(144.010px,243.008px)}8.3333%,91.6667%{transform:translate(170.545px,239.026px)}12.5000%,87.5000%{transform:translate(196.956px,233.760px)}16.6667%,83.3333%{transform:translate(223.299px,227.135px)}20.8333%,79.1667%{transform:translate(249.629px,219.074px)}25.0000%,75.0000%{transform:translate(276.000px,209.500px)}29.1667%,70.8333%{transform:translate(302.467px,198.338px)}33.3333%,66.6667%{transform:translate(329.086px,185.512px)}37.5000%,62.5000%{transform:translate(355.910px,170.944px)}41.6667%,58.3333%{transform:translate(382.995px,154.560px)}45.8333%,54.1667%{transform:translate(410.396px,136.282px)}50.0000%{transform:translate(438.168px,116.035px)}}@keyframes fees{0%,100%{transform:scaleY(.78)}50%{transform:scaleY(1)}}@keyframes costs{0%,100%{transform:scaleY(.8)}50%{transform:scaleY(1.15)}}@keyframes inventory{0%,100%{transform:translateY(-28px)}40%{transform:translateY(35px)}70%{transform:translateY(-58px)}}
+@media(max-width:600px){.metric-scene text,.metric-scene .annotation{font-size:16px}.metric-scene .axis-label{font-size:14px}.metric-scene .range-label{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.motion{animation:none!important}}
+</style>

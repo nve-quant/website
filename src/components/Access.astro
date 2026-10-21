@@ -1,5 +1,5 @@
 ---
-import {accessPathways} from '../data/access-pathways';
+import PermissionDiagram from './PermissionDiagram.astro';
 ---
 <section class="access-section editorial-section" aria-labelledby="access-title">
   <div class="editorial-intro">
@@ -10,77 +10,12 @@ import {accessPathways} from '../data/access-pathways';
     <p>You retain control of your assets. We agree the access needed to operate, with the setup adapted to your requirements.</p>
     <p class="access-boundary-note">For DEX management, our roles are restricted to the specified pool and pair, without withdrawal or send authority. We agree ranges, balances and operating limits with you before operation.</p>
   </div>
-  <figure class="permission-map">
-    <div class="permission-headings" aria-hidden="true">
-      <span>Your team</span><span>Agreed access</span><span>Onchain Bureau</span>
-    </div>
-    <div class="permission-pathways">
-      {accessPathways.map(path => <article class="permission-pathway" aria-label={path.name}>
-        <div class="permission-account">
-          <span class="permission-owner">Your team</span>
-          <svg class="account-symbol" viewBox="0 0 42 42" aria-hidden="true"><rect x="5" y="8" width="32" height="28" rx="2"/><path d="M5 17h32M13 8V5h16v3M14 24h14M14 29h9"/></svg>
-          <h3>{path.account}</h3>
-          <p>{path.accountDetail}</p>
-        </div>
-        <div class="permission-connection">
-          <span class="permission-owner">Agreed access</span>
-          <div class="permission-bridge" aria-hidden="true"><span></span><svg viewBox="0 0 28 28"><path d="M9 12V8a5 5 0 0 1 10 0v4"/><rect x="6" y="12" width="16" height="12" rx="2"/><path d="M14 16v4"/></svg><span></span></div>
-          <h3>{path.permission}</h3>
-          <p>{path.permissionDetail}</p>
-        </div>
-        <div class="permission-operation">
-          <span class="permission-owner">Onchain Bureau</span>
-          <svg class="operation-symbol" viewBox="0 0 42 42" aria-hidden="true"><path d="M5 10h32M5 21h32M5 32h32"/><rect x="11" y="6" width="5" height="8"/><rect x="25" y="17" width="5" height="8"/><rect x="17" y="28" width="5" height="8"/></svg>
-          <h3>{path.operation}</h3>
-          <p>{path.operationDetail}</p>
-          <a href={path.href}>{path.link}</a>
-        </div>
-      </article>)}
-    </div>
-    <figcaption>Access schematic. Exact permissions and operating procedures are engagement-specific.</figcaption>
-  </figure>
+  <div class="permission-map"><PermissionDiagram /></div>
 </section>
 <style>
   .access-section { row-gap: 32px; }
   .access-explanation { padding-top: 28px; }
   .access-boundary-note { color: var(--muted); }
-  .permission-map { grid-column: 1 / -1; margin: 0; }
-  .permission-headings, .permission-pathway { display: grid; grid-template-columns: 1fr .9fr 1fr; gap: clamp(16px, 3vw, 48px); }
-  .permission-headings { padding: 0 clamp(20px, 3vw, 40px) 14px; color: var(--muted); font-size: .8rem; }
-  .permission-headings span:nth-child(2) { text-align: center; }
-  .permission-pathways { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .permission-pathway { padding: 28px clamp(20px, 3vw, 40px); background: #edf0e6; }
-  .permission-pathway + .permission-pathway { border-top: 1px solid var(--line); }
-  .permission-pathway > div { min-width: 0; }
-  .permission-pathway h3 { font-size: clamp(1rem, 1.5vw, 1.25rem); letter-spacing: -.025em; line-height: 1.35; margin: 12px 0 8px; }
-  .permission-pathway p { font-size: .8rem; line-height: 1.5; color: var(--muted); margin: 0; }
-  .permission-pathway a { display: inline-block; margin-top: 16px; font-size: .78rem; text-underline-offset: 4px; }
-  .permission-pathway svg { fill: none; stroke: currentColor; stroke-width: 1.4; }
-  .account-symbol, .operation-symbol { width: 42px; height: 42px; }
-  .operation-symbol rect { fill: #edf0e6; }
-  .permission-connection { text-align: center; }
-  .permission-bridge { height: 42px; display: flex; align-items: center; gap: 10px; }
-  .permission-bridge span { flex: 1; height: 1px; background: #7e9180; position: relative; }
-  .permission-bridge span:first-child::before, .permission-bridge span:last-child::after { content: ''; width: 5px; height: 5px; background: var(--ink); border-radius: 50%; position: absolute; top: -2px; }
-  .permission-bridge span:first-child::before { left: 0; }
-  .permission-bridge span:last-child::after { right: 0; }
-  .permission-bridge svg { width: 28px; height: 28px; flex: 0 0 auto; }
-  .permission-owner { display: none; }
-  .permission-map figcaption { margin-top: 14px; font-size: .75rem; color: var(--muted); line-height: 1.5; }
-  @media (max-width: 600px) {
-    .access-explanation { padding-top: 0; }
-    .permission-headings { display: none; }
-    .permission-pathway { grid-template-columns: 1fr; gap: 0; padding: 24px; }
-    .permission-owner { display: block; color: var(--muted); font-size: .72rem; margin-bottom: 12px; }
-    .permission-account, .permission-operation { padding-left: 26px; }
-    .permission-connection { text-align: left; border-left: 1px solid #7e9180; margin: 18px 0 18px 8px; padding: 14px 0 14px 17px; position: relative; }
-    .permission-connection::before, .permission-connection::after { content: ''; position: absolute; left: -3px; width: 5px; height: 5px; border-radius: 50%; background: var(--ink); }
-    .permission-connection::before { top: 0; }
-    .permission-connection::after { bottom: 0; }
-    .permission-bridge { position: absolute; left: -15px; top: 50%; transform: translateY(-50%); height: 34px; background: #edf0e6; }
-    .permission-bridge span { display: none; }
-    .permission-connection h3 { margin-top: 0; }
-    .permission-account, .permission-operation { position: relative; }
-    .account-symbol, .operation-symbol { position: absolute; width: 26px; height: 26px; left: -5px; top: 22px; }
-  }
+  .permission-map { grid-column: 1 / -1; min-width: 0; }
+  @media (max-width: 600px) { .access-explanation { padding-top: 0; } }
 </style>

@@ -191,3 +191,6 @@ Website bios intentionally use owner-confirmed roles and public profile links. P
 
 ### Coverage removal requested by owner
 Removed BitMart, CoinEx and AscendEX from the public coverage list and removed their unused logo files. CEX display now contains 24 venues. This records a display/coverage decision; no independent statement about venue closure is published.
+
+### Dynamic measurement and permissions diagrams
+New diagrams use the existing measurement definitions and owner-confirmed access rules only. All values are unnumbered schematic geometry; no client records, performance results, trading latency timing, product screenshots or return projections introduced. Moving packets depict operating instructions, not transfers. Market-price crossing highlights the appropriate schematic ranges. Quote-history gaps are explanatory examples, not evidence of actual interruptions. Scenario switches change the explanation, not a live data feed.

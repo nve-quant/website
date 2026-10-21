@@ -274,3 +274,10 @@ Updated named engagement examples, short founder profiles with LinkedIn links, v
 ### Venue hover and DEX logo display
 Fixed ineffective image:hover target (images are pointer-events:none), replacing with entry:hover. Removed inert from decorative clone entries so their hover works; aria-hidden retains single accessible list. Replaced DEX table with two responsive ecosystem groups and eight local marks. PNGs visually inspected; SVGs scanned for active/external content. Aerodrome uses a 3.2KB vector rather than supplied 482KB artwork.
 Type check: 73 files, zero diagnostics. Static build and all local link/asset/isolation checks pass; carousel lifecycle/drag/motion checks pass. Browser layout/hover verification still outstanding.
+
+### Permissions and measurement visual rebuild
+Replaced static access glyphs with CEX/DEX instruction/permission/account diagrams; replaced six small metric thumbnails with six selectable large animated scenes. Mobile uses vertical access flow and top metric selection. Corrected new CEX permissions text to retain disabled transfers; clarified DEX miniature with individual ranges rather than overlapping pool/managed silhouettes. Clipped impact projections to the chart and increased mobile SVG label sizes.
+
+`npm run check` passes (77 files, zero diagnostics); static build links/assets/anchors/noindex/isolation pass. New explainer-motion checks verify persistent pause, viewport/hidden suspension, reduced-motion changes, page lifecycle, six-view integration and unique SVG IDs. Existing liquidity animation checks retained. New diagrams use CSS animation with lifecycle-gating JS only; no dependencies or RAF loop added. Existing Three.js bundle warning unchanged.
+
+CUA again returned no enabled apps/browsers and native pipe startup failure. No browser screenshots or observed layout/keyboard checks were possible. 375/768/1440 visual verification remains outstanding, and this pass does not claim browser approval.
