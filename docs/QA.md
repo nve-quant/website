@@ -203,3 +203,185 @@ Type check and static build pass. Observed a complete connected sheaf silhouette
 
 ## GitHub and remote preview — 20 October 2026
 Owner authorized pushing to nve-quant/website (public) and preparing a separate Vercel preview. Added a GitHub Actions clean-install/check/controller/build workflow, explicit static Vercel settings, noindex response header and cloud handoff guide. All local checks passed; the first GitHub Actions run completed successfully from npm ci. Vercel clean installation/type checking/build succeeded using the current official CLI; the installed older CLI was incompatible with its upload endpoint. Git integration connected to the new project. Hosted homepage returned HTTP 200 through authenticated Vercel CLI access, with expected title, new asset categories and noindex metadata/header. Existing live domain and dashboard project were not modified. Cloud environment creation remains an account-side next step; no claim that this local conversation was migrated.
+
+## Asset taxonomy and detail pass — 21 October 2026
+- Eight categories and twenty-five specimens. Six additions: nickel, natural gas, coffee, cotton, Treasury bill and corporate bond. Specimen-specific explanatory notes and original SVG companions included. Category visibility CSS is generated from typed data; the selector uses four desktop columns and two mobile columns.
+- `npm run check`: 59 files, zero errors/warnings/hints. `npm run build`: five pages with static link, asset, anchor, h1, noindex and development-route isolation checks passing. The existing deferred Three.js chunk advisory remains. No new packages or downloaded model/texture files.
+- Extended asset-controller checks pass all category forward/backward cycles, remembered selections, captions and note visibility, lazy initialization, reduced-motion/mobile behavior and lifecycle. New `check-asset-models.mjs` executes all real factories with stubbed canvas calls, asserting finite geometry/instance transforms, floor/framing bounds and per-model budgets (<200k triangles, <90 mesh calls, <32 MiB estimated RGBA+mipmap textures). This is not WebGL or texture-appearance validation.
+- Geometry counts before shadow passes: wheat 120,000; corn 103,432; soy 14,976; residential 33,048; office 38,772; warehouse 19,244; oil 59,040. Mesh calls respectively 23, 8, 27, 7, 5, 7, 38. Oil's 2K colour map plus relief uses an estimated 22.67 MiB with RGBA mipmaps; other changed models are lower. Three-model eviction, one active model, 30 fps rotation and offscreen pause remain. Canvas capped at DPR 2 / 2.4 MP; shadow map 2048². No measured FPS claim.
+- Code review fixed a potentially mirrored barrel UV mapping and brought soy pods/seeds and the corn stalk to the receiving floor. Financial paper studies retain specimen labels and no real issuer/official seal.
+- **Browser QA pending:** native browser access failed with `Sky Computer Use native pipe startup failed`. Resetting the session and requesting available surfaces returned no apps or browsers with the same error. Could not capture fresh screenshots, verify 375/768/1440px rendering, inspect textures/shadows visually, or re-exercise drag/keyboard/focus in this session. Prior screenshots are not evidence for this update. `/review` and `/asset-review` remain ready for the next browser-capable task.
+- Publish as a review branch/preview pending visual review; do not merge automatically. Live domain unchanged.
+
+### Asset fallback regression — 22 October 2026
+Observed local HTTP failures: the scene module loaded, but Three.js and RoundedBoxGeometry optimized dependency URLs returned HTTP 504 `Outdated Optimize Dep`. The controller silently caught the resulting import failure and showed SVG illustrations. Original gold and gemstone model files are identical to main. Restarted the server with a fresh disposable Vite cache; recursive requests for all 15 scene modules then succeeded. Added explicit pre-optimization of the two dependencies and separate caches per Astro command to prevent build/check work sharing the running development cache.
+
+Removed the 701px rendering gate. Small screens now load the same procedural models lazily, within the existing pixel/cache/frame budgets. Reduced motion retains the detailed model with automatic rotation and entrance easing disabled, rather than replacing it with SVG artwork. Actual WebGL failures log the error and label the simplified illustration. Controller regression check now initializes at mobile width and verifies 3D retention under reduced motion. Browser UI connection failed (`Sky Computer Use native pipe startup failed`); visual appearance, mobile GPU performance and screenshots remain unverified. HTTP/module checks are not a rendered browser test. The observed cache failure is local; a corresponding hosted failure has not been established.
+
+### Market specificity and realism pass — 22 October 2026
+Checks: all 25 factories stay within the existing bounds and budgets. Added an assertion that textured mesh materials have UV coordinates, catching the missing corn-husk and soybean-shell mapping addressed here. Corn uses 151,816 triangles; buildings use 6–8 mesh draws and at most 4.33MiB estimated textures. Oil remains 22.67MiB; no global resolution or lighting increase. Controller tests pass after naming changes, including short bullion stamps independent of longer captions. Gold/gem files remain unchanged.
+
+Browser connection retried after resetting CUA: no apps/browsers available, `Sky Computer Use native pipe startup failed`. Cannot capture or certify 375/768/1440px screenshots, appearance, clipping, real WebGL materials or device frame rates. Local asset review and responsive harness remain available for the visual pass. This limitation is not replaced by source inspection or mocked canvas tests.
+
+### Multi-agent energy/agriculture/property review — 21 October 2026
+Three explicitly authorised agents handled crops, energy/soft commodities and property. Integration review additionally corrected drum/sack/loose-bean grounding and cotton fibre roots, which now use the same surface deformation and transforms as their lobes. Property agent ray-tested all 50 residential window openings. Protected gold, gem, metal, equity and fund source files were compared byte-for-byte against the starting commit; createNickel and the shared scene renderer also remain unchanged.
+
+Final checks pass: Astro check (59 files, zero errors/warnings), five-route static build and internal-link/isolation checks, asset controller checks, all25 model geometry/UV/resource checks, git diff whitespace check. Recursive local HTTP verification fetched all15 scene modules without errors. Resource examples: wheat126,240 triangles/25mesh draws; corn153,664/9; soy20,376/36; coffee129,720/3; cotton23,640/33; property max44,568 triangles/12draws/4.33MiB estimated textures; oil59,424/24/22.67MiB; gas9,760/31/2MiB. These remain under the existing caps; they are not measured browser FPS.
+
+Visible redundant caption and instructions removed; accessible description, keyboard operations and rotation state remain. Failure text appears only when the renderer fails. Oil texture no longer includes ILLUSTRATIVE SPECIMEN. Section-level context remains.
+
+Visual verification blocked: CUA native pipe startup failed, and explicit in-app-browser creation returned Browser is not available: iab. No 375/768/1440 screenshots or WebGL appearance/performance claims. All ten affected assets remain available in /asset-review locally for inspection; that route stays excluded from production. Photorealism still needs actual rendered visual judgement.
+
+### Corn, soybean, coffee and warehouse correction
+Owner reported lower corn husks intersecting the ear, unrealistic soy/coffee, and overlapping warehouse dock plates. Corn husk paths now clear the kernel envelope; matching centre veins no longer follow the obsolete inward path. Tapered cob replaces a capsule core that protruded through narrowing upper rows. Added clearance assertion for husk vertices above the first kernel row. Warehouse removes redundant full-width black backing and outer jamb plates, uses one U gasket with recessed shutter, lower independent bumpers and slim canopy supports; duplicate leveler plate removed.
+
+Soy rebuilt as a low split pod with separate concave thick valves, three exposed seeds and four grounded loose seeds. Coffee rebuilt as an asymmetric flattened fabric sack with folded cuff, supported irregular kernels and a level bulk substrate. Independent geometry review and the committed model regression verify118 transformed coffee-kernel bounds have no pairwise intersections and19 spilled kernels contact the floor. Conservative bounding-box support approximates packing; it is not a rigid-body simulation or proof of photographic appearance.
+
+All25 model checks remain within established budgets; mapped geometry has UVs. Protected models, other energy/agriculture specimens and residential/office definitions remain unchanged. Astro check/build/controller checks pass. Browser access remains blocked by native pipe startup failure; visual appearance and responsive screenshots cannot be certified in this session. Owner feedback, not prior unobserved visual checks, identified these defects.
+
+### Attachment/support regression follow-up
+Previous clearance and non-overlap checks did not establish attachment or actual surface contact. Owner correctly identified those gaps. Added explicit corn-root assertions inside stalk radius alongside existing upper-husk clearance. Coffee verification now raycasts actual transformed kernel vertices against the actual support mesh and requires contact within .001 model units, rather than accepting bounding-box support. All in-bag kernels pass, as do spilled-kernel floor checks and non-overlap. All16 loose soybeans independently contact floor y=-.035 by transformed vertex minimum. This replaces the rejected pod composition; soybean detail text now says dry oilseed.
+
+All25 geometry/UV/budget checks pass. Browser access was retried: native pipe startup failed with no available apps/browsers. No screenshots or rendered visual sign-off are claimed. The new checks specifically address attachment/support; they are not proof of photorealistic appearance.
+
+### Client-need DEX stacking fix
+Owner reported the bars in “A DEX position that needs attention” were not stacked. They were two baseline-sharing silhouettes. Fixed bin lower bars now anchor managed upper bars. Regression samples101 interpolation frames for nonnegative contributions, chart bounds, segment contact and constant managed total. Existing illustration pause/visibility/reduced-motion checks pass. Astro type check and static build pass. Browser-rendered animation remains unverified because browser access is unavailable in this session.
+
+## Commercial graphics and copy interview
+- Added permissions pathways, native CEX/DEX measurement selector, reporting capability map, client/operator handoff and OTC/strategy disclosure diagrams. Coverage component is data-gated pending confirmed public names.
+- `npm run check`: 68 files, zero diagnostics. `npm run build`: five routes; local links/assets/anchors, h1, noindex and development-route isolation pass. Existing large Three.js chunk warning remains; no dependency added.
+- Existing liquidity animation, need illustration and service navigation checks pass. No new animation loop introduced.
+- Reporting component was corrected during integration from dark text to #f6f7f2 / #d6dfd3 against #243f35 (calculated contrast 10.62:1 / 8.36:1).
+- CUA returned no apps/browsers and a native pipe startup error. Desktop/mobile screenshots and observed browser keyboard/overflow checks remain outstanding; responsive CSS is implemented but not visually verified.
+- Owner interview questions sent in three groups. Venue logos, actual DEX deployments, dashboard media and experience/results await evidence; no placeholders for those ship publicly.
+
+## Owner interview integration and CEX coverage
+- Added 27 owner-supplied venue SVGs (~89 KB total), named accessible rail entries and previous/next controls. Touch/keyboard scrolling remains native; smooth scrolling disabled under reduced motion. DEX deployment details remain pending.
+- Updated company history, approved MNEE/BSV examples, reporting, spot/perpetual operation, monitoring, DEX permissions and commercial copy. Systematic strategies marked pilot/coming soon.
+- Type checks: 70 files, no diagnostics. Static build and local asset/link/anchor/noindex isolation pass. Existing service-navigation, liquidity-animation and need-illustration checks pass. Existing Three.js bundle-size warning remains.
+- Original SVGs scanned for script/foreignObject/event handlers/external references before copying. Blockfinex embeds a raster PNG; retained as owner-provided art.
+- Browser screenshot/keyboard/overflow verification remains unavailable in this environment; do not treat implemented breakpoints as observed browser passes.
+
+### Confirmed DEX coverage
+Enabled eight-protocol EVM/Solana coverage matrix and updated both service FAQs. Type checks (70 files, no diagnostics), static build and link/asset/isolation checks pass. No new dependencies or animation changes. Browser layout verification remains outstanding. Numeric latency wording remains held for the precise percentile/threshold/timestamp definition.
+
+### Founders, entity and enquiry conversion
+Updated named engagement examples, short founder profiles with LinkedIn links, verified UK entity/number, client-only CEX transfers, per-asset/per-exchange starting capital, latency FAQ and free assessment/proposal CTA. Checks and static build pass with 70 files and five routes; existing bundle-size warning remains. New external links sourced from public LinkedIn results and Companies House. Browser visual validation remains outstanding.
+
+### CEX carousel automatic motion and direct drag
+71-file type check and static build pass. New check-venue-carousel.mjs validates 18px/s pacing, subpixel accumulation, modulo wrapping, hidden duplicate semantics, pointer drag, keyboard browsing, pause persistence, focus, reduced motion, visibility and page lifecycle with DOM mocks. These are logic tests, not observed browser rendering. Visual review/screenshots still outstanding. No arrows or visible scrollbar; subtle pause control retained.
+
+### Venue hover and DEX logo display
+Fixed ineffective image:hover target (images are pointer-events:none), replacing with entry:hover. Removed inert from decorative clone entries so their hover works; aria-hidden retains single accessible list. Replaced DEX table with two responsive ecosystem groups and eight local marks. PNGs visually inspected; SVGs scanned for active/external content. Aerodrome uses a 3.2KB vector rather than supplied 482KB artwork.
+Type check: 73 files, zero diagnostics. Static build and all local link/asset/isolation checks pass; carousel lifecycle/drag/motion checks pass. Browser layout/hover verification still outstanding.
+
+### Permissions and measurement visual rebuild
+Replaced static access glyphs with CEX/DEX instruction/permission/account diagrams; replaced six small metric thumbnails with six selectable large animated scenes. Mobile uses vertical access flow and top metric selection. Corrected new CEX permissions text to retain disabled transfers; clarified DEX miniature with individual ranges rather than overlapping pool/managed silhouettes. Clipped impact projections to the chart and increased mobile SVG label sizes.
+
+`npm run check` passes (77 files, zero diagnostics); static build links/assets/anchors/noindex/isolation pass. New explainer-motion checks verify persistent pause, viewport/hidden suspension, reduced-motion changes, page lifecycle, six-view integration and unique SVG IDs. Existing liquidity animation checks retained. New diagrams use CSS animation with lifecycle-gating JS only; no dependencies or RAF loop added. Existing Three.js bundle warning unchanged.
+
+CUA again returned no enabled apps/browsers and native pipe startup failure. No browser screenshots or observed layout/keyboard checks were possible. 375/768/1440 visual verification remains outstanding, and this pass does not claim browser approval.
+
+### Named Solana pools and trading venues
+- Shared coverage directory now appears on Home and DEX service, with ten Solana venues and specific pool/market families. Trading coverage follows explicit owner confirmation; routing aggregators and infrastructure interfaces are excluded. EVM protocol scope unchanged.
+- `npm run check`: 77 files, no errors, warnings or hints. `npm run build`: five static pages; local links/assets, anchors, heading/noindex and development-route isolation checks pass. Existing Three.js chunk-size advisory remains; no additional JavaScript or dependency introduced.
+- Existing venue-carousel and service-navigation checks pass. Browser testing used isolated headless Google Chrome through the already installed Playwright package, with no project dependency change.
+- Observed Home and DEX service at 375, 768 and 1440 CSS pixels: document width equals viewport width in all six cases, all venue images decode, no browser errors on final build, fonts loaded, all ten Solana names visible. Reviewed complete coverage captures including lower proprietary-AMM entries and the scope note. Narrow phones use one column for the detailed Solana entries; tablet uses two; desktop uses three.
+- Observed Moonit logo changing from grayscale(1) to grayscale(0) on hover; reduced-motion checks return a 0s transition. Keyboard focus on the service link is a visible 3px outline. Enter follows the DEX detail link and opens the new launch/trading FAQ. No new motion or interactive controls.
+- First pass found the existing `/favicon.ico` 404. Added a local SVG favicon and verified no resource or console errors on the final static preview. A running Astro dev server retained older component markup; restarted it with `npm run dev -- --force` and served the fresh build separately on localhost:4322 for final verification. The dev server remains on localhost:4321.
+- Screenshots: `solana-coverage-{home,dex}-{375,768,1440}.png` show the complete directory, with matching `solana-context-*` viewport captures. The mobile capture uses a taller viewport to fit the whole directory; width remains exactly 375px. An initial oversized element capture showed a fixed skip-link capture artifact; final captures fit inside their viewport and normal viewport review confirmed the skip link remains offscreen until focused.
+- Subtraction pass: removed the generic all-pool-types label and the initial promotional tagline; rejected generic unknown-project logo placeholders. Five new local identification images total 121,665 bytes, loaded lazily. No fabricated operating metrics, pool addresses, current balances or partner claims.
+
+## DEX market categories and EVM deployment scope — 21 October 2026
+
+Changes reviewed on / and /dex-liquidity-management. Raydium LaunchLab, Meteora DBC, Pump.fun and Moonit now sit under Launchpads & bonding curves; Raydium/Meteora LP products, Orca and PumpSwap remain under Liquidity pools. Phoenix spot and proprietary AMMs have their own execution group. Robinhood Uniswap v4 and the initial proposed Pools.trade launchpad entry are visibly Coming soon, outside current coverage.
+
+Validation:
+- npm run check: 78 files, no errors, warnings or hints.
+- npm run build: all five static pages; internal links, local assets, anchors, one h1 and noindex checks passed; development-only routes excluded. Existing Three.js chunk-size warning persists, unrelated to this static directory change.
+- Venue-carousel and services-navigation harnesses passed.
+- Headless Chrome review of both pages at 375×812, 768×1000 and 1440×1000. Scrolled through every coverage entry and the lower footnote. No horizontal overflow, broken/undecodable images, page errors, console errors or HTTP failures.
+- Confirmed 16 current entries and two upcoming entries on each page. All four Solana LP products, four launch products and four other trading venues are in the correct groups. Robinhood is absent from the current six-chain heading and present in the coming-soon inset only.
+- Full-section screenshots captured with extended viewport height after checking the normal viewport; restored normal height for lower-section checks. All six screenshots inspected visually.
+- Normal-motion Moonit hover changed grayscale(1) to grayscale(0). Reduced-motion logo transition is 0s.
+- Keyboard-focused DEX detail link has a visible 3px outline; Enter navigates correctly. The new Robinhood FAQ opens with Enter.
+- Calculated text contrast: muted on ground 5.88:1, primary on ground 10.62:1, coming-soon badge 8.86:1.
+- Official Pools.trade SVG parses, contains no script/foreignObject/event attributes or external resource references, and adds 2.6 KB with no runtime request or JavaScript.
+
+Observed problems addressed: the former brand-level rows mixed LP products and launch curves; those now have separate named sections. Generic EVM labels omitted chain/version scope; Uniswap, Aerodrome and Velodrome now show their specific mappings. PancakeSwap remains owner-confirmed with unspecified chain/version details because this repository does not corroborate them. Mobile uses single-column venue rows to keep product names readable.
+
+Screenshots:
+- [Homepage, 375px](screenshots/dex-market-types-home-375.png)
+- [Homepage, 768px](screenshots/dex-market-types-home-768.png)
+- [Homepage, 1440px](screenshots/dex-market-types-home-1440.png)
+- [DEX service, 375px](screenshots/dex-market-types-dex-375.png)
+- [DEX service, 768px](screenshots/dex-market-types-dex-768.png)
+- [DEX service, 1440px](screenshots/dex-market-types-dex-1440.png)
+
+Scope limit: the source audit establishes connector and deployment configuration, not successful production execution on every chain. No trading bot was run. Pools.trade is an initial proposed launchpad name pending optional owner clarification; it is not claimed as an implemented integration.
+
+## Robinhood availability correction — 21 October 2026
+
+Supersedes the prior screenshot/state that marked Uniswap on Robinhood as coming soon. Owner confirms it is already covered.
+
+- Type/content checks: 78 files, no errors/warnings/hints. Static build and all five-route isolation/link/asset/heading/noindex checks pass.
+- Browser: homepage and DEX page at 375×812, 768×1000 and 1440×1000; every coverage row and the lower footnote visited. No overflow, broken images, console/page errors or HTTP errors.
+- Current Uniswap entry explicitly maps v3/v4 to the original six chains and v4 to Robinhood Chain. Exactly one current Uniswap entry; no Uniswap item among upcoming entries. EVM chain heading now includes Robinhood.
+- Upcoming entries are GIGA DEX, Pools.trade and Pons only. Pool/launch labels remain distinct. Copy explicitly says Uniswap v4 is already supported.
+- Normal-motion colour hover works; reduced-motion duration remains 0s. DEX link has visible 3px keyboard focus and navigates with Enter; corrected Robinhood FAQ opens with Enter.
+- Inspected all six full-section screenshots. Three columns at desktop, two at tablet, one on narrow phones. The longer upcoming heading and badge wrap naturally on mobile. Source logos for GIGA/Pons inspected at native resolution.
+- No dependencies or client scripts added. Two official raster icons total 45,110 bytes; no invented SVG replacements. Existing Three.js build size warning remains unrelated.
+
+Screenshots:
+[Home 375](screenshots/robinhood-coverage-home-375.png), [Home 768](screenshots/robinhood-coverage-home-768.png), [Home 1440](screenshots/robinhood-coverage-home-1440.png),
+[DEX 375](screenshots/robinhood-coverage-dex-375.png), [DEX 768](screenshots/robinhood-coverage-dex-768.png), [DEX 1440](screenshots/robinhood-coverage-dex-1440.png).
+
+Logo-search limitation: additional local Solana/launchpad SVGs were not located in the searched folders. macOS blocked Trash enumeration even on an unsandboxed read-only retry. Existing images remain intact pending the owner's folder clarification.
+
+## Owner SVGs, reconstructed vectors and Moonit removal — 21 October 2026
+
+- Replaced PancakeSwap, Pump.fun/PumpSwap and Orca raster marks with the owner's supplied SVGs, unchanged. Replaced SolFi/Tessera V with requested vector reconstructions. Removed Moonit from the shared directory, FAQ and public assets.
+- Validated all five SVG files: no embedded image, script, foreignObject, event handler or external resource. SolFi lettering is outlined; no font dependency.
+- Compared both reconstructed assets against their original rasters in Chrome at 256px and the site's actual 40px size, including grayscale. SolFi retains its ring/lettering; Tessera approximates photographic surface detail. Rejected the first coarse colour trace because it flattened lighting. Source rasters archived under docs/reference-assets/venues/.
+- npm run check: 78 files, no errors/warnings/hints. Build passes all five static pages and link/asset/anchor/h1/noindex/development-route checks. Existing Three.js size warning unchanged.
+- Homepage and DEX route reviewed in Chrome at 375×812, 768×1000 and 1440×1000; all coverage entries and footnotes traversed. No horizontal overflow, missing/undecodable logos, console/page errors or HTTP failures.
+- Browser assertions confirm no Moonit text on either page, 15 current venue entries, all six affected venue entries loading SVGs, and unchanged Robinhood v4/current versus three-upcoming status.
+- Hovering Pump.fun changes grayscale(1) to grayscale(0); reduced-motion transition remains 0s. Service link retains visible 3px keyboard outline, Enter navigation works, and FAQ opens by keyboard.
+- Screenshots captured for all six page/width combinations. Desktop home, tablet DEX and mobile home screenshots visually inspected along with the detailed source/vector comparison.
+- No site JavaScript or dependencies added. Reconstructed files measure approximately 1.6 KB (SolFi) and 43 KB (Tessera) when gzipped. Static vector rendering only; existing image lazy loading retained.
+
+[Source/vector comparison](screenshots/venue-vector-comparison.png).
+[Home 375](screenshots/venue-vectors-home-375.png), [Home 768](screenshots/venue-vectors-home-768.png), [Home 1440](screenshots/venue-vectors-home-1440.png).
+[DEX 375](screenshots/venue-vectors-dex-375.png), [DEX 768](screenshots/venue-vectors-dex-768.png), [DEX 1440](screenshots/venue-vectors-dex-1440.png).
+
+## Transparent venue marks and Jupiter Studio — 21 October 2026
+
+- Removed Tessera/SolFi full-canvas backgrounds. Canvas pixel checks in Chrome confirm alpha=0 at all four corners; SolFi's empty ring interior is transparent. Tessera's planet remains opaque. SolFi's lettering/geometry uses a dark-on-light variant for legibility.
+- Jupiter Studio added only to Solana launchpads and the DEX FAQ, following explicit owner clarification. Supplied Jupiter path geometry preserved; gradient visually matched to the Studio banner, with original uploaded SVG archived.
+- npm run check: 78 files, no errors/warnings/hints. Static build and five-route link/asset/noindex/isolation checks pass. Existing Three.js chunk-size warning unchanged.
+- Both routes checked at 375×812, 768×1000 and 1440×1000, including every venue row and footnote. No overflow, broken assets, console/page errors or HTTP failures. Four Solana launchpad entries include Jupiter Studio; no aggregator entry or Moonit restored.
+- Browser screenshots captured for all six cases; desktop home, tablet DEX and mobile home inspected visually. Enlarged and actual-size transparent-logo comparison inspected on the site background.
+- Hover colour, reduced-motion 0s transitions, visible keyboard focus, service navigation and FAQ keyboard opening pass.
+- Validation harness corrections: initial transparency sample hit SolFi's lettering rather than empty interior; moved sample below the wordmark. A broad test-string replacement initially put Jupiter Studio in the expected trading group; corrected expected group to launchpads. Neither failure indicated a production rendering/category defect.
+- No JavaScript or dependency changes.
+
+[Transparent logo comparison](screenshots/transparent-venue-logos.png).
+[Home 375](screenshots/transparent-studio-home-375.png), [Home 768](screenshots/transparent-studio-home-768.png), [Home 1440](screenshots/transparent-studio-home-1440.png).
+[DEX 375](screenshots/transparent-studio-dex-375.png), [DEX 768](screenshots/transparent-studio-dex-768.png), [DEX 1440](screenshots/transparent-studio-dex-1440.png).
+
+## Homepage presentation refresh — 21 October 2026
+- Type/content check: 80 files, zero errors/warnings/hints. Static build: five routes; links, assets, anchors, h1, noindex and development-route isolation pass. Existing lazy Three.js chunk-size warning remains; no new dependencies or model textures.
+- Existing liquidity animation, explainer motion, asset explorer, venue carousel and service navigation checks pass.
+- Chrome review at 375, 768 and 1440: homepage top, full expanded DEX directory, scenarios, all lower sections and asset gallery. No horizontal overflow, broken images, HTTP errors or uncaught page errors in the final clean run. Renderer reports ready at all three widths. Shared header/navigation checked on CEX, DEX, Work and Company at all three widths; Enter opens and Escape closes the menu.
+- Scenario tabs: all four selections, one visible panel, Arrow/Home/End navigation; visible focus. Reduced motion removes animation and replay controls. Existing charts retain their motion controllers. Native DEX disclosures keep all current and upcoming entries; service-page directory remains expanded.
+- Measured text contrast against #142e26: warm white 13.47:1; secondary copy 9.08:1; gold text 7.48:1; diagram caption 8.26:1. Primary button 8.93:1. All exceed AA normal-text requirements. Existing light-section palette retained.
+- Screenshots: refresh-home-{375,768,1440}, refresh-coverage-{375,768,1440}, refresh-scenarios-{375,768,1440}, refresh-assets-{375,768,1440}. Visually inspected desktop/tablet hero, mobile hero, mobile/desktop scenario and asset gallery, and expanded mobile directory. Model geometry and lighting untouched; only gallery ground colour changes.
+- Defects fixed during review: mismatched closing tag in the initial disclosure conversion; the dev server cached that earlier compile error and needed a forced restart. The first browser run therefore failed with HTTP 500; the final clean run passes. Added clipping to the unfocused skip link to prevent it appearing in expanded element captures while retaining focus visibility. Scenario controls stay hidden without JavaScript while the substantive panels remain readable.
+- Subtraction pass: removed the old ClientNeeds insertion from the homepage in favour of the four decision scenarios; kept its component available. Retained full DEX information behind two ecosystem disclosures. No duplicate scenario cards, new dashboard mockup or generic decorative animation added.
+- Additional final checks: all four scenario graphics visually reviewed; collapsed directory screenshot saved. Native disclosure Enter/Space toggles verified; gemstone selection keeps the 3D renderer ready. Browser console has no errors. With JavaScript disabled, all four scenarios remain visible, tab controls are hidden, Solana disclosure opens and Jupiter Studio remains accessible; 375px layout has no overflow.
+
+## Chain artwork and Robinhood vector — 21 October 2026
+- Seven supplied SVGs integrated, plus owner-requested Robinhood vector trace. XML parses for all eight; no embedded raster in the new Robinhood SVG. Ethereum/Arbitrum symbol-only geometry and Optimism viewBox normalization preserve source artwork. Originals archived.
+- Type/content checks: 80 files, zero errors/warnings/hints. Static five-route build and isolation/link checks pass; existing Three.js chunk warning unchanged.
+- Chrome: homepage and DEX route at 375/768/1440 pass overflow, eight chain mark counts and broken-image checks. EVM disclosure works via Enter/Space. Hover restores colour, reduced-motion removes transition, no console/page errors in final run. Six chain screenshots saved; mobile/desktop homepage and tablet DEX inspected visually. Large Robinhood vector rendering inspected against supplied PNG.
+- Initial image failure: local Astro server had cached public asset inventory and returned 404 for newly generated robinhood.svg. Restarted server, then reran all checks successfully. No production asset missing; build includes SVG.

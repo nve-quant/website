@@ -1,0 +1,36 @@
+/* Approved live-site adaptation: forest, warm paper and a restrained bullion accent. */
+.home-wordmark{display:flex;align-items:center;gap:12px;padding:0;letter-spacing:0}
+.home-wordmark svg{width:35px;height:42px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.home-wordmark>.brand-name{position:static;border:0;width:auto;height:auto;font-size:1rem;line-height:1.12;letter-spacing:.02em}
+.home-refresh>.home-header{background:#142e26;color:#f6f7f2;margin-inline:calc(-1 * var(--space));padding-inline:var(--space)}
+.home-refresh>.home-header .nav-contact{border-color:#d4b775}
+.home-refresh>.home-header .services-panel{color:var(--ink);right:var(--space);width:min(1120px,calc(100% - 2 * var(--space)))}
+.home-refresh .home-hero{position:relative;isolation:isolate;background:#142e26;color:#f6f7f2;margin:0 calc(-1 * var(--space));padding:48px var(--space) 0;grid-template-columns:1.45fr 1fr;gap:52px 7vw;overflow:hidden;animation:none}
+.home-refresh .home-hero:before{content:'';position:absolute;width:75%;height:100%;right:-25%;bottom:-35%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at center,rgba(176,152,88,.16),transparent 65%)}
+.hero-research{grid-column:1/-1;display:flex;align-items:baseline;gap:16px;max-width:fit-content;font-size:.78rem;text-decoration:none;border-bottom:1px solid #637d6b;padding-bottom:12px;color:#e6e9db}
+.hero-research>span:first-child{color:#d4b775;flex-shrink:0}.hero-research:hover>span:nth-child(2){text-decoration:underline;text-underline-offset:4px}
+.home-refresh .hero-audience{font-size:.8rem;color:#c0d1c4;margin-bottom:24px}
+.home-refresh .home-hero h1{font-family:'Newsreader',Georgia,serif;font-size:clamp(3.6rem,6.4vw,6.5rem);font-weight:400;letter-spacing:-.04em;line-height:1.02;margin:0;max-width:15ch}
+.home-refresh .hero-intro{padding-bottom:6px}.home-refresh .hero-intro>p{font-size:1.05rem;line-height:1.7;color:#dce5d9;max-width:42ch}
+.home-refresh .hero-intro .home-button{background:#e1c98d;color:#142e26}.home-refresh .hero-intro .home-button:hover{background:#eed9a8;transform:none}
+.hero-secondary{display:inline-block;font-size:.85rem;margin:20px 0 0 22px;text-underline-offset:5px}
+.hero-foot{grid-column:1/-1;display:flex;gap:24px 48px;border-top:1px solid #486451;padding:24px 0 30px;margin-top:28px;font-size:.75rem;color:#c0d1c4}
+.home-refresh .liquidity-services{padding-top:var(--section)}
+.home-people{padding:0 0 var(--section);display:grid;grid-template-columns:1fr 1fr;gap:7vw}.home-people>div>p:first-child{font-size:.8rem;color:var(--muted)}.home-people h2{font-size:clamp(1.8rem,3vw,2.8rem)}.home-people a{font-size:.85rem}.people-names article{border-top:1px solid var(--line);padding:20px 0}.people-names h3{font-size:1.35rem;letter-spacing:-.025em;margin:0 0 8px}.people-names p{font-size:.85rem;color:var(--muted);margin:0}.people-names>p{padding-top:10px;max-width:48ch}
+.home-refresh .home-asset-studies{background:#142e26;color:#f6f7f2;margin:0 calc(-1 * var(--space));padding:var(--section) var(--space) 54px}
+.home-asset-studies .market-explorer{background:#142e26;padding:0;overflow:visible}
+.home-asset-studies .explorer-heading h2{font-family:'Newsreader',Georgia,serif;font-size:clamp(2.6rem,4.6vw,4.5rem);letter-spacing:-.035em}
+.home-asset-studies .explorer-heading>p{color:#c0d1c4}
+.home-asset-studies .asset-selector{border-color:#56705e;gap:0 28px}
+.home-asset-studies .asset-selector label{color:#c0d1c4}.home-asset-studies .asset-selector label:hover{color:#fff}.home-asset-studies .asset-selector label:has(input:checked){color:#e1c98d;border-color:#e1c98d}
+.home-asset-studies .model-explanation,.home-asset-studies .model-panel dl>div,.home-asset-studies .model-question,.home-asset-studies .model-routes,.home-asset-studies .specimen-note{border-color:#56705e}
+.home-asset-studies .model-panel dt,.home-asset-studies .model-disclaimer,.home-asset-studies .model-caption [data-specimen-detail],.home-asset-studies .specimen-count,.home-asset-studies .model-caption>span{color:#c0d1c4}
+.home-asset-studies .model-axis{display:none}.home-asset-studies .specimen-arrow{background:#142e26;border-color:#78907c;color:#f6f7f2}.home-asset-studies .specimen-arrow:hover{background:#2c4b3a}
+.home-asset-studies .model-routes li:not(:last-child):after{color:#c0d1c4}
+.home-asset-studies .explorer-body{grid-template-columns:1.3fr 1fr;gap:50px}.home-asset-studies .model-stage{min-height:560px}
+.home-asset-studies .model-fallback ellipse{fill:#203d2e}
+.home-refresh :is(.home-hero,.home-asset-studies) :is(a,button,input,summary,[tabindex]):focus-visible,.home-refresh>.home-header>a:focus-visible,.home-refresh>.home-header nav> a:focus-visible,.home-refresh>.home-header .services-nav>summary:focus-visible{outline:3px solid #e1c98d;outline-offset:5px}
+.home-asset-studies .asset-selector label:has(input:focus-visible){outline-color:#e1c98d}
+@media(max-width:1000px){.home-refresh .home-hero{grid-template-columns:1fr;gap:28px}.hero-intro{max-width:60ch}.home-refresh .hero-intro>p{max-width:58ch}.home-refresh .home-hero h1{font-size:clamp(3.6rem,8vw,5.6rem)}.hero-foot{margin-top:12px;gap:24px}.home-asset-studies .explorer-body{gap:28px}}
+@media(max-width:700px){.home-asset-studies .explorer-body{grid-template-columns:1fr;gap:0}.home-asset-studies .model-stage{min-height:400px}.home-people{grid-template-columns:1fr;gap:28px}}
+@media(max-width:600px){.home-wordmark{gap:7px}.home-wordmark svg{width:28px;height:35px}.home-wordmark>.brand-name{font-size:.8rem}.home-refresh .home-hero{padding-top:25px;gap:30px}.hero-research{font-size:.72rem;display:grid;grid-template-columns:1fr auto;gap:8px 16px}.hero-research>span:first-child{grid-column:1/-1}.home-refresh .home-hero h1{font-size:clamp(3rem,12vw,4.3rem)}.home-refresh .hero-audience{font-size:.72rem;max-width:none}.home-refresh .hero-intro>p{font-size:.95rem}.hero-secondary{margin-left:16px}.hero-foot{display:grid;gap:12px;font-size:.7rem;margin-top:4px;padding-bottom:28px}.home-asset-studies .asset-selector{gap:0 18px}.home-refresh .home-asset-studies{padding-bottom:36px}}

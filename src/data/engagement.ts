@@ -7,11 +7,14 @@ export const mandate = [
  {title:'Operating limits',text:'Inventory boundaries, permissions and the conditions for reviewing activity.'},
  {title:'Review arrangements',text:'The metrics, service levels and communication agreed for the mandate.'},
 ];
+// Expanded dashboard scope confirmed by the owner, 21 October 2026.
+// Read-only UI review corroborates historical spread/depth, oracle views and CSV fills;
+// direct exchange sourcing and JSON/timeframe export scope remain owner-confirmed.
 export const reporting = [
- {title:'Market view',text:'Aggregate and exchange-specific candlestick charts and order books give context to trading activity.'},
- {title:'Order detail',text:'Inspect active and filled orders. Download filled orders as CSV for your own analysis.'},
- {title:'Accounting',text:'Review the accounting view alongside the orders and markets in the engagement.'},
- {title:'Liquidity quality',text:'Inspect liquidity and microstructure metrics and compare them with the agreed SLA.'},
+ {title:'Market view',text:'Follow CEX and DEX markets in real time, with data sourced directly from exchanges. Compare aggregate and exchange-specific candlestick charts and order books.'},
+ {title:'Orders & exports',text:'Inspect active orders and executed trades on candlestick charts or in tables. Export the selected reporting period as CSV or JSON for your own analysis.'},
+ {title:'Accounting',text:'Review accounting alongside orders and market activity, so execution records can be considered in the context of the engagement.'},
+ {title:'Liquidity & history',text:'Inspect spread, depth at defined basis-point distances, and the fair-value or oracle reference used for quoting. Review snapshots and historical observations against the agreed SLA.'},
 ];
 export const engagementSteps = [
  {title:'Review your markets',text:'Share your token, trading pairs, venues or pools, and what you want to improve. We review the proposed scope and the capital available.'},

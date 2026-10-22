@@ -1,18 +1,11 @@
 import * as THREE from 'three';
-import {createGold} from './models/gold';
-import {createFund} from './models/fund';
-import {createStock} from './models/stock';
-import {createEmerald} from './models/emerald';
-import {createOil,createWheat} from './models/commodities';
-import {createCorn,createSoy} from './models/grains';
-import {createCopper} from './models/metals';
-import {createRealEstate} from './models/real-estate';
+import {assetBuilders} from './models';
 import type {AssetVariantId} from '../data/market-model';
 
 /** Original procedural geometry; no remote models, textures or market data. */
 export function createMarketScene(host: HTMLElement, onContextLost: () => void, onRotationChange: (spinning: boolean) => void) {
   const renderer = new THREE.WebGLRenderer({alpha:true, antialias:true, powerPreference:'low-power'});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
@@ -45,7 +38,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   scene.add(new THREE.HemisphereLight(0xffffff,0xb4b99f,.25));
   const key=new THREE.DirectionalLight(0xfff7e8,3.2);
   key.position.set(-3,6,4);key.castShadow=true;
-  key.shadow.mapSize.set(1024,1024);
+  key.shadow.mapSize.set(2048,2048);
   key.shadow.camera.left=-3;key.shadow.camera.right=3;
   key.shadow.camera.top=3;key.shadow.camera.bottom=-3;
   key.shadow.camera.near=.1;key.shadow.camera.far=15;
@@ -53,11 +46,6 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   scene.add(key);
   const rig=new THREE.Group();scene.add(rig);
   const models=new Map<AssetVariantId,THREE.Group>();
-  const builders:Record<AssetVariantId,()=>THREE.Group>={
-    gold:()=>createGold(),silver:()=>createGold('silver'),palladium:()=>createGold('palladium'),platinum:()=>createGold('platinum'),
-    fund:createFund,stock:createStock,emerald:createEmerald,ruby:()=>createEmerald('ruby'),sapphire:()=>createEmerald('sapphire'),diamond:()=>createEmerald('diamond'),oil:createOil,wheat:createWheat,corn:createCorn,soy:createSoy,copper:createCopper,aluminium:()=>createGold('aluminium'),
-    residential:()=>createRealEstate('residential'),office:()=>createRealEstate('office'),warehouse:()=>createRealEstate('warehouse'),
-  };
   const disposeTree=(root:THREE.Object3D)=>{
     const geometries=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>(),textures=new Set<THREE.Texture>();
     root.traverse(object=>{
@@ -75,7 +63,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
     }));
   });
   configureTextures(scene);
-  const floor=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.MeshBasicMaterial({color:0xe6ebd9,toneMapped:false}));
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.MeshBasicMaterial({color:host.closest('.home-asset-studies')?0x142e26:0xe6ebd9,toneMapped:false}));
   floor.rotation.x=-Math.PI/2;floor.position.y=-.045;scene.add(floor);
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.ShadowMaterial({opacity:.12}));
   ground.rotation.x=-Math.PI/2;ground.position.y=-.04;ground.receiveShadow=true;scene.add(ground);
@@ -91,6 +79,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
 
   let active:AssetVariantId='gold';
   let rotation=-.2, targetRotation=-.2, tilt=0, targetTilt=0;
+  let reducedMotion=false;
   let scale=1, spinning=true, visible=true, disposed=false, contextLost=false;
   let drag: {id:number;startX:number;startY:number;x:number;y:number;moved:boolean}|undefined;
   let pointerActivation:boolean|undefined;
@@ -102,7 +91,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
     if(spinning&&!drag&&time-lastTime<1000/30){schedule();return;}
     const dt=Math.min((time-lastTime)/1000 || .016,.05);lastTime=time;
     if(spinning&&!drag)targetRotation+=dt*.24;
-    const ease=1-Math.exp(-dt*9);
+    const ease=reducedMotion?1:1-Math.exp(-dt*9);
     rotation+=(targetRotation-rotation)*ease;tilt+=(targetTilt-tilt)*ease;scale+=(1-scale)*ease;
     rig.rotation.y=rotation;rig.rotation.x=tilt;models.get(active)?.scale.setScalar(scale);
     renderer.render(scene,camera);
@@ -111,6 +100,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   function resize(){
     const {width,height}=host.getBoundingClientRect();
     if(!width||!height)return;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2,Math.sqrt(2400000/(width*height))));
     renderer.setSize(width,height,false);camera.aspect=width/height;
     camera.fov=THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(25)/2)/Math.min(1,camera.aspect)));
     camera.updateProjectionMatrix();schedule();
@@ -133,6 +123,7 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
     schedule();
   }
   function toggleRotation(){
+    if(reducedMotion)return;
     spinning=!spinning;
     onRotationChange(spinning);
     schedule();
@@ -214,10 +205,15 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
   canvas.addEventListener('webglcontextlost',lost);
   resize();
   return {
+    setReducedMotion(value:boolean){
+      reducedMotion=value;
+      if(value){spinning=false;scale=1;rotation=targetRotation;tilt=targetTilt;}
+      onRotationChange(spinning);schedule();
+    },
     select(id:AssetVariantId){
       endDrag();
       let model=models.get(id);
-      if(!model){model=builders[id]();configureTextures(model);models.set(id,model);rig.add(model);}
+      if(!model){model=assetBuilders[id]();configureTextures(model);models.set(id,model);rig.add(model);}
       // Three recently viewed specimens at most: no upfront generation or unbounded GPU cache.
       models.delete(id);models.set(id,model);
       if(models.size>3){const oldest=models.keys().next().value!;const evicted=models.get(oldest)!;rig.remove(evicted);disposeTree(evicted);models.delete(oldest);}
@@ -226,11 +222,11 @@ export function createMarketScene(host: HTMLElement, onContextLost: () => void, 
       // Thin stalks need a smaller shadow bias than the broad bullion surfaces.
       key.shadow.normalBias=id==='wheat'?.003:.018;
       active=id;models.forEach((entry,key)=>{entry.visible=key===id;entry.scale.setScalar(1);});
-      scale=.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();
+      scale=reducedMotion?1:.86;rotation=targetRotation=-.2;tilt=targetTilt=0;schedule();
     },
     renderStill(){
       resize();rig.rotation.set(0,-.2,0);models.get(active)?.scale.setScalar(1);renderer.render(scene,camera);
-      return {geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,triangles:renderer.info.render.triangles};
+      return {geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,triangles:renderer.info.render.triangles,calls:renderer.info.render.calls,pixels:canvas.width*canvas.height};
     },
     visible(value:boolean){visible=value;if(!value){endDrag();leave();if(frame!==undefined){cancelAnimationFrame(frame);frame=undefined;}}if(value){lastTime=performance.now();schedule();}},
     dispose(){

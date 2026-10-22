@@ -47,3 +47,80 @@ Owner requested selectable specimens within asset groups: four gemstones, four p
 
 ### Expanded asset studies — 20 October 2026
 Owner requested distinct Metals, Grains (wheat, corn and soy) and Real estate categories. Metals now includes the original gold, silver, palladium and platinum plus copper and aluminium. Real estate uses original residential, office and industrial architectural miniatures. Oil remains under Commodities. These are illustrative market-design studies, not a portfolio, available products, certified holdings or evidence of existing client mandates. New grain/property copy is a draft for owner review.
+
+### Asset taxonomy and detail pass — 21 October 2026
+Owner approved eight groups: Precious metals; Industrial metals; Energy; Agriculture; Gemstones & collectibles; Real estate; Equities; Fixed income & funds. Add nickel, natural gas, coffee, cotton, Treasury bill and corporate bond specimens. Watches/art remain future possibilities, not additions in this milestone. Fund shares, direct bills and corporate debt must be distinguished in the explanation. These remain illustrative market studies, not a product catalogue or claimed holdings. Owner also requested more detailed grains, buildings and barrel, with the existing performance-conscious rendering approach retained.
+
+Owner requested market-specific specimen names and a realism upgrade on 22 October 2026. Use appropriate benchmark/class/grade/form distinctions in the asset explorer, with primary references in the inventory. Treat these as illustrative subjects, not supported-product or certified-inventory claims. Prioritise agriculture, property and the oil drum while preserving gold/gem appearance and rendering budgets.
+
+## Focused model refinement and caption cleanup
+Owner explicitly requested multi-agent refinement of agriculture (wheat, corn, soybeans, coffee, cotton), energy (oil and natural gas) and all three property studies. Exclude precious/industrial metals, gems, equities, fixed income and funds from model changes. Remove the oil drum’s illustrative stamp and repeated “Illustrative asset study / Drag to rotate / Click to pause” caption. Preserve accessible rotation controls and the section-level context; user authorization supersedes the earlier instruction to retain every illustrative label.
+
+## Owner interview: operating history, coverage and commercial model
+Source: owner answers and follow-up publication permission, 21 October 2026. Supersedes previous assumptions about general availability of systematic strategies.
+- Operating since 2022. Public people: Nicholas van Eerde and Nahuel Angelone; roles/approved biographies remain pending.
+- Client fit includes exchanges, stablecoins, utility/layer-one projects and gemstone-backed tokens. Owner expressly approved naming MNEE and Bitcoin SV (BSV) engagements. Emerald/ruby project names and exchange client name remain unspecified. Gem backing valuation/certification and CMC ranking are not published without supporting evidence.
+- Core priorities: CEX/DEX. OTC is a small secondary activity. Systematic terminals/vaults are testing/pilot, coming soon rather than generally available.
+- Main differentiator: bespoke transparent reporting of orders and SLA metrics in real time, including directly sourced exchange data. Case-specific introductions/additional support are not a standard promised service package.
+- CEX: spot and perpetuals; quoting, depth, availability, inventory, allocation and hedging scoped to client needs. Internal ML volatility forecasting, OMS controls, logs, data pipelines and alerting; human trade ops monitors books 24/7.
+- DEX: ranges/balances chosen with client; primarily automated adjustments, with discretionary exceptions/requests. Safe/Squads roles restrict operation to agreed pool/pair without withdrawal/send authority. This is a permission model, not proof that malicious extraction or losses are impossible.
+- Monthly retainer; 3/6/12/24-month terms. Client generally receives P&L/rebates/LP fees and pays costs, with some negotiated income-share/lower-retainer arrangements. Loan models are exceptional, not core marketing. Stated capital floor of 3k awaits currency, unit and publication wording.
+- Weekly/monthly Telegram reviews, calls if required. Real-time CEX/DEX dashboard, visual chart and table trade history, timeframe CSV/JSON exports; spread/depth snapshots/history and fair-value/oracle quotation reference.
+- Latency answer mentions sub-3–5ms, typically ~1ms and some sub-1ms RTT. Do not publish an all-venue guarantee until measurement endpoints, bound/percentile, exclusions and applicable deployments are clarified.
+- Coverage authorized from SVGs in owner-specified DataIndexer asset folder. 27 distinct CEXs copied; duplicate OKX mark excluded. Uniswap/Aerodrome/Hyperliquid deployment details remain pending; PNG-only files were outside the stated SVG selection.
+
+### Owner follow-up: DEX coverage and latency definition
+Owner confirms Uniswap v3/v4, Aerodrome, Velodrome and PancakeSwap; support across EVM chains. Solana: Raydium, Meteora, Orca and PumpSwap, all pool types. Protocol support does not imply every protocol is deployed on every EVM chain. Hyperliquid product scope still unconfirmed. Public coverage matrix and DEX FAQ updated.
+
+Latency figures described by owner as p50 across all venues, with low jitter and p99 close to p50, measured from order sending to the timestamp of accepted order. Latency clauses are available by agreement but not standard contracts. “Upper bound” conflicts with percentile terminology; exact 3ms versus 5ms threshold, timestamp origin and clock synchronization remain to clarify. Public numeric latency claim remains deferred, while contractual availability is stated accurately.
+
+### Owner follow-up: account funding and limit response
+Starting minimum described as 3k of each asset in the account at launch; currency and per-exchange application still to confirm. Account imbalances can prompt refill requests or redistribution between exchanges. Do not infer withdrawal authority from this: transfer responsibility/arrangement remains to clarify. Public copy explains two-sided funding and coordination without publishing an ambiguous currency amount.
+CEX limit response: reduce size, alert internal operators and notify clients through a bot. DEX repositioning usually when benefit outweighs gas; dynamic fees, external hedging or arbitrage may be used case by case. Do not imply every pool supports every tool, guaranteed profitability, automatic compounding or discretionary transfer authority.
+
+### Owner follow-up: founders, named engagements, funding and assessment
+Owner confirms both co-founders: Nicholas van Eerde focuses on technology; Nahuel Angelone on operations/business development; both work across functions. Public biographies use this description, not invented employment histories. Named engagements now include EMRL.D, RUBY.D and BlockFinex alongside MNEE/BSV.
+Starting minimum confirmed in reply to the US$3,000 example: each asset, each exchange account. Client performs transfers; transfer permissions never enabled on Bureau API keys. Required capital can exceed the starting floor depending on scope.
+Initial project/market/liquidity assessment and quote/proposal are free, without obligation. Contracting identity: Onchain Bureau Capital Limited, UK company 15636039. Companies House records incorporation 11 April 2024; owner-described operating history since 2022 is separate.
+Latency threshold clarified to 3ms; publish as owner-reported operational p50 below 3ms, using send-to-acceptance-timestamp definition, without hard maximum, measured-p99 number or standard contractual guarantee. Timestamp origin/clock validation and underlying evidence remain documentation gaps.
+
+### Named Solana market coverage
+Following recovery of the owner's SOL_DEX_MM_2 project, the owner explicitly requested publishing trading venues from its IDL inventory, including Moonit, Phoenix, SolFi, Tessera and ZeroFi. Exclude aggregators such as Jupiter and DFlow; routing, Jito and base-program interfaces are not separate trading venues.
+Use explicit pool families: Raydium AMM v4, CPMM, CLMM; Meteora DLMM, DAMM v1, DAMM v2; Orca Whirlpools; PumpSwap constant-product AMM. Label LaunchLab, Meteora DBC, Pump.fun and Moonit as launch markets. Phoenix coverage here refers to the recovered spot order book, not the newer perpetual product. SolFi, Tessera V and ZeroFi are proprietary-AMM trading coverage, not an offer to manage those firms' liquidity. Exact activities, versions, market addresses and permissions remain engagement-specific.
+Publication is owner-confirmed. The IDL inventory corroborates names/interfaces, not production readiness, client history or the implementation of every instruction. Show this shared coverage on the homepage and DEX service page without changing EVM scope.
+
+### EVM deployment review and separation of market types
+Owner requested separating liquidity pools from launchpads and adding Robinhood Chain DEX/launchpad coverage as coming soon. The supplied uniswap-mm repository identifies Uniswap v3/v4 on Ethereum, Arbitrum, Optimism, Polygon, Base and BNB Chain; Aerodrome Slipstream and classic stable/volatile pools on Base; Velodrome Slipstream on Optimism. These are connector/registry capabilities, not evidence of client history on every combination. PancakeSwap remains separately owner-confirmed, with exact version/chain scope unresolved in this repository.
+
+Keep LaunchLab, Meteora DBC, Pump.fun and Moonit apart from Solana LP products. Phoenix spot and proprietary AMM execution remain a third group. Owner subsequently clarified that Uniswap v4 on Robinhood Chain is already covered. Keep it in current coverage, without implying Robinhood v3 support. Coming soon applies to additional native DEXs and launchpads: GIGA DEX, Pools.trade and Pons are the initial researched selections. Do not claim that a launchpad connector has been implemented or that pools with locked launch liquidity are client-managed LP positions.
+
+### Owner update: venue artwork and Moonit removal
+Owner supplied cake.svg, pump.svg and orca.svg and requested their use. Remove Moonit from all current website coverage and FAQ copy; owner described it as no longer operational. Treat this as a coverage/display decision, without publishing an independently unverified closure claim. Earlier inventory mentions are historical.
+Owner explicitly requested vector versions derived from the existing Tessera V and SolFi images. These are reconstructions, not newly sourced official brand masters. Retain raster originals outside public assets for provenance.
+
+### Jupiter Studio and transparent marks
+Owner confirmed the requested Jupiter launch platform is Jupiter Studio, distinct from Raydium LaunchLab and Jupiter's routing aggregator. Add it under current Solana launchpads with the broad Token launches label. Owner supplied jup.svg and requested Studio's different palette. No aggregator listing or additional pool implementation claim inferred.
+Remove the square backgrounds from Tessera and SolFi. SolFi needs a light-surface monochrome treatment so its previously white lettering remains visible on the site's pale ground.
+
+### Owner-approved homepage presentation refresh
+Adapt the updated live site's outlined B mark, stronger dark opening, research entry point and scenario storytelling. Retain existing market charts and 3D assets. Use a dark gallery stage without modifying specimen geometry. Compact founder copy may reuse the already approved Company content. Replace the repetitive homepage problem-list with four illustrative operating scenarios. Keep all DEX coverage on the homepage within clickable, keyboard-accessible EVM/Solana disclosures; expanded directory stays on the DEX service page. No fabricated dashboard screenshot or additional service claims.
+
+
+### Owner interview follow-up: reporting, execution and recovery — 21 October 2026
+- Positioning: market making is a utility for project users, intended to improve entry/exit execution and the experience of trading the asset. Owner associates better execution with reputation/user experience; no measured reputation impact or unconditional execution availability established.
+- Owner reports substantial spread improvements across the named engagements, more efficient capital use and some yield generation. These remain qualitative owner reports pending a specific engagement, period, baseline, net costs and supporting records. Do not publish quantified uplift, universal profitability, guaranteed yield or a measured reputation claim.
+- CEX dashboard: owner confirms slippage estimates, two-sided quote availability over time and inventory exposure, in addition to spread/depth/reference reporting. Confirms ability to distinguish Bureau orders from the aggregate market for relevant metrics. Formula, sampling and export evidence remain to inspect.
+- DEX dashboard: owner confirms time in range, allocation, price impact, inventory composition, earned fees, gas/rebalancing costs and performance against holding the original assets are all available. Exact benchmark construction, cash-flow treatment and cost inclusion remain to document from the product.
+- Latency endpoint: acceptance timestamp is exchange-supplied. Clock alignment uses chrony and exchange server-time endpoints/WebSocket feeds. The previously confirmed below-3ms figure is p50; underlying logs, measurement period and residual clock error have not been reviewed.
+- Recovery: owner describes reconnects as always below one second, redundant oracle feeds, halting new quotes until reconnected, retaining existing orders when the oracle price remains in range, cancelling clearly stale orders, and automatic restart. Record as owner-described behavior; do not turn the reconnect timing into an externally verified universal bound or exchange-availability guarantee. Exact stale/in-range rules and restart checks remain unspecified.
+- Client control answer was only 'Yes' to a multi-part question. This does not identify dashboard/Telegram/operator pause channels, nor who may close DEX positions, collect fees or change allowed pools; clarification required.
+- Dashboard-location reply ended at 'Its on'; no new location or permission to expose client information supplied. Earlier DataIndexer path remains a lead, not identification of the intended public capture.
+- Owner is willing to request client testimonials. Need the client's own account of problem, work and observable benefit, approved attribution and explicit permission to publish. No testimonial exists from this reply.
+
+
+### Owner follow-up: dashboard publication, pause requests and DEX authority
+- Owner identifies the frontend dashboard in the DataIndexer project and permits showing any view there publicly. Earlier source path: /Users/nicholasvaneerde/Developer/Onchain Bureau/Data Pipelines/DataIndexer/frontend. A specific capture has not yet been selected or inspected; approval concerns dashboard views, not exposing credentials or secrets.
+- Clients request a pause by contacting operations. A Telegram kill switch can be configured on request; do not describe it as a standard existing dashboard or bot control.
+- On request, Bureau can manually close DEX positions and collect fees within the authorized setup. Changing the permitted pool requires the client to sign a transaction changing Safe/Squads roles. Do not confuse position/fee management with authority to withdraw or transfer client funds.
+- Owner clarifies earlier 'yield' primarily meant market-making trading profits; depending on the engagement, income can also include DEX pool fees and exchange rebates. Use separate trading P&L, fees, rebates and costs rather than an undifferentiated yield claim. No measured net returns or guaranteed profitability established.
+- Specific client/venue/pair and before/after measurement period remain unanswered. This confirmation does not supply a performance case study.

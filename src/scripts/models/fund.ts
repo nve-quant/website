@@ -133,7 +133,7 @@ export function createFund(): THREE.Group {
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     context.font = '40px Georgia, serif';
-    context.fillText('Portfolio', 512, 402);
+    context.fillText('Treasury portfolio', 512, 402);
     context.font = '86px Georgia, serif';
     context.fillText('Fund share', 512, 479);
 

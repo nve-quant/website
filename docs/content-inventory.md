@@ -124,3 +124,171 @@ The former Tokenized gold tab becomes Precious metals, with generalized draft re
 - Original assets: copper strip coil, aluminium cast ingots, corn, dry soybean pods, residential building, office tower and logistics warehouse. Generated as local Three.js geometry with authored SVG companions; no third-party asset licence required.
 - Draft copy: grain specification, storage/delivery questions and property ownership/valuation/exit questions in `src/data/market-model.ts`. Review before publication; these describe illustrative design considerations, not instrument-specific advice or confirmed services/holdings. No invented source links or property values.
 - Existing commodity copy rewritten for oil after moving wheat. Unique-asset copy now focuses on gems/lots; property has its own explanation. Existing source URLs retained.
+
+### Taxonomy and six specimens — 21 October 2026
+Owner supplied/approved the eight-category grouping and new nickel, gas, coffee, cotton, Treasury-bill and corporate-bond studies. Replaced the broad Metals/Commodities and Unique asset labels; relabelled stock as Equities and fund group as Fixed income & funds, with Fund shares as its specimen label. No claim that a token automatically gives direct asset ownership.
+
+Bill and corporate-debt explanatory facts checked against primary sources:
+- TreasuryDirect, https://www.treasurydirect.gov/marketable-securities/treasury-bills/ — bills sold at discount or face value, defined maturity.
+- Investor.gov, https://www.investor.gov/introduction-investing/investing-basics/investment-products/bonds-or-fixed-income-products — corporate debt, interest/principal and issuer payment risk.
+The fund-versus-direct-instrument distinction was explicitly requested by the owner. The 3D paper studies are marked illustrative, not issued securities. Commodity form/grade/location and property copy remain draft market-design questions, without specific commercial commitments. All model/fallback artwork is locally authored; no external assets or new licences.
+
+### Market-specific specimen naming — 22 October 2026
+Owner requested meaningful market distinctions and a realism pass. These are illustrative subjects, not newly confirmed products, certified inventory or exchange affiliations. Specimens now identify WTI light sweet crude, Henry Hub natural gas, Hard Red Winter wheat, No. 2 yellow corn/soybeans, Arabica coffee and Upland cotton. Primary aluminium references P1020A; rolled copper remains a fabricated strip coil rather than being mislabeled Grade A cathodes. Precious-metal captions reflect the existing specimen stamps. Financial studies distinguish Treasury fund shares, a 13-week U.S. Treasury bill, fixed-rate corporate debt and common stock. Property names specify multifamily residential, commercial office and logistics real estate without invented locations, tenants or valuations. Gem cuts remain unchanged; no unverified origin, treatment or grading claims.
+
+Primary specification references:
+- WTI: https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.contract.html
+- Henry Hub: https://www.cmegroup.com/markets/energy/natural-gas/natural-gas.contractSpecs.html
+- Wheat classes: https://uswheat.org/crop-and-quality/
+- Corn grade: https://www.cmegroup.com/markets/agriculture/grains/corn/specs
+- Soybean grade: https://www.cmegroup.com/content/dam/cmegroup/market-regulation/rule-filings/2024/12/24-443.pdf
+- Arabica/Coffee C: https://www.ice.com/products/15/data
+- Cotton specification: https://www.theice.com/publicdocs/futures_us_reports/cotton/Cotton_Deliverers_Guide.pdf
+- Upland cotton: https://www.ams.usda.gov/grades-standards/universal-upland-color-and-leaf-grade-cotton-standards
+- Primary aluminium: https://www.lme.com/en/metals/non-ferrous/lme-aluminium/contract-specifications
+- Treasury maturities: https://www.treasurydirect.gov/marketable-securities/treasury-bills/
+
+Captions and specimen notes separate a reference specification from a complete lot/contract. The oil drum and gas vessel are symbolic illustrations, not actual delivery arrangements. Agricultural shapes cannot certify grades. No protein percentage, origin, credit rating or security identifier has been invented.
+
+### Owner-requested model refinement and caption subtraction
+Owner authorised removing the oil barrel’s illustrative stamp and repeated asset-study/rotation caption. The section-level context still distinguishes studies from actual offerings. Gas/coffee model captions also omit redundant illustrative wording. No product support, certifications, provenance, tenants or performance claims added. Changes use local procedural geometry/materials only; no external model/image licences introduced. Excluded metals/gems/equities/fixed-income/fund model definitions remain unchanged.
+
+## Commercial graphics and copy interview
+Owner requested parallel work on the proposed graphics while answering a broad business-copy interview. New access/handoff/reporting visuals use the existing owner-confirmed operating model. Measurement diagrams are educational drafts, not measured results or confirmation that every measure is available in the dashboard. OTC/strategy diagrams explain discussion scope, without inferring settlement, custody, returns or principal/agency models.
+
+Coverage data in src/data/venue-coverage.ts is intentionally empty pending owner-confirmed venues, protocol/network combinations and publication permission. No coverage section renders without data. Real sanitized dashboard imagery and team/client evidence remain outstanding; the reporting capability map does not substitute for such proof. Interview questions and outstanding source dependencies are recorded in docs/copy-interview.md. No new owner answers have been received during this implementation pass.
+
+## Owner interview answers and dashboard source review
+Source: direct owner answers, 21 October 2026; publication permission for named MNEE/BSV engagements received in follow-up. See BRIEF.md for the full confirmation/qualification ledger. Public copy now uses operating since 2022, the two named people (without invented titles), approved client examples, 24/7 human monitoring, spot/perpetual scope, permission-restricted DEX operation, reporting detail and retainer/term structure. Systematic strategies explicitly pilot/coming soon. No published latency number, 3k minimum, gem valuation/certification, CMC ranking or undisclosed client name.
+
+Read-only review of the owner-specified DataIndexer/frontend/src corroborated:
+- components/ExchangeChart.tsx:376–410: actual-trade markers on candles.
+- components/hbot/HbotInstanceDetailView.tsx:41–106,458+,638,778: CSV exports, active order fields and fills.
+- components/liquidity/LiquidityDashboard.tsx:113–133: spread/depth history, basis-point controls and bid/ask/total modes.
+- pages/MarketMicrostructure.tsx:265–266: depth relative to mid and coverage limitations.
+- components/risk/OracleMarkChart.tsx:74,378: historical/live oracle marks.
+Source code does not independently establish production availability, direct feed provenance, client entitlements or JSON export scope. Those remain owner-confirmed capabilities. Depth reference and oracle views are kept distinct in copy rather than assuming all depth uses the oracle. No private source, configurations, live records or credentials copied.
+
+27 CEX marks copied from the owner's crypto SVG directory into public/images/venues. Owner confirms operational coverage, not exchange endorsements/partnerships. Exclude Uniswap/Aerodrome/Hyperliquid pending product/network scope, duplicate okx-x, and PNG-only LBank/Coinstore. Original logo files preserved. Brand marks identify venues, not clients. Remaining questions in docs/copy-interview.md.
+
+### DEX deployment and latency follow-up
+Direct owner reply confirms eight protocols: Uniswap v3/v4, Aerodrome, Velodrome, PancakeSwap across EVM deployments; Raydium, Meteora, Orca and PumpSwap on Solana across pool types. Matrix uses EVM/Solana families rather than inventing individual deployments. No version inferred for Aerodrome/Velodrome/PancakeSwap. Hyperliquid remains omitted pending product scope.
+Latency clarification: owner reports p50 values across venues, close p99, send-to-order-acceptance timestamp. Exact threshold and timestamp/clock methodology still pending; do not relabel percentile evidence as a hard maximum or received-acknowledgement RTT. Latency terms may be negotiated but are not standard contractual guarantees.
+
+### Funding, limits and DEX tool clarification
+Source: direct owner response. 3k per asset at launch, currency/per-account scope awaiting final confirmation. Publish funding of both assets and replenishment/redistribution coordination; hold numerical minimum and exact transfer authority. Confirmed CEX size reduction plus internal and client-bot alerts. DEX cost-benefit-aware rebalancing and case-specific dynamic fees/hedging/arbitrage added to service copy. No universal availability or returns claimed.
+
+### Founder research and final interview clarifications
+Owner authorizes named EMRL.D, RUBY.D and BlockFinex engagements, co-founder role descriptions, minimum funding per asset per exchange, client-only transfers, free assessment/proposal, UK legal identity and 3ms latency threshold. These are first-party confirmations, not independent outcome evidence.
+
+Research sources:
+- https://uk.linkedin.com/in/nicholas-van-eerde — search-indexed public profile identifies Onchain Bureau and University of Bath; lists software/blockchain courses. Direct open returned LinkedIn 999. Employment titles/history and degrees were not visible; do not invent them or equate courses with employment/degree credentials.
+- https://es.linkedin.com/in/nahuel-angelone-oliver/es — public indexed profile identifies CryptoMondays Ibiza and WorldQuant University, with market-maker/treasury writing and certificates. Direct open returned 999. No degree completion or hidden employment history inferred.
+- https://find-and-update.company-information.service.gov.uk/company/15636039 — verified legal name, company number and 11 April 2024 incorporation. No personal address or birth data copied.
+- https://uk.linkedin.com/company/onchainbureau — lists founding year 2023, differing from owner-provided 2022 operating start. Preserve owner-defined operating history and separately label legal incorporation 2024; LinkedIn company history should be reconciled later. Its older service catalogue was not imported.
+
+Website bios intentionally use owner-confirmed roles and public profile links. Published numeric latency is a first-party p50 claim with measurement definition and non-guarantee qualifier; no fabricated benchmark chart or p99 figure. Detailed clock/measurement evidence remains outstanding. Client-only transfer control is explicit across CEX service and access schematic.
+
+### Coverage removal requested by owner
+Removed BitMart, CoinEx and AscendEX from the public coverage list and removed their unused logo files. CEX display now contains 24 venues. This records a display/coverage decision; no independent statement about venue closure is published.
+
+### Dynamic measurement and permissions diagrams
+New diagrams use the existing measurement definitions and owner-confirmed access rules only. All values are unnumbered schematic geometry; no client records, performance results, trading latency timing, product screenshots or return projections introduced. Moving packets depict operating instructions, not transfers. Market-price crossing highlights the appropriate schematic ranges. Quote-history gaps are explanatory examples, not evidence of actual interruptions. Scenario switches change the explanation, not a live data feed.
+
+### Solana venue and pool-family expansion
+**Authority:** owner instruction following recovery of `~/.Trash/SOL_DEX_MM_2/sol_trading/scripts/algos/exchanges/idls/`, then explicit confirmation to include trading venues and exclude aggregators. The related GitHub tree is https://github.com/nve-quant/Dex-System/tree/main/scripts/algos/exchanges/idls; the recovered local inventory additionally contains `solfi`, `tessera_v` and `zerofi`.
+
+| Interface family | Published treatment |
+| --- | --- |
+| raydium_amm_v4, raydium_cpmm, raydium_clmm | Raydium AMM v4, CPMM, CLMM |
+| raydium_launchlab | LaunchLab, separately identified as a launch market |
+| meteora_dlmm, meteora_damm, meteora_damm_v2 | Meteora DLMM, DAMM v1 and DAMM v2; explicit names combine the owner's all-pool-types confirmation with protocol terminology, not an IDL-only deployment audit |
+| meteora_dbc | Dynamic Bonding Curve (DBC), launch market |
+| orca_whirlpools | Orca Whirlpools |
+| pumpswap_amm, pumpfun | PumpSwap constant-product AMM; Pump.fun bonding curves as a separate entry |
+| moonit | Moonit bonding curves; no unsupported curve-version promise |
+| phoenix | Phoenix spot order book; no inference of perpetual-futures support |
+| solfi, tessera_v, zerofi | SolFi, Tessera V and ZeroFi proprietary-AMM trading; no claim that their LP capital is managed by Bureau |
+| jupiter, dflow_agg_v4, okx_dex_aggregator_v2 | Excluded: routing/aggregation, per owner instruction |
+| jito, solana, kamino_limit_order | Excluded from the venue directory: infrastructure or product interface, not evidence of a separate liquidity-pool offering |
+
+IDL presence is interface/decoder evidence, not a test of live execution. The owner's confirmation is the source of public operational coverage; no trading code was run or credentials copied.
+
+Terminology references:
+- https://docs.raydium.io/raydium/protocol/protocol-fees — AMM v4, CPMM, CLMM naming.
+- https://github.com/raydium-io/raydium-docs-v1/blob/main/reference/fee-comparison.mdx — LaunchLab versus pool products.
+- https://docs.meteora.ag/get-started — DLMM, DAMM v1/v2 and Dynamic Bonding Curve.
+- https://docs.orca.so/ — Whirlpools and concentrated liquidity.
+- https://github.com/pump-fun/pump-public-docs — distinct bonding-curve and PumpSwap programs; no claim of support for every newly added instruction.
+- https://docs.moon.it/docs/welcome — Moonit bonding curves; no specific curve variant asserted.
+- https://github.com/Ellipsis-Labs/phoenix-v1 — legacy spot order book, distinguished from the current perpetual product at phoenix.trade.
+- https://github.com/LimeChain/pmm-sim — proprietary-AMM integration terminology; not evidence of Bureau's deployment or permission to manage another market maker's capital.
+
+### EVM source review and Robinhood coming-soon scope — 21 October 2026
+**Authority:** owner supplied the local uniswap-mm repository for exact EVM coverage and requested Robinhood Chain DEXs/launchpads marked coming soon. Read-only inspection; no bot execution, account access, live calls, credential files or private operational details imported.
+
+Source root: /Users/nicholasvaneerde/Developer/Onchain Bureau/DEX/uniswap-mm
+
+| Source | Finding | Website treatment |
+| --- | --- | --- |
+| src/config/chains.rs (supported_chains, address registries), src/config/market.rs (Dex), src/main.rs dispatch | Uniswap v3/v4 registry for Ethereum, Arbitrum, Optimism, Polygon, Base, BNB; four CL connector variants | Explicit chain names and Uni versions; no claim of live client operations on all combinations |
+| src/services/blockchain/aerodrome_slipstream.rs, velodrome_slipstream.rs and chain registry | Aerodrome Slipstream on Base; Velodrome Slipstream on Optimism | Name the family and its chain |
+| src/services/blockchain/aerodrome_amm.rs and aerodrome_amm registry | Classic stable/volatile AMM on Base; no configured classic Velodrome deployment | Add Aerodrome classic stable/volatile; do not infer Velodrome classic support |
+| docs/PROJECT-STATUS.md, docs/plans/dex-chain-expansion.md, README.md | Production/fork-test evidence varies by deployment; registry presence is broader than live operation | Coverage is scoping information, not evidence of results, client history or universal strategy suitability |
+| Existing owner interview; expansion plan marks PancakeSwap as future connector work in this repo | Owner previously confirmed PancakeSwap; exact implementation/version/chain not corroborated here | Retain separately confirmed brand; leave versions/chains unspecified pending reconciliation |
+| Robinhood chain registry and whitelisted chain/dex config fields | Robinhood mainnet/testnet v4 configuration; v3 registry empty | Owner subsequently confirms existing v4 coverage; list as current. Do not advertise v3/v2/UniswapX based on ecosystem availability |
+| Owner request + official launchpad announcement below | Launchpad names unspecified by owner; optional clarification requested | Initial proposed coming-soon launchpad: Pools.trade. No live or completed launchpad integration claim |
+
+Public terminology/ecosystem sources:
+- https://blog.uniswap.org/robinhood-chain-is-live — official Robinhood Uniswap deployment announcement; ecosystem availability is not Bureau integration evidence.
+- https://blog.uniswap.org/pools-trade-a-new-way-to-launch-on-robinhood-chain — Pools.trade is a Robinhood launchpad with Crowd Launch and Instant Launch; both lead to Uniswap v4. Locked launch liquidity is distinct from a client-managed LP position.
+- https://robinhood.com/us/en/crypto/chain/ecosystem/ — ecosystem context only, not a Bureau support list. Aggregators and infrastructure omitted.
+- https://pools.trade/favicon.svg — official icon, copied unchanged to public/images/venues/pools-trade.svg (2,596 bytes). Trademark identifies the planned venue; no affiliation/endorsement implied.
+
+Separate Solana display entries for LaunchLab and Meteora DBC reuse their existing protocol logos. Current pool, launch and other-trading entries have explicit typed categories; planned coverage has a separate typed status. The initial version excluded Robinhood from the current six-chain list; this was corrected after the owner confirmed existing Uniswap v4 coverage. No claims about the chain or launchpad being unreleased.
+
+### Robinhood status correction and additional native venues — 21 October 2026
+Owner clarified that Uniswap on Robinhood Chain is already covered. Corrected current coverage, the chain heading and both service FAQs to identify v4 specifically. The prior coming-soon classification of Uniswap was a misinterpretation, not a change in the business.
+
+Coming soon now concerns additional venues only:
+- GIGA DEX: stable, volatile and concentrated pools, verified in first-party documentation at https://docs.gigadex.app/protocol/liquidity and https://docs.gigadex.app/what-is-giga. Robinhood-native status: https://docs.gigadex.app/.
+- Pons: Robinhood token launchpad, https://docs.ponsfamily.com/. The current documentation describes immediate locked-pool trading without a bonding curve or later migration. Use the broad, accurate Token launches label, not an assumed curve/migration implementation.
+- Pools.trade: retain the previously sourced launchpad entry.
+These are selected future coverage entries within the owner's requested scope, not a claim that new connectors have been built or tested.
+
+Other findings kept out of the public support list: Pleiades is named as a proprietary AMM in Robinhood's launch announcement; current documentation instead lists Rialto among PropAMM/aggregation services. No inference that they are the same product or that Bureau supports either. Source: https://robinhood.com/newsroom/robinhood-accelerates-global-expansion-robinhood-chain-mainnet-stock-tokens-agentic-trading/ and https://docs.robinhood.com/chain/. Routing aggregators remain excluded.
+
+Local logo search: inventoried SVG files including ignored files in Developer, Downloads, Desktop and Documents; checked relevant names, SVG metadata and Spotlight. Found the known DataIndexer CEX collections (frontend and dashboard_bsv), but no identifiable additional Solana/launchpad SVG collection. Trash enumeration was blocked by macOS with Operation not permitted, including an unsandboxed read-only retry; it was not searched successfully. Asked owner for a possible other folder/repo. Preserve existing venue artwork rather than inventing vector versions or presenting embedded raster images as true SVGs.
+
+### Moonit removal and vector artwork — 21 October 2026
+Owner requested removing Moonit entirely from the current coverage list and logo assets, describing it as no longer operational. Removed from shared coverage and the DEX FAQ. Do not turn this display decision into a public closure claim. Historical inventory entries above remain a record of previous scope.
+
+Owner supplied original PancakeSwap, Pump and Orca SVG files, and authorized reconstructing Tessera V and SolFi SVGs from the existing images. Published replacements are identified in docs/assets.md; the two reconstructed images are derivative vector approximations, not official vector masters. Source rasters preserved outside public assets for audit/reference.
+
+### Jupiter Studio coverage — 21 October 2026
+Owner explicitly confirmed Jupiter Studio when asked to distinguish it from Raydium LaunchLab and Jupiter LFG. Publish Jupiter Studio in current Solana launchpads, with Token launches; update the shared directory and DEX FAQ. This does not add Jupiter's routing aggregator to the venue list.
+Sources: https://studio.jup.ag/ describes its launch/manage/verify suite; https://studio.jup.ag/launch identifies the token creation workflow. Product palette reference: https://studio.jup.ag/images/banner.jpg. No specific curve, contract or pool-family support inferred beyond the owner-authorized launchpad entry.
+
+### Approved homepage presentation adaptation — 21 October 2026
+Source: updated https://onchainbureau.com/ and owner's approval of the comparison recommendations. Retain the live brand mark and adapt the scenario presentation concept; do not import the live site's platform promotion, unsupported claims or venue list. Existing owner-confirmed coverage remains authoritative.
+Four draft illustrative scenarios use the confirmed account funding, trade-only access, limits/alerts, client transfer responsibility and discretionary/automated DEX model. Reference-hours scenario derives from existing market-design service copy. These are not named client cases or performance evidence. The founder excerpt reuses the approved names/roles already on Company. Hero research points to the existing emerald research entry; no new research findings claimed.
+
+
+### Owner interview follow-up: reporting, execution and recovery — 21 October 2026
+- Positioning: market making is a utility for project users, intended to improve entry/exit execution and the experience of trading the asset. Owner associates better execution with reputation/user experience; no measured reputation impact or unconditional execution availability established.
+- Owner reports substantial spread improvements across the named engagements, more efficient capital use and some yield generation. These remain qualitative owner reports pending a specific engagement, period, baseline, net costs and supporting records. Do not publish quantified uplift, universal profitability, guaranteed yield or a measured reputation claim.
+- CEX dashboard: owner confirms slippage estimates, two-sided quote availability over time and inventory exposure, in addition to spread/depth/reference reporting. Confirms ability to distinguish Bureau orders from the aggregate market for relevant metrics. Formula, sampling and export evidence remain to inspect.
+- DEX dashboard: owner confirms time in range, allocation, price impact, inventory composition, earned fees, gas/rebalancing costs and performance against holding the original assets are all available. Exact benchmark construction, cash-flow treatment and cost inclusion remain to document from the product.
+- Latency endpoint: acceptance timestamp is exchange-supplied. Clock alignment uses chrony and exchange server-time endpoints/WebSocket feeds. The previously confirmed below-3ms figure is p50; underlying logs, measurement period and residual clock error have not been reviewed.
+- Recovery: owner describes reconnects as always below one second, redundant oracle feeds, halting new quotes until reconnected, retaining existing orders when the oracle price remains in range, cancelling clearly stale orders, and automatic restart. Record as owner-described behavior; do not turn the reconnect timing into an externally verified universal bound or exchange-availability guarantee. Exact stale/in-range rules and restart checks remain unspecified.
+- Client control answer was only 'Yes' to a multi-part question. This does not identify dashboard/Telegram/operator pause channels, nor who may close DEX positions, collect fees or change allowed pools; clarification required.
+- Dashboard-location reply ended at 'Its on'; no new location or permission to expose client information supplied. Earlier DataIndexer path remains a lead, not identification of the intended public capture.
+- Owner is willing to request client testimonials. Need the client's own account of problem, work and observable benefit, approved attribution and explicit permission to publish. No testimonial exists from this reply.
+
+
+### Owner follow-up: dashboard publication, pause requests and DEX authority
+- Owner identifies the frontend dashboard in the DataIndexer project and permits showing any view there publicly. Earlier source path: /Users/nicholasvaneerde/Developer/Onchain Bureau/Data Pipelines/DataIndexer/frontend. A specific capture has not yet been selected or inspected; approval concerns dashboard views, not exposing credentials or secrets.
+- Clients request a pause by contacting operations. A Telegram kill switch can be configured on request; do not describe it as a standard existing dashboard or bot control.
+- On request, Bureau can manually close DEX positions and collect fees within the authorized setup. Changing the permitted pool requires the client to sign a transaction changing Safe/Squads roles. Do not confuse position/fee management with authority to withdraw or transfer client funds.
+- Owner clarifies earlier 'yield' primarily meant market-making trading profits; depending on the engagement, income can also include DEX pool fees and exchange rebates. Use separate trading P&L, fees, rebates and costs rather than an undifferentiated yield claim. No measured net returns or guaranteed profitability established.
+- Specific client/venue/pair and before/after measurement period remain unanswered. This confirmation does not supply a performance case study.

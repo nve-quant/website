@@ -1,0 +1,96 @@
+---
+import {accessPathways} from '../data/access-pathways';
+---
+<div class="permission-explorer" data-access-motion data-explainer-motion>
+  <fieldset class="permission-tabs">
+    <legend class="sr-only">Explore the access model</legend>
+    <input type="radio" name="permission-view" id="permission-cex" value="cex" checked />
+    <label for="permission-cex">Exchange accounts</label>
+    <input type="radio" name="permission-view" id="permission-dex" value="dex" />
+    <label for="permission-dex">Onchain vaults</label>
+  </fieldset>
+  {accessPathways.map((path, i) => <div class:list={['permission-scene', i === 0 ? 'cex-scene' : 'dex-scene']}>
+    <div class="permission-circuit">
+      <div class="circuit-node operator-node">
+        <p class="node-owner">Onchain Bureau</p>
+        <svg viewBox="0 0 240 150" class="node-drawing" aria-hidden="true">
+          <path class="drawing-grid" d="M20 30h200M20 60h200M20 90h200M20 120h200M60 15v120M120 15v120M180 15v120"/>
+          <path class="signal-line" d="M20 104h26V78h28V89h26V48h30V64h28V36h30V51h32"/>
+          <g class="motion order-signal"><circle cx="130" cy="64" r="5"/><circle cx="188" cy="51" r="5"/></g>
+          <path class="instruction-line" d="M30 133h48m8 0h20m8 0h40m8 0h48"/>
+        </svg>
+        <h3>{path.operation}</h3>
+        <p class="node-detail">{path.operationDetail}</p>
+      </div>
+      <div class="circuit-link link-in" aria-hidden="true"><span class="motion instruction-packet"></span><span class="motion instruction-packet second-packet"></span></div>
+      <div class="circuit-node gate-node">
+        <p class="node-owner">Agreed access</p>
+        <svg viewBox="0 0 240 150" class="node-drawing gate-drawing" aria-hidden="true">
+          <path class="gate-layer back-layer" d="m120 12 69 34v61l-69 34-69-34V46Z"/>
+          <path class="gate-layer" d="m120 24 54 26v49l-54 27-54-27V50Z"/>
+          <path class="gate-cross" d="M24 75h57m78 0h57M120 4v33m0 76v33"/>
+          <rect class="gate-core" x="83" y="44" width="74" height="63" rx="4"/>
+          <path class="gate-key" d="M107 68v-6a13 13 0 0 1 26 0v6m-29 0h32v24h-32Zm16 8v8"/>
+          <path class="motion gate-trace" d="m120 24 54 26v49l-54 27-54-27V50Z"/>
+        </svg>
+        <h3>{path.permission}</h3>
+        <p class="node-detail">{i === 0 ? 'Trading access. Transfers disabled.' : 'Specified pool and asset pair'}</p>
+      </div>
+      <div class="circuit-link link-out" aria-hidden="true"><span class="motion instruction-packet"></span><span class="motion instruction-packet second-packet"></span></div>
+      <div class="circuit-node account-node">
+        <p class="node-owner">Your {i === 0 ? 'exchange account' : 'Safe or Squads vault'}</p>
+        <svg viewBox="0 0 240 150" class="node-drawing market-drawing" aria-hidden="true">
+          <path class="account-outline" d="M26 24h188v110H26Z"/>
+          <path class="account-rail" d="M26 45h188M38 34h22m7 0h8M120 54v69"/>
+          {i === 0 ? <g>
+            {[0,1,2,3].map(n => <g transform={`translate(0 ${n*17})`}><rect class="motion bid-level" style={`--duration:${2.2+n*.3}s;--delay:${n*-.45}s`} x={57-n*5} y="55" width={51+n*5} height="9"/><rect class="motion ask-level" style={`--duration:${2.4+n*.2}s;--delay:${n*-.7}s`} x="132" y="55" width={36+n*8} height="9"/></g>)}
+          </g> : <g>
+            <rect class="pool-level" x="44" y="64" width="108" height="12" rx="2"/>
+            <rect class="pool-level" x="72" y="86" width="122" height="12" rx="2"/>
+            <rect class="pool-level" x="103" y="108" width="92" height="12" rx="2"/>
+            <g class="motion managed-allocation"><path class="range-bracket" d="M121 54v72"/><circle cx="121" cy="54" r="4"/></g>
+          </g>}
+        </svg>
+        <h3>{i === 0 ? 'Quotes and orders' : 'Managed liquidity'}</h3>
+        <p class="node-detail">{i === 0 ? 'Within your account' : 'Within the agreed pool and pair'}</p>
+      </div>
+    </div>
+    <div class="permission-boundary">
+      <div class="retained-control"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v12H4ZM8 8V4h8v4M10 13h4m-2-2v4"/></svg><span>Your assets remain under your control.</span></div>
+      {i === 1 ? <span class="restricted-transfer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h13m-4-4 4 4-4 4M20 5v14"/></svg>No withdrawal or send authority</span> : <span class="permission-scope">Only your team transfers funds</span>}
+    </div>
+    <div class="permission-bottom"><p><span class="instruction-dot" aria-hidden="true"></span>Motion illustrates operating instructions, not asset transfers.</p><a href={path.href}>{path.link}</a></div>
+  </div>)}
+  <div class="permission-controls"><span>Access schematic · configuration agreed for your mandate</span><button type="button" data-explainer-toggle hidden>Pause animation</button></div>
+</div>
+<script>
+  import {initExplainerMotion} from '../scripts/explainer-motion';
+  document.querySelectorAll<HTMLElement>('[data-access-motion]').forEach(initExplainerMotion);
+</script>
+<style>
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.permission-explorer{background:#e9eee1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(18px,3vw,40px);overflow:hidden}
+.permission-tabs{border:0;padding:0;margin:0 0 30px;display:flex;gap:4px;flex-wrap:wrap}
+.permission-tabs input{position:absolute;opacity:0;width:1px;height:1px}
+.permission-tabs label{font-size:.85rem;cursor:pointer;padding:11px 17px;border:1px solid transparent;border-radius:2px;color:var(--muted)}
+.permission-tabs input:checked+label{background:var(--ink);color:var(--ground)}
+.permission-tabs input:focus-visible+label{outline:3px solid #a13d00;outline-offset:3px}
+.permission-scene{display:none}
+.permission-explorer:has(#permission-cex:checked) .cex-scene,.permission-explorer:has(#permission-dex:checked) .dex-scene{display:block}
+.permission-circuit{display:grid;grid-template-columns:minmax(0,1fr) clamp(18px,4vw,64px) minmax(0,1fr) clamp(18px,4vw,64px) minmax(0,1fr);align-items:start}
+.circuit-node{min-width:0;text-align:center}
+.node-owner{font-size:.8rem!important;line-height:1.4;margin:0 0 12px;min-height:2.8em;color:var(--muted)}
+.node-drawing{width:100%;max-width:260px;display:block;margin:auto;overflow:visible;fill:none;stroke:var(--ink);stroke-width:1.4}
+.drawing-grid{stroke:#b5c1aa;stroke-width:.65}.signal-line{stroke-width:2.4}.order-signal{fill:#b29232;stroke:#e9eee1;stroke-width:2}.instruction-line{stroke:#9baf8b;stroke-width:3}
+.gate-layer{stroke:#79906b;fill:#dbe5ce;fill-opacity:.45}.back-layer{stroke:#b3c2a5;fill:none}.gate-core{fill:#f6f7f2;stroke:#839975}.gate-key{stroke-width:1.8}.gate-cross{stroke:#a0b38f}.gate-trace{stroke:#365b43;stroke-width:2;stroke-dasharray:30 310;animation:gate-trace 4s linear infinite}
+.account-outline{fill:#f6f7f2;stroke:#8b9e7c}.account-rail{stroke:#adbaa0;stroke-width:1}.bid-level{fill:#3d6349;stroke:none;transform-box:fill-box;transform-origin:right center;animation:quote-size var(--duration) ease-in-out var(--delay) infinite alternate}.ask-level{fill:#9bad72;stroke:none;transform-box:fill-box;transform-origin:left center;animation:quote-size var(--duration) ease-in-out var(--delay) infinite alternate}.pool-level{fill:#c0ce9f;stroke:none}.managed-allocation{fill:#365b43;stroke:none;animation:allocation-shift 4s ease-in-out infinite alternate}.range-bracket{fill:none;stroke:#365b43;stroke-width:1.4}
+.circuit-node h3{font-size:clamp(1rem,1.55vw,1.35rem);letter-spacing:-.035em;line-height:1.3;margin:18px 0 8px}.node-detail{font-size:.78rem!important;line-height:1.5;margin:0;color:var(--muted)}
+.circuit-link{position:relative;height:1px;background:#9aac8c;margin-top:calc(3.8rem + clamp(38px,6vw,78px))}.circuit-link::after{content:'';position:absolute;right:0;top:-3px;width:6px;height:6px;border-top:1px solid #6a825b;border-right:1px solid #6a825b;transform:rotate(45deg)}
+.instruction-packet{position:absolute;left:0;top:-3px;width:7px;height:7px;border-radius:50%;background:#8e7528;animation:instruction-route 2.8s linear infinite}.second-packet{animation-delay:-1.4s}.link-out .instruction-packet{animation-delay:-.8s}.link-out .second-packet{animation-delay:-2.2s}
+.permission-boundary{margin-top:28px;padding:18px 0;border-top:1px solid #acbaa0;border-bottom:1px solid #acbaa0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:.78rem;line-height:1.45}.retained-control,.restricted-transfer{display:flex;align-items:center;gap:10px}.permission-boundary svg{width:24px;height:24px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.4}.permission-scope{color:var(--muted)}
+.permission-bottom{display:flex;justify-content:space-between;gap:20px;align-items:baseline;padding-top:16px}.permission-bottom p{font-size:.72rem!important;margin:0;color:var(--muted);line-height:1.5}.instruction-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#8e7528;margin-right:6px}.permission-bottom a{font-size:.75rem;white-space:nowrap;text-underline-offset:4px}.permission-controls{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:22px;font-size:.68rem;color:var(--muted);line-height:1.4}.permission-controls button{font:inherit;color:var(--ink);border:1px solid #9bab8c;background:transparent;padding:7px 10px;cursor:pointer;white-space:nowrap}.permission-controls button:focus-visible{outline:3px solid #a13d00;outline-offset:3px}.order-signal{animation:signal-pulse 2.8s ease-in-out infinite}.motion{animation-play-state:paused}[data-explainer-motion][data-running] .motion{animation-play-state:running}
+@keyframes instruction-route{0%{left:0;opacity:0}12%,85%{opacity:1}100%{left:100%;opacity:0}}@keyframes gate-trace{to{stroke-dashoffset:-340}}@keyframes quote-size{from{transform:scaleX(.62)}to{transform:scaleX(1)}}@keyframes allocation-shift{from{transform:translateX(-14px)}to{transform:translateX(16px)}}@keyframes signal-pulse{0%,100%{opacity:.5}40%,65%{opacity:1}}
+@media(max-width:600px){.permission-tabs{margin-bottom:24px;flex-wrap:nowrap}.permission-tabs label{font-size:.75rem;padding:10px 12px}.permission-circuit{grid-template-columns:1fr;gap:0}.circuit-node{display:grid;grid-template-columns:112px minmax(0,1fr);text-align:left;column-gap:16px;align-items:start}.node-owner{grid-column:2;grid-row:1;font-size:.7rem!important;min-height:0;margin:8px 0 6px}.node-drawing{grid-column:1;grid-row:1/4;align-self:center;width:112px}.circuit-node h3{grid-column:2;grid-row:2;margin:0 0 6px;font-size:1.05rem}.node-detail{grid-column:2;grid-row:3;font-size:.72rem!important}.circuit-link{width:1px;height:35px;margin:8px 0 8px 56px}.circuit-link::after{right:-3px;top:auto;bottom:0;transform:rotate(135deg)}.instruction-packet{left:-3px;top:0;animation-name:instruction-route-vertical}.permission-boundary,.permission-bottom{align-items:flex-start;flex-direction:column;gap:12px}.permission-boundary{font-size:.75rem}.permission-controls{align-items:flex-start}.permission-controls>span{max-width:25ch}}
+@keyframes instruction-route-vertical{0%{top:0;opacity:0}12%,85%{opacity:1}100%{top:100%;opacity:0}}
+@media(prefers-reduced-motion:reduce){.motion{animation:none!important}.instruction-packet{display:none}}
+</style>

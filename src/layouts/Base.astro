@@ -3,4 +3,4 @@ import '../styles/base.css';
 interface Props { title:string; description?:string; theme?:string; }
 const {title,description='Local design study for Onchain Bureau.',theme='review'}=Astro.props;
 ---
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content={description}/><meta name="robots" content="noindex,nofollow"/><title>{title} | Onchain Bureau</title><slot name="head"/></head><body class={theme}><a class="skip" href="#main">Skip to content</a><slot/></body></html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content={description}/><meta name="robots" content="noindex,nofollow"/><link rel="icon" type="image/svg+xml" href="/favicon.svg"/><title>{title} | Onchain Bureau</title><slot name="head"/></head><body class={theme}><a class="skip" href="#main">Skip to content</a><slot/></body></html>

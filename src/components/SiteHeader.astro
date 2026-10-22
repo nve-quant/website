@@ -8,7 +8,7 @@ const executionServices=services.filter(service=>executionIds.has(service.id));
 const marketServices=services.filter(service=>!executionIds.has(service.id));
 ---
 <header class="home-header">
- <a class="home-wordmark" href="/" aria-label="Onchain Bureau home">Onchain<br/>Bureau<span aria-hidden="true"></span></a>
+ <a class="home-wordmark" href="/" aria-label="Onchain Bureau home"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M11 8v48M11 8h25c10 0 16 5 16 13S46 33 36 33H11M11 33h27c10 0 16 4 16 12s-6 11-16 11H11M24 21h16M24 45h19"/></svg><span class="brand-name">Onchain<br/>Bureau</span></a>
  <nav aria-label="Main navigation">
   <details class="services-nav" data-services-nav>
    <summary aria-controls="services-dropdown">Services <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="m1 1 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></summary>

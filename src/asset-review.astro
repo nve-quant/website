@@ -14,7 +14,7 @@ document.querySelectorAll<HTMLButtonElement>('[data-asset]').forEach(button=>but
   if(!scene){scene=createMarketScene(host,()=>{result.textContent='WebGL context lost';},()=>{});scene.visible(false);}
   scene.select(button.dataset.asset as AssetVariantId);
   const info=scene.renderStill();
-  result.textContent=`${button.textContent}: rendered. ${info.triangles.toLocaleString()} triangles; ${info.geometries} resident geometries; ${info.textures} resident textures.`;
+  result.textContent=`${button.textContent}: rendered. ${info.triangles.toLocaleString()} triangles; ${info.geometries} resident geometries; ${info.textures} resident textures; ${info.calls} draw calls; ${(info.pixels/1000000).toFixed(2)} MP canvas.`;
  }catch(error){result.textContent=`Render failed: ${String(error)}`;}
 }));
 window.addEventListener('error',event=>{result.textContent=`Browser error: ${event.message}`;});

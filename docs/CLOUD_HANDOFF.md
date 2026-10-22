@@ -19,6 +19,7 @@ node scripts/check-liquidity-animation.mjs
 node scripts/check-service-navigation.mjs
 node scripts/check-need-illustrations.mjs
 node scripts/check-asset-explorer.mjs
+node scripts/check-asset-models.mjs
 npm run build
 ```
 
@@ -36,7 +37,7 @@ The server uses port 4321. Expose that port only through the environment's authe
 - Development-only routes: `/review`, `/asset-review`, `/studies`, `/concepts/[direction]`. These must remain excluded from builds.
 - `/review` provides exact 375, 768 and 1440px viewport checks and section navigation.
 - `/asset-review` renders each procedural specimen explicitly for material inspection.
-- Asset explorer: nineteen specimens in Metals, Yield-bearing fund, Tokenized stock, Unique asset, Grains, Real estate and Commodities. Grain specimens are wheat, corn and soy; property specimens are residential, office and industrial.
+- Asset explorer: twenty-five specimens in Precious metals, Industrial metals, Energy, Agriculture, Gemstones & collectibles, Real estate, Equities and Fixed income & funds. Agriculture includes wheat, corn, soy, coffee and cotton. Property includes residential, office and industrial. Treasury bills and corporate bonds are distinct from fund shares.
 - Mobile and reduced-motion views deliberately use SVG illustrations. Desktop 3D loads on intersection, caches at most three models, rotates automatically and supports direct drag and click-to-pause.
 - All business evidence gaps and draft claims remain in docs/commercial-evidence.md. Do not invent proof, numbers, customers or dashboard screenshots.
 

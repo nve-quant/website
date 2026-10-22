@@ -20,4 +20,5 @@ jobs:
       - run: node scripts/check-service-navigation.mjs
       - run: node scripts/check-need-illustrations.mjs
       - run: node scripts/check-asset-explorer.mjs
+      - run: node scripts/check-asset-models.mjs
       - run: npm run build

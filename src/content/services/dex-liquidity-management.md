@@ -35,20 +35,28 @@ metrics:
     definition: Benchmark, valuation dates and external cash flows. Include costs and distinguish market exposure from the effect of management.
 operations:
   - title: Range selection
-    text: Define where to place liquidity around the market. Range width is considered alongside price movement, the asset pair and the inventory available.
+    text: Agree ranges and token balances with your team. Range width is considered alongside price movement, the asset pair and the inventory available.
   - title: Position rebalancing
-    text: Review positions as market conditions change. Repositioning decisions consider the current allocation, inventory exposure and transaction costs within the agreed mandate.
+    text: Adjustments are primarily automated within the agreed approach, with discretionary intervention for exceptions or client requests. Repositioning generally proceeds when the expected benefit outweighs gas costs, alongside the current allocation and inventory exposure.
+  - title: Engagement-specific tools
+    text: Depending on the pool and mandate, management may include dynamic fees, hedging on another market or arbitrage execution. These tools are selected for the engagement rather than included in every setup.
   - title: Capital allocation
     text: Agree how much capital to allocate and which pools fall within scope. Review the distribution of that capital as prices and liquidity needs change.
-access: Your assets remain under your control. Operation uses defined roles and permissions through Safe or Squads vaults, with the setup adapted to client requirements. The specific vault arrangement and permissions are agreed before operation.
+access: Your assets remain under your control. Safe or Squads vault roles restrict our operation to the specified pool and asset pair, without withdrawal or send authority. We agree the vault configuration, ranges, balances and operating limits with your team before operation.
 considerations: A narrower range concentrates liquidity but can move out of range as prices change. Asset exposure changes as trades occur, and repositioning incurs transaction costs. Active management does not remove market, smart-contract or inventory risk, or guarantee returns.
 faqs:
+  - question: Which protocols and chains do you support?
+    answer: Uniswap v3 and v4 coverage spans Ethereum, Arbitrum, Optimism, Polygon, Base and BNB Chain. Uniswap v4 is also supported on Robinhood Chain. Aerodrome coverage includes Slipstream and classic stable/volatile pools on Base; Velodrome Slipstream is on Optimism. PancakeSwap is also supported, with the deployment agreed for the engagement. Solana liquidity pools include Raydium AMM v4, CPMM and CLMM; Meteora DLMM, DAMM v1 and DAMM v2; Orca Whirlpools; and PumpSwap constant-product pools. We agree the version, pool, asset pair and permitted activity before operation.
+  - question: Does your Solana coverage extend beyond liquidity pools?
+    answer: Yes. Launch-market execution covers Raydium LaunchLab, Meteora Dynamic Bonding Curve (DBC), Pump.fun and Jupiter Studio. Trading coverage also includes the Phoenix spot order book and the SolFi, Tessera V and ZeroFi proprietary AMMs. These are distinct market structures, with activities and permissions agreed separately from concentrated-liquidity management. Trading against a proprietary AMM does not mean we manage its liquidity.
+  - question: Is Robinhood Chain coverage available yet?
+    answer: Yes. Uniswap v4 on Robinhood Chain is already supported. Additional coverage is coming soon for GIGA DEX pools and launch-market execution on Pools.trade and Pons. Those planned integrations are separate from our existing Uniswap service; their coming-soon status refers to our coverage, not the venues themselves.
   - question: Who controls the assets?
-    answer: The service is non-custodial. Client-controlled Safe or Squads vaults use roles and permissions for the agreed work. The configuration is defined for each engagement and can accommodate client requirements.
+    answer: You retain control through your Safe or Squads vault. Our roles are restricted to the specified pool and asset pair, with no withdrawal or send authority. The configuration is agreed for the engagement. These permission boundaries do not remove market, smart-contract or inventory risk.
   - question: Can you work with an existing pool?
     answer: Bring the pool, chain, asset pair and current position details to the initial review. We assess the proposed setup and agree which pools and activities belong within the mandate.
   - question: When are positions rebalanced?
-    answer: Rebalancing is considered against the position, market conditions, inventory exposure and transaction costs. The operating approach is agreed for the engagement; there is no universal fixed interval.
+    answer: We agree ranges, balances and the operating approach with your team. Adjustments are primarily automated, with discretionary intervention for exceptions or client requests. Market conditions, inventory exposure and transaction costs inform repositioning; there is no universal fixed interval.
   - question: Does active management guarantee a return?
     answer: No. Fees earned, changes in asset value, inventory exposure and transaction costs all affect the outcome. The service manages positions within agreed limits rather than promising a yield or protection from losses.
 ---
